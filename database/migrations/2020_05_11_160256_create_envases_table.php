@@ -22,9 +22,9 @@ class CreateEnvasesTable extends Migration
             $table->boolean('es_propio')->unsigned()->default(0);
             $table->boolean('activo')->unsigned()->default(1); 
 
-            $table->unsignedBigInteger('tercero_id');
+            $table->unsignedBigInteger('tercero_id')->nullable();
             $table->foreign('tercero_id')->references('id')->on('terceros');
-            $table->unsignedBigInteger('organizacion_id');
+            $table->unsignedBigInteger('organizacion_id')->nullable();
             $table->foreign('organizacion_id')->references('id')->on('organizaciones');  
 
             $table->timestamps();

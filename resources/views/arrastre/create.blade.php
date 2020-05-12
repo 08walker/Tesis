@@ -32,20 +32,35 @@
                     <div class="card-body">
                       
                       <div class="row">
-                        @include('foreach.tercerofor')
-                        @include('foreach.organizacionfor')
-                        
-                        @include('componentes.chapa')
-                        @include('componentes.tara')
-                        @include('componentes.volumen')
-                        @include('componentes.peso')
+                        <div class="col-md-6">
+                          @include('foreach.tercerofor')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('foreach.organizacionfor')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('componentes.chapa')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('componentes.tara')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('componentes.volumen')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('componentes.peso')                          
+                        </div>
                       </div>
 
                       @include('componentes.description')                      
 
                       <div class="row">
-                        @include('foreach.tipoarrastrefor')                    
-                        @include('foreach.equipofor')
+                        <div class="col-md-6">
+                          @include('foreach.tipoarrastrefor')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('foreach.equipofor')                          
+                        </div>
                       </div>
                      <!-- es_propio 
                       <div class="form-group">

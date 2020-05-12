@@ -55,8 +55,8 @@
                   <!-- <td>{{$envase->es_propio}}</td> -->
                   <td>{{$envase->volumen_max_carga}}</td>
                   <td>{{$envase->tara}}</td>
-                  <td>{{$envase->tercero->name}}</td>
-                  <td>{{$envase->organizacion->name}}</td>
+                  <td>{{optional($envase->tercero)->name}}</td>
+                  <td>{{optional($envase->organizacion)->name}}</td>
                   <td>
                       <a href="{{route('envases.show',$envase)}}" target="_blank">
                           <i class="fa fa-eye"></i>

@@ -63,8 +63,8 @@
                   <!-- <td>{{$equipo->puede_cargar}}</td> -->
                   <!-- <td>{{$equipo->es_propio}}</td> -->
                   <td>{{$equipo->tipoEquipo->name}}</td>
-                  <td>{{$equipo->tercero->name}}</td>
-                  <td>{{$equipo->organizacion->name}}</td>
+                  <td>{{optional($equipo->tercero)->name}}</td>
+                  <td>{{optional($equipo->organizacion)->name}}</td>
                   <td>
                       <a href="{{route('equipos.show',$equipo)}}" target="_blank">
                           <i class="fa fa-eye"></i>

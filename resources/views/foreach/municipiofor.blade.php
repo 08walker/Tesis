@@ -1,4 +1,4 @@
-<div class="col-md-6 form-group">
+<div class="form-group">
     <label for="exampleInputMunicipio1">Municipio al que pertenece:</label>
         <select class="form-control select2" style="width: 100%;" name="municipio_id">
             <option value="">------Seleccione el municipio------

@@ -34,11 +34,21 @@
                     <div class="card-body">
 
                       <div class="row">
-                        @include('foreach.tercerofor')
-                        @include('foreach.organizacionfor')                      
-                        @include('componentes.identificador')
-                        @include('componentes.tara')
-                        @include('componentes.volumen')
+                        <div class="col-md-6">
+                          @include('foreach.tercerofor')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('foreach.organizacionfor')
+                        </div>
+                        <div class="col-md-6">
+                          @include('componentes.identificador')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('componentes.tara')                          
+                        </div>
+                        <div class="col-md-6">
+                          @include('componentes.volumen')                          
+                        </div>
                       </div>
 
                       <!-- es_propio 

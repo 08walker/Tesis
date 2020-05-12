@@ -16,7 +16,6 @@
         <div class="content">
           <div class="container">
             <div class="row">
-    
                 <!-- aling -->
                 <div class="col-lg-3">
                   <div class="card"></div>
@@ -36,9 +35,15 @@
                 <div class="card-body">
                   
                   <div class="row">
+                    <div class="col-md-6">
                      @include('componentes.name')          
-                     @include('componentes.identificador')          
-                     @include('foreach.unidadmedidafor')
+                    </div>
+                    <div class="col-md-6">
+                     @include('componentes.identificador')                      
+                    </div>
+                    <div class="col-md-12">
+                     @include('foreach.unidadmedidafor')                      
+                    </div>
                   </div>
                   @include('componentes.description')          
 

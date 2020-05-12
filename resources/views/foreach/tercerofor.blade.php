@@ -1,4 +1,3 @@
-<div class="col-md-6">
 <div class="form-group">
     <label for="exampleInputEmail1">Tercero al que pertenece:</label>
         <select class="form-control select2" style="width: 100%;" name="tercero_id">
@@ -17,5 +16,4 @@
         </font>
         @endif
     </div>
-</div>
 </div>

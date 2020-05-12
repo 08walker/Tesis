@@ -21,9 +21,9 @@ class CreateLugaresTable extends Migration
 
             $table->unsignedBigInteger('municipio_id');
             $table->foreign('municipio_id')->references('id')->on('municipios');
-            $table->unsignedBigInteger('tercero_id');
+            $table->unsignedBigInteger('tercero_id')->nullable();
             $table->foreign('tercero_id')->references('id')->on('terceros');
-            $table->unsignedBigInteger('organizacion_id');
+            $table->unsignedBigInteger('organizacion_id')->nullable();
             $table->foreign('organizacion_id')->references('id')->on('organizaciones');
             
             $table->timestamps();

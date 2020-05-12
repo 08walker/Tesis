@@ -1,4 +1,4 @@
-<div class="col-md-6 form-group">
+<div class="form-group">
 	<label for="exampleInputName1">Nombre:</label>
 	<input autofocus="" type="text" class="form-control" name="name" id="exampleInputName1" placeholder="Escriba el nombre" value="{{old('name')}}">
 	<div class="has-error">

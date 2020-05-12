@@ -1,4 +1,4 @@
-<div class="col-md-6 form-group">
+<div class="form-group">
 	<label for="exampleInputEmail1">Tara:</label>
 	<input type="text" class="form-control" name="tara" id="exampleInputTara1" placeholder="Escriba la tara del arrastre" value="{{old('tara')}}">
 	<div class="has-error">

@@ -26,11 +26,11 @@ class CreateArrastresTable extends Migration
 
             $table->unsignedBigInteger('equipo_id');
             $table->foreign('equipo_id')->references('id')->on('equipos');
-            $table->unsignedBigInteger('tercero_id');
+            $table->unsignedBigInteger('tercero_id')->nullable();
             $table->foreign('tercero_id')->references('id')->on('terceros');
             $table->unsignedBigInteger('tipo_arrastre_id');
             $table->foreign('tipo_arrastre_id')->references('id')->on('tipo_arrastre');
-            $table->unsignedBigInteger('organizacion_id');
+            $table->unsignedBigInteger('organizacion_id')->nullable();
             $table->foreign('organizacion_id')->references('id')->on('organizaciones');
 
             $table->timestamps();

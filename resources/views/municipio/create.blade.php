@@ -31,20 +31,8 @@
                     <form id="quickForm" role="form" method="POST" action="{{ route('municipios.create') }}">
                     {!! csrf_field() !!}
                     <div class="card-body">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre:</label>
-                        <input autofocus="" type="text" class="form-control" name="name" id="name" placeholder="Escriba el nombre" value="{{old('name')}}">
-                      <div class="has-error">
-                            @if($errors->has('name'))
-                              <font color="#FF0000">
-                                <span style="background-color: inherit;">
-                                  {{$errors->first('name')}}
-                                </span>
-                              </font>
-                            @endif
-                      </div>
-                      </div>
-
+                      
+                      @include('componentes.name')
                       @include('foreach.provinciafor')
 
                     <button type="submit" class="btn btn-success btn-flat">Crear</button>

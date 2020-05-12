@@ -51,8 +51,8 @@
                   <td>{{$lugar->id}}</td>
                   <td>{{$lugar->name}}</td>
                   <td>{{$lugar->municipio->name}}</td>
-                  <td>{{$lugar->tercero->name}}</td>
-                  <td>{{$lugar->organizacion->name}}</td>
+                  <td>{{optional($lugar->tercero)->name}}</td>
+                  <td>{{optional($lugar->organizacion)->name}}</td>
                   <td>
                       <a href="{{route('lugares.show',$lugar)}}" target="_blank">
                           <i class="fa fa-eye"></i>

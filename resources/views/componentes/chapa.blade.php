@@ -1,4 +1,4 @@
-<div class="col-md-6 form-group">
+<div class="form-group">
 	<label for="exampleInputEmail1">Chapa:</label>
 	<input type="text" autofocus="" class="form-control" name="identificador" id="exampleInputidentificador1" placeholder="Escriba el identificador" value="{{old('identificador')}}">
   <div class="has-error">

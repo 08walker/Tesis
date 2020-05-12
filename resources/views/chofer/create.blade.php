@@ -34,9 +34,15 @@
                     <div class="card-body">
 
                       <div class="row">
-                        @include('foreach.tercerofor')
-                        @include('foreach.organizacionfor')
-                        @include('componentes.name')
+                         <div class="col-md-6">
+                            @include('foreach.tercerofor')   
+                         </div>
+                         <div class="col-md-6">
+                            @include('foreach.organizacionfor')   
+                         </div>
+                         <div class="col-md-6">
+                            @include('componentes.name')   
+                         </div>                        
 
                       <div class="col-md-6 form-group">
                         <label for="exampleInputApellido1">Apellido:</label>
@@ -94,7 +100,9 @@
                       </div>
                       </div>
                       
-                      @include('foreach.equipofor')
+                      <div class="col-md-6">
+                        @include('foreach.equipofor')                        
+                      </div>
                       <!-- es_propio 
                       <div class="form-group">
                         <div class="custom-control custom-checkbox">

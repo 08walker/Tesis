@@ -17,10 +17,10 @@
           <div class="container">
             <div class="row">
                 <!-- aling -->
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                   <div class="card"></div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
                     @if($errors->any())
@@ -32,11 +32,10 @@
                     <form id="quickForm" role="form" method="POST" action="{{ route('terceros.create') }}">
                     {!! csrf_field() !!}
                     <div class="card-body">
-                      <div class="row">
+
                         @include('componentes.name')          
                         @include('componentes.identificador')          
                         @include('foreach.municipiofor')
-                      </div>
 
                     <button type="submit" class="btn btn-success btn-flat">Crear</button>
                     <a class="btn btn-flat btn-primary" href="{{route('terceros')}}">Cancelar</a>

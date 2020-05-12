@@ -1,4 +1,4 @@
-<div class="col-md-6 form-group">
+<div class="form-group">
   <label for="exampleInputEmail1">Volumen de carga máxima:</label>
   <input type="text" class="form-control" name="volumen_max_carga" id="exampleInputVolumen1" placeholder="Escriba el volumen" value="{{old('volumen_max_carga')}}">
     <div class="has-error">

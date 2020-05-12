@@ -14,7 +14,7 @@
         </select>
   </div>
 @else
-  <div class="col-md-6 form-group">
+  <div class="form-group">
         <label for="exampleInputEmail1">Tipo de arrastre:</label>
           <select class="form-control select2" style="width: 100%;" name="tipo_arrastre_id">
                 <option value="">

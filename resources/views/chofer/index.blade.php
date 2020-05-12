@@ -61,8 +61,8 @@
                   <td>{{$chofer->telefono}}</td>
                   <td>{{$chofer->equipo->identificador}}</td>
                   <!-- <td>{{$chofer->es_propio}}</td> -->
-                  <td>{{$chofer->tercero->name}}</td>
-                  <td>{{$chofer->organizacion->name}}</td>
+                  <td>{{optional($chofer->tercero)->name}}</td>
+                  <td>{{optional($chofer->organizacion)->name}}</td>
                   <td>
                       <a href="{{route('choferes.show',$chofer)}}" target="_blank">
                           <i class="fa fa-eye"></i>

@@ -1,4 +1,4 @@
-<div class="col-md-6 form-group">
+<div class="form-group">
     <label for="exampleInputEquipoId1">Equipo por defecto:</label>
     	<select class="form-control select2" style="width: 100%;" name="equipo_id">
             <option value="">

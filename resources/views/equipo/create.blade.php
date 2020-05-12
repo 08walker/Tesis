@@ -31,12 +31,25 @@
                     {!! csrf_field() !!}
                     <div class="card-body">
                     <div class="row">
-                      @include('foreach.tercerofor')
-                      @include('foreach.organizacionfor')
-                      @include('componentes.chapa')
-                      @include('componentes.tara')
-                      @include('componentes.volumen')
-                      @include('componentes.peso') 
+                      <div class="col-md-6">
+                        @include('foreach.tercerofor')  
+                      </div>
+                      <div class="col-md-6">
+                        @include('foreach.organizacionfor')  
+                      </div>
+                      <div class="col-md-6">
+                        @include('componentes.chapa')  
+                      </div>
+                      <div class="col-md-6">
+                        @include('componentes.tara')  
+                      </div>
+                      <div class="col-md-6">
+                        @include('componentes.volumen')
+                      </div>
+                      <div class="col-md-6">
+                        @include('componentes.peso')   
+                      </div>                      
+
                       <!-- puede_cargar -->
                         <div class="col-md-6 form-group">
                           <div class="custom-control custom-checkbox">
@@ -44,10 +57,10 @@
                             <label for="customCheckbox2" class="custom-control-label">Puede Cargar:</label>
                           </div>                        
                         </div>
-                        
-                      @include('foreach.tipoequipofor')
-                    </div>
-                    
+                        <div class="col-md-6">
+                          @include('foreach.tipoequipofor')
+                        </div>                      
+                    </div>                    
                     @include('componentes.description')
                         
                      <!-- es_propio 

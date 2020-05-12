@@ -63,8 +63,8 @@
                   <!-- <td>{{$arrastre->es_propio}}</td> -->
                   <td>{{$arrastre->equipo->identificador}}</td>
                   <td>{{$arrastre->tipoArrastre->name}}</td>
-                  <td> @if($arrastre->tercero){{$arrastre->tercero->name}} @endif</td>
-                  <td>@if($arrastre->organizacion){{$arrastre->organizacion->name}}@endif</td>
+                  <td>{{optional($arrastre->tercero)->name}}</td>
+                  <td>{{optional($arrastre->organizacion)->name}}</td>
                   <td>
                       <a href="{{route('arrastres.show',$arrastre)}}" target="_blank">
                           <i class="fa fa-eye"></i>

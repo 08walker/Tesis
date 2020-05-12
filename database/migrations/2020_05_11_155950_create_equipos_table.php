@@ -27,9 +27,9 @@ class CreateEquiposTable extends Migration
 
             $table->unsignedBigInteger('tipo_equipo_id');
             $table->foreign('tipo_equipo_id')->references('id')->on('tipo_equipo');
-            $table->unsignedBigInteger('tercero_id');
+            $table->unsignedBigInteger('tercero_id')->nullable();
             $table->foreign('tercero_id')->references('id')->on('terceros');
-            $table->unsignedBigInteger('organizacion_id');
+            $table->unsignedBigInteger('organizacion_id')->nullable();
             $table->foreign('organizacion_id')->references('id')->on('organizaciones');
 
             $table->timestamps();
