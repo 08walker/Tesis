@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEquipoRequest extends FormRequest
 {
@@ -24,7 +25,10 @@ class StoreEquipoRequest extends FormRequest
     public function rules()
     {
         return [
-            'identificador'=>'required|size:7',
+            'identificador'=>
+                ['required',
+                'size:7',
+                Rule::unique('equipos')->ignore($this->route('equipo')->id)],
             'volumen_max_carga' => 'required|numeric|min:1',
             'peso_max_carga' => 'required|numeric|min:1',
             'tara' => 'required|numeric|min:1',
@@ -41,6 +45,7 @@ class StoreEquipoRequest extends FormRequest
         return [
             'identificador.required'=>'Debe introducir la chapa.',
             'identificador.size'=>'La chapa debe tener 7 caracteres.',
+            'identificador.unique'=>'La chapa ya existe.',
             'volumen_max_carga.required' => 'Debe introducir el volumen ',
             'volumen_max_carga.numeric' => 'Debe introducir el solo números ',
             'volumen_max_carga.min' => 'Debe introducir valores mayores que 0 ',

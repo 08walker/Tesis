@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreChoferRequest extends FormRequest
 {
@@ -25,8 +26,13 @@ class StoreChoferRequest extends FormRequest
     {
         return [
             'name'=>'required|min:3',
-            'ci'=>'required|size:11',
-            'licencia'=>'required',
+            'ci'=>
+                ['required',
+                'size:11',
+                 Rule::unique('choferes')->ignore($this->route('chofer')->id)],
+            'licencia'=>
+                ['required',
+                 Rule::unique('choferes')->ignore($this->route('chofer')->id)],
             'telefono'=>'required',
             'equipo_id'=>'required',
             //'es_propio'=>'required',
@@ -41,7 +47,9 @@ class StoreChoferRequest extends FormRequest
             'name.min'=>'El nombre debe tener mas de 3 caracteres',
             'ci.required'=>'Debe introducir el carnet de identidad',
             'ci.size'=>'El carnet debe tener 11 dígitos',
+            'ci.unique'=>'El carnet ya está en uso',
             'licencia.required'=>'Debe introducir la licencia',
+            'licencia.unique'=>'La licencia está en uso',
             'telefono.required'=>'Debe introducir el teléfono',
             'equipo_id.required'=>'Debe seleccionar el equipo por defecto',
             'organizacion_id.required_if' => 'Debe llenar al tercero cuando no pertenece a la organizacion', 

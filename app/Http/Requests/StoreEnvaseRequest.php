@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEnvaseRequest extends FormRequest
 {
@@ -24,7 +25,9 @@ class StoreEnvaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'identificador'=>'required',
+            'identificador'=>
+                ['required',
+                Rule::unique('envases')->ignore($this->route('envase')->id)],
             'volumen_max_carga' => 'required|numeric|min:1',
             'tara' => 'required|numeric|min:1',
             //'es_propio'=>'required',
@@ -36,6 +39,7 @@ class StoreEnvaseRequest extends FormRequest
     {
         return [
             'identificador.required'=>'Debe introducir el identificador',
+            'identificador.unique'=>'El identificador ya esta en uso',
             'volumen_max_carga.required' => 'Debe introducir el volumen',
             'volumen_max_carga.numeric' => 'Debe introducir el solo números ',
             'volumen_max_carga.min' => 'Debe introducir valores mayores que 0 ',

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProvinciaRequest extends FormRequest
 {
@@ -24,7 +25,10 @@ class StoreProvinciaRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|min:3|unique:provincias',
+            'name'=>
+                ['required',
+                'min:3',
+                Rule::unique('provincias')->ignore($this->route('provincia')->id)],
         ];
     }
 

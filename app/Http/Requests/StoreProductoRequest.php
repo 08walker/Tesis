@@ -24,7 +24,10 @@ class StoreProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|min:3',
+            'name'=>
+                ['required',
+                'min:3',
+                Rule::unique('productos')->ignore($this->route('producto')->id)],
             'identificador'=>'required',
             'unidad_medida_id'=>'required',
         ];
@@ -35,7 +38,7 @@ class StoreProductoRequest extends FormRequest
         return [
             'name.required'=>'Debe introducir el nombre',
             'name.min'=>'El nombre debe tener mas de 3 caracteres',
-            //'name.unique'=>'El nombre ya esta en uso',
+            'name.unique'=>'El nombre ya esta en uso',
             'identificador.required'=>'Debe introducir el identificador',
             'unidad_medida_id.required'=>'Debe seleccionar la unidad de medida',
         ];
