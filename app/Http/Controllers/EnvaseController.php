@@ -28,9 +28,10 @@ class EnvaseController extends Controller
     
     public function create()
     {
+        $envase = new Envase;
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
-        return view('envase.create',compact('terceros','organizaciones'));
+        return view('envase.create',compact('terceros','organizaciones','envase'));
     }
 
     public function store(StoreEnvaseRequest $request)

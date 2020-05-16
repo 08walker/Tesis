@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Arrastre::class, function (Faker $faker) {
     return [
-        'identificador'=>str_random(10),
+        'identificador'=>str_random(7),
         'description'=>$faker->sentence(3),
         'volumen_max_carga'=>$faker->randomElement(['3','4','5']),
         'peso_max_carga'=>$faker->randomElement(['2','3','4','5']),

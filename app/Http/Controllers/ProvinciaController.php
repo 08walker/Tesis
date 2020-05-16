@@ -16,7 +16,8 @@ class ProvinciaController extends Controller
 
     public function create()
     {
-        return view('provincia.create');
+        $provincia = new Provincia;
+        return view('provincia.create',compact('provincia'));
     }
 
     public function store(StoreProvinciaRequest $request)

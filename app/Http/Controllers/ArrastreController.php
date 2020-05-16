@@ -29,13 +29,14 @@ class ArrastreController extends Controller
     }
 
     public function create()
-    {   
+    {
+        $arrastre = new Arrastre;   
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $equipos = Equipo::all();
         $tipoarrastre = TipoArrastre::all();
-        return view('arrastre.create',compact('terceros','equipos','organizaciones','tipoarrastre'));
-        //return view('arrastre.create',['terceros'=>$terceros,'equipos'=>$equipos,'organizaciones'=>$organizaciones,'tipoarrastre'=>$tipoarrastre]);
+        return view('arrastre.create',
+            compact('terceros','equipos','organizaciones','tipoarrastre','arrastre'));
     }
 
     public function store(StoreArrastreRequest $request)

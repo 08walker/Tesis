@@ -33,8 +33,9 @@ class MunicipioController extends Controller
 
     public function create()
     {   
+        $municipio = new Municipio;
         $provincias = Provincia::all();
-        return view('municipio.create',compact('provincias'));
+        return view('municipio.create',compact('provincias', 'municipio'));
         //return view('municipio.create');
     }
 
@@ -57,7 +58,7 @@ class MunicipioController extends Controller
         return view('municipio.edit',['municipio'=>$municipio,'provincias'=>$provincias]);
     }
 
-    public function update(Request $request, Municipio $municipio)
+    public function update(StoreMunicipioRequest $request, Municipio $municipio)
     {
         $data = request()->all();
         //dd($data);

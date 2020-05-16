@@ -17,38 +17,32 @@
           <div class="container">
             <div class="row">
                 <!-- aling -->
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                   <div class="card"></div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                    <p>Por favor corrige los errores debajo:</p> 
-                    </div>
-                    @endif
+                    
+                    @include('partials.error-messages')
                     
                     <form method="POST" action="{{ route('choferes.update',$chofer) }}">
                     {{ method_field('PUT') }} {!! csrf_field() !!}
                     <div class="card-body">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre:</label>
-                        <input autofocus="" type="text" class="form-control" name="name" id="exampleInputPassword1" placeholder="Escriba el nombre" value="{{$chofer->name,old('name')}}">
-                      <div class="has-error">
-                            @if($errors->has('name'))
-                              <font color="#FF0000">
-                                    <span style="background-color: inherit;">
-                                      {{$errors->first('name')}}
-                                    </span>
-                              </font>
-                            @endif
-                      </div>
-                      </div>
+                      <div class="row">
+                         <div class="col-md-6">
+                            @include('foreach.tercerofor',['model'=>$chofer])
+                         </div>
+                         <div class="col-md-6">
+                            @include('foreach.organizacionfor',['model'=>$chofer])
+                         </div>
+                         <div class="col-md-6">
+                            @include('componentes.name',['model'=>$chofer])
+                         </div>                        
 
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido" id="exampleInputPassword1" placeholder="Escriba el apellido" value="{{$chofer->apellido, old('apellido')}}">
+                      <div class="col-md-6 form-group">
+                        <label for="exampleInputApellido1">Apellidos:</label>
+                        <input type="text" class="form-control" name="apellido" id="exampleInputPassword1" placeholder="Escriba el apellido" value="{{$chofer->apellido,old('apellido')}}">
                       <div class="has-error">
                             @if($errors->has('apellido'))
                               <font color="#FF0000">
@@ -60,9 +54,9 @@
                       </div>
                       </div>
 
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Carnet de identidad:</label>
-                        <input type="text" class="form-control" name="ci" id="exampleInputPassword1" placeholder="Escriba el número de carnet" value="{{$chofer->ci, old('ci')}}">
+                      <div class="col-md-6 form-group">
+                        <label for="exampleInputCi1">Carnet de identidad:</label>
+                        <input type="text" class="form-control" name="ci" id="exampleInputCi1" placeholder="Escriba el número de carnet" value="{{$chofer->ci,old('ci')}}">
                       <div class="has-error">
                             @if($errors->has('ci'))
                               <font color="#FF0000">
@@ -74,9 +68,9 @@
                       </div>
                       </div>
 
-                      <div class="form-group">
+                      <div class="col-md-6 form-group">
                         <label for="exampleInputEmail1">Licencia:</label>
-                        <input type="text" class="form-control" name="licencia" id="exampleInputPassword1" placeholder="Escriba código de la licencia" value="{{$chofer->licencia, old('licencia')}}">
+                        <input type="text" class="form-control" name="licencia" id="exampleInputLicencia1" placeholder="Escriba código de la licencia" value="{{$chofer->licencia, old('licencia')}}">
                       <div class="has-error">
                             @if($errors->has('licencia'))
                               <font color="#FF0000">
@@ -88,9 +82,9 @@
                       </div>
                       </div>
 
-                      <div class="form-group">
+                      <div class="col-md-6 form-group">
                         <label for="exampleInputEmail1">Teléfono:</label>
-                        <input type="text" class="form-control" name="telefono" id="exampleInputPassword1" placeholder="Escriba el número de teléfono" value="{{$chofer->telefono, old('telefono')}}">
+                        <input type="text" class="form-control" name="telefono" id="exampleInputTelefono1" placeholder="Escriba el número de teléfono" value="{{$chofer->telefono, old('telefono')}}">
                       <div class="has-error">
                             @if($errors->has('telefono'))
                               <font color="#FF0000">
@@ -101,53 +95,11 @@
                             @endif
                       </div>
                       </div>
-
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Equipo:</label>
-                        <select class="form-control select2" style="width: 100%;" name="equipo_id">
-                            @foreach($equipos->all() as $equipo)
-                                @if($equipo->id == $chofer->equipo_id)
-                                  <option value="{{$equipo->id}}">{{$equipo->identificador}}</option>
-                                @else                                 
-                                  <option value="{{$equipo->id}}">{{$equipo->identificador}}</option>
-                                @endif
-                            @endforeach
-                        </select>
+                      
+                      <div class="col-md-6">
+                        @include('foreach.equipofor',['model'=>$chofer])
                       </div>
-                        <!-- es_propio 
-                      <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="customCheckbox2" checked name="">
-                          <label for="customCheckbox2" class="custom-control-label">Contratado:</label>
-                        </div>                        
-                      </div>
-                      -->
-
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Tercero:</label>
-                        <select class="form-control select2" style="width: 100%;" name="tercero_id">
-                            @foreach($terceros->all() as $tercero)
-                                @if($tercero->id == $chofer->tercero_id)
-                                  <option value="{{$tercero->id}}">{{$tercero->name}}</option>
-                                @else                                 
-                                  <option value="{{$tercero->id}}">{{$tercero->name}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Organización:</label>
-                        <select class="form-control select2" style="width: 100%;" name="organizacion_id">
-                            @foreach($organizaciones->all() as $org)
-                                @if($org->id == $chofer->organizacion_id)
-                                  <option value="{{$org->id}}">{{$org->name}}</option>
-                                @else                                 
-                                  <option value="{{$org->id}}">{{$org->name}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                      </div>
+                    </div>
 
                     <button type="submit" class="btn btn-success btn-flat">Actualizar</button>
                     <a class="btn btn-flat btn-primary" href="{{route('choferes')}}">Cancelar</a>

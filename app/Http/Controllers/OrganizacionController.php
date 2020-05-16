@@ -26,8 +26,9 @@ class OrganizacionController extends Controller
 
     public function create()
     {   
+        $organizacion = new Organizacion;
         $municipios = Municipio::all();
-        return view('organizacion.create',compact('municipios'));
+        return view('organizacion.create',compact('municipios','organizacion'));
     }
 
     public function store(StoreOrganizacionRequest $request)

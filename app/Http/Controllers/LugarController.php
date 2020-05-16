@@ -29,10 +29,11 @@ class LugarController extends Controller
 
     public function create()
     {   
+        $lugar = new Lugar;
         $municipios = Municipio::all();
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
-        return view('lugar.create',compact('municipios','terceros','organizaciones'));
+        return view('lugar.create',compact('municipios','terceros','organizaciones','lugar'));
     }
 
     public function store(StoreLugarRequest $request)

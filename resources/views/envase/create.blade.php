@@ -23,11 +23,8 @@
                 <div class="col-lg-8">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                    <p>Por favor corrige los errores debajo:</p> 
-                    </div>
-                    @endif
+                    
+                    @include('partials.error-messages')
                     
                     <form role="form" id="quickForm" method="POST" action="{{ route('envases.create') }}">
                     {!! csrf_field() !!}
@@ -35,19 +32,19 @@
 
                       <div class="row">
                         <div class="col-md-6">
-                          @include('foreach.tercerofor')                          
+                          @include('foreach.tercerofor',['model'=>$envase])
                         </div>
                         <div class="col-md-6">
-                          @include('foreach.organizacionfor')
+                          @include('foreach.organizacionfor',['model'=>$envase])
                         </div>
                         <div class="col-md-6">
-                          @include('componentes.identificador')                          
+                          @include('componentes.identificador',['model'=>$envase])       
                         </div>
                         <div class="col-md-6">
-                          @include('componentes.tara')                          
+                          @include('componentes.tara',['model'=>$envase])
                         </div>
                         <div class="col-md-6">
-                          @include('componentes.volumen')                          
+                          @include('componentes.volumen',['model'=>$envase])
                         </div>
                       </div>
 

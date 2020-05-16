@@ -1,6 +1,6 @@
 <div class="form-group">
 	<label for="exampleInputName1">Nombre:</label>
-	<input autofocus="" type="text" class="form-control" name="name" id="exampleInputName1" placeholder="Escriba el nombre" value="{{old('name')}}">
+	<input autofocus="" type="text" class="form-control" name="name" id="exampleInputName1" placeholder="Escriba el nombre" value="{{$model->name,old('name')}}">
 	<div class="has-error">
 	    @if($errors->has('name'))
 	      <font color="#FF0000">

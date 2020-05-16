@@ -24,11 +24,8 @@
           <div class="col-lg-6">
             <div class="card card-primary card-outline">
               <div class="card-body">
-                @if($errors->any())
-                <div class="alert alert-danger">
-                <p>Por favor corrige los errores debajo:</p> 
-                </div>
-                @endif
+
+                @include('partials.error-messages')
                 
                 <form id="quickForm" role="form" method="POST" action="{{ route('productos.create') }}">
                 {!! csrf_field() !!}
@@ -36,16 +33,16 @@
                   
                   <div class="row">
                     <div class="col-md-6">
-                     @include('componentes.name')          
+                     @include('componentes.name',['model'=>$producto])
                     </div>
                     <div class="col-md-6">
-                     @include('componentes.identificador')                      
+                     @include('componentes.identificador',['model'=>$producto])      
                     </div>
                     <div class="col-md-12">
-                     @include('foreach.unidadmedidafor')                      
+                     @include('foreach.unidadmedidafor',['model'=>$producto])
                     </div>
                   </div>
-                  @include('componentes.description')          
+                  @include('componentes.description',['model'=>$producto])
 
                 <button type="submit" class="btn btn-success btn-flat">Crear</button>
                 <a class="btn btn-flat btn-primary" href="{{route('provincias')}}">Cancelar</a>

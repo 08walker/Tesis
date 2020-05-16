@@ -29,10 +29,11 @@ class EquipoController extends Controller
     
     public function create()
     {   
+        $equipo = new Equipo;
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $tipoequipo = TipoEquipo::all();
-        return view('equipo.create',compact('terceros','organizaciones','tipoequipo'));
+        return view('equipo.create',compact('terceros','organizaciones','tipoequipo','equipo'));
     }
 
     public function store(StoreEquipoRequest $request)

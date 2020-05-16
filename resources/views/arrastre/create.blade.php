@@ -21,11 +21,8 @@
                 <div class="col-lg-8">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                    <p>Por favor corrige los errores debajo:</p> 
-                    </div>
-                    @endif
+                    
+                    @include('partials.error-messages')
                     
                     <form id="quickForm" role="form" method="POST" action="{{ route('arrastres.create') }}">
                     {!! csrf_field() !!}
@@ -33,33 +30,33 @@
                       
                       <div class="row">
                         <div class="col-md-6">
-                          @include('foreach.tercerofor')                          
+                          @include('foreach.tercerofor',['model'=>$arrastre])
                         </div>
                         <div class="col-md-6">
-                          @include('foreach.organizacionfor')                          
+                          @include('foreach.organizacionfor',['model'=>$arrastre])
                         </div>
                         <div class="col-md-6">
-                          @include('componentes.chapa')                          
+                          @include('componentes.chapa',['model'=>$arrastre])  
                         </div>
                         <div class="col-md-6">
-                          @include('componentes.tara')                          
+                          @include('componentes.tara',['model'=>$arrastre])           
                         </div>
                         <div class="col-md-6">
-                          @include('componentes.volumen')                          
+                          @include('componentes.volumen',['model'=>$arrastre])         
                         </div>
                         <div class="col-md-6">
-                          @include('componentes.peso')                          
+                          @include('componentes.peso',['model'=>$arrastre])   
                         </div>
                       </div>
 
-                      @include('componentes.description')                      
+                      @include('componentes.description',['model'=>$arrastre])     
 
                       <div class="row">
                         <div class="col-md-6">
-                          @include('foreach.tipoarrastrefor')                          
+                          @include('foreach.tipoarrastrefor',['model'=>$arrastre])          
                         </div>
                         <div class="col-md-6">
-                          @include('foreach.equipofor')                          
+                          @include('foreach.equipofor',['model'=>$arrastre])
                         </div>
                       </div>
                      <!-- es_propio 

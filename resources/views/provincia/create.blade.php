@@ -25,17 +25,14 @@
           <div class="col-lg-6">
             <div class="card card-primary card-outline">
               <div class="card-body">
-                @if($errors->any())
-                <div class="alert alert-danger">
-                <p>Por favor corrige los errores debajo:</p> 
-                </div>
-                @endif
+                
+                @include('partials.error-messages')
                 
                 <form id="quickForm" role="form" method="POST" action="{{ route('provincias.create') }}">
                 {!! csrf_field() !!}
                 <div class="card-body">
                   
-                @include('componentes.name')
+                @include('componentes.name',['model'=>$provincia])
 
                 <button type="submit" class="btn btn-success btn-flat">Crear</button>
                 <a class="btn btn-flat btn-primary" href="{{route('provincias')}}">Cancelar</a>

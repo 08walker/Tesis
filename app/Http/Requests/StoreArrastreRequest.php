@@ -24,7 +24,9 @@ class StoreArrastreRequest extends FormRequest
     public function rules()
     {
         return [
-             'identificador' => 'required|size:7',
+             'identificador' => ['required',
+                                'size:7',
+                                Rule::unique('arrastres')->ignore($this->route('arrastre')->id)],
              'volumen_max_carga' => 'required|numeric|min:1',
              'peso_max_carga' => 'required|numeric|min:1',
              'tara' => 'required|numeric|min:1',
@@ -42,6 +44,7 @@ class StoreArrastreRequest extends FormRequest
         return [
             'identificador.required'=>'Debe introducir la chapa.',
             'identificador.size'=>'La chapa debe tener 7 caracteres.',
+            'identificador.unique'=>'La chapa ya está en uso.',
             'volumen_max_carga.required' => 'Debe introducir el volumen ',
             'volumen_max_carga.numeric' => 'Debe introducir el solo números ',
             'volumen_max_carga.min' => 'Debe introducir valores mayores que 0 ',

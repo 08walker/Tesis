@@ -18,8 +18,9 @@ class ProductoController extends Controller
 
     public function create()
     {
+        $producto = new Producto;
         $unidades = UnidadMedida::all();
-        return view('producto.create',compact('unidades'));
+        return view('producto.create',compact('unidades','producto'));
     }
 
     public function store(StoreProductoRequest $request)

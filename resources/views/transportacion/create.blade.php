@@ -23,11 +23,8 @@
                 <div class="col-lg-6">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                    <p>Por favor corrige los errores debajo:</p> 
-                    </div>
-                    @endif
+                    
+                    @include('admin.partials.error-messages')
                     
                     <form id="quickForm" role="form" method="POST" action="{{ route('transportaciones.create') }}">
                     {!! csrf_field() !!}

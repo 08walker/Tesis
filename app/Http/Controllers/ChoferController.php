@@ -29,10 +29,11 @@ class ChoferController extends Controller
 
     public function create()
     {
+        $chofer = new Chofer;
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $equipos = Equipo::all();
-        return view('chofer.create',compact('terceros','equipos','organizaciones'));
+        return view('chofer.create',compact('terceros','equipos','organizaciones','chofer'));
     }
 
     public function store(StoreChoferRequest $request)

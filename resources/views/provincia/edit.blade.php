@@ -34,15 +34,9 @@
                 {{ method_field('PUT') }}
                 {!! csrf_field() !!}
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre:</label>
-                    <input autofocus="" type="text" class="form-control" id="exampleInputPassword1" placeholder="Escriba el nombre" name="name" value="{{$provincia->name,old('name')}}">
-                  </div>
-                  <div class="form-group has-error">
-                            @if($errors->has('name'))
-                                <span id="helpBlock2" class="help-block">{{$errors->first('name')}}</span> 
-                            @endif
-                  </div>
+
+                  @include('componentes.name',['model'=>$provincia])
+                
                 <button type="submit" class="btn btn-success btn-flat">Actualizar</button>
                 <a class="btn btn-flat btn-primary" href="{{route('provincias')}}">Cancelar</a>
                 </div>

@@ -26,8 +26,9 @@ class TerceroController extends Controller
 
     public function create()
     {   
+        $tercero = new Tercero;
         $municipios = Municipio::all();
-        return view('tercero.create',compact('municipios'));
+        return view('tercero.create',compact('municipios','tercero'));
         //return view('tercero.create');
     }
 

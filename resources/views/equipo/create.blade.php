@@ -21,33 +21,30 @@
                 <div class="col-lg-8">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                    <p>Por favor corrige los errores debajo:</p> 
-                    </div>
-                    @endif
+                    
+                    @include('partials.error-messages')
                     
                     <form id="quickForm" role="form" method="POST" action="{{ route('equipos.create') }}">
                     {!! csrf_field() !!}
                     <div class="card-body">
                     <div class="row">
                       <div class="col-md-6">
-                        @include('foreach.tercerofor')  
+                        @include('foreach.tercerofor',['model'=>$equipo])
                       </div>
                       <div class="col-md-6">
-                        @include('foreach.organizacionfor')  
+                        @include('foreach.organizacionfor',['model'=>$equipo])
                       </div>
                       <div class="col-md-6">
-                        @include('componentes.chapa')  
+                        @include('componentes.chapa',['model'=>$equipo])
                       </div>
                       <div class="col-md-6">
-                        @include('componentes.tara')  
+                        @include('componentes.tara',['model'=>$equipo])
                       </div>
                       <div class="col-md-6">
-                        @include('componentes.volumen')
+                        @include('componentes.volumen',['model'=>$equipo])
                       </div>
                       <div class="col-md-6">
-                        @include('componentes.peso')   
+                        @include('componentes.peso',['model'=>$equipo])
                       </div>                      
 
                       <!-- puede_cargar -->
@@ -58,10 +55,10 @@
                           </div>                        
                         </div>
                         <div class="col-md-6">
-                          @include('foreach.tipoequipofor')
+                          @include('foreach.tipoequipofor',['model'=>$equipo])
                         </div>                      
                     </div>                    
-                    @include('componentes.description')
+                    @include('componentes.description',['model'=>$equipo])
                         
                      <!-- es_propio 
                       <div class="form-group">
