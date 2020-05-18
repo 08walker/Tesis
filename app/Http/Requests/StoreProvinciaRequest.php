@@ -28,7 +28,7 @@ class StoreProvinciaRequest extends FormRequest
             'name'=>
                 ['required',
                 'min:3',
-                Rule::unique('provincias')->ignore($this->route('provincia')->id)],
+                Rule::unique('provincias')->ignore($this->route('provincia'))],
         ];
     }
 

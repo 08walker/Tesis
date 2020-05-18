@@ -28,7 +28,7 @@ class StoreOrganizacionRequest extends FormRequest
             'name'=>
                 ['required',
                 'min:3',
-                Rule::unique('organizaciones')->ignore($this->route('organizacion')->id)],
+                Rule::unique('organizaciones')->ignore($this->route('organizacion'))],
             //'identificador'=>'required',
             'municipio_id'=>'required',
         ];

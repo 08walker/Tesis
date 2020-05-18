@@ -27,7 +27,7 @@ class StoreArrastreRequest extends FormRequest
         return [
              'identificador' => ['required',
                                 'size:7',
-                                Rule::unique('arrastres')->ignore($this->route('arrastre')->id)],
+                                Rule::unique('arrastres')->ignore($this->route('arrastre'))],
              'volumen_max_carga' => 'required|numeric|min:1',
              'peso_max_carga' => 'required|numeric|min:1',
              'tara' => 'required|numeric|min:1',

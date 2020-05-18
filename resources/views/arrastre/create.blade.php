@@ -47,11 +47,6 @@
                         <div class="col-md-6">
                           @include('componentes.peso',['model'=>$arrastre])   
                         </div>
-                      </div>
-
-                      @include('componentes.description',['model'=>$arrastre])     
-
-                      <div class="row">
                         <div class="col-md-6">
                           @include('foreach.tipoarrastrefor',['model'=>$arrastre])          
                         </div>
@@ -59,6 +54,9 @@
                           @include('foreach.equipofor',['model'=>$arrastre])
                         </div>
                       </div>
+
+                      @include('componentes.description',['model'=>$arrastre])     
+
                      <!-- es_propio 
                       <div class="form-group">
                         <div class="custom-control custom-checkbox">

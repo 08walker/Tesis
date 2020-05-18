@@ -27,7 +27,7 @@ class StoreMunicipioRequest extends FormRequest
         return [
             'name'=>['required',
                      'min:3',
-                      Rule::unique('municipios')->ignore($this->route('municipio')->id)],
+                      Rule::unique('municipios')->ignore($this->route('municipio'))],
             'provincia_id' => 'required',
         ];
     }

@@ -4,12 +4,13 @@ use App\Equipo;
 use App\Organizacion;
 use App\Tercero;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(App\Chofer::class, function (Faker $faker) {
     return [
         'name'=>$faker->firstNameMale,
         'apellido'=>$faker->lastName,    
-        'licencia'=>str_random(7),
+        'licencia'=>Str::random(7),
         'telefono'=>$faker->phoneNumber,
         //Para los boolean o cualquier otra cosa
         'es_propio'=>$faker->randomElement(['0','1']),

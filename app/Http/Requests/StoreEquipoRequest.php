@@ -28,7 +28,7 @@ class StoreEquipoRequest extends FormRequest
             'identificador'=>
                 ['required',
                 'size:7',
-                Rule::unique('equipos')->ignore($this->route('equipo')->id)],
+                Rule::unique('equipos')->ignore($this->route('equipo'))],
             'volumen_max_carga' => 'required|numeric|min:1',
             'peso_max_carga' => 'required|numeric|min:1',
             'tara' => 'required|numeric|min:1',

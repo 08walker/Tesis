@@ -28,7 +28,7 @@ class StoreTerceroRequest extends FormRequest
             'name'=>
                 ['required',
                 'min:3',
-                Rule::unique('terceros')->ignore($this->route('tercero')->id)],
+                Rule::unique('terceros')->ignore($this->route('tercero'))],
             //'identificador'=>'required',
             'municipio_id'=>'required',
         ];

@@ -102,7 +102,7 @@ $(document).ready(function () {
       identificador: {
         required: true
       },
-      unidad_medidas_id: {
+      unidad_medida_id: {
         required: true
       },
     },
@@ -114,7 +114,7 @@ $(document).ready(function () {
       identificador: {
         required: "Debe introducir el identificador",
       },
-      unidad_medidas_id: {
+      unidad_medida_id: {
         required: "Debe seleccionar la unidad de medida",
       },
     },
@@ -132,5 +132,4 @@ $(document).ready(function () {
   });
 });
 </script>
-
 @endpush

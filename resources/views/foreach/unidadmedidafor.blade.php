@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label for="exampleInputEmail1">Unidad de medida:</label>
+    <label for="exampleInputUnidadM1">Unidad de medida:</label>
         <select class="form-control select2" style="width: 100%;" name="unidad_medida_id">
         @if($model->unidad_medida_id)
           @foreach($unidades->all() as $unidad)

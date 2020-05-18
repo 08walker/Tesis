@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Actualizar agencia</h1>
+            <h1 class="m-0 text-dark"> Actualizar tercero</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -26,10 +26,10 @@
                     
                     @include('partials.error-messages')
                     
-                  <form method="POST" action="{{ route('terceros.update',$tercero) }}">
-                    {{ method_field('PUT') }}{!! csrf_field() !!}
+                    <form id="quickForm" role="form" method="POST" action="{{ route('terceros.update',$tercero) }}">
+                    {{ method_field('PUT') }} {!! csrf_field() !!}
                     <div class="card-body">
-                        
+
                         @include('componentes.name',['model'=>$tercero])
                         @include('componentes.identificador',['model'=>$tercero])
                         @include('foreach.municipiofor',['model'=>$tercero])
@@ -58,6 +58,9 @@
 @push('scripts')
   <!-- Select2 -->
   <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+  <!-- jquery-validation -->
+  <script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <script>
     $(function () {
@@ -71,8 +74,50 @@
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     });
-
   });
+</script>
 
+<script type="text/javascript">
+$(document).ready(function () {
+   $('#quickForm').validate({
+    rules: {
+      name: {
+        required: true,
+        minlength: 5,
+      },
+      identificador: {
+        required: true,
+        minlength: 5,
+      },
+      municipio_id: {
+        required: true
+      },
+    },
+    messages: {
+      name: {
+        required: "Debe introducir el nombre",
+        minlength: "El nombre debe tener 5 caracteres como mínimo"
+      },
+      identificador: {
+        required: "Debe introducir el identificador",
+        minlength: "El identificador debe tener 5 caracteres como mínimo"
+      },
+      municipio_id: {
+        required: "Por favor seleccione el municipio",
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
 </script>
 @endpush

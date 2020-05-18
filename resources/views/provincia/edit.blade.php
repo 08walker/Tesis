@@ -30,7 +30,7 @@
                 </div>
                 @endif
                 
-                <form method="POST" action="{{ route('provincias.update',$provincia) }}">
+                <form method="POST" id="quickForm" action="{{ route('provincias.update',$provincia) }}">
                 {{ method_field('PUT') }}
                 {!! csrf_field() !!}
                 <div class="card-body">
@@ -53,3 +53,41 @@
     <!-- /.content -->
 </div>
 @endsection
+@push('scripts')
+  <!-- jquery-validation -->
+  <script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+   $('#quickForm').validate({
+    rules: {
+      name: {
+        required: true,
+        minlength: 5,
+      },
+      provincia_id: {
+        required: true
+      },
+    },
+    messages: {
+      name: {
+        required: "Debe introducir el nombre",
+        minlength: "El nombre debe tener 5 caracteres como mínimo"
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
+</script>
+@endpush

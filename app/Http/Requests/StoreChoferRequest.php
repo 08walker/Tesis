@@ -29,7 +29,8 @@ class StoreChoferRequest extends FormRequest
             'ci'=>
                 ['required',
                 'size:11',
-                 Rule::unique('choferes')->ignore($this->route('chofer')->id)],
+                 Rule::unique('choferes')->ignore($this->route('chofer')->id)
+             ],
             'licencia'=>
                 ['required',
                  Rule::unique('choferes')->ignore($this->route('chofer')->id)],

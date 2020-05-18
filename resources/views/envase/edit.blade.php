@@ -26,7 +26,7 @@
                     
                     @include('partials.error-messages')
                     
-                    <form method="POST" action="{{ route('envases.update',$envase) }}">
+                    <form method="POST" id="quickForm" action="{{ route('envases.update',$envase) }}">
                         {{ method_field('PUT') }} {!! csrf_field() !!}
                     <div class="card-body">
                       
@@ -62,7 +62,6 @@
 @endsection
 
 @push('styles')
-
 <!-- Select2 -->
   <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
@@ -71,7 +70,10 @@
 
 @push('scripts')
   <!-- Select2 -->
-  <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<!-- jquery-validation -->
+<script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <script>
     $(function () {
@@ -85,6 +87,59 @@
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     });
+
   });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#quickForm').validate({
+    rules: {
+      identificador: {
+        required: true,
+        minlength: 6,
+        maxlength: 8
+      },
+      tara: {
+        required:true,
+        number:true,
+        min: 0
+      },
+      volumen_max_carga: {
+        required: true,
+        number:true,
+        min: 0
+      },
+    },
+    messages: {
+      identificador: {
+        required: "Debe introducir el identificador",
+        minlength: "El identificador debe tener 7 caracteres.",
+        maxlength: "El identificador debe tener 7 caracteres."
+      },
+      tara: {
+        required: "Debe introducir la tara",
+        number:"Debe introducir un número",
+        min:"El valor debe ser mayor que 0"
+      },
+      volumen_max_carga: {
+        required: "Debe introducir el volumen",
+        number:"Debe introducir un número",
+        min:"El valor debe ser mayor que 0"
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
 </script>
 @endpush

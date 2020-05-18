@@ -4,10 +4,11 @@
 
 use App\Transportacion;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Transportacion::class, function (Faker $faker) {
     return [
-        'numero'=>str_random(7),
+        'numero'=>Str::random(7),
         'observacion'=>$faker->sentence(3),
     ];
 });

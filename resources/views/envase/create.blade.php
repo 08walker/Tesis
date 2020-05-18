@@ -7,13 +7,11 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear envases</h1>
+            <h1 class="m-0 text-dark"> Crear envase</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-
-    <div class="content">
           <div class="container">
             <div class="row">
                 <!-- aling -->
@@ -26,36 +24,26 @@
                     
                     @include('partials.error-messages')
                     
-                    <form role="form" id="quickForm" method="POST" action="{{ route('envases.create') }}">
+                    <form id="quickForm" role="form" method="POST" action="{{ route('envases.create') }}">
                     {!! csrf_field() !!}
                     <div class="card-body">
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          @include('foreach.tercerofor',['model'=>$envase])
-                        </div>
-                        <div class="col-md-6">
-                          @include('foreach.organizacionfor',['model'=>$envase])
-                        </div>
-                        <div class="col-md-6">
-                          @include('componentes.identificador',['model'=>$envase])       
-                        </div>
-                        <div class="col-md-6">
-                          @include('componentes.tara',['model'=>$envase])
-                        </div>
-                        <div class="col-md-6">
-                          @include('componentes.volumen',['model'=>$envase])
-                        </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        @include('foreach.tercerofor',['model'=>$envase])
                       </div>
-
-                      <!-- es_propio 
-                      <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="customCheckbox2" checked name="">
-                          <label for="customCheckbox2" class="custom-control-label">Contratado:</label>
-                        </div>                        
+                      <div class="col-md-6">
+                        @include('foreach.organizacionfor',['model'=>$envase])
                       </div>
-                      -->
+                      <div class="col-md-6">
+                        @include('componentes.identificador',['model'=>$envase])
+                      </div>
+                      <div class="col-md-6">
+                        @include('componentes.tara',['model'=>$envase])
+                      </div>
+                      <div class="col-md-6">
+                        @include('componentes.volumen',['model'=>$envase])
+                      </div>                      
+                    </div>    
 
                     <button type="submit" class="btn btn-success btn-flat">Crear</button>
                     <a class="btn btn-flat btn-primary" href="{{route('envases')}}">Cancelar</a>
@@ -66,7 +54,6 @@
             </div>
             </div>
           </div>
-    </div>
 </div>
 @endsection
 
@@ -99,52 +86,43 @@
     });
 
   });
-
 </script>
 
 <script type="text/javascript">
 $(document).ready(function () {
-   $('#quickForm').validate({
+  $('#quickForm').validate({
     rules: {
       identificador: {
         required: true,
-        minlength: 5,
-      },
-      volumen: {
-        required: true,
-        number:true,
-        min: 0
+        minlength: 6,
+        maxlength: 8
       },
       tara: {
         required:true,
         number:true,
         min: 0
       },
-      if ( organizacion_id == null ) {
-        organizacion_id: {
-        required:true
-      },}
+      volumen_max_carga: {
+        required: true,
+        number:true,
+        min: 0
+      },
     },
     messages: {
       identificador: {
         required: "Debe introducir el identificador",
-        minlength: "El identificador debe tener 5 caracteres como mínimo"
+        minlength: "El identificador debe tener 7 caracteres.",
+        maxlength: "El identificador debe tener 7 caracteres."
       },
       tara: {
         required: "Debe introducir la tara",
         number:"Debe introducir un número",
         min:"El valor debe ser mayor que 0"
       },
-      volumen: {
+      volumen_max_carga: {
         required: "Debe introducir el volumen",
         number:"Debe introducir un número",
         min:"El valor debe ser mayor que 0"
-      },
-      organizacion_id: {
-        equalTo:"Please enter the same value again.",
-      },
-      tercero_id: {
-       equalTo:"Please enter the same value again.",
       },
     },
     errorElement: 'span',

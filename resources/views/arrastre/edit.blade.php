@@ -24,8 +24,8 @@
                      
                     @include('partials.error-messages')
                     
-                    <form id="quickForm" role="form" method="POST" action="{{ route('arrastres.create') }}">
-                    {!! csrf_field() !!}
+                    <form id="quickForm" role="form" method="POST" action="{{ route('arrastres.update',$arrastre) }}">
+                    {{ method_field('PUT') }} {!! csrf_field() !!}
                     <div class="card-body">
                       
                       <div class="row">
@@ -83,6 +83,9 @@
 @push('scripts')
   <!-- Select2 -->
   <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+  <!-- jquery-validation -->
+  <script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <script>
     $(function () {
@@ -98,5 +101,79 @@
     });
 
   });
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+$('#quickForm').validate({
+  rules: {
+    identificador: {
+      required: true,
+      minlength: 6,
+      maxlength: 8
+    },
+    tara: {
+      required:true,
+      number:true,
+      min: 0
+    },
+    tipo_arrastre_id: {
+      required: true
+    },
+    volumen_max_carga: {
+      required: true,
+      number:true,
+      min: 0
+    },
+    peso_max_carga: {
+      required: true,
+      number:true,
+      min: 0
+    },
+    equipo_id: {
+      required: true
+    },
+
+  },
+  messages: {
+    identificador: {
+      required: "Debe introducir la chapa",
+      minlength: "La chapa debe tener 7 caracteres.",
+      maxlength: "La chapa debe tener 7 caracteres."
+    },
+    tipo_arrastre_id: {
+      required: "Por favor seleccione el tipo de arrastre",
+    },
+    equipo_id: {
+      required: "Por favor seleccione el equipo",
+    },
+    tara: {
+      required: "Debe introducir la tara",
+      number:"Debe introducir un número",
+      min:"El valor debe ser mayor que 0"
+    },
+    volumen_max_carga: {
+      required: "Debe introducir el volumen",
+      number:"Debe introducir un número",
+      min:"El valor debe ser mayor que 0"
+    },
+    peso_max_carga: {
+      required: "Debe introducir el peso",
+      number:"Debe introducir un número",
+      min:"El valor debe ser mayor que 0"
+    },
+  },
+  errorElement: 'span',
+  errorPlacement: function (error, element) {
+    error.addClass('invalid-feedback');
+    element.closest('.form-group').append(error);
+  },
+  highlight: function (element, errorClass, validClass) {
+    $(element).addClass('is-invalid');
+  },
+  unhighlight: function (element, errorClass, validClass) {
+    $(element).removeClass('is-invalid');
+  }
+});
+});
 </script>
 @endpush

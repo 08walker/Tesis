@@ -7,10 +7,11 @@ use App\Lugar;
 use App\Organizacion;
 use App\SelloRecibido;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(SelloRecibido::class, function (Faker $faker) {
     return [
-        'identificador'=>str_random(10),
+        'identificador'=>Str::random(10),
 	    //'fyh_quitado',
 	    'observacion' => $faker->sentence(3),
 	    'lugar_id' => Lugar::InRandomOrder()->value('id')?:factory(Lugar::class),

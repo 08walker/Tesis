@@ -60,6 +60,9 @@
 @push('scripts')
   <!-- Select2 -->
   <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<!-- jquery-validation -->
+  <script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <script>
     $(function () {
@@ -78,22 +81,23 @@
 </script>
 <script type="text/javascript">
 $(document).ready(function () {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-  $('#quickForm').validate({
+   $('#quickForm').validate({
     rules: {
       name: {
         required: true,
         minlength: 5,
+      },
+      provincia_id: {
+        required: true
       },
     },
     messages: {
       name: {
         required: "Debe introducir el nombre",
         minlength: "El nombre debe tener 5 caracteres como mínimo"
+      },
+      provincia_id: {
+        required: "Por favor seleccione la provincia",
       },
     },
     errorElement: 'span',

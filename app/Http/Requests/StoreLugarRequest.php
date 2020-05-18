@@ -28,7 +28,7 @@ class StoreLugarRequest extends FormRequest
             'name'=>
                 ['required',
                 'min:3',
-                Rule::unique('lugares')->ignore($this->route('lugar')->id)],
+                Rule::unique('lugares')->ignore($this->route('lugar'))],
             'municipio_id'=>'required',
             //'tercero_id'=>'required',
             //'organizacion_id'=>'required',

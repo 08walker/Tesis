@@ -27,7 +27,8 @@ class StoreEnvaseRequest extends FormRequest
         return [
             'identificador'=>
                 ['required',
-                Rule::unique('envases')->ignore($this->route('envase')->id)],
+                  Rule::unique('envases')->ignore($this->route('envase')),
+            ],
             'volumen_max_carga' => 'required|numeric|min:1',
             'tara' => 'required|numeric|min:1',
             //'es_propio'=>'required',

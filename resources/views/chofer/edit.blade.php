@@ -26,7 +26,7 @@
                     
                     @include('partials.error-messages')
                     
-                    <form method="POST" action="{{ route('choferes.update',$chofer) }}">
+                    <form id="quickForm" role="form" method="POST" action="{{ route('choferes.update',$chofer) }}">
                     {{ method_field('PUT') }} {!! csrf_field() !!}
                     <div class="card-body">
                       <div class="row">
@@ -113,7 +113,6 @@
     </div>
 </div>
 @endsection
-
 @push('styles')
 
 <!-- Select2 -->
@@ -125,6 +124,9 @@
 @push('scripts')
   <!-- Select2 -->
   <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+  <!-- jquery-validation -->
+  <script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <script>
     $(function () {
@@ -140,5 +142,65 @@
     });
 
   });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#quickForm').validate({
+    rules: {
+      name: {
+        required: true,
+        minlength:2
+      },
+      ci: {
+        required: true,
+        minlength:10,
+        maxlength:12
+      },
+      licencia: {
+        required: true
+      },
+      equipo_id: {
+        required: true
+      },
+      telefono: {
+        required: true,
+        //number:true
+      },
+    },
+    messages: {
+      name: {
+        required: "Debe introducir el nombre",
+        maxlength: "El nombre debo terner mas caracteres",
+      },
+      ci: {
+        required: "Debe introducir el carnet de identidad",
+        minlength: "El carnet debe tener 11 dígitos",
+        maxlength: "El carnet debe tener 11 dígitos",
+      },
+      licencia: {
+        required: "Debe introducir el código de la licencia",
+      },
+      equipo_id: {
+        required: "Debe seleccionar el equipo",
+      },
+      telefono: {
+        required: "Debe introducir el número de teléfono",
+        //number: "Solo debe introducir números",
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
 </script>
 @endpush
