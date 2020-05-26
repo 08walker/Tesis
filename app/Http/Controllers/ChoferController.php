@@ -18,6 +18,7 @@ class ChoferController extends Controller
      */
     public function index()
     {
+        //$this->authorize('view');
         return view('chofer.index')
         ->with('choferes', Chofer::all());
     }
@@ -30,6 +31,7 @@ class ChoferController extends Controller
     public function create()
     {
         $chofer = new Chofer;
+        $this->authorize('create',$chofer);
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $equipos = Equipo::all();
@@ -38,6 +40,7 @@ class ChoferController extends Controller
 
     public function store(StoreChoferRequest $request)
      {  
+        $this->authorize('create',$chofer);
         $data = request()->all(); 
         //dd($data);
         
@@ -61,6 +64,7 @@ class ChoferController extends Controller
 
     public function edit(Chofer $chofer)
     {
+        $this->authorize('update',$chofer);
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $equipos = Equipo::all();
@@ -69,6 +73,7 @@ class ChoferController extends Controller
 
     public function update(StoreChoferRequest $request, Chofer $chofer)
     {   
+        $this->authorize('update',$chofer);
         $data = request()->all(); 
         //dd($data);
     
@@ -81,6 +86,7 @@ class ChoferController extends Controller
 
     public function destroy(Chofer $chofer)
     {
+        $this->authorize('delete',$chofer);
         $chofer->delete();
 
         return redirect()->route('choferes')

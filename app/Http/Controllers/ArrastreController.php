@@ -19,6 +19,7 @@ class ArrastreController extends Controller
      */
     public function index()
     {
+        //$this->authorize('view');
         return view('arrastre.index')
         ->with('arrastres', Arrastre::all());
     }
@@ -31,6 +32,7 @@ class ArrastreController extends Controller
     public function create()
     {
         $arrastre = new Arrastre;   
+        $this->authorize('create',$arrastre);
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $equipos = Equipo::all();
@@ -41,6 +43,7 @@ class ArrastreController extends Controller
 
     public function store(StoreArrastreRequest $request)
     { 
+        $this->authorize('create',new Arrastre);
         $data = request()->all(); 
 
         //dd($data);
@@ -65,6 +68,7 @@ class ArrastreController extends Controller
 
     public function edit(Arrastre $arrastre)
     {
+        $this->authorize('update',$arrastre);
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $equipos = Equipo::all();
@@ -74,6 +78,7 @@ class ArrastreController extends Controller
 
     public function update(StoreArrastreRequest $request, Arrastre $arrastre)
     {
+        $this->authorize('update',$arrastre);
         $data = request()->all(); 
 
         //dd($data);
@@ -86,6 +91,7 @@ class ArrastreController extends Controller
 
     public function destroy(Arrastre $arrastre)
     {
+        $this->authorize('update',$arrastre);
         $arrastre->delete();
 
         return redirect()->route('arrastres')

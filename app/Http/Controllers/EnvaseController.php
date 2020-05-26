@@ -29,6 +29,7 @@ class EnvaseController extends Controller
     public function create()
     {
         $envase = new Envase;
+        $this->authorize('create',$envase);
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         return view('envase.create',compact('terceros','organizaciones','envase'));
@@ -36,6 +37,8 @@ class EnvaseController extends Controller
 
     public function store(StoreEnvaseRequest $request)
     {   
+        $this->authorize('create',new Envase);
+
         $data = request()->all(); 
 
         //dd($data);        
@@ -55,6 +58,8 @@ class EnvaseController extends Controller
 
     public function edit(Envase $envase)
     {
+        $this->authorize('update',$envase);
+
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         return view('envase.edit',['envase'=>$envase,'terceros'=>$terceros,'organizaciones'=>$organizaciones]);
@@ -62,6 +67,8 @@ class EnvaseController extends Controller
 
     public function update(StoreEnvaseRequest $request, Envase $envase)
     {
+        $this->authorize('update',$envase);
+
         $data = request()->all();
         //dd($data);
         $envase->update($data);
@@ -74,6 +81,8 @@ class EnvaseController extends Controller
 
     public function destroy(Envase $envase)
     {
+        $this->authorize('delete',$envase);
+
         $envase->delete();
 
         return redirect()->route('envases')

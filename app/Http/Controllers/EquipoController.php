@@ -30,6 +30,7 @@ class EquipoController extends Controller
     public function create()
     {   
         $equipo = new Equipo;
+        $this->authorize('create',$equipo);
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $tipoequipo = TipoEquipo::all();
@@ -38,6 +39,8 @@ class EquipoController extends Controller
 
     public function store(StoreEquipoRequest $request)
     {   
+        $this->authorize('create',new Equipo);
+
         $data = request()->all(); 
         //dd($data);
         $equipo = Equipo::create([
@@ -61,6 +64,8 @@ class EquipoController extends Controller
 
     public function edit(Equipo $equipo)
     {
+        $this->authorize('update',$equipo);
+
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
         $tipoequipo = TipoEquipo::all();
@@ -69,6 +74,8 @@ class EquipoController extends Controller
 
     public function update(StoreEquipoRequest $request, Equipo $equipo)
     {
+        $this->authorize('update',$equipo);
+        
         $data = request()->all(); 
         //dd($data);
 
