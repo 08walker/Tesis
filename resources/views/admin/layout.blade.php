@@ -155,10 +155,10 @@
       </li>
       @else
       <li class="nav-item">
-            <a href="{{ route('login') }}" class="nav-link">Login</a>
+            <a href="{{ route('login') }}" class="nav-link">Autenticar</a>
       </li>
       <li class="nav-item">
-            <a href="{{ route('register') }}" class="nav-link">Register</a>
+            <a href="{{ route('register') }}" class="nav-link">Registrar</a>
       </li>
       @endif
       </ul>

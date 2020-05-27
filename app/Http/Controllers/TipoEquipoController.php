@@ -7,79 +7,59 @@ use Illuminate\Http\Request;
 
 class TipoEquipoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('tipoequipo.index')
+            ->with('tipoequipo', TipoEquipo::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $tipoEquipo = new TipoEquipo;
+        $this->authorize('create',$tipoEquipo);
+        return view('tipoequipo.create',compact('tipoEquipo'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create',new TipoEquipo);
+        $tipoEquipo = TipoEquipo::create($request->all());
+
+        if ($tipoEquipo) {
+            return redirect()->route('tipoequipo')->with('success','Tipo de equipo creado con éxito');
+        }
+        return back()->withInput()->with('error','Error al crear el nuevo tipo');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TipoEquipo  $tipoEquipo
-     * @return \Illuminate\Http\Response
-     */
     public function show(TipoEquipo $tipoEquipo)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TipoEquipo  $tipoEquipo
-     * @return \Illuminate\Http\Response
-     */
     public function edit(TipoEquipo $tipoEquipo)
     {
-        //
+        $this->authorize('update',$tipoEquipo);
+        return view('tipoequipo.edit',['tipoEquipo'=>$tipoEquipo]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TipoEquipo  $tipoEquipo
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, TipoEquipo $tipoEquipo)
     {
-        //
+        $this->authorize('update',$tipoEquipo);
+        $data = request()->all();
+        $tipoEquipo->update($data);
+
+        if ($tipoEquipo) {
+            return redirect()->route('tipoequipo')->with('success','Tipo de equipo actualizado con éxito');
+        }
+        return back()->withInput()->with('error','Error al actualizar el tipo de equipo');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TipoEquipo  $tipoEquipo
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(TipoEquipo $tipoEquipo)
     {
-        //
+        $this->authorize('delete',$tipoEquipo);
+        $tipoEquipo->delete();
+
+        return redirect()->route('tipoequipo')
+                    ->with('success', 'El tipo arrastre ha sido eliminado');
     }
 }

@@ -34,6 +34,7 @@ class MunicipioController extends Controller
     public function create()
     {   
         $municipio = new Municipio;
+        $this->authorize('create',$municipio);
         $provincias = Provincia::all();
         return view('municipio.create',compact('provincias', 'municipio'));
         //return view('municipio.create');
@@ -41,6 +42,7 @@ class MunicipioController extends Controller
 
     public function store(StoreMunicipioRequest $request)
     {   
+        $this->authorize('create',new Municipio);
         $data = request()->all();
         $municipio = Municipio::create([
             'name'=> $data['name'],
@@ -54,12 +56,14 @@ class MunicipioController extends Controller
     
     public function edit(Municipio $municipio)
     {
+        $this->authorize('update',$municipio);
         $provincias = Provincia::all();
         return view('municipio.edit',['municipio'=>$municipio,'provincias'=>$provincias]);
     }
 
     public function update(StoreMunicipioRequest $request, Municipio $municipio)
     {
+        $this->authorize('update',$municipio);
         $data = request()->all();
         //dd($data);
         $municipio->update($data);
@@ -72,6 +76,7 @@ class MunicipioController extends Controller
 
     public function destroy(Municipio $municipio)
     {
+        $this->authorize('delete',$municipio);
         try {
          $municipio->delete();   
         }   catch (QueryException $e) {

@@ -17,11 +17,13 @@ class ProvinciaController extends Controller
     public function create()
     {
         $provincia = new Provincia;
+        $this->authorize('create',$provincia);
         return view('provincia.create',compact('provincia'));
     }
 
     public function store(StoreProvinciaRequest $request)
     {   
+        $this->authorize('create',new Provincia);
         $provincia = Provincia::create($request->all());
 
         if ($provincia) {
@@ -38,11 +40,14 @@ class ProvinciaController extends Controller
 
     public function edit(Provincia $provincia)
     {   
+        $this->authorize('update',$provincia);
         return view('provincia.edit',['provincia'=>$provincia]);
     }
 
     public function update(StoreProvinciaRequest $request, Provincia $provincia)
     {   
+        $this->authorize('update',$provincia);
+        $data = request()->all();
         $provincia->update($data);
 
         if ($provincia) {
@@ -53,6 +58,7 @@ class ProvinciaController extends Controller
 
     public function destroy(Provincia $provincia)
     {
+        $this->authorize('delete',$provincia);
         $provincia->delete();
 
         return redirect()->route('provincias')

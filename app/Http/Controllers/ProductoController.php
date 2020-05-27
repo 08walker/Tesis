@@ -19,12 +19,14 @@ class ProductoController extends Controller
     public function create()
     {
         $producto = new Producto;
+        $this->authorize('create',$producto);
         $unidades = UnidadMedida::all();
         return view('producto.create',compact('unidades','producto'));
     }
 
     public function store(StoreProductoRequest $request)
     {
+        $this->authorize('create',new Producto);
         $data = request()->all();
         //dd($data);
         $producto = Producto::create([
@@ -47,12 +49,14 @@ class ProductoController extends Controller
 
     public function edit(Producto $producto)
     {
+        $this->authorize('update',$producto);
         $unidades = UnidadMedida::all();
         return view('producto.edit',compact('producto','unidades'));
     }
 
     public function update(StoreProductoRequest $request, Producto $producto)
     {        
+        $this->authorize('update',$producto);
         $data = request()->all(); 
         //dd($data);
 
@@ -66,6 +70,7 @@ class ProductoController extends Controller
 
     public function destroy(Producto $producto)
     {
+        $this->authorize('delete',$producto);
         try {
          $producto->delete();   
         }   catch (QueryException $e) {

@@ -27,6 +27,7 @@ class TerceroController extends Controller
     public function create()
     {   
         $tercero = new Tercero;
+        $this->authorize('create',$tercero);
         $municipios = Municipio::all();
         return view('tercero.create',compact('municipios','tercero'));
         //return view('tercero.create');
@@ -34,6 +35,7 @@ class TerceroController extends Controller
 
     public function store(StoreTerceroRequest $request)
     {   
+        $this->authorize('create',new Tercero);
         $data = request()->all();
         //dd($data);
         
@@ -51,12 +53,14 @@ class TerceroController extends Controller
 
     public function edit(Tercero $tercero)
     {
+        $this->authorize('update',$tercero);
         $municipios = Municipio::all();
         return view('tercero.edit',['tercero'=>$tercero,'municipios'=>$municipios]);
     }
 
     public function update(StoreTerceroRequest $request, Tercero $tercero)
     {
+        $this->authorize('update',$tercero);
         $data = request()->all();
         //dd($data);
 
@@ -70,6 +74,7 @@ class TerceroController extends Controller
 
     public function destroy(Tercero $tercero)
     {
+        $this->authorize('delete',$tercero);
         $tercero->delete();
 
         return redirect()->route('terceros')

@@ -27,12 +27,14 @@ class OrganizacionController extends Controller
     public function create()
     {   
         $organizacion = new Organizacion;
+        $this->authorize('create',$organizacion);
         $municipios = Municipio::all();
         return view('organizacion.create',compact('municipios','organizacion'));
     }
 
     public function store(StoreOrganizacionRequest $request)
     {           
+        $this->authorize('create',new Organizacion);
         $data = request()->all(); 
         //dd($data);
 
@@ -50,12 +52,14 @@ class OrganizacionController extends Controller
 
     public function edit(Organizacion $organizacion)
     {
+        $this->authorize('update',$organizacion);
         $municipios = Municipio::all();
         return view('organizacion.edit',['organizacion'=>$organizacion,'municipios'=>$municipios]);
     }
 
     public function update(StoreOrganizacionRequest $request, Organizacion $organizacion)
     {   
+        $this->authorize('update',$organizacion);
         $data = request()->all(); 
         //dd($data);
 
@@ -69,6 +73,7 @@ class OrganizacionController extends Controller
 
     public function destroy(Organizacion $organizacion)
     {
+        $this->authorize('delete',$organizacion);
         $organizacion->delete();
 
         return redirect()->route('organizaciones')

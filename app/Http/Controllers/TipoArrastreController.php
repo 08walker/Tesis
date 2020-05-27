@@ -14,72 +14,57 @@ class TipoArrastreController extends Controller
      */
     public function index()
     {
-        //
+        return view('tipoarrastre.index')
+            ->with('tipoArrastre', TipoArrastre::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $tipoArrastre = new TipoArrastre;
+        $this->authorize('create',$tipoArrastre);
+        return view('tipoarrastre.create',compact('tipoArrastre'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create',new TipoArrastre);
+        $tipoArrastre = TipoArrastre::create($request->all());
+
+        if ($tipoArrastre) {
+            return redirect()->route('tipoarrastre')->with('success','Tipo de arrastre creada con éxito');
+        }
+        return back()->withInput()->with('error','Error al crear el nuevo tipo');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TipoArrastre  $tipoArrastre
-     * @return \Illuminate\Http\Response
-     */
     public function show(TipoArrastre $tipoArrastre)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TipoArrastre  $tipoArrastre
-     * @return \Illuminate\Http\Response
-     */
     public function edit(TipoArrastre $tipoArrastre)
     {
-        //
+        $this->authorize('update',$tipoArrastre);
+        return view('tipoarrastre.edit',['tipoArrastre'=>$tipoArrastre]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TipoArrastre  $tipoArrastre
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, TipoArrastre $tipoArrastre)
     {
-        //
+        $this->authorize('update',$tipoArrastre);
+        $data = request()->all();
+        $tipoArrastre->update($data);
+
+        if ($tipoArrastre) {
+            return redirect()->route('tipoarrastre')->with('success','Tipo arrastre actualizado con éxito');
+        }
+        return back()->withInput()->with('error','Error al actualizar el tipo de arrastre');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TipoArrastre  $tipoArrastre
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(TipoArrastre $tipoArrastre)
     {
-        //
+        $this->authorize('delete',$tipoArrastre);
+        $tipoArrastre->delete();
+
+        return redirect()->route('tipoarrastre')
+                    ->with('success', 'El tipo arrastre ha sido eliminado');
     }
 }

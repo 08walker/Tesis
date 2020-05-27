@@ -147,7 +147,6 @@ Route::delete('/{tercero}','TerceroController@destroy')->name('terceros.destroy'
 });
 
 
-
 //Rutas organizaciones
 Route::group([
     'prefix'=>'organizaciones',
@@ -179,7 +178,7 @@ Route::put('/{producto}','ProductoController@update')->name('productos.update');
 Route::delete('/{producto}','ProductoController@destroy')->name('productos.destroy');
 });
 
-//Rutas Productos
+//Rutas Transportaciones
 Route::group([
     'prefix'=>'transportaciones',
     'middleware'=>'auth'
@@ -194,4 +193,81 @@ Route::post('/llenar','TransportacionController@guardar');
 //Route::get('/{transportacion}/editar','TransportacionController@edit')->name('transportaciones.edit');
 //Route::put('/{transportacion}','TransportacionController@update')->name('transportaciones.update');
 //Route::delete('/{transportacion}','TransportacionController@destroy')->name('transportaciones.destroy');
+});
+
+//Rutas tipo unidad de medidas
+Route::group([
+    'prefix'=>'tipounidad',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','TipoUnidadMedidaController@index')->name('tipounidad');
+Route::get('/crear','TipoUnidadMedidaController@create')->name('tipounidad.create');
+Route::post('/crear','TipoUnidadMedidaController@store')->name('tipounidad.create');
+Route::get('/{id}','TipoUnidadMedidaController@show')->name('tipounidad.show');
+Route::get('/{tipoUnidadMedida}/editar','TipoUnidadMedidaController@edit')->name('tipounidad.edit');
+Route::put('/{tipoUnidadMedida}','TipoUnidadMedidaController@update')->name('tipounidad.update');
+Route::delete('/{tipoUnidadMedida}','TipoUnidadMedidaController@destroy')->name('tipounidad.destroy');
+});
+
+//Rutas tipo arrastre
+Route::group([
+    'prefix'=>'tipoarrastre',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','TipoArrastreController@index')->name('tipoarrastre');
+Route::get('/crear','TipoArrastreController@create')->name('tipoarrastre.create');
+Route::post('/crear','TipoArrastreController@store')->name('tipoarrastre.create');
+Route::get('/{id}','TipoArrastreController@show')->name('tipoarrastre.show');
+Route::get('/{tipoArrastre}/editar','TipoArrastreController@edit')->name('tipoarrastre.edit');
+Route::put('/{tipoArrastre}','TipoArrastreController@update')->name('tipoarrastre.update');
+Route::delete('/{tipoArrastre}','TipoArrastreController@destroy')->name('tipoarrastre.destroy');
+});
+
+
+//Rutas Unidades de medidas
+Route::group([
+    'prefix'=>'unidadmedida',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','UnidadMedidaController@index')->name('unidadmedida');
+Route::get('/crear','UnidadMedidaController@create')->name('unidadmedida.create');
+Route::post('/crear','UnidadMedidaController@store')->name('unidadmedida.create');
+Route::get('/{id}','UnidadMedidaController@show')->name('unidadmedida.show');
+Route::get('/{unidadMedida}/editar','UnidadMedidaController@edit')->name('unidadmedida.edit');
+Route::put('/{unidadMedida}','UnidadMedidaController@update')->name('unidadmedida.update');
+Route::delete('/{unidadMedida}','UnidadMedidaController@destroy')->name('unidadmedida.destroy');
+});
+
+//Route::resource('tipohito','TipoHitoController');
+//Rutas tipo unidad de medidas
+Route::group([
+    'prefix'=>'tipohito',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','TipoHitoController@index')->name('tipohito');
+Route::get('/crear','TipoHitoController@create')->name('tipohito.create');
+Route::post('/crear','TipoHitoController@store')->name('tipohito.create');
+Route::get('/{id}','TipoHitoController@show')->name('tipohito.show');
+Route::get('/{tipoHito}/editar','TipoHitoController@edit')->name('tipohito.edit');
+Route::put('/{tipoHito}','TipoHitoController@update')->name('tipohito.update');
+Route::delete('/{tipoHito}','TipoHitoController@destroy')->name('tipohito.destroy');
+});
+
+//Rutas tipo equipo
+Route::group([
+    'prefix'=>'tipoequipo',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','TipoEquipoController@index')->name('tipoequipo');
+Route::get('/crear','TipoEquipoController@create')->name('tipoequipo.create');
+Route::post('/crear','TipoEquipoController@store')->name('tipoequipo.create');
+Route::get('/{id}','TipoEquipoController@show')->name('tipoequipo.show');
+Route::get('/{tipoEquipo}/editar','TipoEquipoController@edit')->name('tipoequipo.edit');
+Route::put('/{tipoEquipo}','TipoEquipoController@update')->name('tipoequipo.update');
+Route::delete('/{tipoEquipo}','TipoEquipoController@destroy')->name('tipoequipo.destroy');
 });

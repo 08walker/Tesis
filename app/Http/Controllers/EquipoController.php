@@ -89,6 +89,7 @@ class EquipoController extends Controller
 
     public function destroy(Equipo $equipo)
     {
+        $this->authorize('delete',$equipo);
         $equipo->delete();
 
         return redirect()->route('equipos')

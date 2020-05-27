@@ -30,6 +30,7 @@ class LugarController extends Controller
     public function create()
     {   
         $lugar = new Lugar;
+        $this->authorize('create',$lugar);
         $municipios = Municipio::all();
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
@@ -38,6 +39,7 @@ class LugarController extends Controller
 
     public function store(StoreLugarRequest $request)
     {   
+        $this->authorize('create',new Lugar);
         $data = request()->all(); 
         //dd($data);
 
@@ -56,6 +58,7 @@ class LugarController extends Controller
 
     public function edit(Lugar $lugar)
     {
+        $this->authorize('update',$lugar);
         $municipios = Municipio::all();
         $organizaciones = Organizacion::all();
         $terceros = Tercero::all();
@@ -64,6 +67,7 @@ class LugarController extends Controller
 
     public function update(StoreLugarRequest $request, Lugar $lugar)
     {
+        $this->authorize('update',$lugar);
         $data = request()->all(); 
         //dd($data);
 
@@ -77,6 +81,7 @@ class LugarController extends Controller
 
     public function destroy(Lugar $lugar)
     {
+        $this->authorize('delete',$lugar);
         $lugar->delete();
 
         return redirect()->route('lugares')
