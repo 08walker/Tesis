@@ -140,7 +140,7 @@
             <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 
             <p>
-              {{auth()->user()->name}} - Web Developer
+              {{auth()->user()->name}} - {{auth()->user()->roles->first()->name}}
               <small>Desde {{auth()->user()->created_at->format('d/M/Y')}}</small>
             </p>
           </li>

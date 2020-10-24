@@ -185,14 +185,14 @@ Route::group([
 ],
 function(){
 Route::get('/','TransportacionController@index')->name('transportaciones');
-//Route::get('/{id}','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
+Route::get('/{id}','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
 Route::get('/crear','TransportacionController@create')->name('transportaciones.create');
 Route::post('/crear','TransportacionController@store');
 Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.llenar');
 Route::post('/llenar','TransportacionController@guardar');
-//Route::get('/{transportacion}/editar','TransportacionController@edit')->name('transportaciones.edit');
-//Route::put('/{transportacion}','TransportacionController@update')->name('transportaciones.update');
-//Route::delete('/{transportacion}','TransportacionController@destroy')->name('transportaciones.destroy');
+Route::get('/{transportacion}/editar','TransportacionController@edit')->name('transportaciones.edit');
+Route::put('/{transportacion}','TransportacionController@update')->name('transportaciones.update');
+Route::delete('/{transportacion}','TransportacionController@destroy')->name('transportaciones.destroy');
 });
 
 //Rutas tipo unidad de medidas

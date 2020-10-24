@@ -12,6 +12,26 @@ class ProductoSeeder extends Seeder
      */
     public function run()
     {
-        factory(Producto::class,10)->create();
+    	factory(Producto::class)->create([           
+			'name'=>'Criollos',
+	        'unidad_medida_id'=>'6',
+		]);
+		
+		factory(Producto::class)->create([           
+			'name'=>'Popular',
+	        'unidad_medida_id'=>'6',
+		]);
+		
+		factory(Producto::class)->create([           
+			'name'=>'Titanes',
+	        'unidad_medida_id'=>'6',
+		]);
+		
+		factory(Producto::class)->create([           
+			'name'=>'Aromas',
+	        'unidad_medida_id'=>'6',
+		]);
+
+        factory(Producto::class,11)->create();
     }
 }

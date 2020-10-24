@@ -7,35 +7,28 @@ use Illuminate\Http\Request;
 
 class TransportacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('transportacion.index')
+            ->with('transportaciones', Transportacion::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('transportacion.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = request()->all();
+        $producto = Transportacion::create([
+            'numero'=> $data['numero'],
+            'observacion'=> $data['observacion'],
+        ]);
+        if ($producto) {
+            return redirect()->route('transportaciones.llenar');
+        }
+        return back()->withInput()->with('errors','Error al crear la transportación');
     }
 
     /**
@@ -81,5 +74,10 @@ class TransportacionController extends Controller
     public function destroy(Transportacion $transportacion)
     {
         //
+    }
+
+    public function llenar($value='')
+    {
+        return view('transportacion.llenar');        
     }
 }
