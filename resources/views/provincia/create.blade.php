@@ -64,9 +64,6 @@ $(document).ready(function () {
         required: true,
         minlength: 5,
       },
-      provincia_id: {
-        required: true
-      },
     },
     messages: {
       name: {

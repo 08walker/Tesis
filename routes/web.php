@@ -271,3 +271,5 @@ Route::get('/{tipoEquipo}/editar','TipoEquipoController@edit')->name('tipoequipo
 Route::put('/{tipoEquipo}','TipoEquipoController@update')->name('tipoequipo.update');
 Route::delete('/{tipoEquipo}','TipoEquipoController@destroy')->name('tipoequipo.destroy');
 });
+
+Route::resource('user','UsersController');

@@ -101,6 +101,24 @@
               <li><a href="{{ route('arrastres') }}" class="dropdown-item">Arrastres</a></li>
             </ul>
           </li>
+
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Otros</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="{{ route('tipounidad') }}" class="dropdown-item">Tipo Unidad de medida </a></li>
+              <li><a href="{{ route('unidadmedida') }}" class="dropdown-item">Unidad de medida</a></li>
+              <li><a href="{{ route('transportaciones') }}" class="dropdown-item">Transportacion</a></li>
+              <li><a href="{{ route('tipoequipo') }}" class="dropdown-item">Tipo Equipo</a></li>
+              <li><a href="{{ route('tipoarrastre') }}" class="dropdown-item">Tipo Arrastre</a></li>
+              <li><a href="{{ route('tipohito') }}" class="dropdown-item">Tipo Hito</a></li>
+              <li><a href="{{ route('user.index') }}" class="dropdown-item">Usuarios</a></li>
+              <li><a href="{{ route('user.index') }}" class="dropdown-item">Roles</a></li>
+              <li><a href="{{ route('user.index') }}" class="dropdown-item">Permisos</a></li>
+
+
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a href="{{ route('productos') }}" class="nav-link">Productos</a>
           </li>

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             'municipios',
             'tipo_equipo',
             'tipo_arrastre',
-   		     'users',
+   		    'users',
             'terceros',
             'organizaciones',
             'equipos',
@@ -52,6 +52,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MunicipioSeeder::class);
         $this->call(TipoEquipoSeeder::class);
         $this->call(TipoArrastreSeeder::class);
+        
+        $this->call(PermissionSeeder::class);
+        
         $this->call(UserSeeder::class);
         $this->call(TerceroSeeder::class);
         $this->call(OrganizacionSeeder::class);

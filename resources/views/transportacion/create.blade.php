@@ -24,7 +24,7 @@
                 <div class="card card-primary card-outline">
                   <div class="card-body">
                     
-                    @include('admin.partials.error-messages')
+                    @include('partials.error-messages')
                     
                     <form id="quickForm" role="form" method="POST" action="{{ route('transportaciones.create') }}">
                     {!! csrf_field() !!}
