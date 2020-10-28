@@ -29,6 +29,10 @@ class AuthServiceProvider extends ServiceProvider
         'App\TipoHito' => 'App\Policies\TipoHitoPolicy',
         'App\TipoUnidadMedida' => 'App\Policies\TipoUnidadMedidaPolicy',
         'App\UnidadMedida' => 'App\Policies\UnidadMedidaPolicy',
+        
+        'App\User' => 'App\Policies\UserPolicy',
+        'Spatie\Permission\Models\Role' => 'App\Policies\RolePolicy',
+        'Spatie\Permission\Models\Permission' => 'App\Policies\PermissionPolicy',
     ];
 
     /**

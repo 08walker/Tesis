@@ -273,3 +273,5 @@ Route::delete('/{tipoEquipo}','TipoEquipoController@destroy')->name('tipoequipo.
 });
 
 Route::resource('user','UsersController');
+Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
+Route::resource('permissions','PermissionsController',['only'=>['index','edit','update'],'as'=>'admin']);
