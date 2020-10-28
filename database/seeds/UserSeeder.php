@@ -3,6 +3,7 @@
 use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -30,6 +31,81 @@ class UserSeeder extends Seeder
             'name'=>'Invitado',
             //'display_name'=>'Escritor'
         ]);
+
+        //$adminRole->givePermissionTo('View users');
+
+        //Permisos Rol Transporte
+        $transporteRole->givePermissionTo('View tArrastre');
+        $transporteRole->givePermissionTo('Create tArrastre');
+        $transporteRole->givePermissionTo('Update tArrastre');
+
+        $transporteRole->givePermissionTo('View tEquipo');
+        $transporteRole->givePermissionTo('Create tEquipo');
+        $transporteRole->givePermissionTo('Update tEquipo');
+
+        $transporteRole->givePermissionTo('View arrastre');
+        $transporteRole->givePermissionTo('Create arrastre');
+        $transporteRole->givePermissionTo('Update arrastre');
+
+        $transporteRole->givePermissionTo('View chofer');
+        $transporteRole->givePermissionTo('Create chofer');
+        $transporteRole->givePermissionTo('Update chofer');
+
+        $transporteRole->givePermissionTo('View envase');
+        $transporteRole->givePermissionTo('Create envase');
+        $transporteRole->givePermissionTo('Update envase');
+
+        $transporteRole->givePermissionTo('View equipo');
+        $transporteRole->givePermissionTo('Create equipo');        
+        $transporteRole->givePermissionTo('Update equipo');
+
+        //Permisos Rol Analista
+        $analistaRole->givePermissionTo('View lugar');
+        $analistaRole->givePermissionTo('Create lugar');
+        $analistaRole->givePermissionTo('Update lugar');
+
+        $analistaRole->givePermissionTo('View municipio');
+
+        $analistaRole->givePermissionTo('View provincia');
+
+        $analistaRole->givePermissionTo('View organization');
+        $analistaRole->givePermissionTo('Create organization');
+        $analistaRole->givePermissionTo('Update organization');
+
+        $analistaRole->givePermissionTo('View tercero');
+        $analistaRole->givePermissionTo('Create tercero');
+        $analistaRole->givePermissionTo('Update tercero');
+
+        $analistaRole->givePermissionTo('View TunidadMedida');
+        $analistaRole->givePermissionTo('Create TunidadMedida');
+        $analistaRole->givePermissionTo('Update TunidadMedida');
+
+        $analistaRole->givePermissionTo('View unidadMedida');
+        $analistaRole->givePermissionTo('Create unidadMedida');
+        $analistaRole->givePermissionTo('Update unidadMedida');
+
+        $analistaRole->givePermissionTo('View transportation');
+        $analistaRole->givePermissionTo('Create transportation');
+        $analistaRole->givePermissionTo('Update transportation');
+
+        $analistaRole->givePermissionTo('View producto');
+        $analistaRole->givePermissionTo('Create producto');
+        $analistaRole->givePermissionTo('Update producto');
+        
+        //Permisos Rol Invitado
+        $inivitadoRole->givePermissionTo('View provincia');
+        $inivitadoRole->givePermissionTo('View municipio');
+        $inivitadoRole->givePermissionTo('View tercero');
+        $inivitadoRole->givePermissionTo('View organization');
+        $inivitadoRole->givePermissionTo('View lugar');
+        $inivitadoRole->givePermissionTo('View equipo');
+        $inivitadoRole->givePermissionTo('View arrastre');
+        $inivitadoRole->givePermissionTo('View unidadMedida');
+        $inivitadoRole->givePermissionTo('View TunidadMedida');
+        $inivitadoRole->givePermissionTo('View tArrastre');
+        $inivitadoRole->givePermissionTo('View tEquipo');
+        $inivitadoRole->givePermissionTo('View roles');
+        $inivitadoRole->givePermissionTo('View producto');
 
         $admin = new User;
         $admin->name ='walker';

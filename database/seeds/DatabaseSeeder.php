@@ -16,8 +16,7 @@ class DatabaseSeeder extends Seeder
             'municipios',
             'tipo_equipo',
             'tipo_arrastre',
-   		    'users',
-            'terceros',
+   		    'terceros',
             'organizaciones',
             'equipos',
             'choferes',
@@ -26,7 +25,6 @@ class DatabaseSeeder extends Seeder
             'envases',
             'productos',
             'transportaciones',
-            //nuevos
             'arrastre_enva_equipo',
             'chofer_equipo_transp',
             'equipo_transportacion',
@@ -44,9 +42,12 @@ class DatabaseSeeder extends Seeder
             'unidad_medida',
             'tipo_unidad_medida',
             'producto_unidad_medida',
+            
+            'users',
             'roles',
             'permissions',
-            'model_has_roles'
+            'model_has_roles',
+            'role_has_permissions'
     	]);
         $this->call(ProvinciaSeeder::class);
         $this->call(MunicipioSeeder::class);
@@ -54,8 +55,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoArrastreSeeder::class);
         
         $this->call(PermissionSeeder::class);
-        
         $this->call(UserSeeder::class);
+
         $this->call(TerceroSeeder::class);
         $this->call(OrganizacionSeeder::class);
         $this->call(EquipoSeeder::class);

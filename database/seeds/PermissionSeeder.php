@@ -58,21 +58,57 @@ class PermissionSeeder extends Seeder
             'display_name'=>'Actualizar permisos'
         ]);
 
+        //Tipo arrastre
+        $viewTArrastrePermission = Permission::create([
+            'name'=>'View tArrastre',
+            'display_name'=>'Ver tipo arrastre'
+        ]);
+        $createTArrastrePermission = Permission::create([
+            'name'=>'Create tArrastre',
+            'display_name'=>'Crear tipo arrastre'
+        ]);
+        $updateTArrastrePermission = Permission::create([
+            'name'=>'Update tArrastre',
+            'display_name'=>'Actualizar tipo arrastre'
+        ]);
+        $deleteTArrastrePermission = Permission::create([
+            'name'=>'Delete tArrastre',
+            'display_name'=>'Eliminar tipo arrastre'
+        ]);
+
+        //Tipo equipo
+        $viewTEquipoPermission = Permission::create([
+            'name'=>'View tEquipo',
+            'display_name'=>'Ver tipo equipo'
+        ]);
+        $createTEquipoPermission = Permission::create([
+            'name'=>'Create tEquipo',
+            'display_name'=>'Crear tipo equipo'
+        ]);
+        $updateTEquipoPermission = Permission::create([
+            'name'=>'Update tEquipo',
+            'display_name'=>'Actualizar tipo equipo'
+        ]);
+        $deleteTEquipoPermission = Permission::create([
+            'name'=>'Delete tEquipo',
+            'display_name'=>'Eliminar tipo equipo'
+        ]);
+
         //Arrastres
         $viewArrastrePermission = Permission::create([
-            'name'=>'View arrastres',
+            'name'=>'View arrastre',
             'display_name'=>'Ver arrastres'
         ]);
         $createArrastrePermission = Permission::create([
-            'name'=>'Create arrastres',
+            'name'=>'Create arrastre',
             'display_name'=>'Crear arrastres'
         ]);
         $updateArrastrePermission = Permission::create([
-            'name'=>'Update arrastres',
+            'name'=>'Update arrastre',
             'display_name'=>'Actualizar arrastres'
         ]);
         $deleteArrastrePermission = Permission::create([
-            'name'=>'Delete arrastres',
+            'name'=>'Delete arrastre',
             'display_name'=>'Eliminar arrastres'
         ]);
 
@@ -150,19 +186,19 @@ class PermissionSeeder extends Seeder
 
         //Municipios
         $viewMunicipioPermission = Permission::create([
-            'name'=>'View municipios',
+            'name'=>'View municipio',
             'display_name'=>'Ver municipios'
         ]);
         $createMunicipioPermission = Permission::create([
-            'name'=>'Create municipios',
+            'name'=>'Create municipio',
             'display_name'=>'Crear municipios'
         ]);
         $updateMunicipioPermission = Permission::create([
-            'name'=>'Update municipios',
+            'name'=>'Update municipio',
             'display_name'=>'Actualizar municipios'
         ]);
         $deleteMunicipioPermission = Permission::create([
-            'name'=>'Delete municipios',
+            'name'=>'Delete municipio',
             'display_name'=>'Eliminar municipios'
         ]);
 
@@ -186,74 +222,20 @@ class PermissionSeeder extends Seeder
 
         //Terceros
         $viewTerceroPermission = Permission::create([
-            'name'=>'View terceros',
+            'name'=>'View tercero',
             'display_name'=>'Ver tercero'
         ]);
         $createTerceroPermission = Permission::create([
-            'name'=>'Create terceros',
+            'name'=>'Create tercero',
             'display_name'=>'Crear tercero'
         ]);
         $updateTerceroPermission = Permission::create([
-            'name'=>'Update terceros',
+            'name'=>'Update tercero',
             'display_name'=>'Actualizar tercero'
         ]);
         $deleteTerceroPermission = Permission::create([
-            'name'=>'Delete terceros',
+            'name'=>'Delete tercero',
             'display_name'=>'Eliminar tercero'
-        ]);
-
-        //Tipo arrastre
-        $viewTArrastrePermission = Permission::create([
-            'name'=>'View tArrastre',
-            'display_name'=>'Ver tipo arrastre'
-        ]);
-        $createTArrastrePermission = Permission::create([
-            'name'=>'Create tArrastre',
-            'display_name'=>'Crear tipo arrastre'
-        ]);
-        $updateTArrastrePermission = Permission::create([
-            'name'=>'Update tArrastre',
-            'display_name'=>'Actualizar tipo arrastre'
-        ]);
-        $deleteTArrastrePermission = Permission::create([
-            'name'=>'Delete tArrastre',
-            'display_name'=>'Eliminar tipo arrastre'
-        ]);
-
-        //Tipo equipo
-        $viewTEquipoPermission = Permission::create([
-            'name'=>'View tEquipo',
-            'display_name'=>'Ver tipo equipo'
-        ]);
-        $createTEquipoPermission = Permission::create([
-            'name'=>'Create tEquipo',
-            'display_name'=>'Crear tipo equipo'
-        ]);
-        $updateTEquipoPermission = Permission::create([
-            'name'=>'Update tEquipo',
-            'display_name'=>'Actualizar tipo equipo'
-        ]);
-        $deleteTEquipoPermission = Permission::create([
-            'name'=>'Delete tEquipo',
-            'display_name'=>'Eliminar tipo equipo'
-        ]);
-
-        //Tipo Hito
-        $viewTHitoPermission = Permission::create([
-            'name'=>'View tHito',
-            'display_name'=>'Ver tipo hito'
-        ]);
-        $createTHitoPermission = Permission::create([
-            'name'=>'Create tHito',
-            'display_name'=>'Crear tipo hito'
-        ]);
-        $updateTHitoPermission = Permission::create([
-            'name'=>'Update tHito',
-            'display_name'=>'Actualizar tipo hito'
-        ]);
-        $deleteTHitoPermission = Permission::create([
-            'name'=>'Delete tHito',
-            'display_name'=>'Eliminar tipo hito'
         ]);
 
         //Tipo unidad de medida
@@ -271,6 +253,24 @@ class PermissionSeeder extends Seeder
         ]);
         $deleteTUMPermission = Permission::create([
             'name'=>'Delete TunidadMedida',
+            'display_name'=>'Eliminar unidad de medida'
+        ]);
+
+        //Unidades de medida
+        $viewUMPermission = Permission::create([
+            'name'=>'View unidadMedida',
+            'display_name'=>'Ver unidad de medida'
+        ]);
+        $createUMPermission = Permission::create([
+            'name'=>'Create unidadMedida',
+            'display_name'=>'Crear unidad de medida'
+        ]);
+        $updateUMPermission = Permission::create([
+            'name'=>'Update unidadMedida',
+            'display_name'=>'Actualizar unidad de medida'
+        ]);
+        $deleteUMPermission = Permission::create([
+            'name'=>'Delete unidadMedida',
             'display_name'=>'Eliminar unidad de medida'
         ]);
 
@@ -292,22 +292,58 @@ class PermissionSeeder extends Seeder
             'display_name'=>'Eliminar transportacion'
         ]);
 
-        //Unidades de medida
-        $viewUMPermission = Permission::create([
-            'name'=>'View unidadMedida',
-            'display_name'=>'Ver unidad de medida'
+        //Productos
+        $viewProductoPermission = Permission::create([
+            'name'=>'View producto',
+            'display_name'=>'Ver productos'
         ]);
-        $createUMPermission = Permission::create([
-            'name'=>'Create unidadMedida',
-            'display_name'=>'Crear unidad de medida'
+        $createProductoPermission = Permission::create([
+            'name'=>'Create producto',
+            'display_name'=>'Crear productos'
         ]);
-        $updateUMPermission = Permission::create([
-            'name'=>'Update unidadMedida',
-            'display_name'=>'Actualizar unidad de medida'
+        $updateProductoPermission = Permission::create([
+            'name'=>'Update producto',
+            'display_name'=>'Actualizar productos'
         ]);
-        $deleteUMPermission = Permission::create([
-            'name'=>'Delete unidadMedida',
-            'display_name'=>'Eliminar unidad de medida'
+        $deleteProductoPermission = Permission::create([
+            'name'=>'Delete producto',
+            'display_name'=>'Eliminar productos'
+        ]);
+
+        //Provincia
+        $viewProvinciaPermission = Permission::create([
+            'name'=>'View provincia',
+            'display_name'=>'Ver provincias'
+        ]);
+        $createProvinciaPermission = Permission::create([
+            'name'=>'Create provincia',
+            'display_name'=>'Crear provincias'
+        ]);
+        $updateProvinciaPermission = Permission::create([
+            'name'=>'Update provincia',
+            'display_name'=>'Actualizar provincias'
+        ]);
+        $deleteProvinciaPermission = Permission::create([
+            'name'=>'Delete provincia',
+            'display_name'=>'Eliminar provincias'
+        ]);
+
+        //Tipo Hito
+        $viewTHitoPermission = Permission::create([
+            'name'=>'View tHito',
+            'display_name'=>'Ver tipo hito'
+        ]);
+        $createTHitoPermission = Permission::create([
+            'name'=>'Create tHito',
+            'display_name'=>'Crear tipo hito'
+        ]);
+        $updateTHitoPermission = Permission::create([
+            'name'=>'Update tHito',
+            'display_name'=>'Actualizar tipo hito'
+        ]);
+        $deleteTHitoPermission = Permission::create([
+            'name'=>'Delete tHito',
+            'display_name'=>'Eliminar tipo hito'
         ]);
     }
 }
