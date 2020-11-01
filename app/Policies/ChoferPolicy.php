@@ -37,7 +37,7 @@ class ChoferPolicy
      */
     public function view(User $user, Chofer $chofer)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('View chofer');
     }
 
     /**
@@ -48,7 +48,7 @@ class ChoferPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create chofer');
     }
 
     /**
@@ -60,7 +60,7 @@ class ChoferPolicy
      */
     public function update(User $user, Chofer $chofer)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update chofer');
     }
 
     /**
@@ -72,7 +72,7 @@ class ChoferPolicy
      */
     public function delete(User $user, Chofer $chofer)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete chofer');
     }
 
     /**

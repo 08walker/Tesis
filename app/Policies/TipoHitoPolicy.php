@@ -37,7 +37,7 @@ class TipoHitoPolicy
      */
     public function view(User $user, TipoHito $tipoHito)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('View tHito');
     }
 
     /**
@@ -48,7 +48,7 @@ class TipoHitoPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Create tHito');
     }
 
     /**
@@ -60,7 +60,7 @@ class TipoHitoPolicy
      */
     public function update(User $user, TipoHito $tipoHito)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Update tHito');
     }
 
     /**
@@ -72,7 +72,7 @@ class TipoHitoPolicy
      */
     public function delete(User $user, TipoHito $tipoHito)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Delete tHito');
     }
 
     /**

@@ -37,7 +37,7 @@ class LugarPolicy
      */
     public function view(User $user, Lugar $lugar)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('View lugar');
     }
 
     /**
@@ -48,7 +48,7 @@ class LugarPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create lugar');
     }
 
     /**
@@ -60,7 +60,7 @@ class LugarPolicy
      */
     public function update(User $user, Lugar $lugar)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update lugar');
     }
 
     /**
@@ -72,7 +72,7 @@ class LugarPolicy
      */
     public function delete(User $user, Lugar $lugar)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete lugar');
     }
 
     /**

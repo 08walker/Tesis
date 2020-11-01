@@ -37,7 +37,7 @@ class ArrastrePolicy
      */
     public function view(User $user, Arrastre $arrastre)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('View arrastre');
     }
 
     /**
@@ -48,7 +48,7 @@ class ArrastrePolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create arrastre');
     }
 
     /**
@@ -60,7 +60,7 @@ class ArrastrePolicy
      */
     public function update(User $user, Arrastre $arrastre)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update arrastre');
     }
 
     /**
@@ -72,7 +72,7 @@ class ArrastrePolicy
      */
     public function delete(User $user, Arrastre $arrastre)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete arrastre');
     }
 
     /**

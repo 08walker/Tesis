@@ -37,7 +37,7 @@ class EquipoPolicy
      */
     public function view(User $user, Equipo $equipo)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('View equipo');
     }
 
     /**
@@ -48,7 +48,7 @@ class EquipoPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create equipo');
     }
 
     /**
@@ -60,7 +60,7 @@ class EquipoPolicy
      */
     public function update(User $user, Equipo $equipo)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update equipo');
     }
 
     /**
@@ -72,7 +72,7 @@ class EquipoPolicy
      */
     public function delete(User $user, Equipo $equipo)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete equipo');
     }
 
     /**

@@ -37,7 +37,7 @@ class TipoEquipoPolicy
      */
     public function view(User $user, TipoEquipo $tipoEquipo)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('View tEquipo');
     }
 
     /**
@@ -48,7 +48,7 @@ class TipoEquipoPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create tEquipo');
     }
 
     /**
@@ -60,7 +60,7 @@ class TipoEquipoPolicy
      */
     public function update(User $user, TipoEquipo $tipoEquipo)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update tEquipo');
     }
 
     /**
@@ -72,7 +72,7 @@ class TipoEquipoPolicy
      */
     public function delete(User $user, TipoEquipo $tipoEquipo)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete tEquipo');
     }
 
     /**

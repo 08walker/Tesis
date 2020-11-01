@@ -37,7 +37,7 @@ class TipoArrastrePolicy
      */
     public function view(User $user, TipoArratre $tipoArratre)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('View tArrastre');
     }
 
     /**
@@ -48,7 +48,7 @@ class TipoArrastrePolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create tArrastre');
     }
 
     /**
@@ -60,7 +60,7 @@ class TipoArrastrePolicy
      */
     public function update(User $user, TipoArratre $tipoArratre)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update tArrastre');
     }
 
     /**
@@ -72,7 +72,7 @@ class TipoArrastrePolicy
      */
     public function delete(User $user, TipoArratre $tipoArratre)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete tArrastre');
     }
 
     /**

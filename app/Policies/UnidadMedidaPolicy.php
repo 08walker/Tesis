@@ -37,7 +37,7 @@ class UnidadMedidaPolicy
      */
     public function view(User $user, UnidadMedida $unidadMedida)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('View unidadMedida');
     }
 
     /**
@@ -48,7 +48,7 @@ class UnidadMedidaPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Create unidadMedida');
     }
 
     /**
@@ -60,7 +60,7 @@ class UnidadMedidaPolicy
      */
     public function update(User $user, UnidadMedida $unidadMedida)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Update unidadMedida');
     }
 
     /**
@@ -72,7 +72,7 @@ class UnidadMedidaPolicy
      */
     public function delete(User $user, UnidadMedida $unidadMedida)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Delete unidadMedida');
     }
 
     /**

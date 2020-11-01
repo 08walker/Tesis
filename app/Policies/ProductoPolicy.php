@@ -37,7 +37,7 @@ class ProductoPolicy
      */
     public function view(User $user, Producto $producto)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('View producto');
     }
 
     /**
@@ -48,7 +48,7 @@ class ProductoPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Create producto');
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductoPolicy
      */
     public function update(User $user, Producto $producto)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Update producto');
     }
 
     /**
@@ -72,7 +72,7 @@ class ProductoPolicy
      */
     public function delete(User $user, Producto $producto)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Delete producto');
     }
 
     /**

@@ -37,7 +37,7 @@ class TipoUnidadMedidaPolicy
      */
     public function view(User $user, TipoUnidadMedida $tipoUnidadMedida)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('View TunidadMedida');
     }
 
     /**
@@ -48,7 +48,7 @@ class TipoUnidadMedidaPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Create TunidadMedida');
     }
 
     /**
@@ -60,7 +60,7 @@ class TipoUnidadMedidaPolicy
      */
     public function update(User $user, TipoUnidadMedida $tipoUnidadMedida)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Update TunidadMedida');
     }
 
     /**
@@ -72,7 +72,7 @@ class TipoUnidadMedidaPolicy
      */
     public function delete(User $user, TipoUnidadMedida $tipoUnidadMedida)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Delete TunidadMedida');
     }
 
     /**

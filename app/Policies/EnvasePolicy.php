@@ -37,7 +37,7 @@ class EnvasePolicy
      */
     public function view(User $user, Envase $envase)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('View envase');
     }
 
     /**
@@ -48,7 +48,7 @@ class EnvasePolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create envase');
     }
 
     /**
@@ -60,7 +60,7 @@ class EnvasePolicy
      */
     public function update(User $user, Envase $envase)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update envase');
     }
 
     /**
@@ -72,7 +72,7 @@ class EnvasePolicy
      */
     public function delete(User $user, Envase $envase)
     {
-        return $user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete envase');
     }
 
     /**

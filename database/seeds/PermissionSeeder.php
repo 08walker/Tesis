@@ -345,5 +345,23 @@ class PermissionSeeder extends Seeder
             'name'=>'Delete tHito',
             'display_name'=>'Eliminar tipo hito'
         ]);
+
+        //Hito
+        $viewHitoPermission = Permission::create([
+            'name'=>'View hito',
+            'display_name'=>'Ver hito'
+        ]);
+        $createHitoPermission = Permission::create([
+            'name'=>'Create hito',
+            'display_name'=>'Crear hito'
+        ]);
+        $updateHitoPermission = Permission::create([
+            'name'=>'Update hito',
+            'display_name'=>'Actualizar hito'
+        ]);
+        $deleteHitoPermission = Permission::create([
+            'name'=>'Delete hito',
+            'display_name'=>'Eliminar hito'
+        ]);
     }
 }

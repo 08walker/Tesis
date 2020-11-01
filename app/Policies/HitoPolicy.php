@@ -37,7 +37,7 @@ class HitoPolicy
      */
     public function view(User $user, Hito $hito)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('View hito');
     }
 
     /**
@@ -48,7 +48,7 @@ class HitoPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Create hito');
     }
 
     /**
@@ -60,7 +60,7 @@ class HitoPolicy
      */
     public function update(User $user, Hito $hito)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Update hito');
     }
 
     /**
@@ -72,7 +72,7 @@ class HitoPolicy
      */
     public function delete(User $user, Hito $hito)
     {
-        return $user->hasRole('Analista');
+        return $user->hasPermissionTo('Delete hito');
     }
 
     /**

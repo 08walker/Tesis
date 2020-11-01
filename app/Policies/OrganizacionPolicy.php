@@ -37,7 +37,7 @@ class OrganizacionPolicy
      */
     public function view(User $user, Organizacion $organizacion)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('View organization');
     }
 
     /**
@@ -48,7 +48,7 @@ class OrganizacionPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create organization');
     }
 
     /**
@@ -60,7 +60,7 @@ class OrganizacionPolicy
      */
     public function update(User $user, Organizacion $organizacion)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update organization');
     }
 
     /**
@@ -72,7 +72,7 @@ class OrganizacionPolicy
      */
     public function delete(User $user, Organizacion $organizacion)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete organization');
     }
 
     /**

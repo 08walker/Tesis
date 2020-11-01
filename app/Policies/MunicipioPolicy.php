@@ -37,7 +37,7 @@ class MunicipioPolicy
      */
     public function view(User $user, Municipio $municipio)
     {
-        //
+        return $user->hasPermissionTo('View municipio');
     }
 
     /**
@@ -48,7 +48,7 @@ class MunicipioPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermissionTo('Create municipio');
     }
 
     /**
@@ -60,7 +60,7 @@ class MunicipioPolicy
      */
     public function update(User $user, Municipio $municipio)
     {
-        //
+        return $user->hasPermissionTo('Update municipio');
     }
 
     /**
@@ -72,7 +72,7 @@ class MunicipioPolicy
      */
     public function delete(User $user, Municipio $municipio)
     {
-        //
+        return $user->hasPermissionTo('Delete municipio');
     }
 
     /**

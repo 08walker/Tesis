@@ -37,7 +37,7 @@ class TerceroPolicy
      */
     public function view(User $user, Tercero $tercero)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('View tercero');
     }
 
     /**
@@ -48,7 +48,7 @@ class TerceroPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Create tercero');
     }
 
     /**
@@ -60,7 +60,7 @@ class TerceroPolicy
      */
     public function update(User $user, Tercero $tercero)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Update tercero');
     }
 
     /**
@@ -72,7 +72,7 @@ class TerceroPolicy
      */
     public function delete(User $user, Tercero $tercero)
     {
-        return $user->hasRole('Analista')||$user->hasRole('Transporte');
+        return $user->hasPermissionTo('Delete tercero');
     }
 
     /**
