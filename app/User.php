@@ -29,6 +29,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function directivo()
+    {
+        return $this->hasOne('App\Directivo');
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -37,4 +42,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+        public function scopeAllowed($query)
+    {   
+        if (auth()->user()->can('view',$this)) {
+            return $query;
+        } else
+        {
+            return $query->where('id',auth()->id());
+        }
+    }
+
 }

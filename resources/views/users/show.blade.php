@@ -33,7 +33,10 @@
                   </li>
                 </ul>
 
-                <a href="{{route('user.edit',auth()->user())}}" class="btn btn-primary btn-block"><b>Editar</b></a>
+                @if($user->id!==1)
+                    <a href="{{route('user.edit',$user)}}" class="btn btn-primary btn-block"><b>Editar</b></a>
+                @endif
+
               </div>
               <!-- /.card-body -->
     </div>
@@ -48,7 +51,7 @@
                 <strong>{{$role->name}}</strong><br>
                 @if( $role->permissions->count() )
                 <small class="text-muted">Permisos:
-                  {{$role->permissions->pluck('name')->implode(', ')}}</small><br>
+                  {{$role->permissions->pluck('display_name')->implode(', ')}}</small><br>
                 @endif
                 @unless($loop->last)
                 <hr>

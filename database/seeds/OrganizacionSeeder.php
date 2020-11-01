@@ -48,6 +48,13 @@ class OrganizacionSeeder extends Seeder
             'municipio_id'=>$municipio,
         ]);
 
+        $municipio = Municipio::whereName('Plaza de la Revolución')->value('id');
+        Organizacion::create([
+            'name'=>'Empresa la Vega',
+            'identificador'=>'AVB587',
+            'municipio_id'=>$municipio,
+        ]);
+
         factory(Organizacion::class,5)->create();
     }
 }

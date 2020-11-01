@@ -33,14 +33,11 @@
             <div class="card-header">
               <h3 class="card-title">Usuarios</h3>
               <br>
-              <a href="{{route('user.create')}}" type="button" class="btn btn-primary btn-flat" >
-                  <i class="fa fa-plus"></i> Crear
-              </a>
-
+              
               @can('create', $users->first()) 
               <a class="btn btn-primary btn-flat" href="{{route('user.create')}}">
                 <i class="fa fa-plus"></i> 
-                Crear usuario
+                Crear 
               </a>
               @endcan  
             </div>
@@ -69,19 +66,24 @@
                           <i class="fa fa-eye"></i>
                         </a>
 
+                        @if($user->id!==1)
+
                         @can('update',$user)
                         <a href="{{route('user.edit',$user)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
                         @endcan
-                        @can('delete',$user)
+
+                        @role('Admin')
                         <form method="POST" action="{{route('user.destroy', $user)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la usuario?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
-                        @endcan
+                        @endrole
+
+                        @endif
 
                       </td>
                     </tr>

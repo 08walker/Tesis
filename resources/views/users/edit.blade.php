@@ -1,7 +1,19 @@
 @extends('admin.layout')
 
 @section('content')
-<div class="row">
+<div class="content-wrapper">
+      <div class="content-header">
+         <div class="container">
+            <div class="row mb-2">
+               <div class="col-sm-6">
+                  <h1 class="m-0 text-dark"> Crear usuario</h1>
+               </div>
+            </div><!-- /.row -->
+         </div><!-- /.container-fluid -->
+      </div>
+      <div class="content">
+<div class="container">
+   <div class="row">
  	<div class="col-md-6">
 		<div class="card card-primary card-outline">
 			<div class="card-header">
@@ -17,31 +29,29 @@
                               @endforeach
                         </ul>
                   @endif
-            	<form method="POST" action="{{route('admin.users.update',$user)}}">
+            	<form method="POST" action="{{route('user.update',$user)}}">
             		{{ csrf_field() }} {{method_field('PUT')}}
-            		
-                        <div class="form-group">
-            			<label for="name">Nombre:</label>
-                              <input type="text" class="form-control" name="name" value="{{old('name',$user->name)}}">
-            		</div>
-            		
-                        <div class="form-group">
-            			<label for="email">Email:</label>
-                              <input type="text" class="form-control" name="email" value="{{old('email',$user->email)}}">
-            		</div>
+            		    
 
-                        <div class="form-group">
-                              <label for="password">Contraseña:</label>
-                              <input type="password" class="form-control" name="password">
-                              <span class="help-block">Dejar en blanco si no quieres cambiar la contraseña</span>
-                        </div>
-
-                        <div class="form-group">
-                              <label for="password_confirmation">Repita la contraseña:</label>
-                              <input type="password" class="form-control" name="password_confirmation">
-                        </div>
+                     @include('componentes.name',['model'=>$user])
             		
-                        <button class="btn btn-primary btn-flat btn-block" type="submit">Actualizar usuario</button>
+                     <div class="form-group">
+            			   <label for="email">Email:</label>
+                        <input type="text" class="form-control" name="email" value="{{old('email',$user->email)}}">
+            		    </div>
+
+                     <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" class="form-control" name="password">
+                        <span class="help-block">Dejar en blanco si no quieres cambiar la contraseña</span>
+                     </div>
+
+                     <div class="form-group">
+                           <label for="password_confirmation">Repita la contraseña:</label>
+                           <input type="password" class="form-control" name="password_confirmation">
+                     </div>
+            		
+                     <button class="btn btn-primary btn-flat btn-block" type="submit">Actualizar usuario</button>
             	</form>
             </div>
  		</div>
@@ -52,11 +62,11 @@
                  <h5 class="card-title">Roles: </h5>
                </div>
                @role('Admin')
-               <div class="card-body">
-                  <form method="POST" action="{{route('admin.users.roles.update', $user)}}">
+               {{-- <div class="card-body">
+                  <form method="POST" action="{{route('user.roles.update', $user)}}">
                   {{ csrf_field() }} {{method_field('PUT')}}
                   
-                  @include('admin.partials.roles-checkboxes')
+                  @include('partials.roles-checkboxes')
 
                   <button class="btn btn-primary btn-flat btn-block">Actualizar roles</button>
                   </form>
@@ -68,7 +78,7 @@
                   @empty
                      <li class="list-group-item">No tiene roles asignados.</li>
                   @endforelse
-               </ul>
+               </ul> --}}
                @endrole
             </div>
       
@@ -77,11 +87,12 @@
                  <h5 class="card-title">Permisos: </h5>
                </div>
                @role('Admin')
+               {{-- 
                <div class="card-body">
-                  <form method="POST" action="{{route('admin.users.permissions.update', $user)}}">
+                  <form method="POST" action="{{route('user.permissions.update', $user)}}">
                   {{ csrf_field() }} {{method_field('PUT')}}
 
-                  @include('admin.partials.permissions-checkboxes',['model'=>$user])
+                  @include('partials.permissions-checkboxes',['model'=>$user])
 
                   <button class="btn btn-primary btn-flat btn-block">Actualizar permisos</button>
                   </form>
@@ -95,9 +106,12 @@
                      <li class="list-group-item">No tiene permisos asignados.</li>
                   @endforelse
                   
-               </ul>
+               </ul> --}}
                @endrole
             </div>
       </div>      
  </div>
+</div>    
+</div></div>
+
 @endsection

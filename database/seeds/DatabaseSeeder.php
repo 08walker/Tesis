@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'permissions',
             'model_has_roles',
             'role_has_permissions'
+            //'directivos'
     	]);
         $this->call(ProvinciaSeeder::class);
         $this->call(MunicipioSeeder::class);
@@ -88,6 +89,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SelloRecibidoSeeder::class);
 
         $this->call(ProductoUnidadMedidaSeeder::class);
+
+        $this->call(DirectivoSeeder::class);
     }
 
     public function truncateTables(array $tables)

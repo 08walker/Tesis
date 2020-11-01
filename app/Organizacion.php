@@ -44,6 +44,11 @@ class Organizacion extends Model
         return $this->hasMany('App\Envase');
     }
 
+    public function directivo()
+    {
+        return $this->hasOne('App\Directivo');
+    }
+
     public function getRouteKeyName()
     {
         return 'url';

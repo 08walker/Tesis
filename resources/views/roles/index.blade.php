@@ -25,7 +25,7 @@
               <h3 class="card-title">Listado de roles</h3>
               <br>
               @can('create',$roles->first())
-              <a class="btn btn-primary btn-flat" href="{{route('admin.roles.create')}}">
+              <a class="btn btn-primary btn-flat" href="{{route('roles.create')}}">
                 <i class="fa fa-plus"></i> 
                 Crear role
               </a>
@@ -54,13 +54,13 @@
                       <td>{{$role->permissions->pluck('name')->implode(', ')}}</td>
                       <td>
                         @can('update',$role)
-                        <a href="{{route('admin.roles.edit',$role)}}" class="btn btn-xs btn-info">
+                        <a href="{{route('roles.edit',$role)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
                         @endcan
                         @can('delete',$role)
                         @if($role->id !==1)
-                        <form method="POST" action="{{route('admin.roles.destroy', $role)}}" style="display: inline;">
+                        <form method="POST" action="{{route('roles.destroy', $role)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la role?')">
                             <i class="fa fa-times"></i>

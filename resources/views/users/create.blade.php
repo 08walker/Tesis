@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear provincia</h1>
+            <h1 class="m-0 text-dark"> Crear usuario</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -40,8 +40,19 @@
 					<label for="email">Correo electrónico:</label>
 		                  <input type="text" class="form-control" name="email" value="{{old('email')}}">
 					</div>
+
+          <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" name="password">
+          </div>
+
+          <div class="form-group">
+                <label for="password_confirmation">Repita la contraseña:</label>
+                <input type="password" class="form-control" name="password_confirmation">
+          </div>
+
 					<div class="row">
-					<div class="form-group col-md-6">
+					<div class="form-group">
 						<label for="">Roles:</label>
 					    @include('componentes.roles-checkboxes')
 					</div>{{-- 
@@ -53,15 +64,6 @@
 
 		            {{-- <span class="help-block">La contraseña será generada y enviada via email</span> --}}
 
-		            <div class="form-group">
-		                  <label for="password">Contraseña:</label>
-		                  <input type="password" class="form-control" name="password">
-		            </div>
-
-		            <div class="form-group">
-		                  <label for="password_confirmation">Repita la contraseña:</label>
-		                  <input type="password" class="form-control" name="password_confirmation">
-		            </div>
 				
 		            <button class="btn btn-primary btn-flat btn-block" type="submit">Crear usuario</button>
 				</form>
