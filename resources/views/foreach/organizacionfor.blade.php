@@ -2,13 +2,19 @@
     <label for="exampleInputEmail1">Organización a la que pertenece:</label>
         <select class="form-control select2" style="width: 100%;" name="organizacion_id">
             @if($model->organizacion_id)  
+      
               @foreach($organizaciones->all() as $org)
                   @if($org->id == $model->organizacion_id)
                       <option value="{{$org->id}}">{{$org->name}}</option>
-                  @else                                 
+                  @endif
+              @endforeach
+              
+              @foreach($organizaciones->all() as $org)
+                  @if($org->id !== $model->organizacion_id)
                       <option value="{{$org->id}}">{{$org->name}}</option>
                   @endif
               @endforeach
+              
               <option value="">
                 -------Seleccione la organización------
               </option>

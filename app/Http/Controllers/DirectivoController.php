@@ -76,9 +76,9 @@ class DirectivoController extends Controller
     public function edit(Directivo $directivo)
     {
         $this->authorize('update',$directivo);
-        $usuarios = User::all();
+        $users = User::all();
         $organizaciones = Organizacion::all();
-        return view('directivo.edit',['directivo'=>$directivo,'usuarios'=>$usuarios,'organizaciones'=>$organizaciones]);
+        return view('directivo.edit',['directivo'=>$directivo,'users'=>$users,'organizaciones'=>$organizaciones]);
     }
 
     /**

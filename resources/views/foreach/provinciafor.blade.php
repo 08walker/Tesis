@@ -5,10 +5,15 @@
           @foreach($provincias->all() as $provincia)
               @if($provincia->id == $model->provincia_id)
                   <option value="{{$provincia->id}}">{{$provincia->name}}</option>
-                  @else                                 
-                  <option value="{{$provincia->id}}">{{$provincia->name}}</option>
-                  @endif
+              @endif
           @endforeach
+
+          @foreach($provincias->all() as $provincia)
+              @if($provincia->id !== $model->provincia_id)
+                  <option value="{{$provincia->id}}">{{$provincia->name}}</option>
+              @endif
+          @endforeach
+
           <option value="">
             --------------------Seleccione el provincia----------------
           </option>
@@ -16,6 +21,7 @@
           <option value="">
             --------------------Seleccione el provincia----------------
           </option>
+      
           @foreach($provincias->all() as $provincia)
               @if($provincia->id == $model->provincia_id)
                   <option value="{{$provincia->id}}">{{$provincia->name}}</option>

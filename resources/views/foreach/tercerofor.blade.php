@@ -2,13 +2,19 @@
     <label for="exampleInputEmail1">Tercero al que pertenece:</label>
         <select class="form-control select2" style="width: 100%;" name="tercero_id">
         @if($model->tercero_id)
+        
           @foreach($terceros->all() as $tercero)
               @if($tercero->id == $model->tercero_id)
                 <option value="{{$tercero->id}}">{{$tercero->name}}</option>
-              @else                                 
+              @endif
+          @endforeach
+
+          @foreach($terceros->all() as $tercero)
+              @if($tercero->id !== $model->tercero_id)
                 <option value="{{$tercero->id}}">{{$tercero->name}}</option>
               @endif
           @endforeach
+
           <option value="">
             -----------Seleccione el tercero-------
           </option>

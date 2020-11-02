@@ -5,10 +5,15 @@
           @foreach($tipoUnidades->all() as $unidad)
               @if($unidad->id == $model->tipo_unidad_medida_id)
                   <option value="{{$unidad->id}}">{{$unidad->name}}</option>
-                  @else                                 
-                  <option value="{{$unidad->id}}">{{$unidad->name}}</option>
-                  @endif
+              @endif
           @endforeach
+          
+          @foreach($tipoUnidades->all() as $unidad)
+              @if($unidad->id !== $model->tipo_unidad_medida_id)
+                  <option value="{{$unidad->id}}">{{$unidad->name}}</option>
+              @endif
+          @endforeach
+          
           <option value="">
             --------------------Seleccione la unidad----------------
           </option>

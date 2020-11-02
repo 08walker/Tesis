@@ -22,28 +22,14 @@
                 <div class="col-lg-6">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
-                    {{$directivo->user_id}}
-                    {{$directivo->name}}
-                    {{$directivo->organizacion->name}}
+                    
                     @include('partials.error-messages')
                     
                     <form id="quickForm" role="form" method="POST" action="{{ route('directivo.update',$directivo) }}">
                     {{ method_field('PUT') }} {!! csrf_field() !!}
                     <div class="card-body">
                       
-                  <div class="form-group">
-                    {{$directivo->user->id}}
-                    <label for="exampleInputEmail1">Seleccione el usuario:</label>
-                    <select class="form-control select2" style="width: 100%;" name="user_id">
-                      @foreach($usuarios->all() as $user)
-                        @if($user->id == $directivo->user->id)
-                          <option value="{{$user->id}}">{{$user->name}}</option>
-                        {{-- @else                                 
-                          <option value="{{$user->id}}">{{$user->name}}</option> --}}
-                        @endif
-                      @endforeach
-                    </select>
-                  </div>
+                      @include('foreach.usersfor',['model'=>$directivo])
 
                       @include('componentes.name',['model'=>$directivo])
                       

@@ -2,13 +2,19 @@
     <label for="exampleInputEmail1">Municipio al que pertenece:</label>
         <select class="form-control select2" style="width: 100%;" name="municipio_id">
         @if($model->municipio_id)
+          
           @foreach($municipios->all() as $municipio)
               @if($municipio->id == $model->municipio_id)
                 <option value="{{$municipio->id}}">{{$municipio->name}}</option>
-              @else                                 
+              @endif
+          @endforeach
+
+          @foreach($municipios->all() as $municipio)
+              @if($municipio->id !== $model->municipio_id)
                 <option value="{{$municipio->id}}">{{$municipio->name}}</option>
               @endif
           @endforeach
+      
           <option value="">
             ------Seleccione el municipio------
           </option>

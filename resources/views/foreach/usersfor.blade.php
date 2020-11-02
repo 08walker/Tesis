@@ -5,10 +5,15 @@
           @foreach($users->all() as $user)
               @if($user->id == $model->user_id)
                 <option value="{{$user->id}}">{{$user->name}}</option>
-              @else                                 
+              @endif
+          @endforeach
+
+          @foreach($users->all() as $user)
+              @if($user->id !== $model->user_id)
                 <option value="{{$user->id}}">{{$user->name}}</option>
               @endif
           @endforeach
+
           <option value="">
             -----------Seleccione el usuario-------
           </option>

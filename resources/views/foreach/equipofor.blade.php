@@ -2,13 +2,19 @@
     <label for="exampleInputEmail1">Equipo al que pertenece:</label>
         <select class="form-control select2" style="width: 100%;" name="equipo_id">
         @if($model->equipo_id)
+      
           @foreach($equipos->all() as $equipo)
               @if($equipo->id == $model->equipo_id)
                 <option value="{{$equipo->id}}">{{$equipo->identificador}}</option>
-              @else                                 
+              @endif
+          @endforeach
+      
+          @foreach($equipos->all() as $equipo)
+              @if($equipo->id !== $model->equipo_id)
                 <option value="{{$equipo->id}}">{{$equipo->identificador}}</option>
               @endif
           @endforeach
+          
           <option value="">
             --------Seleccione el equipo--------
           </option>
