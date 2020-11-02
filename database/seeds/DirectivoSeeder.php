@@ -35,6 +35,43 @@ class DirectivoSeeder extends Seeder
         	'user_id'=>'8',
         	'organizacion_id'=>'3',
         ]);
-        factory(Directivo::class,10)->create();
+
+        Directivo::create([
+        	'name'=>'Director de UEB',
+        	'user_id'=>'9',
+        	'organizacion_id'=>'3',
+        ]);
+
+        Directivo::create([
+        	'name'=>'Esp. Principal de rama',
+        	'user_id'=>'10',
+        	'organizacion_id'=>'1',
+        ]);
+
+        Directivo::create([
+        	'name'=>'Esp. Principal de rama',
+        	'user_id'=>'11',
+        	'organizacion_id'=>'2',
+        ]);
+
+        Directivo::create([
+        	'name'=>'Esp. Principal de rama',
+        	'user_id'=>'12',
+        	'organizacion_id'=>'3',
+        ]);
+
+        Directivo::create([
+        	'name'=>'Esp. Principal de rama',
+        	'user_id'=>'13',
+        	'organizacion_id'=>'4',
+        ]);
+
+        Directivo::create([
+        	'name'=>'Esp. Principal de rama',
+        	'user_id'=>'14',
+        	'organizacion_id'=>'5',
+        ]);
+
+        //factory(Directivo::class,10)->create();
     }
 }

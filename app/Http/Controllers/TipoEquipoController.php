@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTEquipoRequest;
 use App\TipoEquipo;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class TipoEquipoController extends Controller
         return view('tipoequipo.create',compact('tipoEquipo'));
     }
 
-    public function store(Request $request)
+    public function store(StoreTEquipoRequest $request)
     {
         $this->authorize('create',new TipoEquipo);
         $tipoEquipo = TipoEquipo::create($request->all());
@@ -42,7 +43,7 @@ class TipoEquipoController extends Controller
         return view('tipoequipo.edit',['tipoEquipo'=>$tipoEquipo]);
     }
 
-    public function update(Request $request, TipoEquipo $tipoEquipo)
+    public function update(StoreTEquipoRequest $request, TipoEquipo $tipoEquipo)
     {
         $this->authorize('update',$tipoEquipo);
         $data = request()->all();

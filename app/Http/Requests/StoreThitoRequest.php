@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreProductoRequest extends FormRequest
+class StoreThitoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class StoreProductoRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,13 +24,9 @@ class StoreProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>
-                ['required',
-                'min:3',
-                Rule::unique('productos')->ignore($this->route('producto'))
-            ],
-            'identificador'=>'required',
-            'unidad_medida_id'=>'required',
+            'name'=>['required',
+                     'min:3',
+                      Rule::unique('tipo_hipo')->ignore($this->route('tipoHito'))],
         ];
     }
 
@@ -41,8 +36,6 @@ class StoreProductoRequest extends FormRequest
             'name.required'=>'Debe introducir el nombre',
             'name.min'=>'El nombre debe tener mas de 3 caracteres',
             'name.unique'=>'El nombre ya esta en uso',
-            'identificador.required'=>'Debe introducir el identificador',
-            'unidad_medida_id.required'=>'Debe seleccionar la unidad de medida',
         ];
     }
 }

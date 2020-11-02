@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTArrastreRequest;
 use App\TipoArrastre;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class TipoArrastreController extends Controller
         return view('tipoarrastre.create',compact('tipoArrastre'));
     }
 
-    public function store(Request $request)
+    public function store(StoreTArrastreRequest $request)
     {
         $this->authorize('create',new TipoArrastre);
         $tipoArrastre = TipoArrastre::create($request->all());
@@ -47,7 +48,7 @@ class TipoArrastreController extends Controller
         return view('tipoarrastre.edit',['tipoArrastre'=>$tipoArrastre]);
     }
 
-    public function update(Request $request, TipoArrastre $tipoArrastre)
+    public function update(StoreTArrastreRequest $request, TipoArrastre $tipoArrastre)
     {
         $this->authorize('update',$tipoArrastre);
         $data = request()->all();

@@ -363,5 +363,23 @@ class PermissionSeeder extends Seeder
             'name'=>'Delete hito',
             'display_name'=>'Eliminar hito'
         ]);
+
+        //Directivos
+        $viewDirectivoPermission = Permission::create([
+            'name'=>'View directivo',
+            'display_name'=>'Ver directivo'
+        ]);
+        $createDirectivoPermission = Permission::create([
+            'name'=>'Create directivo',
+            'display_name'=>'Crear directivo'
+        ]);
+        $updateDirectivoPermission = Permission::create([
+            'name'=>'Update directivo',
+            'display_name'=>'Actualizar directivo'
+        ]);
+        $deleteDirectivoPermission = Permission::create([
+            'name'=>'Delete directivo',
+            'display_name'=>'Eliminar directivo'
+        ]);
     }
 }

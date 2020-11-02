@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TipoUnidadMedida;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreTUnidadMRequest;
 
 class TipoUnidadMedidaController extends Controller
 {
@@ -30,11 +31,10 @@ class TipoUnidadMedidaController extends Controller
         return view('tipounidadmedida.create',compact('tipoum'));
     }
 
-    public function store(Request $request)
+    public function store(StoreTUnidadMRequest $request)
     {
         $this->authorize('create',new TipoUnidadMedida);
         $tipoum = TipoUnidadMedida::create($request->all());
-        //dd($tipoum);
 
         if ($tipoum) {
             return redirect()->route('tipounidad')->with('success','Tipo de unidad de medida creada con éxito');
@@ -53,7 +53,7 @@ class TipoUnidadMedidaController extends Controller
         return view('tipounidadmedida.edit',['tipoum'=>$tipoUnidadMedida]);
     }
 
-    public function update(Request $request, TipoUnidadMedida $tipoUnidadMedida)
+    public function update(StoreTUnidadMRequest $request, TipoUnidadMedida $tipoUnidadMedida)
     {
         //$this->authorize('update',$tipoUnidadMedida);
         $data = request()->all();

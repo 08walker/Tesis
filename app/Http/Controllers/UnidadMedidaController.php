@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUnidadMRequest;
 use App\TipoUnidadMedida;
 use App\UnidadMedida;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UnidadMedidaController extends Controller
         return view('unidadmedida.create',compact('unidadmedida', 'tipoUnidades'));
     }
 
-    public function store(Request $request)
+    public function store(StoreUnidadMRequest $request)
     {
         $this->authorize('create',new UnidadMedida);
         $data = request()->all();        
@@ -49,7 +50,7 @@ class UnidadMedidaController extends Controller
         return view('unidadmedida.edit',['unidadmedida'=>$unidadMedida,'tipoUnidades'=>$tipoUnidades]);
     }
 
-    public function update(Request $request, UnidadMedida $unidadMedida)
+    public function update(StoreUnidadMRequest $request, UnidadMedida $unidadMedida)
     {
         $this->authorize('update',$unidadMedida);
         $data = request()->all();
