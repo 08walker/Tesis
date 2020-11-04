@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUnidadMRequest;
 use App\TipoUnidadMedida;
+use App\Traza;
 use App\UnidadMedida;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,10 @@ class UnidadMedidaController extends Controller
             'tipo_unidad_medida_id'=> $data['tipo_unidad_medida_id'],
         ]);
         if ($unidad) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La unidad de medida {$unidad->name} ha sido creada por el usuario {$nombre}",
+            ]);
             return redirect()->route('unidadmedida')->with('success','Unidad de medida creada con éxito');
         }
         return back()->withInput()->with('error','Error al crear la nueva Unidad de medida');
@@ -60,6 +65,10 @@ class UnidadMedidaController extends Controller
         $unidadMedida->update($data);
         
         if ($unidadMedida) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La unidad de medida {$unidadMedida->name} ha sido actualizada por el usuario {$nombre}",
+            ]);
             return redirect()->route('unidadmedida')->with('success','Unidad de medidaas actualizada con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar la unidad de medida');
@@ -74,12 +83,20 @@ class UnidadMedidaController extends Controller
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $unidadMedida->update(['activo'=>'0']);
+                   $nombre = auth()->user()->name;
+                    Traza::create([
+                    'description'=> "La unidad de medida {$unidadMedida->name} ha sido desactivada por el usuario {$nombre}",
+                    ]);
                     return redirect()->route('unidadmedida')
                         ->with('success', 'La unidad de medida ha sido desactivada');   
                }
                return redirect()->route('unidadmedida')
                     ->with('errors', 'La unidad de medida no ha sido ser eliminada');
         }
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La unidad de medida {$unidadMedida->name} ha sido eliminada por el usuario {$nombre}",
+            ]);
         return redirect()->route('unidadmedida')
                     ->with('success', 'La unidad de medida ha sido eliminada con éxito');
     }

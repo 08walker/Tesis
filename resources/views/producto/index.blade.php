@@ -32,9 +32,13 @@
             <div class="card-header">
               <h3 class="card-title">Productos:</h3> 
               <br>
+              
+              @can('create',new \App\Producto)
               <a href="{{route('productos.create')}}" type="button" class="btn btn-primary btn-flat" >
                   <i class="fa fa-plus"></i> Crear
               </a>
+              @endcan
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -46,7 +50,11 @@
                   <th>Unidad de Medida</th>
                   <th>Identificador</th>
                   <th>Descripción</th>
+                  
+                  @can('update',new \App\Producto)
                   <th>Acciones</th>
+                  @endcan
+
                 </tr>
                 </thead>
 
@@ -58,22 +66,28 @@
                   <td>{{$producto->unidadMedida->name}}</td>
                   <td>{{$producto->identificador}}</td>
                   <td>{{$producto->description}}</td>
+                  
+                  @can('update',new \App\Producto)
                   <td>
-                      <a href="{{route('productos.show',$producto)}}" target="_blank">
+                        {{-- <a href="{{route('productos.show',$producto)}}" target="_blank">
                           <i class="fa fa-eye"></i>
-                        </a>
+                        </a> --}}
 
                         <a href="{{route('productos.edit',$producto)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
+
+                        @can('delete',new \App\Producto)
                         <form method="POST" action="{{route('productos.destroy', $producto)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar el producto?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
-                  
+                        @endcan
+                        
                   </td>
+                  @endcan
                 </tr>
                 @endforeach
                 </tbody>

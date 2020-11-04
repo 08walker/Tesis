@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTEquipoRequest;
 use App\TipoEquipo;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class TipoEquipoController extends Controller
@@ -29,6 +30,10 @@ class TipoEquipoController extends Controller
         $tipoEquipo = TipoEquipo::create($request->all());
 
         if ($tipoEquipo) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tipo de equipo {$tipoEquipo->name} ha sido creado por el usuario {$nombre}",
+            ]);
             return redirect()->route('tipoequipo')->with('success','Tipo de equipo creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo tipo');
@@ -52,6 +57,10 @@ class TipoEquipoController extends Controller
         $tipoEquipo->update($data);
 
         if ($tipoEquipo) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tipo de equipo {$tipoEquipo->name} ha sido actualizado por el usuario {$nombre}",
+            ]);
             return redirect()->route('tipoequipo')->with('success','Tipo de equipo actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el tipo de equipo');
@@ -61,6 +70,11 @@ class TipoEquipoController extends Controller
     {
         $this->authorize('delete',$tipoEquipo);
         $tipoEquipo->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tipo de equipo {$tipoEquipo->name} ha sido eliminado por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('tipoequipo')
                     ->with('success', 'El tipo arrastre ha sido eliminado');

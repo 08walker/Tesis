@@ -180,7 +180,14 @@
 
               @can('view',new \App\User)
                 <li>
-                  <a href="{{ route('user.index') }}" class="dropdown-item">Permisos</a></li>
+                  <a href="{{ route('user.index') }}" class="dropdown-item">Permisos</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Directivo)
+                <li>
+                  <a href="{{ route('directivo.index') }}" class="dropdown-item">Directivo</a>
+                </li>
               @endcan
 
             </ul>

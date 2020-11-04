@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEquipoRequest;
 use App\Organizacion;
 use App\Tercero;
 use App\TipoEquipo;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -59,6 +60,12 @@ class EquipoController extends Controller
         ]);
         
         if ($equipo) {
+
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Equipo {$equipo->identificador} creado por el usuario {$nombre}",
+            ]);
+
             return redirect()->route('equipos')->with('success','Equipo creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo equipo');
@@ -84,6 +91,10 @@ class EquipoController extends Controller
         $equipo->update($data);
 
         if ($equipo) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Equipo {$equipo->identificador} actualizado por el usuario {$nombre}",
+            ]);
             return redirect()->route('equipos')->with('success','Equipo actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el equipo');
@@ -93,6 +104,11 @@ class EquipoController extends Controller
     {
         $this->authorize('delete',$equipo);
         $equipo->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Equipo {$equipo->identificador} eliminado por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('equipos')
                     ->with('success', 'El equipo ha sido eliminado');

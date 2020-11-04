@@ -11,6 +11,9 @@
             </div><!-- /.row -->
          </div><!-- /.container-fluid -->
       </div>
+
+    @include('partials.success')
+
       <div class="content">
 <div class="container">
    <div class="row">
@@ -62,11 +65,11 @@
                  <h5 class="card-title">Roles: </h5>
                </div>
                @role('Admin')
-               {{-- <div class="card-body">
+               <div class="card-body">
                   <form method="POST" action="{{route('user.roles.update', $user)}}">
                   {{ csrf_field() }} {{method_field('PUT')}}
                   
-                  @include('partials.roles-checkboxes')
+                  @include('componentes.roles-checkboxes')
 
                   <button class="btn btn-primary btn-flat btn-block">Actualizar roles</button>
                   </form>
@@ -78,7 +81,7 @@
                   @empty
                      <li class="list-group-item">No tiene roles asignados.</li>
                   @endforelse
-               </ul> --}}
+               </ul>
                @endrole
             </div>
       
@@ -87,12 +90,12 @@
                  <h5 class="card-title">Permisos: </h5>
                </div>
                @role('Admin')
-               {{-- 
+               
                <div class="card-body">
                   <form method="POST" action="{{route('user.permissions.update', $user)}}">
                   {{ csrf_field() }} {{method_field('PUT')}}
 
-                  @include('partials.permissions-checkboxes',['model'=>$user])
+                  @include('componentes.permissions-checkboxes',['model'=>$user])
 
                   <button class="btn btn-primary btn-flat btn-block">Actualizar permisos</button>
                   </form>
@@ -106,7 +109,7 @@
                      <li class="list-group-item">No tiene permisos asignados.</li>
                   @endforelse
                   
-               </ul> --}}
+               </ul>
                @endrole
             </div>
       </div>      

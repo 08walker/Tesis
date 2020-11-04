@@ -61,13 +61,13 @@
                       <td>{{$user->name}}</td>
                       <td>{{$user->email}}</td>
                       <td>{{$user->getRoleNames()->implode(', ')}}</td>
+                      
                       <td>
                         <a href="{{route('user.show',$user)}}">
                           <i class="fa fa-eye"></i>
                         </a>
 
                         @if($user->id!==1)
-
                         @can('update',$user)
                         <a href="{{route('user.edit',$user)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>

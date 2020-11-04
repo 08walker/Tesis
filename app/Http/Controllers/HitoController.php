@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Hito;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class HitoController extends Controller
@@ -35,7 +36,10 @@ class HitoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Hito {$hito->description} creado por el usuario {$nombre}",
+            ]); 
     }
 
     /**

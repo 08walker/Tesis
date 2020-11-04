@@ -31,9 +31,12 @@
             <div class="card-header">
               <h3 class="card-title">Unidades de medida:</h3> 
               <br>
+
+              @can('view',new \App\UnidadMedida)
               <a href="{{route('unidadmedida.create')}}" type="button" class="btn btn-primary btn-flat" >
                   <i class="fa fa-plus"></i> Crear
               </a>
+              @endcan
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,7 +47,11 @@
                   <th>Nombre</th>
                   <th>identificador</th>
                   <th>Tipo unidad de medida</th>
+                  
+                  @can('update',new \App\UnidadMedida)
                   <th>Acciones</th>
+                  @endcan
+
                 </tr>
                 </thead>
 
@@ -55,22 +62,26 @@
                   <td>{{$unidad->name}}</td>
                   <td>{{$unidad->identificador}}</td>
                   <td>{{$unidad->tipoUnidadMedida->name}}</td>
+                  
+                  @can('update',new \App\UnidadMedida)
                   <td>
-                      <a href="{{route('unidadmedida.show',$unidad)}}" target="_blank">
+                        {{-- <a href="{{route('unidadmedida.show',$unidad)}}" target="_blank">
                           <i class="fa fa-eye"></i>
-                        </a>
+                        </a> --}}
 
                         <a href="{{route('unidadmedida.edit',$unidad)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
+                        @can('delete',new \App\UnidadMedida)
                         <form method="POST" action="{{route('unidadmedida.destroy', $unidad)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la unidad de medida?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
-                  
+                        @endcan
                   </td>
+                  @endcan
                 </tr>
                 @endforeach
                 </tbody>

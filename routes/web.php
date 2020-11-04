@@ -29,7 +29,7 @@ function(){
 Route::get('/','ProvinciaController@index')->name('provincias');
 Route::get('/crear','ProvinciaController@create')->name('provincias.create');
 Route::post('/crear','ProvinciaController@store');
-Route::get('/{provincia}','ProvinciaController@show')->name('provincias.show');
+//Route::get('/{provincia}','ProvinciaController@show')->name('provincias.show');
 Route::get('/{provincia}/editar','ProvinciaController@edit')->name('provincias.edit');
 Route::put('/{provincia}','ProvinciaController@update')->name('provincias.update');
 Route::delete('/{provincia}','ProvinciaController@destroy')->name('provincias.destroy');
@@ -44,7 +44,7 @@ function(){
 Route::get('/','MunicipioController@index')->name('municipios');
 Route::get('/crear','MunicipioController@create')->name('municipios.create');
 Route::post('/crear','MunicipioController@store')->name('municipios.create');
-Route::get('/{municipio}','MunicipioController@show')->name('municipios.show');
+// Route::get('/{municipio}','MunicipioController@show')->name('municipios.show');
 Route::get('/{municipio}/editar','MunicipioController@edit')->name('municipios.edit');
 Route::put('/{municipio}','MunicipioController@update')->name('municipios.update');
 Route::delete('/{municipio}','MunicipioController@destroy')->name('municipios.destroy');
@@ -58,7 +58,7 @@ Route::group([
 ],
 function(){
 Route::get('/','ArrastreController@index')->name('arrastres');
-Route::get('/{id}','ArrastreController@show')->where('id','[0-9]+')->name('arrastres.show');
+// Route::get('/{id}','ArrastreController@show')->where('id','[0-9]+')->name('arrastres.show');
 Route::get('/crear','ArrastreController@create')->name('arrastres.create');
 Route::post('/crear','ArrastreController@store')->name('arrastres.create');
 Route::get('/{arrastre}/editar','ArrastreController@edit')->name('arrastres.edit');
@@ -75,7 +75,7 @@ Route::group([
 ],
 function(){
 Route::get('/','ChoferController@index')->name('choferes');
-Route::get('/{id}','ChoferController@show')->where('id','[0-9]+')->name('choferes.show');
+// Route::get('/{id}','ChoferController@show')->where('id','[0-9]+')->name('choferes.show');
 Route::post('/crear','ChoferController@store');
 Route::get('/crear','ChoferController@create')->name('choferes.create');
 Route::get('/{chofer}/editar','ChoferController@edit')->name('choferes.edit');
@@ -90,7 +90,7 @@ Route::group([
 ],
 function(){
 Route::get('/','EnvaseController@index')->name('envases');
-Route::get('/{id}','EnvaseController@show')->where('id','[0-9]+')->name('envases.show');
+// Route::get('/{id}','EnvaseController@show')->where('id','[0-9]+')->name('envases.show');
 Route::post('/crear','EnvaseController@store');
 Route::get('/crear','EnvaseController@create')->name('envases.create');
 Route::get('/{envase}/editar','EnvaseController@edit')->name('envases.edit');
@@ -106,7 +106,7 @@ Route::group([
 ],
 function(){
 Route::get('/','EquipoController@index')->name('equipos');
-Route::get('/{id}','EquipoController@show')->where('id','[0-9]+')->name('equipos.show');
+// Route::get('/{id}','EquipoController@show')->where('id','[0-9]+')->name('equipos.show');
 Route::post('/crear','EquipoController@store');
 Route::get('/crear','EquipoController@create')->name('equipos.create');
 Route::get('/{equipo}/editar','EquipoController@edit')->name('equipos.edit');
@@ -122,7 +122,7 @@ Route::group([
 ],
 function(){
 Route::get('/','LugarController@index')->name('lugares');
-Route::get('/{id}','LugarController@show')->where('id','[0-9]+')->name('lugares.show');
+// Route::get('/{id}','LugarController@show')->where('id','[0-9]+')->name('lugares.show');
 Route::post('/crear','LugarController@store');
 Route::get('/crear','LugarController@create')->name('lugares.create');
 Route::get('/{lugar}/editar','LugarController@edit')->name('lugares.edit');
@@ -140,7 +140,7 @@ function(){
 Route::get('/','TerceroController@index')->name('terceros');
 Route::post('/crear','TerceroController@store');
 Route::get('/crear','TerceroController@create')->name('terceros.create');
-Route::get('/{tercero}','TerceroController@show')->name('terceros.show');
+// Route::get('/{tercero}','TerceroController@show')->name('terceros.show');
 Route::get('/{tercero}/editar','TerceroController@edit')->name('terceros.edit');
 Route::put('/{tercero}','TerceroController@update')->name('terceros.update');
 Route::delete('/{tercero}','TerceroController@destroy')->name('terceros.destroy');
@@ -156,7 +156,7 @@ function(){
 Route::get('/','OrganizacionController@index')->name('organizaciones');
 Route::post('/crear','OrganizacionController@store');
 Route::get('/crear','OrganizacionController@create')->name('organizaciones.create');
-Route::get('/{organizacion}','OrganizacionController@show')->name('organizaciones.show');
+// Route::get('/{organizacion}','OrganizacionController@show')->name('organizaciones.show');
 Route::get('/{organizacion}/editar','OrganizacionController@edit')->name('organizaciones.edit');
 Route::put('/{organizacion}','OrganizacionController@update')->name('organizaciones.update');
 Route::delete('/{organizacion}','OrganizacionController@destroy')->name('organizaciones.destroy');
@@ -170,7 +170,7 @@ Route::group([
 ],
 function(){
 Route::get('/','ProductoController@index')->name('productos');
-Route::get('/{id}','ProductoController@show')->where('id','[0-9]+')->name('productos.show');
+// Route::get('/{id}','ProductoController@show')->where('id','[0-9]+')->name('productos.show');
 Route::post('/crear','ProductoController@store');
 Route::get('/crear','ProductoController@create')->name('productos.create');
 Route::get('/{producto}/editar','ProductoController@edit')->name('productos.edit');
@@ -185,7 +185,7 @@ Route::group([
 ],
 function(){
 Route::get('/','TransportacionController@index')->name('transportaciones');
-Route::get('/{id}','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
+// Route::get('/{id}','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
 Route::get('/crear','TransportacionController@create')->name('transportaciones.create');
 Route::post('/crear','TransportacionController@store');
 Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.llenar');
@@ -204,7 +204,7 @@ function(){
 Route::get('/','TipoUnidadMedidaController@index')->name('tipounidad');
 Route::get('/crear','TipoUnidadMedidaController@create')->name('tipounidad.create');
 Route::post('/crear','TipoUnidadMedidaController@store')->name('tipounidad.create');
-Route::get('/{id}','TipoUnidadMedidaController@show')->name('tipounidad.show');
+// Route::get('/{id}','TipoUnidadMedidaController@show')->name('tipounidad.show');
 Route::get('/{tipoUnidadMedida}/editar','TipoUnidadMedidaController@edit')->name('tipounidad.edit');
 Route::put('/{tipoUnidadMedida}','TipoUnidadMedidaController@update')->name('tipounidad.update');
 Route::delete('/{tipoUnidadMedida}','TipoUnidadMedidaController@destroy')->name('tipounidad.destroy');
@@ -219,7 +219,7 @@ function(){
 Route::get('/','TipoArrastreController@index')->name('tipoarrastre');
 Route::get('/crear','TipoArrastreController@create')->name('tipoarrastre.create');
 Route::post('/crear','TipoArrastreController@store')->name('tipoarrastre.create');
-Route::get('/{id}','TipoArrastreController@show')->name('tipoarrastre.show');
+// Route::get('/{id}','TipoArrastreController@show')->name('tipoarrastre.show');
 Route::get('/{tipoArrastre}/editar','TipoArrastreController@edit')->name('tipoarrastre.edit');
 Route::put('/{tipoArrastre}','TipoArrastreController@update')->name('tipoarrastre.update');
 Route::delete('/{tipoArrastre}','TipoArrastreController@destroy')->name('tipoarrastre.destroy');
@@ -235,7 +235,7 @@ function(){
 Route::get('/','UnidadMedidaController@index')->name('unidadmedida');
 Route::get('/crear','UnidadMedidaController@create')->name('unidadmedida.create');
 Route::post('/crear','UnidadMedidaController@store')->name('unidadmedida.create');
-Route::get('/{id}','UnidadMedidaController@show')->name('unidadmedida.show');
+// Route::get('/{id}','UnidadMedidaController@show')->name('unidadmedida.show');
 Route::get('/{unidadMedida}/editar','UnidadMedidaController@edit')->name('unidadmedida.edit');
 Route::put('/{unidadMedida}','UnidadMedidaController@update')->name('unidadmedida.update');
 Route::delete('/{unidadMedida}','UnidadMedidaController@destroy')->name('unidadmedida.destroy');
@@ -251,7 +251,7 @@ function(){
 Route::get('/','TipoHitoController@index')->name('tipohito');
 Route::get('/crear','TipoHitoController@create')->name('tipohito.create');
 Route::post('/crear','TipoHitoController@store')->name('tipohito.create');
-Route::get('/{id}','TipoHitoController@show')->name('tipohito.show');
+// Route::get('/{id}','TipoHitoController@show')->name('tipohito.show');
 Route::get('/{tipoHito}/editar','TipoHitoController@edit')->name('tipohito.edit');
 Route::put('/{tipoHito}','TipoHitoController@update')->name('tipohito.update');
 Route::delete('/{tipoHito}','TipoHitoController@destroy')->name('tipohito.destroy');
@@ -266,15 +266,20 @@ function(){
 Route::get('/','TipoEquipoController@index')->name('tipoequipo');
 Route::get('/crear','TipoEquipoController@create')->name('tipoequipo.create');
 Route::post('/crear','TipoEquipoController@store')->name('tipoequipo.create');
-Route::get('/{id}','TipoEquipoController@show')->name('tipoequipo.show');
+// Route::get('/{id}','TipoEquipoController@show')->name('tipoequipo.show');
 Route::get('/{tipoEquipo}/editar','TipoEquipoController@edit')->name('tipoequipo.edit');
 Route::put('/{tipoEquipo}','TipoEquipoController@update')->name('tipoequipo.update');
 Route::delete('/{tipoEquipo}','TipoEquipoController@destroy')->name('tipoequipo.destroy');
 });
 
 Route::resource('user','UsersController');
+Route::middleware('role:Admin')
+      ->put('users/{user}/roles','UsersRolesController@update')
+        ->name('user.roles.update');
+Route::middleware('role:Admin')
+   ->put('users/{user}/permissions','UsersPermissionsController@update')->name('user.permissions.update');
 Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
 Route::resource('permissions','PermissionsController',['only'=>['index','edit','update'],'as'=>'admin']);
-Route::resource('directivo','DirectivoController');
+Route::resource('directivo','DirectivoController',['except'=>'show']);
 
 Route::get('/trazas', 'TrazasController@index')->name('trazas');

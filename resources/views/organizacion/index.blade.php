@@ -31,9 +31,13 @@
             <div class="card-header">
               <h3 class="card-title">Organizaciones:</h3> 
               <br>
+
+              @can('create',new \App\Organizacion)
               <a href="{{route('organizaciones.create')}}" type="button" class="btn btn-primary btn-flat" >
                   <i class="fa fa-plus"></i> Crear
               </a>
+              @endcan
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,7 +48,11 @@
                   <th>Nombre</th>
                   <th>Identificador</th>
                   <th>Municipio</th>
+
+                  @can('update',new \App\Organizacion)
                   <th>Acciones</th>
+                  @endcan
+                  
                 </tr>
                 </thead>
 
@@ -55,22 +63,25 @@
                   <td>{{$organizacion->name}}</td>
                   <td>{{$organizacion->identificador}}</td>
                   <td>{{$organizacion->municipio->name}}</td>
+                  @can('update',new \App\Organizacion)
                   <td>
-                      <a href="{{route('organizaciones.show',$organizacion)}}" target="_blank">
+              {{--         <a href="{{route('organizaciones.show',$organizacion)}}" target="_blank">
                           <i class="fa fa-eye"></i>
-                        </a>
+                        </a> --}}
 
                         <a href="{{route('organizaciones.edit',$organizacion)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
+                        @can('delete',new \App\Organizacion)
                         <form method="POST" action="{{route('organizaciones.destroy', $organizacion)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la organizacion?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
-                  
+                        @endcan
                   </td>
+                  @endcan
                 </tr>
                 @endforeach
                 </tbody>

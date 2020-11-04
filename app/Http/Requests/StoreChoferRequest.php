@@ -29,11 +29,10 @@ class StoreChoferRequest extends FormRequest
             'ci'=>
                 ['required',
                 'size:11',
-                 Rule::unique('choferes')->ignore($this->route('chofer')->id)
-             ],
+                 Rule::unique('choferes')->ignore($this->route('chofer'))],
             'licencia'=>
                 ['required',
-                 Rule::unique('choferes')->ignore($this->route('chofer')->id)],
+                 Rule::unique('choferes')->ignore($this->route('chofer'))],
             'telefono'=>'required',
             'equipo_id'=>'required',
             //'es_propio'=>'required',

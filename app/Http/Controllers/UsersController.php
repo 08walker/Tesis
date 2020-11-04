@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
+use App\Traza;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
@@ -54,6 +56,12 @@ class UsersController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ],
+        [  
+            'name.required'=>'Debe introducir el nombre',
+            'password.min'=>'La contraseña debe tener mas de 6 caracteres',
+            'password.confirmed'=>'Las contraseñas no coinciden',
+            'email.unique'=>'El correo electronico ya está en uso',
         ]);
         
         $user = User::create($data);
@@ -69,7 +77,11 @@ class UsersController extends Controller
         }
 
         //Regresamos al usuario
-        return redirect()->route('users.index')->withFlash('El usuario ha sido creado');
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "En usuario {$user->name} ha sido creado por el usuario {$nombre}",
+            ]);
+        return redirect()->route('user.index')->with('success','Usuario creado con éxito');
 
     }
 
@@ -110,10 +122,18 @@ class UsersController extends Controller
         }
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->validated());
-        return redirect()->route('users.edit', $user)->withFlash('Usuario actualizado');
+        
+        if ($user) {
+        $nombre = auth()->user()->name;
+        Traza::create([
+        'description'=> "Usuario {$user->name} actualizado por el usuario {$nombre}",
+        ]); 
+        return redirect()->route('user.edit', $user)->with('success','Usuario actualizado con éxito');
+        }
+        return back()->withInput()->with('error','Error al actualisar el nuevo usuario');
     }
 
     /**
@@ -128,6 +148,6 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index')->withFlash('EL usuario ha sido eliminado');
+        return redirect()->route('user.index')->withFlash('EL usuario ha sido eliminado');
     }
 }

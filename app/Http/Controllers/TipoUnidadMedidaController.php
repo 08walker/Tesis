@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\TipoUnidadMedida;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreTUnidadMRequest;
+use App\TipoUnidadMedida;
+use App\Traza;
+use Illuminate\Http\Request;
 
 class TipoUnidadMedidaController extends Controller
 {
@@ -39,6 +40,10 @@ class TipoUnidadMedidaController extends Controller
         $tipoum = TipoUnidadMedida::create($request->all());
 
         if ($tipoum) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tipo de unidad de medida {$tipoum->name} ha sido creada por el usuario {$nombre}",
+            ]);
             return redirect()->route('tipounidad')->with('success','Tipo de unidad de medida creada con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo tipo');
@@ -62,6 +67,10 @@ class TipoUnidadMedidaController extends Controller
         $tipoUnidadMedida->update($data);
 
         if ($tipoUnidadMedida) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} ha sido actualizada por el usuario {$nombre}",
+            ]);
             return redirect()->route('tipounidad')->with('success','Tipo de unidad actualizada con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el tipo de unidad');
@@ -71,6 +80,11 @@ class TipoUnidadMedidaController extends Controller
     {
         $this->authorize('delete',$tipoUnidadMedida);
         $tipoUnidadMedida->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} ha sido eliminada por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('tipounidad')
                     ->with('success', 'El tipo de unidad ha sido eliminado');

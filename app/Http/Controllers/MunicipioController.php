@@ -50,11 +50,12 @@ class MunicipioController extends Controller
             'name'=> $data['name'],
             'provincia_id'=> $data['provincia_id'],
         ]);
+
         if ($municipio) {
             $nombre = auth()->user()->name;
-           Traza::create([
-            'description'=> "Municipio {$municipio->name} creado por el usuario {$nombre}",
-        ]); 
+            Traza::create([
+            'description'=> "El municipio {$municipio->name} creado por el usuario {$nombre}",
+            ]); 
             return redirect()->route('municipios')->with('success','Municipio creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo municipio');
@@ -75,6 +76,10 @@ class MunicipioController extends Controller
         $municipio->update($data);
         
         if ($municipio) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El municipio {$municipio->name} actualizado por el usuario {$nombre}",
+            ]);
             return redirect()->route('municipios')->with('success','Municipio actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el municipio');
@@ -89,12 +94,20 @@ class MunicipioController extends Controller
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $municipio->update(['activo'=>'0']);
+                   $nombre = auth()->user()->name;
+                    Traza::create([
+                    'description'=> "El municipio {$municipio->name} desactivado por el usuario {$nombre}",
+                    ]);
                     return redirect()->route('municipios')
                         ->with('success', 'El municipio ha sido desactivado');   
                }
                return redirect()->route('municipios')
                     ->with('errors', 'El municipio no ha sido ser eliminado');
         }
+        $nombre = auth()->user()->name;
+        Traza::create([
+        'description'=> "El municipio {$municipio->name} eliminado por el usuario {$nombre}",
+        ]);
         return redirect()->route('municipios')
                     ->with('success', 'El municipio ha sido eliminado con éxito');
     }

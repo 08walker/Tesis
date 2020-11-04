@@ -6,6 +6,7 @@ use App\Envase;
 use App\Http\Requests\StoreEnvaseRequest;
 use App\Organizacion;
 use App\Tercero;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class EnvaseController extends Controller
@@ -53,6 +54,11 @@ class EnvaseController extends Controller
             'organizacion_id'=>$data['organizacion_id'],
         ]);
         if ($envase) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Envase {$envase->identificador} creado por el usuario {$nombre}",
+            ]);
+
             return redirect()->route('envases')->with('success','Envase creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo envase');
@@ -76,6 +82,10 @@ class EnvaseController extends Controller
         $envase->update($data);
 
         if ($envase) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Envase {$envase->identificador} actualizado por el usuario {$nombre}",
+            ]);
         return redirect()->route('envases')->with('success','Envase actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el envase');
@@ -86,6 +96,11 @@ class EnvaseController extends Controller
         $this->authorize('delete',$envase);
 
         $envase->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Envase {$envase->identificador} eliminado por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('envases')
                     ->with('success', 'El envase ha sido eliminado');

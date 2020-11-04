@@ -8,6 +8,7 @@ use App\Http\Requests\StoreArrastreRequest;
 use App\Organizacion;
 use App\Tercero;
 use App\TipoArrastre;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class ArrastreController extends Controller
@@ -62,6 +63,10 @@ class ArrastreController extends Controller
         ]);
 
         if ($arrastre) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Arrastre {$arrastre->identificador} creado por el usuario {$nombre}",
+            ]);
             return redirect()->route('arrastres')->with('success','Arrastre creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo arrastre');
@@ -85,15 +90,33 @@ class ArrastreController extends Controller
         //dd($data);
 
         $arrastre->update($data);
+        
+        if ($arrastre) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Arrastre {$arrastre->identificador} actualizado por el usuario {$nombre}",
+            ]);
+
         return redirect()->route('arrastres')->with('success','Arrastre actualizado con éxito');
+        }
 
         return back()->withInput()->with('error','Error al actualizar el arrastre');
     }
 
     public function destroy(Arrastre $arrastre)
     {
-        $this->authorize('update',$arrastre);
+        
+        //arreglar este metodo
+
+        //$this->authorize('update',$arrastre);
+        $delet = $arrastre;
         $arrastre->delete();
+        //$municipio->delete();
+        
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Arrastre {$delet->identificador} eliminado por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('arrastres')
                     ->with('success', 'El arrastre ha sido eliminado');

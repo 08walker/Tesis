@@ -7,6 +7,7 @@ use App\Equipo;
 use App\Http\Requests\StoreChoferRequest;
 use App\Organizacion;
 use App\Tercero;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class ChoferController extends Controller
@@ -41,7 +42,7 @@ class ChoferController extends Controller
 
     public function store(StoreChoferRequest $request)
      {  
-        $this->authorize('create',$chofer);
+        $this->authorize('create',new Chofer);
         $data = request()->all(); 
         //dd($data);
         
@@ -58,6 +59,10 @@ class ChoferController extends Controller
             ]);
 
         if ($chofer) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Chofer {$chofer->name} creado por el usuario {$nombre}",
+            ]);
             return redirect()->route('choferes')->with('success','EL chofer ha sido creado con éxito');
         }
         return back()->withInput()->with('error','Error al insertar el nuevo chofer');
@@ -80,6 +85,10 @@ class ChoferController extends Controller
     
         $chofer->update($data);
         if ($chofer) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Chofer {$chofer->name} actualizado por el usuario {$nombre}",
+            ]);
             return redirect()->route('choferes')->with('success','Chofer actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el chofer');
@@ -89,6 +98,11 @@ class ChoferController extends Controller
     {
         $this->authorize('delete',$chofer);
         $chofer->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Chofer {$chofer->name} eliminado por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('choferes')
                     ->with('success', 'El chofer ha sido eliminado');

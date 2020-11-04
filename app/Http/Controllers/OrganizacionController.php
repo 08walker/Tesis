@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrganizacionRequest;
 use App\Municipio;
 use App\Organizacion;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class OrganizacionController extends Controller
@@ -47,6 +48,10 @@ class OrganizacionController extends Controller
         ]);
         
         if ($organizacion) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La organizacion {$organizacion->name} creada por el usuario {$nombre}",
+            ]);
             return redirect()->route('organizaciones')->with('success','Organización creada con éxito');
         }
         return back()->withInput()->with('error','Error al crear la nueva organización');
@@ -68,6 +73,10 @@ class OrganizacionController extends Controller
         $organizacion->update($data);
 
         if ($organizacion) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La organizacion {$organizacion->name} actualizada por el usuario {$nombre}",
+            ]);
             return redirect()->route('organizaciones')->with('success','Organización actualizada con éxito');
            }
         return back()->withInput()->with('error','Error al actualizar la organización');
@@ -77,6 +86,11 @@ class OrganizacionController extends Controller
     {
         $this->authorize('delete',$organizacion);
         $organizacion->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La organizacion {$organizacion->name} eliminada por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('organizaciones')
                     ->with('success', 'La organización ha sido eliminada');

@@ -91,6 +91,10 @@ class UserSeeder extends Seeder
         $analistaRole->givePermissionTo('View producto');
         $analistaRole->givePermissionTo('Create producto');
         $analistaRole->givePermissionTo('Update producto');
+
+        $analistaRole->givePermissionTo('View directivo');
+        $analistaRole->givePermissionTo('Create directivo');
+        $analistaRole->givePermissionTo('Update directivo');
         
         //Permisos Rol Invitado
         $inivitadoRole->givePermissionTo('View provincia');
@@ -106,37 +110,41 @@ class UserSeeder extends Seeder
         $inivitadoRole->givePermissionTo('View tEquipo');
         $inivitadoRole->givePermissionTo('View roles');
         $inivitadoRole->givePermissionTo('View producto');
+        $inivitadoRole->givePermissionTo('View chofer');
+        $inivitadoRole->givePermissionTo('View envase');
+        $inivitadoRole->givePermissionTo('View directivo');
+
 
         $admin = new User;
-        $admin->name ='walker';
+        $admin->name ='Walker';
         $admin->email ='walker@walker.com';
-        $admin->password =bcrypt('123456');
+        $admin->password ='123456';
         $admin->save();
         $admin->assignRole($adminRole);
 
         $writer = new User;
-        $writer->name='yisel';
+        $writer->name='Yisel';
         $writer->email='yisel@yisel.com';
-        $writer->password=bcrypt('123456');
+        $writer->password='123456';
         $writer->save();
         $writer->assignRole($transporteRole);
 
         $writer2 = new User;
-        $writer2->name = 'laura';
+        $writer2->name = 'Laura';
         $writer2->email = 'laura@laura.com';
-        $writer2->password=bcrypt('123456');
+        $writer2->password='123456';
         $writer2->save();
         $writer2->assignRole($analistaRole);
 
         $writer3 = new User;
-        $writer3->name = 'Paco';
-        $writer3->email = 'paco@paco.com';
-        $writer3->password=bcrypt('123456');
+        $writer3->name = 'Pepe';
+        $writer3->email = 'pepe@pepe.com';
+        $writer3->password='123456';
         $writer3->save();
         $writer3->assignRole($inivitadoRole);
 
         factory(User::class,11)->create([
-            'password'=>bcrypt('123456')
+            'password'=>'123456'
         ]);
 
         // User::create([

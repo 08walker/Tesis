@@ -27,9 +27,13 @@
             <div class="card-header">
               <h3 class="card-title">Choferes:</h3> 
               <br>
+              
+              @can('create',new \App\Chofer)
               <a href="{{route('choferes.create')}}" type="button" class="btn btn-primary btn-flat" >
                   <i class="fa fa-plus"></i> Crear
               </a>
+              @endcan
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -46,7 +50,11 @@
                   <!-- <th>Es propio</th> -->
                   <th>Tercero</th>
                   <th>Organización</th>
+                  
+                  @can('update',new \App\Chofer)
                   <th>Acciones</th>
+                  @endcan
+
                 </tr>
                 </thead>
 
@@ -63,22 +71,27 @@
                   <!-- <td>{{$chofer->es_propio}}</td> -->
                   <td>{{optional($chofer->tercero)->name}}</td>
                   <td>{{optional($chofer->organizacion)->name}}</td>
+                  @can('update',new \App\Chofer)
                   <td>
-                      <a href="{{route('choferes.show',$chofer)}}" target="_blank">
+                        {{-- <a href="{{route('choferes.show',$chofer)}}" target="_blank">
                           <i class="fa fa-eye"></i>
-                        </a>
+                        </a> --}}
 
                         <a href="{{route('choferes.edit',$chofer)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
+                        
+                        @can('delete',new \App\Chofer)
                         <form method="POST" action="{{route('choferes.destroy', $chofer)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar el chofer?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
+                        @endcan
                   
                   </td>
+                  @endcan
                 </tr>
                 @endforeach
                 </tbody>

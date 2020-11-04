@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProvinciaRequest;
 use App\Provincia;
+use App\Traza;
 //use Illuminate\Http\Request;
 
 class ProvinciaController extends Controller
@@ -29,6 +30,10 @@ class ProvinciaController extends Controller
         $provincia = Provincia::create($request->all());
 
         if ($provincia) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La provincia {$provincia->name} ha sido creada por el usuario {$nombre}",
+            ]);
             return redirect()->route('provincias')->with('success','Provincia creada con éxito');
         }
         return back()->withInput()->with('error','Error al crear la nueva provincia');
@@ -53,6 +58,10 @@ class ProvinciaController extends Controller
         $provincia->update($data);
 
         if ($provincia) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La provincia {$provincia->name} ha sido actualizada por el usuario {$nombre}",
+            ]);
             return redirect()->route('provincias')->with('success','Provincia actualizada con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar la provincia');
@@ -62,6 +71,11 @@ class ProvinciaController extends Controller
     {
         $this->authorize('delete',$provincia);
         $provincia->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "La provincia {$provincia->name} ha sido eliminada por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('provincias')
                     ->with('success', 'La provincia ha sido eliminada');

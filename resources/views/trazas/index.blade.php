@@ -75,7 +75,7 @@
 <!-- page script -->
 <script>
   $(function () {
-      //"order":['asc'],  
+      "order":['asc'],  
     $("#example1").DataTable({
       //"_aData": [],
       "responsive": true,

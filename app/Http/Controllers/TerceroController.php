@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTerceroRequest;
 use App\Municipio;
 use App\Tercero;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class TerceroController extends Controller
@@ -48,6 +49,10 @@ class TerceroController extends Controller
         ]);
 
         if ($tercero) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tercero {$tercero->name} ha sido creado por el usuario {$nombre}",
+            ]);
             return redirect()->route('terceros')->with('success','Tercero creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear la agencia');
@@ -69,6 +74,10 @@ class TerceroController extends Controller
         $tercero->update($data);
         
         if ($tercero) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tercero {$tercero->name} ha sido actualizado por el usuario {$nombre}",
+            ]);
             return redirect()->route('terceros')->with('success','Tercero actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar la agencia');   
@@ -78,6 +87,11 @@ class TerceroController extends Controller
     {
         $this->authorize('delete',$tercero);
         $tercero->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El tercero {$tercero->name} ha sido eliminado por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('terceros')
                     ->with('success', 'Tercero eliminado');

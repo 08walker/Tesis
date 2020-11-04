@@ -31,9 +31,12 @@
             <div class="card-header">
               <h3 class="card-title">Terceros:</h3> 
               <br>
+
+              @can('create',new \App\Tercero)
               <a href="{{route('terceros.create')}}" type="button" class="btn btn-primary btn-flat" >
                   <i class="fa fa-plus"></i> Crear
               </a>
+              @endcan
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,7 +47,9 @@
                   <th>Nombre</th>
                   <th>Identificador</th>
                   <th>Municipio</th>
+                  @can('update',new \App\Tercero)
                   <th>Acciones</th>
+                  @endcan
                 </tr>
                 </thead>
 
@@ -55,22 +60,26 @@
                   <td>{{$tercero->name}}</td>
                   <td>{{$tercero->identificador}}</td>
                   <td>{{$tercero->municipio->name}}</td>
+                  
+                  @can('update',new \App\Tercero)
                   <td>
-                      <a href="{{route('terceros.show',$tercero)}}" target="_blank">
+                        {{-- <a href="{{route('terceros.show',$tercero)}}" target="_blank">
                           <i class="fa fa-eye"></i>
-                        </a>
+                        </a> --}}
 
                         <a href="{{route('terceros.edit',$tercero)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
+                        @can('delete',new \App\Tercero)
                         <form method="POST" action="{{route('terceros.destroy', $tercero)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar el tercero?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
-                  
+                        @endcan                  
                   </td>
+                  @endcan
                 </tr>
                 @endforeach
                 </tbody>

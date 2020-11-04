@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductoRequest;
 use App\Producto;
+use App\Traza;
 use App\UnidadMedida;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -38,6 +39,10 @@ class ProductoController extends Controller
             'unidad_medida_id'=> $data['unidad_medida_id'],
         ]);
         if ($producto) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El producto {$producto->name} ha sido creado por el usuario {$nombre}",
+            ]);
             return redirect()->route('productos')->with('success','El producto ha sido creado con éxito');
         }
         return back()->withInput()->with('errors','Error al crear el nuevo Producto');
@@ -65,6 +70,10 @@ class ProductoController extends Controller
         $producto->update($data);
 
         if ($producto) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El producto {$producto->name} ha sido actualizado por el usuario {$nombre}",
+            ]);
             return redirect()->route('productos')->with('success','Producto actualizado con éxito');
            }
         return back()->withInput()->with('error','Error al actualizar el producto');
@@ -79,12 +88,20 @@ class ProductoController extends Controller
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $producto->update(['activo'=>'0']);
+                   $nombre = auth()->user()->name;
+                    Traza::create([
+                    'description'=> "El producto {$producto->name} ha sido desactivado por el usuario {$nombre}",
+                    ]);
                     return redirect()->route('productos')
                         ->with('success', 'El producto ha sido desactivado');   
                }
                return redirect()->route('productos')
                     ->with('errors', 'El producto no ha sido ser eliminado');
         }
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El producto {$producto->name} ha sido eliminado por el usuario {$nombre}",
+            ]);
         return redirect()->route('productos')
                     ->with('success', 'El producto ha sido eliminado con éxito');
     }

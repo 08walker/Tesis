@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Directivo;
 use App\Organizacion;
+use App\Traza;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,11 @@ class DirectivoController extends Controller
             'organizacion_id'=> $data['organizacion_id'],
         ]);
         if ($directivo) {
+
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Directivo {$directivo->name} creado por el usuario {$nombre}",
+            ]);
             return redirect()->route('directivo.index')->with('success','Directivo creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo directivo');
@@ -98,6 +104,10 @@ class DirectivoController extends Controller
         $directivo->update($data);
         
         if ($directivo) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Directivo {$directivo->name} actualizado por el usuario {$nombre}",
+            ]);
             return redirect()->route('directivo.index')->with('success','Directivo actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el directivo');
@@ -113,6 +123,11 @@ class DirectivoController extends Controller
     {
         $this->authorize('delete',$directivo);
         $directivo->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Directivo {$directivo->name} eliminado por el usuario {$nombre}",
+            ]);
 
         return redirect()->route('directivo.index')
                     ->with('success', 'El directivo ha sido eliminado');

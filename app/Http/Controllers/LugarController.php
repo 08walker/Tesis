@@ -7,6 +7,7 @@ use App\Lugar;
 use App\Municipio;
 use App\Organizacion;
 use App\Tercero;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class LugarController extends Controller
@@ -53,6 +54,10 @@ class LugarController extends Controller
         ]);
 
         if ($lugar) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Lugar {$lugar->name} creado por el usuario {$nombre}",
+            ]); 
             return redirect()->route('lugares')->with('success','Lugar creado con éxito');
         }
         return back()->withInput()->with('error','Error al insertar el nuevo lugar');
@@ -76,6 +81,10 @@ class LugarController extends Controller
         $lugar->update($data);
 
         if ($lugar) {
+            $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Lugar {$lugar->name} actualizado por el usuario {$nombre}",
+            ]); 
             return redirect()->route('lugares')->with('success','Lugar actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar el lugar');
@@ -85,6 +94,11 @@ class LugarController extends Controller
     {
         $this->authorize('delete',$lugar);
         $lugar->delete();
+        
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "Lugar {$lugar->name} eliminado por el usuario {$nombre}",
+            ]); 
 
         return redirect()->route('lugares')
                     ->with('success', 'El lugar ha sido eliminado');
