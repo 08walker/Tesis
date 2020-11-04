@@ -18,6 +18,8 @@ class EquipoController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new Equipo);
+        
         return view('equipo.index')
         ->with('equipos', Equipo::all());
     }

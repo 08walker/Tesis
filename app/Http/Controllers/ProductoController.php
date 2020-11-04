@@ -12,6 +12,8 @@ class ProductoController extends Controller
 {
     public function index()
     {
+        $this->authorize('view',new Producto);
+        
         return view('producto.index')
             ->with('productos', Producto::all());
     }

@@ -16,6 +16,8 @@ class OrganizacionController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new Organizacion);
+
         return view('organizacion.index')
         ->with('organizaciones', Organizacion::all());
     }

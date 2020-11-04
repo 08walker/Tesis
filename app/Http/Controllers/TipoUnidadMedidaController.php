@@ -15,6 +15,8 @@ class TipoUnidadMedidaController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new TipoUnidadMedida);
+        
         return view('tipounidadmedida.index')
             ->with('tipoum', TipoUnidadMedida::all());
     }

@@ -35,6 +35,8 @@ class AuthServiceProvider extends ServiceProvider
         'Spatie\Permission\Models\Permission' => 'App\Policies\PermissionPolicy',
 
         'App\Directivo' => 'App\Policies\DirectivoPolicy',
+
+        'App\Traza' => 'App\Policies\TrazaPolicy',
     ];
 
     /**

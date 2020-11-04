@@ -18,6 +18,8 @@ class LugarController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new Lugar);
+        
         return view('lugar.index')
         ->with('lugares', Lugar::all());
     }

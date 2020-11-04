@@ -11,6 +11,8 @@ class UnidadMedidaController extends Controller
 {
     public function index()
     {
+        $this->authorize('view',new UnidadMedida);
+
         $unidadmedida = UnidadMedida::all();        
         return view('unidadmedida.index',compact('unidadmedida'));
     }

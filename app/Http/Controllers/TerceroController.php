@@ -16,6 +16,8 @@ class TerceroController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new Tercero);
+        
         return view('tercero.index')
         ->with('terceros', Tercero::all());
     }

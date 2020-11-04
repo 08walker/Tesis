@@ -19,7 +19,8 @@ class ArrastreController extends Controller
      */
     public function index()
     {
-        //$this->authorize('view');
+        $this->authorize('view',new Arrastre);
+        
         return view('arrastre.index')
         ->with('arrastres', Arrastre::all());
     }

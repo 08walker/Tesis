@@ -16,6 +16,8 @@ class DirectivoController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new Directivo);
+        
         return view('directivo.index')
             ->with('directivos', Directivo::all());
     }

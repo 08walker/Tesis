@@ -10,6 +10,8 @@ class TipoEquipoController extends Controller
 {
     public function index()
     {
+        $this->authorize('view',new TipoEquipo);
+
         return view('tipoequipo.index')
             ->with('tipoequipo', TipoEquipo::all());
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMunicipioRequest;
 use App\Municipio;
 use App\Provincia;
+use App\Traza;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,9 @@ class MunicipioController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new Municipio);
+        
         $todos = Municipio::all();
-
         $municipios = $todos->filter(function ($value,$key){
             return data_get($value,'activo') == 1;
         })->sortBy('provincia_id');        
@@ -49,6 +51,10 @@ class MunicipioController extends Controller
             'provincia_id'=> $data['provincia_id'],
         ]);
         if ($municipio) {
+            $nombre = auth()->user()->name;
+           Traza::create([
+            'description'=> "Municipio {$municipio->name} creado por el usuario {$nombre}",
+        ]); 
             return redirect()->route('municipios')->with('success','Municipio creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo municipio');

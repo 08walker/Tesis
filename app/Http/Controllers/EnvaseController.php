@@ -17,6 +17,8 @@ class EnvaseController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new Envase);
+        
         return view('envase.index')
         ->with('envases', Envase::all());
     }

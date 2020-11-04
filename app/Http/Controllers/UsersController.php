@@ -16,6 +16,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $this->authorize('view',new User);
+        
         $users = User::allowed()->get();
         return view('users.index',compact('users'));
     }

@@ -381,5 +381,11 @@ class PermissionSeeder extends Seeder
             'name'=>'Delete directivo',
             'display_name'=>'Eliminar directivo'
         ]);
+
+        //Trazas
+        $verTrazasPermission = Permission::create([
+            'name'=>'View traza',
+            'display_name'=>'Ver trazas'
+        ]);
     }
 }

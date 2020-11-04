@@ -18,7 +18,8 @@ class ChoferController extends Controller
      */
     public function index()
     {
-        //$this->authorize('view');
+        $this->authorize('view',new Chofer);
+        
         return view('chofer.index')
         ->with('choferes', Chofer::all());
     }

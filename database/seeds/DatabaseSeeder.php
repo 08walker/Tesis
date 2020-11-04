@@ -48,7 +48,9 @@ class DatabaseSeeder extends Seeder
             'permissions',
             'model_has_roles',
             'role_has_permissions',
-            'directivos'
+            'directivos',
+
+            'trazas',
     	]);
         $this->call(ProvinciaSeeder::class);
         $this->call(MunicipioSeeder::class);

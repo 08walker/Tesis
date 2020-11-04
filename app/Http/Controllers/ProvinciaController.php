@@ -10,6 +10,8 @@ class ProvinciaController extends Controller
 {
     public function index()
     {
+            $this->authorize('view',new Provincia);
+            
             return view('provincia.index')
             ->with('provincias', Provincia::all());
     }    
