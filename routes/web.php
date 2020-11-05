@@ -280,17 +280,21 @@ Route::resource('directivo','DirectivoController',['except'=>'show']);
 Route::get('/trazas', 'TrazasController@index')->name('trazas');
 });
 
+Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
+
 Route::resource('user','UsersController');
 
 // Route::middleware('role:Admin')
 //       ->put('users/{user}/roles','UsersRolesController@update')
 //         ->name('user.roles.update');
 
-Route::put('users/{user}/permissions','UsersPermissionsController@update')->name('user.permissions.update');
+Route::middleware('role:Admin')
+    ->put('users/{user}/permissions','UsersPermissionsController@update')
+    ->name('user.permissions.update');
 
-Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
 
 Route::resource('permissions','PermissionsController',['only'=>['index','edit','update'],'as'=>'admin']);
 
-Route::put('users/{user}/roles','UsersRolesController@update')
-        ->name('user.roles.update');
+Route::middleware('role:Admin')
+    ->put('users/{user}/roles','UsersRolesController@update')
+    ->name('user.roles.update');

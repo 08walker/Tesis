@@ -7,10 +7,12 @@
             </div>
             <div class="card-body">
 			
-			@include('admin.partials.error-messages')
+			@include('partials.error-messages')
 	
 	<form method="POST" action="{{route('admin.roles.store')}}">
-     @include('admin.roles.form')
+     
+     @include('componentes.role-form')
+     
      <button class="btn btn-primary btn-flat btn-block" type="submit">Crear role</button>
 	</form>
             </div>

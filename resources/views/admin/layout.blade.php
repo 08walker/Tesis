@@ -180,7 +180,7 @@
 
               @can('view',new \App\User)
                 <li>
-                  <a href="{{ route('user.index') }}" class="dropdown-item">Roles</a>
+                  <a href="{{ route('admin.roles.index') }}" class="dropdown-item">Roles</a>
                 </li>
               @endcan
 
