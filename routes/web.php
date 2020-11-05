@@ -185,7 +185,7 @@ Route::group([
 ],
 function(){
 Route::get('/','TransportacionController@index')->name('transportaciones');
-// Route::get('/{id}','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
+Route::get('/{id}','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
 Route::get('/crear','TransportacionController@create')->name('transportaciones.create');
 Route::post('/crear','TransportacionController@store');
 Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.llenar');
@@ -272,14 +272,25 @@ Route::put('/{tipoEquipo}','TipoEquipoController@update')->name('tipoequipo.upda
 Route::delete('/{tipoEquipo}','TipoEquipoController@destroy')->name('tipoequipo.destroy');
 });
 
-Route::resource('user','UsersController');
-Route::middleware('role:Admin')
-      ->put('users/{user}/roles','UsersRolesController@update')
-        ->name('user.roles.update');
-Route::middleware('role:Admin')
-   ->put('users/{user}/permissions','UsersPermissionsController@update')->name('user.permissions.update');
-Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
-Route::resource('permissions','PermissionsController',['only'=>['index','edit','update'],'as'=>'admin']);
+Route::group([
+    'middleware'=>'auth'
+],
+function(){
 Route::resource('directivo','DirectivoController',['except'=>'show']);
-
 Route::get('/trazas', 'TrazasController@index')->name('trazas');
+});
+
+Route::resource('user','UsersController');
+
+// Route::middleware('role:Admin')
+//       ->put('users/{user}/roles','UsersRolesController@update')
+//         ->name('user.roles.update');
+
+Route::put('users/{user}/permissions','UsersPermissionsController@update')->name('user.permissions.update');
+
+Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
+
+Route::resource('permissions','PermissionsController',['only'=>['index','edit','update'],'as'=>'admin']);
+
+Route::put('users/{user}/roles','UsersRolesController@update')
+        ->name('user.roles.update');

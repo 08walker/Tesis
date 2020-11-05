@@ -31,9 +31,12 @@
             <div class="card-header">
               <h3 class="card-title">Transportaciones:</h3> 
               <br>
+              {{-- esto de de momemnto porque no he hecho las policies --}}
+              @role('Admin')
               <a href="{{route('transportaciones.create')}}" type="button" class="btn btn-primary btn-flat" >
                   <i class="fa fa-plus"></i> Crear
               </a>
+              @endrole
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -56,16 +59,20 @@
                           <i class="fa fa-eye"></i>
                         </a>
 
+                        @can('update',new \App\Transportacion)
                         <a href="{{route('transportaciones.edit',$transpor)}}" class="btn btn-xs btn-info">
                           <i class="fa fa-pen"></i>
                         </a>
+                        @endcan
+
+                        @can('view',new \App\Transportacion)
                         <form method="POST" action="{{route('transportaciones.destroy', $transpor)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la transportacion?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>
-                  
+                        @endcan
                   </td>
                 </tr>
                 @endforeach

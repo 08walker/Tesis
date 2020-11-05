@@ -32,7 +32,7 @@
               <h3 class="card-title">Unidades de medida:</h3> 
               <br>
 
-              @can('view',new \App\UnidadMedida)
+              @can('create',new \App\UnidadMedida)
               <a href="{{route('unidadmedida.create')}}" type="button" class="btn btn-primary btn-flat" >
                   <i class="fa fa-plus"></i> Crear
               </a>

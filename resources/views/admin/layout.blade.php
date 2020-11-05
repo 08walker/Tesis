@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>@yield('meta-title', config('app.name')."| AdminLTE 3")</title>  
+  {{-- <title>@yield('meta-title', config('app.name')."| AdminLTE 3")</title>   --}}
+  <title>@yield('meta-title', config('app.name'))</title>  
   
   <meta name="description" content="@yield('meta-description','Este la Tesis de David')">  
   <!-- DataTables -->
@@ -51,7 +52,7 @@
             <a href="/home" class="nav-link">Inicio</a>
           </li>
           
-          
+          @canany('view',[new \App\Provincia,new \App\Municipio])
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Division P.A.</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -69,8 +70,9 @@
               @endcan
             </ul>
           </li>
+          @endcanany
           
-
+          @canany('view',[new \App\Organizacion,new \App\Tercero,new \App\Lugar])
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Org.</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -95,7 +97,9 @@
 
             </ul>
           </li>
-
+          @endcanany
+          
+          @canany('view',[new \App\Chofer,new \App\Equipo,new \App\Envase, new \App\Arrastre,new \App\TipoEquipo,new \App\TipoArrastre])
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Transporte</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -138,7 +142,9 @@
 
             </ul>
           </li>
-
+          @endcanany
+          
+          @canany('view',[new \App\TipoUnidadMedida,new \App\UnidadMedida,new \App\Transportacion,new \App\TipoHito,new \App\User,new \App\Directivo])
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Otros</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -192,10 +198,17 @@
 
             </ul>
           </li>
+          @endcanany
           
           @can('view',new \App\Producto)
             <li class="nav-item">
               <a href="{{ route('productos') }}" class="nav-link">Productos</a>
+            </li>
+          @endcan
+
+          @can('view',new \App\Traza)
+            <li class="nav-item">
+              <a href="{{ route('trazas') }}" class="nav-link">Trazas</a>
             </li>
           @endcan
 
@@ -234,7 +247,12 @@
             <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 
             <p>
-              {{auth()->user()->name}} - {{auth()->user()->roles->first()->name}}
+              {{auth()->user()->name}} 
+
+              @if(auth()->user()->roles->first())
+              - {{auth()->user()->roles->first()->name}}
+              @endif
+              
               <small>Desde {{auth()->user()->created_at->format('d/M/Y')}}</small>
             </p>
           </li>

@@ -61,7 +61,7 @@
                   <td>{{$tipo->id}}</td>
                   <td>{{$tipo->name}}</td>
                   
-                  @can('view',new \App\TipoUnidadMedida)
+                  @can('update',new \App\TipoUnidadMedida)
                   <td>
                         {{-- <a href="{{route('tipounidad.show',$tipo)}}" target="_blank">
                           <i class="fa fa-eye"></i>
