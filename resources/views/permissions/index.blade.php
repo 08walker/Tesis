@@ -1,33 +1,41 @@
 @extends('admin.layout')
-@section('meta-title','Zendero| Permisos')
-@section('meta-description','Listado de permisos')
 
-@section('header')
-<div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Todos los permisos.</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-              <li class="breadcrumb-item active">permisos</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-@stop
+@section('meta-title','Tesis| Municipios')
+@section('meta-description','Listado de municipios')
 
 @section('content')
 
- <div class="card">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"> Listado de permisos</h1>
+          </div>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    @include('partials.success')
+    @include('partials.errors')
+
+<div class="content">
+          <div class="container">
+            <div class="row">
+        <div class="col-lg-2">
+            <div class="card">
+            </div>
+        </div>
+        <div class="col-lg-8">
+        <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Listado de permisos</h3>
+              <h3 class="card-title">Permisos:</h3> 
               <br>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
+           <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -59,20 +67,28 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-@stop
+  </div>
+</div>
+</div>
+</div>
+</div>
 
 @push('styles')
-<!-- DataTables -->
-<link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <!-- DataTables -->
+  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 @endpush
 
 @push('scripts')
+
 <!-- DataTables -->
 <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<script src="/adminlte/dist/js/demo.js"></script>
+<!-- page script -->
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -89,7 +105,6 @@
             "previous": "Anterior",
           },
        },
-       
     });
     $('#example2').DataTable({
       "paging": true,
@@ -102,4 +117,7 @@
     });
   });
 </script>
+</script>
+
 @endpush
+@endsection

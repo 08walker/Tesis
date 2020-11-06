@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Rutas predeterminadas de Laravel para la autenticacion,al final del documento inclui manualmente estas rutas para que solo el administrador pueda crear usuarios.
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contacto', 'VistasController@contacto')->name('contacto');
@@ -292,9 +293,24 @@ Route::middleware('role:Admin')
     ->put('users/{user}/permissions','UsersPermissionsController@update')
     ->name('user.permissions.update');
 
-
 Route::resource('permissions','PermissionsController',['only'=>['index','edit','update'],'as'=>'admin']);
 
 Route::middleware('role:Admin')
     ->put('users/{user}/roles','UsersRolesController@update')
     ->name('user.roles.update');
+
+
+// Authentication Routes...
+  Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+  Route::post('login', 'Auth\LoginController@login');
+  Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+  // Registration Routes...
+  // Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  // Route::post('register', 'Auth\RegisterController@register');
+
+  // Password Reset Routes...
+  Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+  Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+  Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+  Route::post('password/reset', 'Auth\ResetPasswordController@reset');

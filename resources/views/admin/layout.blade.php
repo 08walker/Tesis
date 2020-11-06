@@ -186,7 +186,7 @@
 
               @can('view',new \App\User)
                 <li>
-                  <a href="{{ route('user.index') }}" class="dropdown-item">Permisos</a>
+                  <a href="{{ route('admin.permissions.index') }}" class="dropdown-item">Permisos</a>
                 </li>
               @endcan
 
@@ -269,9 +269,9 @@
       <li class="nav-item">
             <a href="{{ route('login') }}" class="nav-link">Autenticar</a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
             <a href="{{ route('register') }}" class="nav-link">Registrar</a>
-      </li>
+      </li> --}}
       @endif
       </ul>
     </div>
@@ -283,16 +283,12 @@
   @yield('content')
   
   <!-- /.content-wrapper -->
-
+  <div class="container">
+    <div class="row">
   <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- To the right 
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-     Default to the left -->
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">Tesis</a>.</strong> All rights reserved.
-  </footer>
+    <strong>Copyright &copy; 2020 <a href="/">Tesis</a>.</strong> All rights reserved.
+  </footer></div></div>
 </div>
 <!-- ./wrapper -->
 

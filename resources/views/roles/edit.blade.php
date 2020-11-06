@@ -1,23 +1,46 @@
 @extends('admin.layout')
 @section('content')
-<div class="col-md-6">
-		<div class="card card-primary card-outline">
-			<div class="card-header">
-            	<h5 class="card-title">Actualizar Role </h5>
-            </div>
-            <div class="card-body">
-			
-			@include('admin.partials.error-messages')
-	
-	<form method="POST" action="{{route('admin.roles.update',$role)}}">
-		 {{method_field('PUT')}}
-		 @include('admin.roles.form')
-
-            <button class="btn btn-primary btn-flat btn-block" type="submit">Actualizar role</button>
-	</form>
-            </div>
-        </div>
+<div class="content-wrapper">
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Actualizar rol</h1>
+          </div>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
+        <!-- Main content -->
+        <div class="content">
+          <div class="container">
+            <div class="row">
+    
+                <!-- aling -->
+                <div class="col-lg-3">
+                  <div class="card"></div>
+                </div>
+                <!-- end aling -->
+          <div class="col-lg-6">
+            <div class="card card-primary card-outline">
+              <div class="card-body">
+                
+                @include('partials.error-messages')
+                
+        <form method="POST" action="{{route('admin.roles.update',$role)}}">
+         @include('componentes.role-form')
+         <button class="btn btn-primary btn-flat btn-block" type="submit">Actualizar role</button>
+        </form>
+            
+              </div>
+            </div>
+          </div>
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
 @endsection
 
 @push('styles')

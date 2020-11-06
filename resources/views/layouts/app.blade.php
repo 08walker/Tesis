@@ -44,9 +44,9 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
                         @else
-                            <li><a href="{{ route('municipios') }}">Municipios</a></li>
+                            {{-- <li><a href="{{ route('municipios') }}">Municipios</a></li>
                             <li><a href="{{ route('provincias') }}">Provincias</a></li>
                             <li><a href="{{ route('envases') }}">Envases</a></li>
                             <li><a href="{{ route('choferes') }}">Choferes</a></li>
@@ -55,7 +55,7 @@
                             <li><a href="{{ route('organizaciones') }}">Organizaciones</a></li>
                             <li><a href="{{ route('equipos') }}">Equipos</a></li>
                             <li><a href="{{ route('lugares') }}">Lugares</a></li>
-                            <li><a href="{{ route('productos') }}">Productos</a></li>
+                            <li><a href="{{ route('productos') }}">Productos</a></li> --}}
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>

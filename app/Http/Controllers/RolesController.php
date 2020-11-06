@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traza;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -30,7 +31,7 @@ class RolesController extends Controller
 
         return view('roles.create',[
             'role'=> $role,
-            'permissions'=>Permission::pluck('name','id'),
+            'permissions'=>Permission::pluck('display_name','id'),
         ]);
     }
 
@@ -47,14 +48,18 @@ class RolesController extends Controller
         $data = $request->validate([
             'name'=> 'required|unique:roles'],
             [
-                'name.required'=>'El campo identificador es obligatorio.',
-                'name.unique'=>'El identificador ya existe.'
+                'name.required'=>'El campo nombre es obligatorio.',
+                'name.unique'=>'El nombre ya existe.'
             ]
         );
         $role = Role::create($data);
         if ($request->has('permissions')) {
             $role->givePermissionTo($request->permissions);
         }
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El rol {$role->name} ha sido creado por el usuario {$nombre}",
+            ]);
         return redirect()->route('admin.roles.index')->with('success','El role fue creado correctamente');
     }
 
@@ -75,9 +80,14 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        $this->authorize('update',$role);        
+
+        return view('roles.edit',[
+            'role' => $role,
+            'permissions'=>Permission::pluck('display_name','id'),
+        ]);
     }
 
     /**
@@ -92,14 +102,15 @@ class RolesController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $this->authorize('delete',$role);        
+        $role->delete();
+
+        $nombre = auth()->user()->name;
+            Traza::create([
+            'description'=> "El rol {$role->name} ha sido eliminado por el usuario {$nombre}",
+            ]);
+        return redirect()->route('admin.roles.index')->with('success','El role fue eliminado correctamente');
     }
 }
