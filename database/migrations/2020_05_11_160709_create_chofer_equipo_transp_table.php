@@ -13,11 +13,12 @@ class CreateChoferEquipoTranspTable extends Migration
      */
     public function up()
     {
+        //Chofer transportacion
         Schema::create('chofer_equipo_transp', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('equipo_transp_id');
-            $table->foreign('equipo_transp_id')->references('id')->on('equipo_transportacion');
+            $table->unsignedBigInteger('transportacion_id');
+            $table->foreign('transportacion_id')->references('id')->on('transportaciones');
             $table->unsignedBigInteger('chofer_id');
             $table->foreign('chofer_id')->references('id')->on('choferes');
 

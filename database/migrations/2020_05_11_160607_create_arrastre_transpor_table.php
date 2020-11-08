@@ -16,11 +16,11 @@ class CreateArrastreTransporTable extends Migration
         Schema::create('arrastre_transpor', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('equipo_transp_id');
-            $table->foreign('equipo_transp_id')->references('id')->on('equipo_transportacion');
+            $table->unsignedBigInteger('transportacion_id');
+            $table->foreign('transportacion_id')->references('id')->on('transportaciones');
             $table->unsignedBigInteger('arrastre_id');
             $table->foreign('arrastre_id')->references('id')->on('arrastres');
-
+            
             $table->timestamps();
         });
     }

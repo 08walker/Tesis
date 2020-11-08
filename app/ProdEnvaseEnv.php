@@ -13,7 +13,6 @@ class ProdEnvaEnv extends Model
         'volumen_m3',
         'observacion',
         'producto_id',
-        'hito_id',
         'transf_enviada_id',
         'equipo_arrastre_envase_id',
     ];

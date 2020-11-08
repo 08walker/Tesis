@@ -103,29 +103,15 @@
                         <tr>
                           <th>ID</th>
                           <th>Nombre</th>
-                          <th>Responsable</th>
                           <th>Quitar</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <tr>
                             <td>1</td>
                             <td>Manuel</td>
                             <td>No</td>
                             <td><i class="fa fa-times"></i></td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Alexis</td>
-                          <td>No</td>
-                          <td><i class="fa fa-times"></i></td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Genaro</td>
-                          <td>Si</td>
-                          <td><i class="fa fa-times"></i></td>
                         </tr>
                     </tbody>
                   </table>

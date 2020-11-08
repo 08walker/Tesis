@@ -19,6 +19,10 @@ class CreateTransportacionesTable extends Migration
             $table->string('numero',10);
             $table->longText('observacion')->nullable();
 
+            $table->unsignedBigInteger('equipo_id');
+            $table->foreign('equipo_id')->references('id')->on('equipos');
+            
+
             $table->timestamps();
         });
     }

@@ -10,5 +10,6 @@ class Transportacion extends Model
     protected $fillable = [
         'numero',
         'observacion',
+        'equipo_id'
     ];
 }

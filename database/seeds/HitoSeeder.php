@@ -14,7 +14,7 @@ class HitoSeeder extends Seeder
     {
         factory(Hito::class,10)->create([
         	'fyh_ini' =>'2020-02-05',
-        	'fyh_fin'=>'2020-02-06',	
+        	//'fyh_fin'=>'2020-02-06',	
         ]);
     }
 }

@@ -8,13 +8,10 @@ class Hito extends Model
 {
     protected $table = 'hitos';
     protected $fillable = [
-        'fyh_ini',
-        'fyh_fin',
         'description',
         'observaciones',
-        'equipo_transp_id',
         'tipo_hito_id ',
-        'lugar_id',
+        'transportacion_id',
     ];
 
     public function tipoHito()

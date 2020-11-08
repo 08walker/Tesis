@@ -17,16 +17,11 @@ class CreateHitosTable extends Migration
             $table->bigIncrements('id');
 
             $table->date('fyh_ini');
-            $table->date('fyh_fin');
             $table->longText('description');
             $table->longText('observaciones');
 
-            $table->unsignedBigInteger('equipo_transp_id');
-            $table->foreign('equipo_transp_id')->references('id')->on('equipo_transportacion');
-            $table->unsignedBigInteger('tipo_hito_id');
-            $table->foreign('tipo_hito_id')->references('id')->on('tipo_hito');
-            $table->unsignedBigInteger('lugar_id');
-            $table->foreign('lugar_id')->references('id')->on('lugares');
+            $table->unsignedBigInteger('transportacion_id');
+            $table->foreign('transportacion_id')->references('id')->on('transportaciones');
 
             $table->timestamps();
         });

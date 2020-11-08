@@ -14,7 +14,7 @@ class TransfEnviadaSeeder extends Seeder
     {
         factory(TransfEnviada::class,10)->create([
         	'fyh_salida'=>'2020-03-01',
-        	'fyh_estimada_llegada'=>'2020-03-05',
+        	//'fyh_estimada_llegada'=>'2020-03-05',
         ]);
     }
 }

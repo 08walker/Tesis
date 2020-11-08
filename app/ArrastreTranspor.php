@@ -8,7 +8,7 @@ class ArrastreTranspor extends Model
 {
     protected $table = 'arrastre_transpor';
     protected $fillable = [
-        'arrastre_transp_id',
+        'transportacion_id',
         'arrastre_id',
     ];
 }

@@ -4,12 +4,12 @@
 
 use App\Arrastre;
 use App\ArrastreTranspor;
-use App\EquipoTransportacion;
+use App\Transportacion;
 use Faker\Generator as Faker;
 
 $factory->define(ArrastreTranspor::class, function (Faker $faker) {
     return [
-        'equipo_transp_id' => EquipoTransportacion::InRandomOrder()->value('id')?:factory(EquipoTransportacion::class),
+        'transportacion_id' => Transportacion::InRandomOrder()->value('id')?:factory(Transportacion::class),
         'arrastre_id' => Arrastre::InRandomOrder()->value('id')?:factory(Arrastre::class),
     ];
 });

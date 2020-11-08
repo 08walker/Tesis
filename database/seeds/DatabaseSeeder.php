@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
             'transportaciones',
             'arrastre_enva_equipo',
             'chofer_equipo_transp',
-            'equipo_transportacion',
             'p_transf_env',
             'p_transf_rec',
             'prod_envase_env',
@@ -37,8 +36,6 @@ class DatabaseSeeder extends Seeder
             'arrastre_transpor',
             'tipo_hito',
             //'hito'
-            'sello_enviado',
-            'sello_recibido',
             'unidad_medida',
             'tipo_unidad_medida',
             'producto_unidad_medida',
@@ -74,7 +71,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductoSeeder::class);
         $this->call(TransportacionSeeder::class);
         
-        $this->call(EquipoTransportacionSeeder::class);
         $this->call(ChoferEquipoTranspSeeder::class);
         $this->call(ArrastreTransporSeeder::class);
         $this->call(ArrastreEnvaEquipoSeeder::class);
@@ -86,9 +82,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProdEnvaRecSeeder::class);
         $this->call(TipoHitoSeeder::class);
         //$this->call(HitoSeeder::class);
-
-        $this->call(SelloEnviadoSeeder::class);
-        $this->call(SelloRecibidoSeeder::class);
 
         $this->call(ProductoUnidadMedidaSeeder::class);
 

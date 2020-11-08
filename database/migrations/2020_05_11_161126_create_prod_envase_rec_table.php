@@ -24,8 +24,6 @@ class CreateProdEnvaseRecTable extends Migration
 
             $table->unsignedBigInteger('producto_id');
             $table->foreign('producto_id')->references('id')->on('productos');
-            $table->unsignedBigInteger('hito_id')->nullable();
-            $table->foreign('hito_id')->references('id')->on('hitos');
             $table->unsignedBigInteger('transf_recibida_id');
             $table->foreign('transf_recibida_id')->references('id')->on('transf_recibidas');
             $table->unsignedBigInteger('arrastre_enva_equipo_id');

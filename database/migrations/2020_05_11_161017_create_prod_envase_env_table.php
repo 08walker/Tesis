@@ -23,8 +23,6 @@ class CreateProdEnvaseEnvTable extends Migration
 
             $table->unsignedBigInteger('producto_id');
             $table->foreign('producto_id')->references('id')->on('productos');
-            $table->unsignedBigInteger('hito_id')->nullable();
-            $table->foreign('hito_id')->references('id')->on('hitos');
             $table->unsignedBigInteger('transf_enviada_id');
             $table->foreign('transf_enviada_id')->references('id')->on('transf_enviadas');
             $table->unsignedBigInteger('arrastre_enva_equipo_id');
