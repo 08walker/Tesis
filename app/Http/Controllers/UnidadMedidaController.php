@@ -45,11 +45,6 @@ class UnidadMedidaController extends Controller
         return back()->withInput()->with('error','Error al crear la nueva Unidad de medida');
     }
 
-    public function show(UnidadMedida $unidadMedida)
-    {
-        //
-    }
-
     public function edit(UnidadMedida $unidadMedida)
     {
         $this->authorize('update',$unidadMedida);

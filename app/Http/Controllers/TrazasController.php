@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class TrazasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->authorize('view',new Traza);
@@ -20,6 +15,4 @@ class TrazasController extends Controller
         //dd($trazas);
         return view('trazas.index',compact('trazas'));
     }
-
-
 }

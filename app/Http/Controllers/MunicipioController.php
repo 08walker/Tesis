@@ -11,11 +11,6 @@ use Illuminate\Http\Request;
 
 class MunicipioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->authorize('view',new Municipio);

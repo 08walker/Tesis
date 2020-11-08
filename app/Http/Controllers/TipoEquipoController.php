@@ -39,11 +39,6 @@ class TipoEquipoController extends Controller
         return back()->withInput()->with('error','Error al crear el nuevo tipo');
     }
 
-    public function show(TipoEquipo $tipoEquipo)
-    {
-        //
-    }
-
     public function edit(TipoEquipo $tipoEquipo)
     {
         $this->authorize('update',$tipoEquipo);

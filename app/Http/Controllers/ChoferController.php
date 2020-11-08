@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 
 class ChoferController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->authorize('view',new Chofer);

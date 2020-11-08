@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class TerceroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->authorize('view',new Tercero);

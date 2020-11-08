@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class TipoArrastreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->authorize('view',new TipoArrastre);
@@ -42,11 +37,6 @@ class TipoArrastreController extends Controller
             return redirect()->route('tipoarrastre')->with('success','Tipo de arrastre creada con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo tipo');
-    }
-
-    public function show(TipoArrastre $tipoArrastre)
-    {
-        //
     }
 
     public function edit(TipoArrastre $tipoArrastre)

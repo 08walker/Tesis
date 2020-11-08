@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class OrganizacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->authorize('view',new Organizacion);
