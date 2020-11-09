@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Arrastre;
+use App\Chofer;
+use App\Envase;
+use App\Equipo;
 use App\Transportacion;
 use Illuminate\Http\Request;
 
@@ -15,18 +19,30 @@ class TransportacionController extends Controller
 
     public function create()
     {
-        return view('transportacion.create');
+        $transportacion = new Transportacion;
+        $equipos = Equipo::all();
+        return view('transportacion.create',compact('transportacion','equipos'));
     }
 
     public function store(Request $request)
     {
+    $data = request()->validate([
+        'identificador'=>'required|min:1',
+        'equipo_id'=>'required'
+    ],
+    [   'identificador.required'=>'El campo identificador es obligatorio',
+        'identificador.min'=>'El identificador debe tener mas de 9 caracteres',
+        'equipo_id.required'=>'Debe seleccionar el equipo'
+    ]);
+    //dd($data);
         $data = request()->all();
-        $producto = Transportacion::create([
-            'numero'=> $data['numero'],
+        $transp = Transportacion::create([
+            'numero'=> $data['identificador'],
             'observacion'=> $data['observacion'],
+            'equipo_id'=> $data['equipo_id'],
         ]);
-        if ($producto) {
-            return redirect()->route('transportaciones.llenar');
+        if ($transp) {
+            return redirect()->route('transportaciones.show', ['transp'=>$transp->id]);
         }
         return back()->withInput()->with('errors','Error al crear la transportación');
     }
@@ -37,9 +53,13 @@ class TransportacionController extends Controller
      * @param  \App\Transportacion  $transportacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Transportacion $transportacion)
+    public function show($id)
     {
-        //
+        $transportacion = Transportacion::find($id);
+        $choferes = Chofer::all();
+        $arrastres = Arrastre::all();
+        $envases = Envase::all();
+        return view('transportacion.llenar',compact('transportacion','choferes','arrastres','envases'));
     }
 
     /**
@@ -65,12 +85,6 @@ class TransportacionController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Transportacion  $transportacion
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Transportacion $transportacion)
     {
         //
@@ -79,5 +93,13 @@ class TransportacionController extends Controller
     public function llenar($value='')
     {
         return view('transportacion.llenar');        
+    }
+
+    public function storechofer(Request $request,Transportacion $transportacion)
+    {
+        //dd($transportacion);
+        //dd($request->get('lchofer'));
+        $transportacion->choferes()->sync($request->get('lchofer'));
+        return back();
     }
 }

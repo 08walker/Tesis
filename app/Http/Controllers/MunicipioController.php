@@ -52,6 +52,7 @@ class MunicipioController extends Controller
             'description'=> "El municipio {$municipio->name} creado por el usuario {$nombre}",
             ]); 
             return redirect()->route('municipios')->with('success','Municipio creado con éxito');
+            // return redirect()->route('municipios.show',['municipio'=>$municipio])->with('success','Municipio creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo municipio');
     }

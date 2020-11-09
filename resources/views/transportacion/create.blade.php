@@ -29,27 +29,9 @@
                     <form id="quickForm" role="form" method="POST" action="{{ route('transportaciones.create') }}">
                     {!! csrf_field() !!}
 
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Identificador:</label>
-                        <input type="text" class="form-control" name="numero" id="exampleInputidentificador1" placeholder="Escriba el identificador" value="{{old('numero')}}">
-                      <div class="has-error">
-                            @if($errors->has('numero'))
-                            <span id="helpBlock2" class="help-block">{{$errors->first('numero')}}</span>
-                            @endif
-                      </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label>Observación:</label>
-                        <textarea class="form-control" name="observacion" rows="2" placeholder="Descripción ..."></textarea>
-                      </div>
-                      <div class="form-group has-error">
-                         @if($errors->has('observacion'))
-                            <span id="helpBlock2" class="help-block">
-                                {{$errors->first('observacion')}}
-                            </span> 
-                         @endif
-                      </div>
+                      @include('componentes.identificador',['model'=>$transportacion])
+                      @include('componentes.observacion',['model'=>$transportacion])
+                      @include('foreach.equipofor',['model'=>$transportacion])
 
                     <button type="submit" class="btn btn-success btn-flat">Crear</button>
                     <a class="btn btn-flat btn-primary" href="{{route('transportaciones')}}">Cancelar</a>

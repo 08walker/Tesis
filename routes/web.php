@@ -45,7 +45,7 @@ function(){
 Route::get('/','MunicipioController@index')->name('municipios');
 Route::get('/crear','MunicipioController@create')->name('municipios.create');
 Route::post('/crear','MunicipioController@store')->name('municipios.create');
-// Route::get('/{municipio}','MunicipioController@show')->name('municipios.show');
+//Route::get('/{municipio}','MunicipioController@show')->name('municipios.show');
 Route::get('/{municipio}/editar','MunicipioController@edit')->name('municipios.edit');
 Route::put('/{municipio}','MunicipioController@update')->name('municipios.update');
 Route::delete('/{municipio}','MunicipioController@destroy')->name('municipios.destroy');
@@ -195,6 +195,7 @@ Route::get('/{transportacion}/editar','TransportacionController@edit')->name('tr
 Route::put('/{transportacion}','TransportacionController@update')->name('transportaciones.update');
 Route::delete('/{transportacion}','TransportacionController@destroy')->name('transportaciones.destroy');
 });
+Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')->name('transportaciones.choferes');
 
 //Rutas tipo unidad de medidas
 Route::group([

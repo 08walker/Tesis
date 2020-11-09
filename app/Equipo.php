@@ -45,4 +45,9 @@ class Equipo extends Model
     {
         return $this->hasOne('App\Chofer');
     }
+
+    public function transportacion()
+    {
+        return $this->hasOne('App\Transportacion');
+    }
 }
