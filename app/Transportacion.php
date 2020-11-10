@@ -24,4 +24,13 @@ class Transportacion extends Model
         return $this->belongsToMany('App\Chofer','chofer_equipo_transp','transportacion_id','chofer_id')->withTimestamps();
     }
 
+    public function syncChofer($lchofer)
+    {
+        $tagsIds = collect($lchofer)->map(function($tag){
+            return Chofer::find($tag);
+        });
+
+        return $this->choferes()->sync($lchofer);
+    }
+
 }

@@ -88,8 +88,12 @@
                         <label>Choferes:</label>
                         <select class="select2" multiple="multiple" name="lchofer[]" data-placeholder="Seleccione los choferes" style="width: 100%;">
                           @foreach($choferes->all() as $chofer)
-                                <option value="{{$chofer->id}}"> {{$chofer->name}}</option>
-                          @endforeach                          
+                            <option 
+                              {{ collect(old('lchofer', $transportacion->choferes->pluck('id')))->contains($chofer->id) ? 'selected':'' }}
+                              value="{{$chofer->id}}">
+                              {{$chofer->name}}
+                            </option>
+                          @endforeach   
                         </select>
                         <div class="has-error">
                           @if($errors->has('definir esto'))
@@ -106,17 +110,17 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Acciones</th>
+                      <th>Nombre y Apellidos</th>
+                      <th>Telefono</th>
+                      <th>Carnet de identidad</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($transportacion->choferes as $chofer)
                     <tr>
-                      <td>{{$chofer->id}}</td>
-                      <td>{{$chofer->name}}</td>
-                      <td><i class="fa fa-times">Quitar chofer</i></td>
+                      <td>{{$chofer->name}} {{$chofer->apellido}}</td>
+                      <td>{{$chofer->telefono}}</td>
+                      <td>{{$chofer->ci}}</td>
                       </tr>
                     @endforeach
                   </tbody>

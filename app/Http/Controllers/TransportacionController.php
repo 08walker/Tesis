@@ -97,8 +97,16 @@ class TransportacionController extends Controller
 
     public function storechofer(Request $request,Transportacion $transportacion)
     {
-        //dd($transportacion);
-        //dd($request->get('lchofer'));
+        //$transportacion->choferes()->attach($request->get('lchofer'));
+        $transportacion->syncChofer($request->get('lchofer'));
+        //$transportacion->choferes()->sync($request->get('lchofer'));
+        return back();
+    }
+
+    public function storearrastre(Request $request,Transportacion $transportacion)
+    {
+        //$transportacion->choferes()->attach($request->get('lchofer'));
+        //$transportacion->syncChofer($request->get('lchofer'));
         $transportacion->choferes()->sync($request->get('lchofer'));
         return back();
     }

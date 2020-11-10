@@ -186,7 +186,7 @@ Route::group([
 ],
 function(){
 Route::get('/','TransportacionController@index')->name('transportaciones');
-Route::get('/{id}','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
+Route::get('/{id}/llenar','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
 Route::get('/crear','TransportacionController@create')->name('transportaciones.create');
 Route::post('/crear','TransportacionController@store');
 Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.llenar');
