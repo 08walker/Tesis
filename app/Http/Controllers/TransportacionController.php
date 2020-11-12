@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Arrastre;
+use App\ArrastreTranspor;
 use App\Chofer;
 use App\Envase;
 use App\Equipo;
@@ -13,12 +14,14 @@ class TransportacionController extends Controller
 {
     public function index()
     {
+        $this->authorize('view',new Transportacion);
         return view('transportacion.index')
             ->with('transportaciones', Transportacion::all());
     }
 
     public function create()
-    {
+    {   
+        $this->authorize('create',new Transportacion);
         $transportacion = new Transportacion;
         $equipos = Equipo::all();
         return view('transportacion.create',compact('transportacion','equipos'));
@@ -26,6 +29,7 @@ class TransportacionController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create',new Transportacion);
     $data = request()->validate([
         'identificador'=>'required|min:1',
         'equipo_id'=>'required'
@@ -55,6 +59,7 @@ class TransportacionController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('create',new Transportacion);
         $transportacion = Transportacion::find($id);
         $choferes = Chofer::all();
         $arrastres = Arrastre::all();
@@ -97,17 +102,35 @@ class TransportacionController extends Controller
 
     public function storechofer(Request $request,Transportacion $transportacion)
     {
+        $this->authorize('create',new Transportacion);
         //$transportacion->choferes()->attach($request->get('lchofer'));
-        $transportacion->syncChofer($request->get('lchofer'));
-        //$transportacion->choferes()->sync($request->get('lchofer'));
+        //$transportacion->syncChofer($request->get('lchofer'));
+        $transportacion->choferes()->sync($request->get('lchofer'));
         return back();
     }
 
     public function storearrastre(Request $request,Transportacion $transportacion)
     {
-        //$transportacion->choferes()->attach($request->get('lchofer'));
-        //$transportacion->syncChofer($request->get('lchofer'));
-        $transportacion->choferes()->sync($request->get('lchofer'));
+        $this->authorize('create',new Transportacion);
+
+        if ($request->get('larrastre')) {
+            $arrastres = $request->get('larrastre');
+            foreach ($arrastres as $arrastre) {
+                //dd($municipio->provincia->name);
+            $asdasd = ArrastreTranspor::create([
+                'transportacion_id'=>$transportacion->id,
+                'arrastre_id'=>$arrastre,
+                ]);                
+            }
+            dd($asdasd);
+          //dd($transportacion->arrastretranspor->getAll());
+        }
+        //$transportacion->arrastres()->sync($request->get('larrastre'));
+        
         return back();
+    }
+
+    public function storeenvase(Request $request,Transportacion $transportacion)
+    {
     }
 }

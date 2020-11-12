@@ -70,22 +70,24 @@ class DatabaseSeeder extends Seeder
         
         $this->call(ProductoSeeder::class);
         $this->call(TransportacionSeeder::class);
+
+        $this->call(DirectivoSeeder::class);
         
-        $this->call(ChoferEquipoTranspSeeder::class);
-        $this->call(ArrastreTransporSeeder::class);
-        $this->call(ArrastreEnvaEquipoSeeder::class);
         $this->call(PTransfEnvSeeder::class);
         $this->call(PTransfRecSeeder::class);
-        $this->call(TransfEnviadaSeeder::class);
-        $this->call(TransfRecibidaSeeder::class);
-        $this->call(ProdEnvaEnvSeeder::class);
-        $this->call(ProdEnvaRecSeeder::class);
         $this->call(TipoHitoSeeder::class);
         //$this->call(HitoSeeder::class);
 
-        $this->call(ProductoUnidadMedidaSeeder::class);
+        //$this->call(ChoferEquipoTranspSeeder::class);
+        //$this->call(ArrastreTransporSeeder::class);
+        //$this->call(ArrastreEnvaEquipoSeeder::class);
+        //$this->call(TransfEnviadaSeeder::class);
+        //$this->call(TransfRecibidaSeeder::class);
+        //$this->call(ProdEnvaEnvSeeder::class);
+        //$this->call(ProdEnvaRecSeeder::class);
+        
+        //$this->call(ProductoUnidadMedidaSeeder::class);
 
-        $this->call(DirectivoSeeder::class);
     }
 
     public function truncateTables(array $tables)

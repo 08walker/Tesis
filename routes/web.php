@@ -193,9 +193,18 @@ Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.
 Route::post('/llenar','TransportacionController@guardar');
 Route::get('/{transportacion}/editar','TransportacionController@edit')->name('transportaciones.edit');
 Route::put('/{transportacion}','TransportacionController@update')->name('transportaciones.update');
-Route::delete('/{transportacion}','TransportacionController@destroy')->name('transportaciones.destroy');
+Route::delete('/{transportacion}','TransportacionController@destroy')
+      ->name('transportaciones.destroy');
+
+Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')
+      ->name('transportaciones.choferes');
+Route::post('/añadir/arrastre/{transportacion}','TransportacionController@storearrastre')
+      ->name('transportaciones.arrastres');
+Route::post('/añadir/envase/{transportacion}','TransportacionController@storeenvase')
+      ->name('transportaciones.envases');
+
 });
-Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')->name('transportaciones.choferes');
+// Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')->name('transportaciones.choferes');
 
 //Rutas tipo unidad de medidas
 Route::group([

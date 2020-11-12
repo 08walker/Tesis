@@ -112,7 +112,7 @@ class UsersController extends Controller
         $roles = Role::with('permissions')->get();
         
         //Devuelve un arreglo con el id y el nombre
-        $permissions = Permission::pluck('display_name','id');
+        $permissions = Permission::pluck('name','id');
         if ($user->id!==1) {
             return view('users.edit', compact('user','roles','permissions'));
         }else

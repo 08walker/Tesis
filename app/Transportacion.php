@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Chofer;
 use Illuminate\Database\Eloquent\Model;
 
 class Transportacion extends Model
@@ -24,13 +23,18 @@ class Transportacion extends Model
         return $this->belongsToMany('App\Chofer','chofer_equipo_transp','transportacion_id','chofer_id')->withTimestamps();
     }
 
-    public function syncChofer($lchofer)
+    public function arrastretranspor()
     {
-        $tagsIds = collect($lchofer)->map(function($tag){
-            return Chofer::find($tag);
-        });
-
-        return $this->choferes()->sync($lchofer);
+        return $this->hasMany('App\ArrastreTranspor');
     }
 
+    // public function arrastretranspor()
+    // {
+    //     return $this->hasOne('App\ArrastreTranspor');
+    // }
+
+    // public function arrastres()
+    // {
+    //     return $this->belongsToMany('App\Arrastre','arrastre_transpor','transportacion_id','arrastre_id')->withTimestamps();
+    // }
 }

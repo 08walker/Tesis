@@ -34,24 +34,30 @@
                         <div class="col-4">
                           <p>Equipos: <strong>{{$transportacion->equipo->identificador}}</strong></p>
                         </div>
+                        
                         <div class="col-6">
                         <a href="#" type="button" class="btn btn-primary btn-flat" >
-                        <i class="fa fa-plus"></i> Crear 
+                          <i class="fa fa-pen"></i> Editar detelles
                         </a>
-
+                        </div>
+                        
+                        <div class="col-6">
                         <a href="#" type="button" class="btn btn-primary btn-flat" >
-                        <i class="fa fa-plus"></i> Introducir hito 
+                          <i class="fa fa-plus"></i> Reportar incidencia
+                        </a>
+                        </div>
+  
+                        <div class="col-6">
+                        <a href="#" type="button" class="btn btn-success btn-flat" >
+                          <i class="fa fa-plus"></i> Añadir transferencia enviada
                         </a>
                         </div>
 
-                        <div class="col-6">
-                        <a href="#" type="button" class="btn btn-success btn-flat" >
-                        <i class="fa fa-plus"></i> Añadir transferencia enviada
-                        </a>
-    
+                        <div class="col-6">    
                         <a href="#" type="button" class="btn btn-danger btn-flat" >
-                        <i class="fa fa-plus"></i> Añadir transferencia recibida
+                          <i class="fa fa-plus"></i> Añadir transferencia recibida
                         </a>
+                        
                         </div>
                   </div>
                 </div>
@@ -106,30 +112,90 @@
                     <br>
                     <br>
                     </form>
-              <div class="content">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Nombre y Apellidos</th>
-                      <th>Telefono</th>
-                      <th>Carnet de identidad</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($transportacion->choferes as $chofer)
-                    <tr>
-                      <td>{{$chofer->name}} {{$chofer->apellido}}</td>
-                      <td>{{$chofer->telefono}}</td>
-                      <td>{{$chofer->ci}}</td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
+                    <div class="content">
+                      <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Nombre y Apellidos</th>
+                            <th>Telefono</th>
+                            <th>Carnet de identidad</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($transportacion->choferes as $chofer)
+                          <tr>
+                            <td>{{$chofer->name}} {{$chofer->apellido}}</td>
+                            <td>{{$chofer->telefono}}</td>
+                            <td>{{$chofer->ci}}</td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
 
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                     texto numero 2
+                     
+                     <form id="quickForm" role="form" method="POST" action="{{ route('transportaciones.arrastres',$transportacion) }}">
+                    {!! csrf_field() !!}
+                     <div class="form-group">
+                      <div class="col-6">
+                        <label>Arrastres:</label>
+                        <select class="select2" multiple="multiple" name="larrastre[]" data-placeholder="Seleccione los arrastres" style="width: 100%;">
+                          @foreach($arrastres->all() as $arrastre)
+                            <option 
+                              {{-- collect(old('larrastre', $transportacion->arrastretranspor->arrastres->pluck('id')))->contains($arrastre->id) ? 'selected':'' --}}
+                              value="{{$arrastre->id}}">
+                              {{$arrastre->identificador}}
+                            </option>
+                          @endforeach
+                        </select>
+                        <div class="has-error">
+                          @if($errors->has('definir esto'))
+                              <span id="helpBlock2" class="help-block">{{$errors->first('definir esto')}}</span>
+                            @endif
+                        </div>
+                      </div>      
+                     </div>
+                    <button type="submit" class="btn btn-success btn-flat">Añadir</button>
+                    <br>
+                    <br>
+                    </form>
+                    <div class="content">
+                      <table id="example2" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Identificador</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>adasd</td>
+                            <td>adasd</td>
+                            <td>adada</td>
+                          </tr>
+
+                          {{-- @foreach($transportacion->arrastretranspor->arrastres as $arrastre)
+                          <tr>
+                            <td>{{$arrastre->identificador}}</td>
+                            <td>{{$arrastre->description}}</td>
+                            <td>
+                              <a href="#" type="button" class="btn btn-primary btn-flat" >
+                                <i class="fa fa-plus"></i> Añadir Envase
+                              </a>
+
+                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                                      <i class="fa fa-plus"></i> Añadir Envase
+                             </button>
+                            </td>
+                          </tr>
+                          @endforeach --}}
+                        </tbody>
+                      </table>
+                    </div>  
+
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                      texto numero 3
@@ -150,6 +216,42 @@
     </div>
 
 </div>
+
+      <div class="modal fade" id="modal-default">
+      <form id="quickForm" role="form" method="POST" 
+          action="{{ route('transportaciones.envases',$arrastre) }}">
+              {!! csrf_field() !!}
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Añadir Envase</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <select class="form-control select2" style="width: 100%;" name="envase_id">          
+                  <option value="">
+                    ---------Seleccione el envase---------
+                  </option>
+                  @foreach($envases->all() as $envase)
+                        <option value="{{$envase->id}}">{{$envase->identificador}}</option>
+                  @endforeach                  
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="submit" class="btn btn-success">Añadir</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+        </form>
+      </div>
+      <!-- /.modal -->
 
 
 @endsection
@@ -210,14 +312,21 @@
           },
        },
     });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
+    $("#example2").DataTable({
       "responsive": true,
+      "autoWidth": false,
+      "language": {
+        "search": "Buscar",
+        "lengthMenu": "Ver _MENU_ entradas",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "emptyTable": "No hay datos para mostrar",
+        "paginate": {
+            "last": "Última página",
+            "first": "Primera página",
+            "next": "Siguiente",
+            "previous": "Anterior",
+          },
+       },
     });
   });
 </script>
