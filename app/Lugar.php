@@ -29,4 +29,14 @@ class Lugar extends Model
     {
         return $this->belongsTo('App\Organizacion');
     }
+
+    public function trecibida()
+    {
+        return $this->hasMany('App\TransfRecibida');
+    }
+
+    public function tenviada()
+    {
+        return $this->hasMany('App\TransfEnviada');
+    }
 }

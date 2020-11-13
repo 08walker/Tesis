@@ -80,29 +80,21 @@
 $(document).ready(function () {
    $('#quickForm').validate({
     rules: {
-      name: {
-        required: true,
-        minlength: 5,
-      },
       identificador: {
         required: true,
         minlength: 5,
       },
-      municipio_id: {
+      equipo_id: {
         required: true
       },
     },
     messages: {
-      name: {
-        required: "Debe introducir el nombre",
-        minlength: "El nombre debe tener 5 caracteres como mínimo"
-      },
       identificador: {
         required: "Debe introducir el identificador",
         minlength: "El identificador debe tener 5 caracteres como mínimo"
       },
-      municipio_id: {
-        required: "Por favor seleccione el municipio",
+      equipo_id: {
+        required: "Por favor seleccione el equipo",
       },
     },
     errorElement: 'span',

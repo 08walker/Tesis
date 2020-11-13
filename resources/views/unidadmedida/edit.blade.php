@@ -90,7 +90,10 @@ $(document).ready(function () {
         required: true,
         minlength: 5,
       },
-      provincia_id: {
+      identificador: {
+        required: true
+      },
+      tipo_unidad_medida_id: {
         required: true
       },
     },
@@ -98,6 +101,12 @@ $(document).ready(function () {
       name: {
         required: "Debe introducir el nombre",
         minlength: "El nombre debe tener 5 caracteres como mínimo"
+      },
+      identificador: {
+        required: "Debe introducir el identificador",
+      },
+      tipo_unidad_medida_id: {
+        required: "Debe seleccionar el tipo de unidad de medida",
       },
     },
     errorElement: 'span',

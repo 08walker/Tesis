@@ -76,17 +76,17 @@ class DatabaseSeeder extends Seeder
         $this->call(PTransfEnvSeeder::class);
         $this->call(PTransfRecSeeder::class);
         $this->call(TipoHitoSeeder::class);
-        //$this->call(HitoSeeder::class);
+        // $this->call(HitoSeeder::class);
 
-        //$this->call(ChoferEquipoTranspSeeder::class);
-        //$this->call(ArrastreTransporSeeder::class);
-        //$this->call(ArrastreEnvaEquipoSeeder::class);
-        //$this->call(TransfEnviadaSeeder::class);
-        //$this->call(TransfRecibidaSeeder::class);
-        //$this->call(ProdEnvaEnvSeeder::class);
-        //$this->call(ProdEnvaRecSeeder::class);
+        // $this->call(ChoferEquipoTranspSeeder::class);
+        // $this->call(ArrastreTransporSeeder::class);
+        // $this->call(ArrastreEnvaEquipoSeeder::class);
+        // $this->call(TransfEnviadaSeeder::class);
+        // $this->call(TransfRecibidaSeeder::class);
+        // $this->call(ProdEnvaEnvSeeder::class);
+        // $this->call(ProdEnvaRecSeeder::class);
         
-        //$this->call(ProductoUnidadMedidaSeeder::class);
+        // $this->call(ProductoUnidadMedidaSeeder::class);
 
     }
 

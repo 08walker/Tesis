@@ -324,3 +324,23 @@ Route::middleware('role:Admin')
   Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
   Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
   Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+  //Route::resource('tenv','TransfEnviadaController');
+Route::group([
+    'prefix'=>'tenv',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','TransfEnviadaController@index')->name('tenv');
+Route::get('/{id}/llenar','TransfEnviadaController@show')->where('id','[0-9]+')->name('tenv.show');
+Route::get('/crear','TransfEnviadaController@create')->name('tenv.create');
+Route::post('/crear','TransfEnviadaController@store');
+Route::get('/llenar','TransfEnviadaController@llenar')->name('tenv.llenar');
+Route::post('/llenar','TransfEnviadaController@guardar');
+Route::get('/{tenv}/editar','TransfEnviadaController@edit')->name('tenv.edit');
+Route::put('/{tenv}','TransfEnviadaController@update')->name('tenv.update');
+Route::delete('/{tenv}','TransfEnviadaController@destroy')->name('tenv.destroy');
+});
+
+
+  Route::resource('trec','TransfRecibidaController');

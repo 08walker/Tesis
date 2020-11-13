@@ -132,5 +132,6 @@ class TransportacionController extends Controller
 
     public function storeenvase(Request $request,Transportacion $transportacion)
     {
+        
     }
 }

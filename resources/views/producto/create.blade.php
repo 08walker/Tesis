@@ -45,7 +45,7 @@
                   @include('componentes.description',['model'=>$producto])
 
                 <button type="submit" class="btn btn-success btn-flat">Crear</button>
-                <a class="btn btn-flat btn-primary" href="{{route('provincias')}}">Cancelar</a>
+                <a class="btn btn-flat btn-primary" href="{{route('productos')}}">Cancelar</a>
                 </div>
             </form>                
             

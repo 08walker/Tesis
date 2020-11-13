@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Lugar;
+use App\Producto;
 use App\TransfEnviada;
+use App\Transportacion;
 use Illuminate\Http\Request;
 
 class TransfEnviadaController extends Controller
@@ -14,7 +17,9 @@ class TransfEnviadaController extends Controller
      */
     public function index()
     {
-        //
+        //$this->authorize('view',new Transportacion);
+        $todas = TransfEnviada::all();        
+        return view('tenviada.index',compact('todas'));
     }
 
     /**
@@ -24,7 +29,10 @@ class TransfEnviadaController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create',new Transportacion);
+        $transfer = new TransfEnviada;
+        $lugares = Lugar::all();
+        return view('tenviada.create',compact('transfer','lugares'));
     }
 
     /**
@@ -35,7 +43,35 @@ class TransfEnviadaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create',new Transportacion);
+        $data = request()->validate([
+            'fyh_salida'=>'required|date',
+            'num_fact'=>'required|numeric',
+            'origen_id'=>'required',
+            'destino_id'=>'required|different:origen_id'
+        ],
+        [ 
+            'fyh_salida.required'=>'La fecha es obligatoria',
+            'fyh_salida.required'=>'Debe introducir la fecha',
+            'num_fact.required'=>'El número de la factura es obligatorio',
+            'num_fact.required'=>'El número de la factura no debe contener letras',
+            'origen_id.required'=>'El lugar de origen es obligatorio',
+            'destino_id.required'=>'El lugar de destino es obligatorio',
+            'destino_id.different'=>'El lugar de destino debe ser diferente al de origen',
+        ]);
+
+        //dd($data = request()->all());
+        $transf = TransfEnviada::create([
+            'fyh_salida'=> $data['fyh_salida'],
+            'num_fact'=> $data['num_fact'],
+            'origen_id'=> $data['origen_id'],
+            'destino_id'=> $data['destino_id'],
+        ]);
+        return $transf;
+        // if ($transf) {
+        //     return redirect()->route('transportaciones.show', ['transf'=>$transf->id]);
+        // }
+        // return back()->withInput()->with('errors','Error al crear la transferencia');
     }
 
     /**
@@ -82,4 +118,21 @@ class TransfEnviadaController extends Controller
     {
         //
     }
+
+        public function llenar($value='')
+    {
+        $transfer = new TransfEnviada;
+        $productos = Producto::all();
+        return view('tenviada.llenar',compact('transfer','productos'));
+    }
+
+    public function storechofer(Request $request,Transportacion $transportacion)
+    {
+        $this->authorize('create',new Transportacion);
+        //$transportacion->choferes()->attach($request->get('lchofer'));
+        //$transportacion->syncChofer($request->get('lchofer'));
+        $transportacion->choferes()->sync($request->get('lchofer'));
+        return back();
+    }
+
 }

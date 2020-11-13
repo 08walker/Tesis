@@ -96,6 +96,7 @@
 </div>
 </div>
 
+@endsection
 @push('styles')
     <!-- DataTables -->
   <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -121,6 +122,7 @@
         "search": "Buscar",
         "lengthMenu": "Ver _MENU_ entradas",
         "info": "Mostrando página _PAGE_ de _PAGES_",
+        "emptyTable": "No hay datos para mostrar",
         "paginate": {
             "last": "Última página",
             "first": "Primera página",
@@ -129,18 +131,8 @@
           },
        },
     });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
   });
 </script>
 </script>
 
 @endpush
-@endsection

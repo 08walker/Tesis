@@ -1,12 +1,16 @@
 @extends('admin.layout')
 
 @section('content')
+
+		'cantidad_bultos',
+        'transf_enviada_id',
+        'equipo_arrastre_envase_id',
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear Tipo de arrastre</h1>
+            <h1 class="m-0 text-dark"> Introducir productos</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -25,14 +29,20 @@
                     
                     @include('partials.error-messages')
                     
-                    <form id="quickForm" role="form" method="POST" action="{{ route('tipoarrastre.create') }}">
+                    <form id="quickForm" role="form" method="POST" action="{{ route('municipios.create') }}">
                     {!! csrf_field() !!}
                     <div class="card-body">
                       
-                      @include('componentes.name',['model'=>$tipoArrastre])
+                      @include('foreach.productosfor',['model'=>$transfer])
+        
+                      @include('componentes.observacion',['model'=>$transfer])
 
-                    <button type="submit" class="btn btn-success btn-flat">Crear</button>
-                    <a class="btn btn-flat btn-primary" href="{{route('tipoarrastre')}}">Cancelar</a>
+                      @include('componentes.pesoprod',['model'=>$transfer])
+
+                      @include('componentes.volumenprod',['model'=>$transfer])
+
+                    <button type="submit" class="btn btn-success btn-flat">Añadir</button>
+                    <a class="btn btn-flat btn-primary" href="{{route('municipios')}}">Cancelar</a>
                     </div>
                 </form>                
                 </div>
@@ -79,15 +89,29 @@
 $(document).ready(function () {
    $('#quickForm').validate({
     rules: {
-      name: {
+      producto_id: {
+        required: true
+      },
+      peso_kg: {
         required: true,
-        minlength: 5,
+        number: true
+      },
+      volumen_m3: {
+        required: true,
+        number: true
       },
     },
     messages: {
-      name: {
-        required: "Debe introducir el nombre",
-        minlength: "El nombre debe tener 5 caracteres como mínimo"
+      producto_id: {
+        required: "Debe seleccionar un producto"
+      },
+      peso_kg: {
+        required: "Debe introducir el peso",
+        number: "Debe introducir un número"
+      },
+      volumen_m3: {
+        required: "Por favor seleccione la provincia",
+        number: "Debe introducir un número"
       },
     },
     errorElement: 'span',

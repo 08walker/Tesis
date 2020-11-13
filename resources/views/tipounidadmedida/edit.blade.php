@@ -85,17 +85,11 @@ $(document).ready(function () {
         required: true,
         minlength: 5,
       },
-      provincia_id: {
-        required: true
-      },
     },
     messages: {
       name: {
         required: "Debe introducir el nombre",
         minlength: "El nombre debe tener 5 caracteres como mínimo"
-      },
-      provincia_id: {
-        required: "Por favor seleccione la provincia",
       },
     },
     errorElement: 'span',

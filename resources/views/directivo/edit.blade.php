@@ -87,7 +87,10 @@ $(document).ready(function () {
         required: true,
         minlength: 5,
       },
-      provincia_id: {
+      user_id: {
+        required: true
+      },
+      organizacion_id: {
         required: true
       },
     },
@@ -96,8 +99,11 @@ $(document).ready(function () {
         required: "Debe introducir el nombre",
         minlength: "El nombre debe tener 5 caracteres como mínimo"
       },
-      provincia_id: {
-        required: "Por favor seleccione la provincia",
+      user_id: {
+        required: "Por favor seleccione el usuario",
+      },
+      organizacion_id: {
+        required: "Por favor seleccione la organización",
       },
     },
     errorElement: 'span',

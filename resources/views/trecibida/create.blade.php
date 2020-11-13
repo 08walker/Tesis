@@ -1,49 +1,9 @@
 @extends('admin.layout')
 
 @section('content')
-<div class="content-wrapper">
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear Tipo de arrastre</h1>
-          </div>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
 
-    <div class="content">
-          <div class="container">
-            <div class="row">
-                <!-- aling -->
-                <div class="col-lg-3">
-                  <div class="card"></div>
-                </div>
-                <div class="col-lg-6">
-                <div class="card card-primary card-outline">
-                  <div class="card-body">
-                    
-                    @include('partials.error-messages')
-                    
-                    <form id="quickForm" role="form" method="POST" action="{{ route('tipoarrastre.create') }}">
-                    {!! csrf_field() !!}
-                    <div class="card-body">
-                      
-                      @include('componentes.name',['model'=>$tipoArrastre])
 
-                    <button type="submit" class="btn btn-success btn-flat">Crear</button>
-                    <a class="btn btn-flat btn-primary" href="{{route('tipoarrastre')}}">Cancelar</a>
-                    </div>
-                </form>                
-                </div>
-                </div>
-            </div>
-            </div>
-          </div>
-    </div>
-</div>
 @endsection
-
 @push('styles')
 
 <!-- Select2 -->
@@ -83,11 +43,17 @@ $(document).ready(function () {
         required: true,
         minlength: 5,
       },
+      provincia_id: {
+        required: true
+      },
     },
     messages: {
       name: {
         required: "Debe introducir el nombre",
         minlength: "El nombre debe tener 5 caracteres como mínimo"
+      },
+      provincia_id: {
+        required: "Por favor seleccione la provincia",
       },
     },
     errorElement: 'span',

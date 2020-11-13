@@ -13,4 +13,14 @@ class TransfEnviada extends Model
         'origen_id',
         'destino_id',
     ];
+
+    public function origen()
+    {
+        return $this->belongsTo('App\Lugar');
+    }
+    public function destino()
+    {
+        return $this->belongsTo('App\Lugar');
+    }
+
 }
