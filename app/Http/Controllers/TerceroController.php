@@ -45,8 +45,10 @@ class TerceroController extends Controller
 
         if ($tercero) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tercero {$tercero->name} ha sido creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('terceros')->with('success','Tercero creado con éxito');
         }
@@ -70,8 +72,10 @@ class TerceroController extends Controller
         
         if ($tercero) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tercero {$tercero->name} ha sido actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('terceros')->with('success','Tercero actualizado con éxito');
         }
@@ -84,8 +88,10 @@ class TerceroController extends Controller
         $tercero->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "El tercero {$tercero->name} ha sido eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('terceros')

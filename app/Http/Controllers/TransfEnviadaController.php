@@ -6,6 +6,7 @@ use App\Lugar;
 use App\Producto;
 use App\TransfEnviada;
 use App\Transportacion;
+use App\Traza;
 use Illuminate\Http\Request;
 
 class TransfEnviadaController extends Controller
@@ -61,11 +62,17 @@ class TransfEnviadaController extends Controller
             'origen_id'=> $data['origen_id'],
             'destino_id'=> $data['destino_id'],
         ]);
-        return $transf;
-        // if ($transf) {
-        //     return redirect()->route('transportaciones.show', ['transf'=>$transf->id]);
-        // }
-        // return back()->withInput()->with('errors','Error al crear la transferencia');
+        if ($transf) {
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "Transferencia enviada número {$transf->num_fact} creada por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+
+            return $transf;
+        }
+        return back()->withInput()->with('error','Error al crear la transferencia');
     }
 
     /**

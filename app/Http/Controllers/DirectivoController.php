@@ -40,8 +40,10 @@ class DirectivoController extends Controller
         if ($directivo) {
 
             $nombre = auth()->user()->name;
+            $ip = request()->ip();            
             Traza::create([
             'description'=> "Directivo {$directivo->name} creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('directivo.index')->with('success','Directivo creado con éxito');
         }
@@ -70,8 +72,10 @@ class DirectivoController extends Controller
         
         if ($directivo) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Directivo {$directivo->name} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('directivo.index')->with('success','Directivo actualizado con éxito');
         }
@@ -84,8 +88,10 @@ class DirectivoController extends Controller
         $directivo->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "Directivo {$directivo->name} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('directivo.index')

@@ -40,8 +40,10 @@ class ProductoController extends Controller
         ]);
         if ($producto) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El producto {$producto->name} ha sido creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('productos')->with('success','El producto ha sido creado con éxito');
         }
@@ -71,8 +73,10 @@ class ProductoController extends Controller
 
         if ($producto) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El producto {$producto->name} ha sido actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('productos')->with('success','Producto actualizado con éxito');
            }
@@ -82,15 +86,20 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         $this->authorize('delete',$producto);
+
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+        
         try {
          $producto->delete();   
         }   catch (QueryException $e) {
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $producto->update(['activo'=>'0']);
-                   $nombre = auth()->user()->name;
+
                     Traza::create([
                     'description'=> "El producto {$producto->name} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
                     ]);
                     return redirect()->route('productos')
                         ->with('success', 'El producto ha sido desactivado');   
@@ -101,6 +110,7 @@ class ProductoController extends Controller
         $nombre = auth()->user()->name;
             Traza::create([
             'description'=> "El producto {$producto->name} ha sido eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
         return redirect()->route('productos')
                     ->with('success', 'El producto ha sido eliminado con éxito');

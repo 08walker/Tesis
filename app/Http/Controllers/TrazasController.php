@@ -12,7 +12,6 @@ class TrazasController extends Controller
         $this->authorize('view',new Traza);
         
         $trazas = Traza::orderBy('created_at','desc')->get();
-        //dd($trazas);
         return view('trazas.index',compact('trazas'));
     }
 }

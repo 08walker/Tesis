@@ -17,6 +17,7 @@ class CreateTrazasTable extends Migration
             $table->bigIncrements('id');
 
             $table->longText('description')->nullable();
+            $table->string('ip',50)->nullable();
 
             $table->timestamps();
         });

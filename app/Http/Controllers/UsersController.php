@@ -78,8 +78,10 @@ class UsersController extends Controller
 
         //Regresamos al usuario
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "En usuario {$user->name} ha sido creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
         return redirect()->route('user.index')->with('success','Usuario creado con éxito');
 
@@ -128,25 +130,27 @@ class UsersController extends Controller
         
         if ($user) {
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
         Traza::create([
         'description'=> "Usuario {$user->name} actualizado por el usuario {$nombre}",
+        'ip'=>$ip,
         ]); 
         return redirect()->route('user.edit', $user)->with('success','Usuario actualizado con éxito');
         }
         return back()->withInput()->with('error','Error al actualisar el nuevo usuario');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
         $this->authorize('update',$user);
 
         $user->delete();
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+        Traza::create([
+            'description'=> "Usuario {$user->name} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
+        ]); 
 
         return redirect()->route('user.index')->withFlash('EL usuario ha sido eliminado');
     }

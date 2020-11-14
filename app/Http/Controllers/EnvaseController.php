@@ -50,8 +50,10 @@ class EnvaseController extends Controller
         ]);
         if ($envase) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Envase {$envase->identificador} creado por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
 
             return redirect()->route('envases')->with('success','Envase creado con éxito');
@@ -78,8 +80,10 @@ class EnvaseController extends Controller
 
         if ($envase) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();            
             Traza::create([
             'description'=> "Envase {$envase->identificador} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
         return redirect()->route('envases')->with('success','Envase actualizado con éxito');
         }
@@ -93,8 +97,10 @@ class EnvaseController extends Controller
         $envase->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "Envase {$envase->identificador} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('envases')

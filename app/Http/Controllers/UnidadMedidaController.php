@@ -37,8 +37,10 @@ class UnidadMedidaController extends Controller
         ]);
         if ($unidad) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "La unidad de medida {$unidad->name} ha sido creada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('unidadmedida')->with('success','Unidad de medida creada con éxito');
         }
@@ -61,10 +63,12 @@ class UnidadMedidaController extends Controller
         
         if ($unidadMedida) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "La unidad de medida {$unidadMedida->name} ha sido actualizada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
-            return redirect()->route('unidadmedida')->with('success','Unidad de medidaas actualizada con éxito');
+            return redirect()->route('unidadmedida')->with('success','Unidad de medidas actualizada con éxito');
         }
         return back()->withInput()->with('error','Error al actualizar la unidad de medida');
     }
@@ -72,15 +76,19 @@ class UnidadMedidaController extends Controller
     public function destroy(UnidadMedida $unidadMedida)
     {
         $this->authorize('delete',$unidadMedida);
+        
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+        
         try {
          $unidadMedida->delete();   
         }   catch (QueryException $e) {
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $unidadMedida->update(['activo'=>'0']);
-                   $nombre = auth()->user()->name;
                     Traza::create([
                     'description'=> "La unidad de medida {$unidadMedida->name} ha sido desactivada por el usuario {$nombre}",
+                    'ip'=>$ip,
                     ]);
                     return redirect()->route('unidadmedida')
                         ->with('success', 'La unidad de medida ha sido desactivada');   
@@ -88,9 +96,9 @@ class UnidadMedidaController extends Controller
                return redirect()->route('unidadmedida')
                     ->with('errors', 'La unidad de medida no ha sido ser eliminada');
         }
-        $nombre = auth()->user()->name;
             Traza::create([
             'description'=> "La unidad de medida {$unidadMedida->name} ha sido eliminada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
         return redirect()->route('unidadmedida')
                     ->with('success', 'La unidad de medida ha sido eliminada con éxito');

@@ -3,87 +3,87 @@
 namespace App\Http\Controllers;
 
 use App\Hito;
+use App\TipoHito;
+use App\Transportacion;
 use App\Traza;
 use Illuminate\Http\Request;
 
 class HitoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Transportacion $transportacion)
     {
-        //
+        $this->authorize('create',new Transportacion);
+        $incidencia = new Hito;
+        $thitos = TipoHito::all();
+        return view('hito.create',compact('transportacion','incidencia','thitos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request,Transportacion $transportacion)
     {
-        $nombre = auth()->user()->name;
+    $this->authorize('create',new Transportacion);
+        $data = request()->validate([
+        'fyh_ini'=>'required',
+        'description'=>'required',
+        'tipo_hito_id'=>'required',
+    ],
+    [   
+        'fyh_ini.required'=>'Debe seleccionar la fecha',
+        'description.required'=>'Debe escribir la descripción',
+        'tipo_hito_id.required'=>'Debe seleccionar el tipo de incidencia'
+    ]);
+        $data = request()->all();
+        $hito = Hito::create([
+            'fyh_ini'=> $data['fyh_ini'],
+            'description'=> $data['description'],
+            'tipo_hito_id'=> $data['tipo_hito_id'],
+            'transportacion_id'=> $transportacion->id,
+        ]);
+
+        if ($hito) {
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "Hito {$hito->description} creado por el usuario {$nombre}",
-            ]); 
+            'description'=> "El usuario {$nombre} ha creado una incidencia en la transportación número {$transportacion->numero}",
+            'ip'=>$ip,
+            ]);
+            return redirect()->route('transportaciones.show',$transportacion)->with('success','Incidencia creada con éxito');
+        }
+        return back()->withInput()->with('error','Error al crear la incidencia');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Hito  $hito
-     * @return \Illuminate\Http\Response
-     */
     public function show(Hito $hito)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Hito  $hito
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Hito $hito)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Hito  $hito
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Hito $hito)
     {
-        //
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+            Traza::create([
+            'description'=> "Hito {$hito->description} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Hito  $hito
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Hito $hito)
     {
-        //
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+            Traza::create([
+            'description'=> "Hito {$hito->description} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]); 
     }
 }

@@ -57,8 +57,10 @@ class EquipoController extends Controller
         if ($equipo) {
 
             $nombre = auth()->user()->name;
+            $ip = request()->ip();            
             Traza::create([
             'description'=> "Equipo {$equipo->identificador} creado por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
 
             return redirect()->route('equipos')->with('success','Equipo creado con éxito');
@@ -81,14 +83,14 @@ class EquipoController extends Controller
         $this->authorize('update',$equipo);
         
         $data = request()->all(); 
-        //dd($data);
-
         $equipo->update($data);
 
         if ($equipo) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();            
             Traza::create([
             'description'=> "Equipo {$equipo->identificador} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
             return redirect()->route('equipos')->with('success','Equipo actualizado con éxito');
         }
@@ -101,8 +103,10 @@ class EquipoController extends Controller
         $equipo->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "Equipo {$equipo->identificador} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
 
         return redirect()->route('equipos')

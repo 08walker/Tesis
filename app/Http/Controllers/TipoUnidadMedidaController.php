@@ -41,17 +41,14 @@ class TipoUnidadMedidaController extends Controller
 
         if ($tipoum) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de unidad de medida {$tipoum->name} ha sido creada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('tipounidad')->with('success','Tipo de unidad de medida creada con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo tipo');
-    }
-
-    public function show(TipoUnidadMedida $tipoUnidadMedida)
-    {
-        //
     }
 
     public function edit(TipoUnidadMedida $tipoUnidadMedida)
@@ -62,14 +59,16 @@ class TipoUnidadMedidaController extends Controller
 
     public function update(StoreTUnidadMRequest $request, TipoUnidadMedida $tipoUnidadMedida)
     {
-        //$this->authorize('update',$tipoUnidadMedida);
+        $this->authorize('update',new TipoUnidadMedida);
         $data = request()->all();
         $tipoUnidadMedida->update($data);
 
         if ($tipoUnidadMedida) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} ha sido actualizada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('tipounidad')->with('success','Tipo de unidad actualizada con éxito');
         }
@@ -82,8 +81,10 @@ class TipoUnidadMedidaController extends Controller
         $tipoUnidadMedida->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} ha sido eliminada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('tipounidad')

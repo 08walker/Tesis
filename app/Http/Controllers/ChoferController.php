@@ -55,8 +55,10 @@ class ChoferController extends Controller
 
         if ($chofer) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Chofer {$chofer->name} creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('choferes')->with('success','EL chofer ha sido creado con éxito');
         }
@@ -81,8 +83,10 @@ class ChoferController extends Controller
         $chofer->update($data);
         if ($chofer) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Chofer {$chofer->name} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
             return redirect()->route('choferes')->with('success','Chofer actualizado con éxito');
         }
@@ -95,8 +99,10 @@ class ChoferController extends Controller
         $chofer->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "Chofer {$chofer->name} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
 
         return redirect()->route('choferes')

@@ -31,8 +31,10 @@ class TipoEquipoController extends Controller
 
         if ($tipoEquipo) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de equipo {$tipoEquipo->name} ha sido creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('tipoequipo')->with('success','Tipo de equipo creado con éxito');
         }
@@ -53,8 +55,10 @@ class TipoEquipoController extends Controller
 
         if ($tipoEquipo) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de equipo {$tipoEquipo->name} ha sido actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('tipoequipo')->with('success','Tipo de equipo actualizado con éxito');
         }
@@ -67,8 +71,10 @@ class TipoEquipoController extends Controller
         $tipoEquipo->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de equipo {$tipoEquipo->name} ha sido eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('tipoequipo')

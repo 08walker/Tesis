@@ -49,7 +49,14 @@ class TransportacionController extends Controller
             'equipo_id'=> $data['equipo_id'],
         ]);
         if ($transp) {
-            return redirect()->route('transportaciones.show', ['transp'=>$transp->id]);
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "El usuario {$nombre} ha creado la transportación número {$transportacion->numero}",
+            // 'ip'=>{$ip},
+            ]);
+            return redirect()->route('transportaciones.show', ['transp'=>$transp->id])
+                    ->with('success','Transportación creada con éxito');
         }
         return back()->withInput()->with('errors','Error al crear la transportación');
     }
@@ -73,7 +80,16 @@ class TransportacionController extends Controller
     public function update(Request $request, Transportacion $transportacion)
     {
         $transportacion->update($request->all());        
-        return redirect()->route('transportaciones.show',$transportacion);
+        if ($transportacion) {
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+                'description'=> "El usuario {$nombre} ha actualizado la transportación número {$transportacion->numero}",
+                'ip'=>$ip,
+            ]);
+            return redirect()->route('transportaciones.show',$transportacion)->with('success','Transportación actualizada con éxito');
+        }
+        return back()->withInput()->with('error','Error al actualizar la transportación');
     }
 
     public function destroy(Transportacion $transportacion)
@@ -119,47 +135,5 @@ class TransportacionController extends Controller
     public function storeenvase(Request $request,Transportacion $transportacion)
     {
         
-    }
-
-    public function incidencia(Transportacion $transportacion)
-    {
-        $this->authorize('create',new Transportacion);
-
-        $incidencia = new Hito;
-        $thitos = TipoHito::all();
-
-        return view('transportacion.incidencia',compact('transportacion','incidencia','thitos'));
-    }
-
-    public function storeincidencia(Transportacion $transportacion)
-    {
-        $this->authorize('create',new Transportacion);
-        $data = request()->validate([
-        'fyh_ini'=>'required',
-        'description'=>'required',
-        'tipo_hito_id'=>'required',
-    ],
-    [   
-        'fyh_ini.required'=>'Debe seleccionar la fecha',
-        'description.required'=>'Debe escribir la descripción',
-        'tipo_hito_id.required'=>'Debe seleccionar el tipo de incidencia'
-    ]);
-        $data = request()->all();
-        $hito = Hito::create([
-            'fyh_ini'=> $data['fyh_ini'],
-            'description'=> $data['description'],
-            'tipo_hito_id'=> $data['tipo_hito_id'],
-            'transportacion_id'=> $transportacion->id,
-        ]);
-
-        if ($hito) {
-            $nombre = auth()->user()->name;
-            Traza::create([
-            'description'=> "El usuario {$nombre} ha creado una incidencia en la transportacion número {$transportacion->numero} ",
-            ]);
-            return redirect()->route('transportaciones.show',$transportacion);
-        }
-        return back()->withInput()->with('error','Error al crear la incidencia');
-
-    }
+    }   
 }

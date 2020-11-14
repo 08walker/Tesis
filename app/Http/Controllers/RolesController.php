@@ -41,8 +41,10 @@ class RolesController extends Controller
             $role->givePermissionTo($request->permissions);
         }
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "El rol {$role->name} ha sido creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
         return redirect()->route('admin.roles.index')->with('success','El role fue creado correctamente');
     }
@@ -63,8 +65,10 @@ class RolesController extends Controller
         $role->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "El rol {$role->name} ha sido eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
         return redirect()->route('admin.roles.index')->with('success','El role fue eliminado correctamente');
     }

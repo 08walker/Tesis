@@ -32,6 +32,16 @@ class PermissionsController extends Controller
                     'display_name'=> 'required',
                 ]);
         $permission->update($data);
+        if ($permission) {
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "Permiso {$permission->display_name} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
         return redirect()->route('admin.permissions.edit',$permission)->withFlash('El permiso ha sido actualizado');
+        }
+        return back()->withInput()->with('error','Error al actualizar el permiso');
+
     }
 }

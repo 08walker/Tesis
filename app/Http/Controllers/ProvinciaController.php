@@ -31,8 +31,10 @@ class ProvinciaController extends Controller
 
         if ($provincia) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "La provincia {$provincia->name} ha sido creada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('provincias')->with('success','Provincia creada con éxito');
         }
@@ -59,8 +61,10 @@ class ProvinciaController extends Controller
 
         if ($provincia) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "La provincia {$provincia->name} ha sido actualizada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('provincias')->with('success','Provincia actualizada con éxito');
         }
@@ -73,8 +77,10 @@ class ProvinciaController extends Controller
         $provincia->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "La provincia {$provincia->name} ha sido eliminada por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('provincias')

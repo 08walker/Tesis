@@ -50,8 +50,10 @@ class LugarController extends Controller
 
         if ($lugar) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Lugar {$lugar->name} creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]); 
             return redirect()->route('lugares')->with('success','Lugar creado con éxito');
         }
@@ -77,8 +79,10 @@ class LugarController extends Controller
 
         if ($lugar) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Lugar {$lugar->name} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]); 
             return redirect()->route('lugares')->with('success','Lugar actualizado con éxito');
         }
@@ -91,8 +95,10 @@ class LugarController extends Controller
         $lugar->delete();
         
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "Lugar {$lugar->name} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]); 
 
         return redirect()->route('lugares')

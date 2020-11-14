@@ -59,8 +59,10 @@ class ArrastreController extends Controller
 
         if ($arrastre) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Arrastre {$arrastre->identificador} creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('arrastres')->with('success','Arrastre creado con éxito');
         }
@@ -88,8 +90,10 @@ class ArrastreController extends Controller
         
         if ($arrastre) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "Arrastre {$arrastre->identificador} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('arrastres')->with('success','Arrastre actualizado con éxito');
@@ -109,8 +113,10 @@ class ArrastreController extends Controller
         //$municipio->delete();
         
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "Arrastre {$delet->identificador} eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('arrastres')

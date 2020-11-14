@@ -48,11 +48,12 @@ class MunicipioController extends Controller
 
         if ($municipio) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El municipio {$municipio->name} creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]); 
             return redirect()->route('municipios')->with('success','Municipio creado con éxito');
-            // return redirect()->route('municipios.show',['municipio'=>$municipio])->with('success','Municipio creado con éxito');
         }
         return back()->withInput()->with('error','Error al crear el nuevo municipio');
     }
@@ -68,13 +69,14 @@ class MunicipioController extends Controller
     {
         $this->authorize('update',$municipio);
         $data = request()->all();
-        //dd($data);
         $municipio->update($data);
         
         if ($municipio) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El municipio {$municipio->name} actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('municipios')->with('success','Municipio actualizado con éxito');
         }
@@ -84,15 +86,18 @@ class MunicipioController extends Controller
     public function destroy(Municipio $municipio)
     {
         $this->authorize('delete',$municipio);
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+        
         try {
          $municipio->delete();   
         }   catch (QueryException $e) {
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $municipio->update(['activo'=>'0']);
-                   $nombre = auth()->user()->name;
                     Traza::create([
                     'description'=> "El municipio {$municipio->name} desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
                     ]);
                     return redirect()->route('municipios')
                         ->with('success', 'El municipio ha sido desactivado');   
@@ -100,9 +105,10 @@ class MunicipioController extends Controller
                return redirect()->route('municipios')
                     ->with('errors', 'El municipio no ha sido ser eliminado');
         }
-        $nombre = auth()->user()->name;
+        
         Traza::create([
         'description'=> "El municipio {$municipio->name} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
         ]);
         return redirect()->route('municipios')
                     ->with('success', 'El municipio ha sido eliminado con éxito');

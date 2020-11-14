@@ -44,8 +44,10 @@ class OrganizacionController extends Controller
         
         if ($organizacion) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();            
             Traza::create([
             'description'=> "La organizacion {$organizacion->name} creada por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
             return redirect()->route('organizaciones')->with('success','Organización creada con éxito');
         }
@@ -69,8 +71,10 @@ class OrganizacionController extends Controller
 
         if ($organizacion) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();            
             Traza::create([
             'description'=> "La organizacion {$organizacion->name} actualizada por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
             return redirect()->route('organizaciones')->with('success','Organización actualizada con éxito');
            }
@@ -83,8 +87,10 @@ class OrganizacionController extends Controller
         $organizacion->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "La organizacion {$organizacion->name} eliminada por el usuario {$nombre}",
+            'ip'=>$ip,            
             ]);
 
         return redirect()->route('organizaciones')

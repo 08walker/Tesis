@@ -31,8 +31,10 @@ class TipoArrastreController extends Controller
 
         if ($tipoArrastre) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de arrastre {$tipoArrastre->name} ha sido creado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('tipoarrastre')->with('success','Tipo de arrastre creada con éxito');
         }
@@ -53,8 +55,10 @@ class TipoArrastreController extends Controller
 
         if ($tipoArrastre) {
             $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de arrastre {$tipoArrastre->name} ha sido actualizado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('tipoarrastre')->with('success','Tipo arrastre actualizado con éxito');
         }
@@ -67,8 +71,10 @@ class TipoArrastreController extends Controller
         $tipoArrastre->delete();
 
         $nombre = auth()->user()->name;
+        $ip = request()->ip();
             Traza::create([
             'description'=> "El tipo de arrastre {$tipoArrastre->name} ha sido eliminado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
         return redirect()->route('tipoarrastre')

@@ -9,5 +9,6 @@ class Traza extends Model
     protected $table = 'trazas';
     protected $fillable = [
         'description',
+        'ip',
     ];
 }
