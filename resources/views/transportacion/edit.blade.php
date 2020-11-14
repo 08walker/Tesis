@@ -38,7 +38,7 @@
                       @include('componentes.observacion',['model'=>$transportacion])
                       @include('foreach.equipofor',['model'=>$transportacion])
 
-                    <button type="submit" class="btn btn-success btn-flat">Crear</button>
+                    <button type="submit" class="btn btn-success btn-flat">Actualizar</button>
                     <a class="btn btn-flat btn-primary" href="{{route('transportaciones')}}">Cancelar</a>
                     </div>
                 </form>                

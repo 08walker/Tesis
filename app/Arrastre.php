@@ -41,13 +41,13 @@ class Arrastre extends Model
         return $this->belongsTo('App\Organizacion');
     }
 
-    public function arrastretranspor()
-    {
-        return $this->hasMany('App\ArrastreTranspor');
-    }
-
-    // public function transportaciones()
+    // public function arrastretranspor()
     // {
-    //     return $this->belongsToMany('App\Transportacion','arrastre_transpor','transportacion_id','arrastre_id')->withTimestamps();
+    //     return $this->hasMany('App\ArrastreTranspor');
     // }
+
+    public function transportaciones()
+    {
+        return $this->belongsToMany('App\Transportacion','arrastre_transpor','transportacion_id','arrastre_id')->withTimestamps();
+    }
 }

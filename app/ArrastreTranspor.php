@@ -17,14 +17,14 @@ class ArrastreTranspor extends Model
     //     return $this->belongsTo('App\Transportacion');
     // }
 
-     public function transportacion()
-    {
-        return $this->belongsTo('App\Transportacion');
-    }
+    //  public function transportacion()
+    // {
+    //     return $this->belongsTo('App\Transportacion');
+    // }
 
 
-    public function arrastre()
-    {
-        return $this->belongsTo('App\Arrastre');
-    }
+    // public function arrastre()
+    // {
+    //     return $this->belongsTo('App\Arrastre');
+    // }
 }

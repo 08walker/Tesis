@@ -52,8 +52,8 @@ class TransportacionController extends Controller
             $nombre = auth()->user()->name;
             $ip = request()->ip();
             Traza::create([
-            'description'=> "El usuario {$nombre} ha creado la transportación número {$transportacion->numero}",
-            // 'ip'=>{$ip},
+            'description'=> "El usuario {$nombre} ha creado la transportación número {$transp->numero}",
+            'ip'=>$ip,
             ]);
             return redirect()->route('transportaciones.show', ['transp'=>$transp->id])
                     ->with('success','Transportación creada con éxito');
@@ -97,7 +97,7 @@ class TransportacionController extends Controller
         //
     }
 
-    public function llenar($value='')
+    public function llenar()
     {
         return view('transportacion.llenar');        
     }
@@ -105,8 +105,6 @@ class TransportacionController extends Controller
     public function storechofer(Request $request,Transportacion $transportacion)
     {
         $this->authorize('create',new Transportacion);
-        //$transportacion->choferes()->attach($request->get('lchofer'));
-        //$transportacion->syncChofer($request->get('lchofer'));
         $transportacion->choferes()->sync($request->get('lchofer'));
         return back();
     }
@@ -115,19 +113,19 @@ class TransportacionController extends Controller
     {
         $this->authorize('create',new Transportacion);
 
-        if ($request->get('larrastre')) {
-            $arrastres = $request->get('larrastre');
-            foreach ($arrastres as $arrastre) {
-                //dd($municipio->provincia->name);
-            $asdasd = ArrastreTranspor::create([
-                'transportacion_id'=>$transportacion->id,
-                'arrastre_id'=>$arrastre,
-                ]);                
-            }
-            //dd($asdasd);
-          //dd($transportacion->arrastretranspor->getAll());
-        }
-        //$transportacion->arrastres()->sync($request->get('larrastre'));
+        // if ($request->get('larrastre')) {
+        //     $arrastres = $request->get('larrastre');
+        //     foreach ($arrastres as $arrastre) {
+        //         //dd($municipio->provincia->name);
+        //     $asdasd = ArrastreTranspor::create([
+        //         'transportacion_id'=>$transportacion->id,
+        //         'arrastre_id'=>$arrastre,
+        //         ]);                
+        //     }
+        //     //dd($asdasd);
+        //   //dd($transportacion->arrastretranspor->getAll());
+        // }
+        $transportacion->arrastres()->sync($request->get('larrastre'));
         
         return back();
     }

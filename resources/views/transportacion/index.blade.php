@@ -56,7 +56,7 @@
                   <td>{{$transpor->id}}</td>
                   <td>{{$transpor->numero}}</td>
                   <td>
-                      <a href="{{route('transportaciones.show',$transpor)}}" target="_blank">
+                      <a href="{{route('transportaciones.show',$transpor)}}">
                           <i class="fa fa-eye"></i>
                         </a>
 

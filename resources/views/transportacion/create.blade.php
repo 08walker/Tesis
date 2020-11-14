@@ -14,7 +14,6 @@
     </div>
 
     @include('partials.success')
-    @include('partials.errors')
 
     <div class="content">
           <div class="container">
@@ -32,7 +31,7 @@
                     <form id="quickForm" role="form" method="POST" action="{{ route('transportaciones.create') }}">
                     {!! csrf_field() !!}
 
-                      @include('componentes.identificador',['model'=>$transportacion])
+                      @include('componentes.numero',['model'=>$transportacion])
                       @include('componentes.observacion',['model'=>$transportacion])
                       @include('foreach.equipofor',['model'=>$transportacion])
 

@@ -41,9 +41,11 @@
                           <a href="{{route('transportaciones.edit',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                             <i class="fa fa-pen"></i> Editar detalles
                           </a>
+                          {{-- @if($transportacion->transfenv) --}}
                           <a href="{{route('transportaciones.incidencia',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                             <i class="fa fa-plus"></i> Reportar incidencia
                           </a>
+                          {{-- @endif --}}
                           <a href="{{route('tenv.create')}}" type="button" class="btn btn-success btn-flat" >
                             <i class="fa fa-plus"></i> Añadir transferencia enviada
                           </a>
@@ -67,9 +69,6 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Envases</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false">Settings</a>
                   </li>
                 </ul>
               </div>
@@ -132,13 +131,12 @@
                      <div class="form-group">
                       <div class="col-6">
                         <label>Arrastres:</label>
+                        {{-- {{$arrastres->pluck('id')}} --}}
                         <select class="select2" multiple="multiple" name="larrastre[]" data-placeholder="Seleccione los arrastres" style="width: 100%;">
-                          @foreach($arrastres->all() as $arrastre)
-                            <option 
-                              {{-- collect(old('larrastre', $transportacion->arrastretranspor->arrastres->pluck('id')))->contains($arrastre->id) ? 'selected':'' --}}
+                          @foreach($arrastres as $arrastre)
+                            {{ collect(old('larrastre', $transportacion->arrastres->pluck('id')))->contains($arrastre->id) ? 'selected':'' }}
                               value="{{$arrastre->id}}">
                               {{$arrastre->identificador}}
-                            </option>
                           @endforeach
                         </select>
                         <div class="has-error">
@@ -162,16 +160,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>adasd</td>
-                            <td>adasd</td>
-                            <td>adada</td>
-                          </tr>
-
-                          {{-- @foreach($transportacion->arrastretranspor->arrastres as $arrastre)
+                            @foreach($transportacion->arrastres as $arrastre)
                           <tr>
                             <td>{{$arrastre->identificador}}</td>
                             <td>{{$arrastre->description}}</td>
+                            <td>lololo</td>
+                            </tr>
+                          @endforeach
+
+                          {{-- 
+                          <tr>
+                            <td>{{$demo->id}}</td>
+                            <td>asd</td>
                             <td>
                               <a href="#" type="button" class="btn btn-primary btn-flat" >
                                 <i class="fa fa-plus"></i> Añadir Envase
@@ -181,8 +181,7 @@
                                       <i class="fa fa-plus"></i> Añadir Envase
                              </button>
                             </td>
-                          </tr>
-                          @endforeach --}}
+                          </tr>--}}
                         </tbody>
                       </table>
                     </div>  
