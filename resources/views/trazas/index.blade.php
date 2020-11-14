@@ -18,6 +18,7 @@
     </div>
 
     @include('partials.success')
+    @include('partials.errors')
 
 <div class="content">
           <div class="container">
@@ -75,7 +76,7 @@
 <!-- page script -->
 <script>
   $(function () {
-      "order":['asc'],  
+      //"order":['asc'],  
     $("#example1").DataTable({
       //"_aData": [],
       "responsive": true,
@@ -84,6 +85,7 @@
         "search": "Buscar",
         "lengthMenu": "Ver _MENU_ entradas",
         "info": "Mostrando página _PAGE_ de _PAGES_",
+        "emptyTable": "No hay datos para mostrar",
         "paginate": {
             "last": "Última página",
             "first": "Primera página",

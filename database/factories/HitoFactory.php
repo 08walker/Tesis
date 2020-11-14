@@ -11,7 +11,7 @@ $factory->define(App\Hito::class, function (Faker $faker) {
         //'fyh_ini',
         //'fyh_fin',
         'description'=>$faker->sentence(3),
-        'observaciones'=>$faker->sentence(3),
+        //'observaciones'=>$faker->sentence(3),
         //'equipo_transp_id' => EquipoTransp::InRandomOrder()->value('id')?:factory(EquipoTransp::class),
         'tipo_hito_id ' => TipoHito::InRandomOrder()->value('id')?:factory(TipoHito::class),
         'transportacion_id' => TipoHito::InRandomOrder()->value('id')?:factory(Transportacion::class),

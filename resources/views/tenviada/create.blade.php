@@ -12,6 +12,9 @@
       </div><!-- /.container-fluid -->
     </div>
 
+    @include('partials.success')
+    @include('partials.errors')    
+
     <div class="content">
       <div class="container">
         <div class="row">

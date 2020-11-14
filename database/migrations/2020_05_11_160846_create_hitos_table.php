@@ -18,8 +18,10 @@ class CreateHitosTable extends Migration
 
             $table->date('fyh_ini');
             $table->longText('description');
-            $table->longText('observaciones');
-
+            //$table->longText('observaciones');
+            
+            $table->unsignedBigInteger('tipo_hito_id');
+            $table->foreign('tipo_hito_id')->references('id')->on('tipo_hito');
             $table->unsignedBigInteger('transportacion_id');
             $table->foreign('transportacion_id')->references('id')->on('transportaciones');
 

@@ -35,12 +35,6 @@ class TransfEnviadaController extends Controller
         return view('tenviada.create',compact('transfer','lugares'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->authorize('create',new Transportacion);
@@ -52,7 +46,7 @@ class TransfEnviadaController extends Controller
         ],
         [ 
             'fyh_salida.required'=>'La fecha es obligatoria',
-            'fyh_salida.required'=>'Debe introducir la fecha',
+            'fyh_salida.required'=>'Debe intruducir una fecha válida',
             'num_fact.required'=>'El número de la factura es obligatorio',
             'num_fact.required'=>'El número de la factura no debe contener letras',
             'origen_id.required'=>'El lugar de origen es obligatorio',
@@ -119,7 +113,7 @@ class TransfEnviadaController extends Controller
         //
     }
 
-        public function llenar($value='')
+        public function llenar()
     {
         $transfer = new TransfEnviada;
         $productos = Producto::all();

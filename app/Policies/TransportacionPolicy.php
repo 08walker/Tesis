@@ -17,7 +17,6 @@ class TransportacionPolicy
         }
     }
 
-
     public function viewAny(User $user)
     {
         //

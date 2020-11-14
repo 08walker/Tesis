@@ -12,6 +12,10 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+
+    @include('partials.success')
+    @include('partials.errors')
+
           <div class="container">
             <div class="row">
                 <!-- aling -->

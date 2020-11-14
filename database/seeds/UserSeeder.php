@@ -32,7 +32,19 @@ class UserSeeder extends Seeder
             //'display_name'=>'Escritor'
         ]);
 
-        //$adminRole->givePermissionTo('View users');
+        //Permisos Rol Admin
+        // $adminRole->givePermissionTo('View users');
+        // $adminRole->givePermissionTo('Create users');
+        // $adminRole->givePermissionTo('Update users');
+        // $adminRole->givePermissionTo('Delete users');
+
+        // $adminRole->givePermissionTo('View roles');
+        // $adminRole->givePermissionTo('Create roles');
+        // $adminRole->givePermissionTo('Update roles');
+        // $adminRole->givePermissionTo('Delete roles');
+
+        // $adminRole->givePermissionTo('View permissions');
+        // $adminRole->givePermissionTo('Update permissions');
 
         //Permisos Rol Transporte
         $transporteRole->givePermissionTo('View tArrastre');
@@ -146,21 +158,5 @@ class UserSeeder extends Seeder
         factory(User::class,11)->create([
             'password'=>'123456'
         ]);
-
-        // User::create([
-        // 	'name'=>'laura',
-        // 	'email'=>'laura@gmail.com',
-        // 	'password'=>bcrypt('123456'),
-        // ]);
-        // User::create([
-        // 	'name'=>'walker',
-        // 	'email'=>'walker@gmail.com',
-        // 	'password'=>bcrypt('123456'),
-        // ]);
-        // User::create([
-        // 	'name'=>'yisel',
-        // 	'email'=>'yisel@gmail.com',
-        // 	'password'=>bcrypt('123456'),        	
-        // ]);
     }
 }

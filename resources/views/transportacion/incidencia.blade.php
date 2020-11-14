@@ -1,55 +1,57 @@
 @extends('admin.layout')
 
 @section('content')
-
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear tercero</h1>
+            <h1 class="m-0 text-dark"> Crear Incidencia</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-
+   
     @include('partials.success')
-    @include('partials.errors')    
+    @include('partials.errors')
 
     <div class="content">
-          <div class="container">
-            <div class="row">
-                <!-- aling -->
-                <div class="col-lg-3">
-                  <div class="card"></div>
-                </div>
-                <div class="col-lg-6">
-                <div class="card card-primary card-outline">
-                  <div class="card-body">
-                    
-                    @include('partials.error-messages')
-                    
-                    <form id="quickForm" role="form" method="POST" action="{{ route('terceros.create') }}">
-                    {!! csrf_field() !!}
-                    <div class="card-body">
+      <div class="container">
+        <div class="row">
+            <!-- aling -->
+            <div class="col-lg-3">
+              <div class="card"></div>
+            </div>
+            <div class="col-lg-6">
+            <div class="card card-primary card-outline">
+              <div class="card-body">
+                
+                @include('partials.error-messages')
+                
+                <form id="quickForm" role="form" method="POST" action="{{ route('transportaciones.incidencia',$transportacion) }}">
+                {!! csrf_field() !!}
+                <div class="card-body">
 
-                        @include('componentes.name',['model'=>$tercero])
-                        @include('componentes.identificador',['model'=>$tercero])
-                        @include('foreach.municipiofor',['model'=>$tercero])
+  			        @include('componentes.fechaincidencia',['model'=>$incidencia])
+                    	
+                @include('componentes.description',['model'=>$incidencia])
 
-                    <button type="submit" class="btn btn-success btn-flat">Crear</button>
-                    <a class="btn btn-flat btn-primary" href="{{route('terceros')}}">Cancelar</a>
-                    </div>
-                </form>                
+      		      @include('foreach.tipohitofor',['model'=>$incidencia])
+
+                <button type="submit" class="btn btn-success btn-flat">Crear</button>
+                <a class="btn btn-flat btn-primary" href="{{route('transportaciones')}}">Cancelar</a>
+
                 </div>
-                </div>
+            </form>                
             </div>
             </div>
-          </div>
+        </div>
+        </div>
+      </div>
     </div>
 </div>
-@endsection
 
+@endsection
 @push('styles')
 
 <!-- Select2 -->
@@ -77,6 +79,7 @@
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     });
+
   });
 </script>
 
@@ -84,29 +87,25 @@
 $(document).ready(function () {
    $('#quickForm').validate({
     rules: {
-      name: {
-        required: true,
-        minlength: 5,
-      },
-      identificador: {
-        required: true,
-        minlength: 5,
-      },
-      municipio_id: {
+      fyh_ini: {
         required: true
       },
+      description: {
+        required: true
+      },
+      tipo_hito_id: {
+        required: true
+      },      
     },
     messages: {
-      name: {
-        required: "Debe introducir el nombre",
-        minlength: "El nombre debe tener 5 caracteres como mínimo"
+      fyh_ini: {
+        required: "Debe seleccionar la fecha"
       },
-      identificador: {
-        required: "Debe introducir el identificador",
-        minlength: "El identificador debe tener 5 caracteres como mínimo"
+      description: {
+        required: "Debe introducir la descripción"
       },
-      municipio_id: {
-        required: "Por favor seleccione el municipio",
+      tipo_hito_id: {
+        required: "Debe seleccionar el tipo de incidencia"
       },
     },
     errorElement: 'span',

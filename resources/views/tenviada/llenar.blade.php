@@ -1,10 +1,6 @@
 @extends('admin.layout')
 
 @section('content')
-
-		'cantidad_bultos',
-        'transf_enviada_id',
-        'equipo_arrastre_envase_id',
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container">
@@ -15,6 +11,9 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+
+    @include('partials.success')
+    @include('partials.errors')    
 
     <div class="content">
           <div class="container">

@@ -8,9 +8,10 @@ class Hito extends Model
 {
     protected $table = 'hitos';
     protected $fillable = [
+        'fyh_ini',
         'description',
-        'observaciones',
-        'tipo_hito_id ',
+        //'observaciones',
+        'tipo_hito_id',
         'transportacion_id',
     ];
 

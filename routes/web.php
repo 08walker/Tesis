@@ -203,7 +203,11 @@ Route::post('/añadir/arrastre/{transportacion}','TransportacionController@store
 Route::post('/añadir/envase/{transportacion}','TransportacionController@storeenvase')
       ->name('transportaciones.envases');
 
+Route::get('/{transportacion}/incidencia','TransportacionController@incidencia')
+      ->name('transportaciones.incidencia');
+Route::post('/{transportacion}/incidencia','TransportacionController@storeincidencia');
 });
+
 // Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')->name('transportaciones.choferes');
 
 //Rutas tipo unidad de medidas

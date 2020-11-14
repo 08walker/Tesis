@@ -7,11 +7,14 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Actualizar agencia</h1>
+            <h1 class="m-0 text-dark"> Actualizar transportación</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+
+    @include('partials.success')
+    @include('partials.errors')
 
     <div class="content">
           <div class="container">
@@ -24,48 +27,19 @@
                 <div class="card card-primary card-outline">
                   <div class="card-body">
                     
-                    @include('admin.partials.error-messages')
+                    @include('partials.error-messages')
                     
-                  <form method="POST" action="{{ route('terceros.update',$tercero) }}">
-                    {{ method_field('PUT') }}{!! csrf_field() !!}
-                    <div class="card-body">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre:</label>
-                        <input autofocus="" type="text" class="form-control" name="name" id="exampleInputPassword1" placeholder="Escriba el nombre" value="{{$tercero->name, old('name')}}">
-                      <div class="has-error">
-                            @if($errors->has('name'))
-                            <span id="helpBlock2" class="help-block">{{$errors->first('name')}}</span>
-                            @endif
-                      </div>
-                      </div>
+                    <form id="quickForm" role="form" method="POST" action="{{ route('transportaciones.update',$transportacion) }}">
+                    {!! csrf_field() !!}{{ method_field('PUT') }}
 
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Identificador:</label>
-                        <input type="text" class="form-control" name="identificador" id="exampleInputPassword1" placeholder="Escriba el identificador" value="{{$tercero->identificador, old('identificador')}}">
-                      <div class="has-error">
-                            @if($errors->has('identificador'))
-                            <span id="helpBlock2" class="help-block">{{$errors->first('identificador')}}</span>
-                            @endif
-                      </div>
-                      </div>
+                    {{$transportacion->identificador}}
 
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Municipio:</label>
-                        <select class="form-control select2" style="width: 100%;" name="municipio_id">
-                        @foreach($municipios->all() as $municipio)
-                            @if($municipio->id == $tercero->municipio_id)
-                              <option value="{{$municipio->id}}">{{$municipio->name}}
-                              </option>
-                            @else                                 
-                              <option value="{{$municipio->id}}">{{$municipio->name}}
-                              </option>
-                            @endif
-                        @endforeach
-                      </select>
-                      </div>
+                      @include('componentes.numero',['model'=>$transportacion])
+                      @include('componentes.observacion',['model'=>$transportacion])
+                      @include('foreach.equipofor',['model'=>$transportacion])
 
-                    <button type="submit" class="btn btn-success btn-flat">Actualizar</button>
-                    <a class="btn btn-flat btn-primary" href="{{route('terceros')}}">Cancelar</a>
+                    <button type="submit" class="btn btn-success btn-flat">Crear</button>
+                    <a class="btn btn-flat btn-primary" href="{{route('transportaciones')}}">Cancelar</a>
                     </div>
                 </form>                
                 </div>
@@ -88,6 +62,9 @@
 @push('scripts')
   <!-- Select2 -->
   <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+  <!-- jquery-validation -->
+  <script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <script>
     $(function () {
@@ -101,8 +78,40 @@
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     });
-
   });
+</script>
 
+<script type="text/javascript">
+$(document).ready(function () {
+   $('#quickForm').validate({
+    rules: {
+      numero: {
+        required: true,
+      },
+      equipo_id: {
+        required: true
+      },
+    },
+    messages: {
+      numero: {
+        required: "Debe introducir el número",
+      },
+      equipo_id: {
+        required: "Por favor seleccione el equipo",
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
 </script>
 @endpush

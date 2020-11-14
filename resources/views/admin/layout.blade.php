@@ -52,25 +52,30 @@
             <a href="/home" class="nav-link">Inicio</a>
           </li>
           
-          @canany('view',[new \App\Provincia,new \App\Municipio])
+          @can('view',new \App\Transportacion)
           <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Division P.A.</a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Transportaciones</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               
-              @can('view',new \App\Provincia)
-                <li>
-                  <a href="{{ route('provincias') }}" class="dropdown-item">Provincias </a>
-                </li>
-              @endcan
+              <li>
+                <a href="#" class="dropdown-item">Ver en curso </a>
+              </li>
 
-              @can('view',new \App\Municipio)
-                <li>
-                  <a href="{{ route('municipios') }}" class="dropdown-item">Municipios </a>
-                </li>
-              @endcan
+              <li>
+                <a href="#" class="dropdown-item">Ver Recibidas </a>
+              </li>
+              
+              <li>
+                  <a href="{{ route('transportaciones') }}" class="dropdown-item">Ver Todas</a>
+              </li>
+
+              <li>
+                <a href="#" class="dropdown-item">Incidencias </a>
+              </li>
+              
             </ul>
           </li>
-          @endcanany
+          @endcan
           
           @canany('view',[new \App\Organizacion,new \App\Tercero,new \App\Lugar])
           <li class="nav-item dropdown">
@@ -160,18 +165,48 @@
                 </li>
               @endcan
 
-              {{-- @can('view',new \App\Transportacion) --}}
-                <li>
-                  <a href="{{ route('transportaciones') }}" class="dropdown-item">Transportacion</a>
-                </li>
-              {{-- @endcan --}}
-
               @can('view',new \App\TipoHito)
                 <li>
                   <a href="{{ route('tipohito') }}" class="dropdown-item">Tipo Hito</a>
                 </li>
               @endcan
 
+              <!-- Level two dropdown-->
+              @canany('view',[new \App\Provincia,new \App\Municipio])
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">División P.A.</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  @can('view',new \App\Provincia)
+                    <li>
+                      <a href="{{ route('provincias') }}" class="dropdown-item">Provincias </a>
+                    </li>
+                  @endcan
+
+                  @can('view',new \App\Municipio)
+                    <li>
+                      <a href="{{ route('municipios') }}" class="dropdown-item">Municipios </a>
+                    </li>
+                  @endcan
+                </ul>
+              </li>
+              @endcanany
+              <!-- End Level two -->
+
+            </ul>
+          </li>
+          @endcanany
+          
+          @can('view',new \App\Producto)
+            <li class="nav-item">
+              <a href="{{ route('productos') }}" class="nav-link">Productos</a>
+            </li>
+          @endcan
+
+          @canany('view',[new \App\Traza,new \App\Directivo,new \App\User, new \Spatie\Permission\Models\Role, new \Spatie\Permission\Models\Permission])
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Seguridad</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              
               @can('view',new \App\User)
                 <li>
                   <a href="{{ route('user.index') }}" class="dropdown-item">Usuarios</a>
@@ -196,21 +231,15 @@
                 </li>
               @endcan
 
+              @can('view',new \App\Traza)
+                <li>
+                  <a href="{{ route('trazas') }}" class="dropdown-item">Trazas</a>
+                </li>
+              @endcan
+
             </ul>
           </li>
           @endcanany
-          
-          @can('view',new \App\Producto)
-            <li class="nav-item">
-              <a href="{{ route('productos') }}" class="nav-link">Productos</a>
-            </li>
-          @endcan
-
-          @can('view',new \App\Traza)
-            <li class="nav-item">
-              <a href="{{ route('trazas') }}" class="nav-link">Trazas</a>
-            </li>
-          @endcan
 
           <li class="nav-item">
             <a href="/contacto" class="nav-link">Contacto</a>

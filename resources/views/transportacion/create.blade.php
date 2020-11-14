@@ -7,11 +7,14 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear transportacion</h1>
+            <h1 class="m-0 text-dark"> Crear transportación</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+
+    @include('partials.success')
+    @include('partials.errors')
 
     <div class="content">
           <div class="container">

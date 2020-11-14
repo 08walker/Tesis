@@ -12,8 +12,10 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+
     @include('partials.success')
     @include('partials.errors')
+    
     <div class="content">
         <div class="container">
             <div class="row">
@@ -34,34 +36,23 @@
                         <div class="col-4">
                           <p>Equipos: <strong>{{$transportacion->equipo->identificador}}</strong></p>
                         </div>
-                        
-                        <div class="col-6">
-                        <a href="#" type="button" class="btn btn-primary btn-flat" >
-                          <i class="fa fa-pen"></i> Editar detelles
-                        </a>
-                        </div>
-                        
-                        <div class="col-6">
-                        <a href="#" type="button" class="btn btn-primary btn-flat" >
-                          <i class="fa fa-plus"></i> Reportar incidencia
-                        </a>
-                        </div>
-  
-                        <div class="col-6">
-                        <a href="#" type="button" class="btn btn-success btn-flat" >
-                          <i class="fa fa-plus"></i> Añadir transferencia enviada
-                        </a>
-                        </div>
-
-                        <div class="col-6">    
-                        <a href="#" type="button" class="btn btn-danger btn-flat" >
-                          <i class="fa fa-plus"></i> Añadir transferencia recibida
-                        </a>
-                        
-                        </div>
+                  </div>
+                      <div class="content">
+                          <a href="{{route('transportaciones.edit',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                            <i class="fa fa-pen"></i> Editar detalles
+                          </a>
+                          <a href="{{route('transportaciones.incidencia',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                            <i class="fa fa-plus"></i> Reportar incidencia
+                          </a>
+                          <a href="{{route('tenv.create')}}" type="button" class="btn btn-success btn-flat" >
+                            <i class="fa fa-plus"></i> Añadir transferencia enviada
+                          </a>
+                          <a href="#" type="button" class="btn btn-danger btn-flat" >
+                            <i class="fa fa-plus"></i> Añadir transferencia recibida
+                          </a>
+                      </div>
                   </div>
                 </div>
-                <br><br>
                 <!----------------------------->
                 <div class="content">
                   <div class="container">
