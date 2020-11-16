@@ -12,6 +12,7 @@ class TransfEnviada extends Model
         'num_fact',
         'origen_id',
         'destino_id',
+        'transportacion_id',
     ];
 
     public function origen()

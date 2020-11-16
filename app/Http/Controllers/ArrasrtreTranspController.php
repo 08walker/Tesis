@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ProdEnvaseRec;
+use App\Arrasrtre_Transp;
 use Illuminate\Http\Request;
 
-class ProdEnvaseRecController extends Controller
+class ArrasrtreTranspController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProdEnvaseRecController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProdEnvaseRec  $prodEnvaseRec
+     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
      * @return \Illuminate\Http\Response
      */
-    public function show(ProdEnvaseRec $prodEnvaseRec)
+    public function show(Arrasrtre_Transp $arrasrtre_Transp)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProdEnvaseRecController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProdEnvaseRec  $prodEnvaseRec
+     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProdEnvaseRec $prodEnvaseRec)
+    public function edit(Arrasrtre_Transp $arrasrtre_Transp)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProdEnvaseRecController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProdEnvaseRec  $prodEnvaseRec
+     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProdEnvaseRec $prodEnvaseRec)
+    public function update(Request $request, Arrasrtre_Transp $arrasrtre_Transp)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProdEnvaseRecController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProdEnvaseRec  $prodEnvaseRec
+     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProdEnvaseRec $prodEnvaseRec)
+    public function destroy(Arrasrtre_Transp $arrasrtre_Transp)
     {
         //
     }

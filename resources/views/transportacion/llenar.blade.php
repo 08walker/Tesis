@@ -131,12 +131,14 @@
                      <div class="form-group">
                       <div class="col-6">
                         <label>Arrastres:</label>
-                        {{-- {{$arrastres->pluck('id')}} --}}
+
                         <select class="select2" multiple="multiple" name="larrastre[]" data-placeholder="Seleccione los arrastres" style="width: 100%;">
-                          @foreach($arrastres as $arrastre)
-                            {{ collect(old('larrastre', $transportacion->arrastres->pluck('id')))->contains($arrastre->id) ? 'selected':'' }}
+                          @foreach($arrastres->all() as $arrastre)
+                            <option 
+                              {{-- {{ collect(old('larrastre', $transportacion->arrastres->pluck('id')))->contains($arrastre->id) ? 'selected':'' }} --}}
                               value="{{$arrastre->id}}">
                               {{$arrastre->identificador}}
+                            </option>
                           @endforeach
                         </select>
                         <div class="has-error">
@@ -160,28 +162,17 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach($transportacion->arrastres as $arrastre)
+                          @foreach($tarras as $arrast)
                           <tr>
-                            <td>{{$arrastre->identificador}}</td>
-                            <td>{{$arrastre->description}}</td>
-                            <td>lololo</td>
-                            </tr>
-                          @endforeach
-
-                          {{-- 
-                          <tr>
-                            <td>{{$demo->id}}</td>
-                            <td>asd</td>
+                            <td>{{$arrast->arrastres->identificador}}</td>
+                            <td>{{$arrast->arrastres->description}}</td>
                             <td>
-                              <a href="#" type="button" class="btn btn-primary btn-flat" >
-                                <i class="fa fa-plus"></i> Añadir Envase
-                              </a>
-
-                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                              <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#modal-default">
                                       <i class="fa fa-plus"></i> Añadir Envase
                              </button>
                             </td>
-                          </tr>--}}
+                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>  
@@ -189,9 +180,6 @@
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                      texto numero 3
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
-                     texto numero 4
                   </div>
                 </div>
               </div>
@@ -274,7 +262,8 @@
 
     //Initialize Select2 Elements
     $('.select2').select2({
-      lchofer:true
+      lchofer:true,
+      larrastre:true
     })
 
     //Initialize Select2 Elements

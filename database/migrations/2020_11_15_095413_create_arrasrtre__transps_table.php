@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArrastreTransporTable extends Migration
+class CreateArrasrtreTranspsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateArrastreTransporTable extends Migration
      */
     public function up()
     {
-        Schema::create('arrastre_transpor', function (Blueprint $table) {
+        Schema::create('arrasrtre__transps', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('transportacion_id');
@@ -32,6 +32,6 @@ class CreateArrastreTransporTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arrastre_transpor');
+        Schema::dropIfExists('arrasrtre__transps');
     }
 }

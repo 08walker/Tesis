@@ -23,6 +23,8 @@ class CreateTransfRecibidasTable extends Migration
             $table->foreign('origen_id')->references('id')->on('lugares');
             $table->unsignedBigInteger('destino_id');
             $table->foreign('destino_id')->references('id')->on('lugares');
+            $table->unsignedBigInteger('transportacion_id');
+            $table->foreign('transportacion_id')->references('id')->on('transportaciones');
 
             $table->timestamps();
         });

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ProdEnvaseEnv;
+use App\Transf_Env_Prod;
 use Illuminate\Http\Request;
 
-class ProdEnvaseEnvController extends Controller
+class TransfEnvProdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProdEnvaseEnvController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProdEnvaseEnv  $prodEnvaseEnv
+     * @param  \App\Transf_Env_Prod  $transf_Env_Prod
      * @return \Illuminate\Http\Response
      */
-    public function show(ProdEnvaseEnv $prodEnvaseEnv)
+    public function show(Transf_Env_Prod $transf_Env_Prod)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProdEnvaseEnvController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProdEnvaseEnv  $prodEnvaseEnv
+     * @param  \App\Transf_Env_Prod  $transf_Env_Prod
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProdEnvaseEnv $prodEnvaseEnv)
+    public function edit(Transf_Env_Prod $transf_Env_Prod)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProdEnvaseEnvController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProdEnvaseEnv  $prodEnvaseEnv
+     * @param  \App\Transf_Env_Prod  $transf_Env_Prod
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProdEnvaseEnv $prodEnvaseEnv)
+    public function update(Request $request, Transf_Env_Prod $transf_Env_Prod)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProdEnvaseEnvController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProdEnvaseEnv  $prodEnvaseEnv
+     * @param  \App\Transf_Env_Prod  $transf_Env_Prod
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProdEnvaseEnv $prodEnvaseEnv)
+    public function destroy(Transf_Env_Prod $transf_Env_Prod)
     {
         //
     }

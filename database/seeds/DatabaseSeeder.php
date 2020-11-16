@@ -13,41 +13,41 @@ class DatabaseSeeder extends Seeder
     {
     	$this->truncateTables([
    		    'provincias',
-         //    'municipios',
-         //    'tipo_equipo',
-         //    'tipo_arrastre',
-   		    // 'terceros',
-         //    'organizaciones',
-         //    'equipos',
-         //    'choferes',
-         //    'arrastres',
-         //    'lugares',
-         //    'envases',
-         //    'productos',
-         //    'transportaciones',
-         //    'arrastre_enva_equipo',
-         //    'chofer_equipo_transp',
-         //    'p_transf_env',
-         //    'p_transf_rec',
-         //    'prod_envase_env',
-         //    'prod_envase_rec',
-         //    'transf_enviadas',
-         //    'transf_recibidas',
-         //    'arrastre_transpor',
-         //    'tipo_hito',
-         //    //'hitos',
-         //    'unidad_medida',
-         //    'tipo_unidad_medida',
-         //    'producto_unidad_medida',
+            'municipios',
+            'tipo_equipo',
+            'tipo_arrastre',
+   		    'terceros',
+            'organizaciones',
+            'equipos',
+            'choferes',
+            'arrastres',
+            'lugares',
+            'envases',
+            'productos',
+            'transportaciones',
+            'chofer_equipo_transp',
+            'p_transf_env',
+            'p_transf_rec',
+            'transf_enviadas',
+            'transf_recibidas',
+            'tipo_hito',
+            //'hitos',
+            'unidad_medida',
+            'tipo_unidad_medida',
             
-         //    'users',
-         //    'roles',
-         //    'permissions',
-         //    'model_has_roles',
-         //    'role_has_permissions',
-         //    'directivos',
+            'users',
+            'roles',
+            'permissions',
+            'model_has_roles',
+            'role_has_permissions',
+            'directivos',
 
-         //    'trazas',
+            'arrasrtre__transps',
+            'arrasrtre__transp__envas',
+            'transf__rec__prods',
+            'transf__env__prods',
+
+            'trazas',
     	]);
         $this->call(ProvinciaSeeder::class);
         $this->call(MunicipioSeeder::class);
@@ -78,15 +78,15 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoHitoSeeder::class);
         //$this->call(HitoSeeder::class);
 
-        $this->call(ChoferEquipoTranspSeeder::class);
-        $this->call(ArrastreTransporSeeder::class);
-        $this->call(ArrastreEnvaEquipoSeeder::class);
-        $this->call(TransfEnviadaSeeder::class);
-        $this->call(TransfRecibidaSeeder::class);
-        $this->call(ProdEnvaEnvSeeder::class);
-        $this->call(ProdEnvaRecSeeder::class);
+        // $this->call(ChoferEquipoTranspSeeder::class);
+        // $this->call(ArrastreTransporSeeder::class);
+        // $this->call(ArrastreEnvaEquipoSeeder::class);
+        // $this->call(TransfEnviadaSeeder::class);
+        // $this->call(TransfRecibidaSeeder::class);
+        // $this->call(ProdEnvaEnvSeeder::class);
+        // $this->call(ProdEnvaRecSeeder::class);
         
-        $this->call(ProductoUnidadMedidaSeeder::class);
+        // $this->call(ProductoUnidadMedidaSeeder::class);
 
     }
 

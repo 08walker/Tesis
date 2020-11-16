@@ -18,7 +18,7 @@ class MunicipioController extends Controller
         $todos = Municipio::all();
         $municipios = $todos->filter(function ($value,$key){
             return data_get($value,'activo') == 1;
-        })->sortBy('provincia_id');        
+        })->sortBy('provincia_id');
         
         return view('municipio.index',compact('municipios'));
     }

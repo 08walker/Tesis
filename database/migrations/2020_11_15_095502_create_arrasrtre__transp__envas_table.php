@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArrastreEnvaEquipoTable extends Migration
+class CreateArrasrtreTranspEnvasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateArrastreEnvaEquipoTable extends Migration
      */
     public function up()
     {
-        Schema::create('arrastre_enva_equipo', function (Blueprint $table) {
+        Schema::create('arrasrtre__transp__envas', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->longText('observacion')->nullable();
-
-            $table->unsignedBigInteger('arrastre_transp_id');
-            $table->foreign('arrastre_transp_id')->references('id')->on('arrastre_transpor');
+            $table->unsignedBigInteger('arrast_transp_id');
+            $table->foreign('arrast_transp_id')->references('id')->on('arrasrtre__transps');
             $table->unsignedBigInteger('envase_id');
             $table->foreign('envase_id')->references('id')->on('envases');
-
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ class CreateArrastreEnvaEquipoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arrastre_enva_equipo');
+        Schema::dropIfExists('arrasrtre__transp__envas');
     }
 }

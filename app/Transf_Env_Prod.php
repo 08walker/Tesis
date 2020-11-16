@@ -4,17 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProdEnvaRec extends Model
+class Transf_Env_Prod extends Model
 {
-    protected $table = 'prod_envase_rec';
+    protected $table = 'transf__env__prods';
     protected $fillable = [
         'cantidad_bultos',
         'peso_kg',
         'volumen_m3',
         'observacion',
-        'estado',
         'producto_id',
-        'transf_recibida_id',
-        'equipo_arrastre_envase_id',
+        'transf_enviada_id',
     ];
 }

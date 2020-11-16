@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ArrastreTranspor;
+use App\Transf_Rec_Prod;
 use Illuminate\Http\Request;
 
-class ArrastreTransporController extends Controller
+class TransfRecProdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ArrastreTransporController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ArrastreTranspor  $arrastreTranspor
+     * @param  \App\Transf_Rec_Prod  $transf_Rec_Prod
      * @return \Illuminate\Http\Response
      */
-    public function show(ArrastreTranspor $arrastreTranspor)
+    public function show(Transf_Rec_Prod $transf_Rec_Prod)
     {
         //
     }
@@ -52,10 +52,10 @@ class ArrastreTransporController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ArrastreTranspor  $arrastreTranspor
+     * @param  \App\Transf_Rec_Prod  $transf_Rec_Prod
      * @return \Illuminate\Http\Response
      */
-    public function edit(ArrastreTranspor $arrastreTranspor)
+    public function edit(Transf_Rec_Prod $transf_Rec_Prod)
     {
         //
     }
@@ -64,10 +64,10 @@ class ArrastreTransporController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ArrastreTranspor  $arrastreTranspor
+     * @param  \App\Transf_Rec_Prod  $transf_Rec_Prod
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ArrastreTranspor $arrastreTranspor)
+    public function update(Request $request, Transf_Rec_Prod $transf_Rec_Prod)
     {
         //
     }
@@ -75,10 +75,10 @@ class ArrastreTransporController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ArrastreTranspor  $arrastreTranspor
+     * @param  \App\Transf_Rec_Prod  $transf_Rec_Prod
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ArrastreTranspor $arrastreTranspor)
+    public function destroy(Transf_Rec_Prod $transf_Rec_Prod)
     {
         //
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Arrasrtre_Transp;
 use App\Arrastre;
 use App\ArrastreTranspor;
 use App\Chofer;
@@ -68,7 +69,8 @@ class TransportacionController extends Controller
         $choferes = Chofer::all();
         $arrastres = Arrastre::all();
         $envases = Envase::all();
-        return view('transportacion.llenar',compact('transportacion','choferes','arrastres','envases'));
+        $tarras = $transportacion->arrastretrasnp;
+        return view('transportacion.llenar',compact('transportacion','choferes','arrastres','envases','tarras'));
     }
 
     public function edit(Transportacion $transportacion)
@@ -112,22 +114,31 @@ class TransportacionController extends Controller
     public function storearrastre(Request $request,Transportacion $transportacion)
     {
         $this->authorize('create',new Transportacion);
-
-        // if ($request->get('larrastre')) {
-        //     $arrastres = $request->get('larrastre');
-        //     foreach ($arrastres as $arrastre) {
-        //         //dd($municipio->provincia->name);
-        //     $asdasd = ArrastreTranspor::create([
-        //         'transportacion_id'=>$transportacion->id,
-        //         'arrastre_id'=>$arrastre,
-        //         ]);                
-        //     }
-        //     //dd($asdasd);
-        //   //dd($transportacion->arrastretranspor->getAll());
-        // }
-        $transportacion->arrastres()->sync($request->get('larrastre'));
         
-        return back();
+        $data = $request['larrastre'];
+        //si viene vacio sale
+        if ($data) {
+            if ($transportacion->arrastretrasnp->count() > 0) {
+                foreach ($data as $dat) {
+                if ($transportacion->arrastretrasnp->contains('arrastre_id',$dat)) {}
+                else{
+                      Arrasrtre_Transp::create([
+                       'transportacion_id'=>$transportacion->id,
+                       'arrastre_id'=>$dat,
+                      ]);
+                    }
+                }
+            }
+            else{
+                foreach ($data as $dat) {
+                      Arrasrtre_Transp::create([
+                       'transportacion_id'=>$transportacion->id,
+                       'arrastre_id'=>$dat,
+                      ]);
+                }
+            }
+        }        
+        return redirect()->route('transportaciones.show',$transportacion);
     }
 
     public function storeenvase(Request $request,Transportacion $transportacion)

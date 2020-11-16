@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductoUnidadMedida;
+use App\Arrasrtre_Transp_Enva;
 use Illuminate\Http\Request;
 
-class ProductoUnidadMedidaController extends Controller
+class ArrasrtreTranspEnvaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProductoUnidadMedidaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductoUnidadMedida  $productoUnidadMedida
+     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductoUnidadMedida $productoUnidadMedida)
+    public function show(Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProductoUnidadMedidaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductoUnidadMedida  $productoUnidadMedida
+     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductoUnidadMedida $productoUnidadMedida)
+    public function edit(Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProductoUnidadMedidaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductoUnidadMedida  $productoUnidadMedida
+     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductoUnidadMedida $productoUnidadMedida)
+    public function update(Request $request, Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProductoUnidadMedidaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProductoUnidadMedida  $productoUnidadMedida
+     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductoUnidadMedida $productoUnidadMedida)
+    public function destroy(Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
     {
         //
     }
