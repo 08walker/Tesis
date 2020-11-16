@@ -39,7 +39,7 @@
                       @include('foreach.equipofor',['model'=>$transportacion])
 
                     <button type="submit" class="btn btn-success btn-flat">Actualizar</button>
-                    <a class="btn btn-flat btn-primary" href="{{route('transportaciones')}}">Cancelar</a>
+                    <a class="btn btn-flat btn-primary" href="{{route('transportaciones.show',$transportacion)}}">Cancelar</a>
                     </div>
                 </form>                
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Arrasrtre_Transp;
+use App\Arrasrtre_Transp_Enva;
 use App\Arrastre;
 use App\ArrastreTranspor;
 use App\Chofer;
@@ -70,6 +71,7 @@ class TransportacionController extends Controller
         $arrastres = Arrastre::all();
         $envases = Envase::all();
         $tarras = $transportacion->arrastretrasnp;
+        //dd($tarras);
         return view('transportacion.llenar',compact('transportacion','choferes','arrastres','envases','tarras'));
     }
 
@@ -141,8 +143,15 @@ class TransportacionController extends Controller
         return redirect()->route('transportaciones.show',$transportacion);
     }
 
-    public function storeenvase(Request $request,Transportacion $transportacion)
+    public function storeenvase(Request $request,$id)
     {
-        
+        $arrastre = Arrasrtre_Transp::find($id);
+        //dd($arrastre);
+        $demo = Arrasrtre_Transp_Enva::create([
+            'arrast_transp_id'=>$arrastre->id,
+            'envase_id'=>$request['envase_id'],
+        ]);
+        //dd($arrastre->arrastenva);
+        return redirect()->route('transportaciones.show',$arrastre->transportacion_id);
     }   
 }

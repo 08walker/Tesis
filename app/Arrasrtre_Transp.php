@@ -20,4 +20,9 @@ class Arrasrtre_Transp extends Model
     {
         return $this->belongsTo('App\Transportacion','transportacion_id');
     }
+
+    public function arrastenva()
+    {
+        return $this->hasMany('App\Arrasrtre_Transp_Enva','arrast_transp_id');
+    }
 }

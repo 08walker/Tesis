@@ -200,7 +200,7 @@ Route::post('/añadir/chofer/{transportacion}','TransportacionController@storech
       ->name('transportaciones.choferes');
 Route::post('/añadir/arrastre/{transportacion}','TransportacionController@storearrastre')
       ->name('transportaciones.arrastres');
-Route::post('/añadir/envase/{transportacion}','TransportacionController@storeenvase')
+Route::post('/añadir/envase/{id}','TransportacionController@storeenvase')
       ->name('transportaciones.envases');
 
 Route::get('/{transportacion}/incidencia','HitoController@create')

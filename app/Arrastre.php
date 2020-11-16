@@ -43,6 +43,6 @@ class Arrastre extends Model
 
     public function arrastretrasnp()
     {
-        return $this->hasMany('App\Arrasrtre_Transp');
+        return $this->hasMany('App\Arrasrtre_Transp','arrastre_id');
     }
 }

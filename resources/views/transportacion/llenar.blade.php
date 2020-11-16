@@ -175,11 +175,40 @@
                           @endforeach
                         </tbody>
                       </table>
-                    </div>  
+                    </div>
 
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
-                     texto numero 3
+
+                     <div class="content">
+                      <table id="example3" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Ident. Arrastre</th>
+                            <th>Ident. Envase</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($tarras as $arra)
+                            @foreach($arra->arrastenva as $dat)
+                              <tr>
+                                <td>{{$dat->id}}</td>
+                                <td>{{$arra->arrastres->identificador}}</td>
+                                <td>{{$dat->envase->identificador}}</td>
+                                <td>
+                                  <button type="button" class="btn btn-flat btn-danger">
+                                          <i class="fa fa-minus"></i> Quitar
+                                 </button>
+                                </td>
+                              </tr>
+                            @endforeach
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>  
+
                   </div>
                 </div>
               </div>
@@ -195,9 +224,10 @@
 
 </div>
 
-      <div class="modal fade" id="modal-default">
+@if($tarras->count()>0)
+    <div class="modal fade" id="modal-default">
       <form id="quickForm" role="form" method="POST" 
-          action="{{ route('transportaciones.envases',$arrastre) }}">
+          action="{{ route('transportaciones.envases',$arrast) }}">
               {!! csrf_field() !!}
         <div class="modal-dialog">
           <div class="modal-content">
@@ -230,7 +260,7 @@
         </form>
       </div>
       <!-- /.modal -->
-
+@endif
 
 @endsection
 
@@ -292,6 +322,22 @@
        },
     });
     $("#example2").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      "language": {
+        "search": "Buscar",
+        "lengthMenu": "Ver _MENU_ entradas",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "emptyTable": "No hay datos para mostrar",
+        "paginate": {
+            "last": "Última página",
+            "first": "Primera página",
+            "next": "Siguiente",
+            "previous": "Anterior",
+          },
+       },
+    });
+    $("#example3").DataTable({
       "responsive": true,
       "autoWidth": false,
       "language": {

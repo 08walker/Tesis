@@ -11,4 +11,14 @@ class Arrasrtre_Transp_Enva extends Model
         'arrast_transp_id',
         'envase_id',
     ];
+
+    public function envase()
+    {
+        return $this->belongsTo('App\Envase');
+    }
+
+    public function arrasrtre_transps()
+    {
+        return $this->belongsTo('App\Arrasrtre_Transp','arrast_transp_id');
+    }
 }

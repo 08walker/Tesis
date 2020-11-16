@@ -26,4 +26,10 @@ class Envase extends Model
     {
         return $this->belongsTo('App\Organizacion');
     }
+
+    public function arrastenva()
+    {
+        return $this->hasMany('App\Arrasrtre_Transp_Enva','envase_id');
+    }
+
 }

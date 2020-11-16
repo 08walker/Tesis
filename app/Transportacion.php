@@ -25,6 +25,6 @@ class Transportacion extends Model
 
     public function arrastretrasnp()
     {
-        return $this->hasMany('App\Arrasrtre_Transp');
+        return $this->hasMany('App\Arrasrtre_Transp','transportacion_id');
     }    
 }
