@@ -2,58 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTransfEnvRequest;
 use App\Lugar;
 use App\Producto;
 use App\TransfEnviada;
+use App\Transf_Env_Prod;
 use App\Transportacion;
 use App\Traza;
 use Illuminate\Http\Request;
 
 class TransfEnviadaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //$this->authorize('view',new Transportacion);
+        $this->authorize('view',new Transportacion);
         $todas = TransfEnviada::all();        
         return view('tenviada.index',compact('todas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($id)
     {
         $this->authorize('create',new Transportacion);
         $transfer = new TransfEnviada;
         $lugares = Lugar::all();
-        return view('tenviada.create',compact('transfer','lugares'));
+        return view('tenviada.create',compact('id','transfer','lugares'));
     }
 
-    public function store(Request $request)
+    public function store(StoreTransfEnvRequest $request,$id)
     {
         $this->authorize('create',new Transportacion);
-        $data = request()->validate([
-            'fyh_salida'=>'required|date',
-            'num_fact'=>'required|numeric',
-            'origen_id'=>'required',
-            'destino_id'=>'required|different:origen_id'
-        ],
-        [ 
-            'fyh_salida.required'=>'La fecha es obligatoria',
-            'fyh_salida.required'=>'Debe intruducir una fecha válida',
-            'num_fact.required'=>'El número de la factura es obligatorio',
-            'num_fact.required'=>'El número de la factura no debe contener letras',
-            'origen_id.required'=>'El lugar de origen es obligatorio',
-            'destino_id.required'=>'El lugar de destino es obligatorio',
-            'destino_id.different'=>'El lugar de destino debe ser diferente al de origen',
-        ]);
+        $data = $request->all();
 
         //dd($data = request()->all());
         $transf = TransfEnviada::create([
@@ -61,26 +39,21 @@ class TransfEnviadaController extends Controller
             'num_fact'=> $data['num_fact'],
             'origen_id'=> $data['origen_id'],
             'destino_id'=> $data['destino_id'],
+            'transportacion_id'=>$id,
         ]);
         if ($transf) {
             $nombre = auth()->user()->name;
             $ip = request()->ip();
             Traza::create([
-            'description'=> "Transferencia enviada número {$transf->num_fact} creada por el usuario {$nombre}",
+            'description'=> "Transferencia número {$transf->num_fact} creada por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
 
-            return $transf;
+            return redirect()->route('tenv.llenar',$id)->with('success','Transferencia creada con éxito');
         }
         return back()->withInput()->with('error','Error al crear la transferencia');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TransfEnviada  $transfEnviada
-     * @return \Illuminate\Http\Response
-     */
     public function show(TransfEnviada $transfEnviada)
     {
         //
@@ -109,31 +82,57 @@ class TransfEnviadaController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TransfEnviada  $transfEnviada
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(TransfEnviada $transfEnviada)
     {
         //
     }
 
-        public function llenar()
+    public function llenar($id)
     {
-        $transfer = new TransfEnviada;
+        $transfer = new Transf_Env_Prod;
         $productos = Producto::all();
-        return view('tenviada.llenar',compact('transfer','productos'));
+        return view('tenviada.llenar',compact('transfer','productos','id'));
     }
 
-    public function storechofer(Request $request,Transportacion $transportacion)
+    public function storeproducto(Request $request,$id)
     {
-        $this->authorize('create',new Transportacion);
-        //$transportacion->choferes()->attach($request->get('lchofer'));
-        //$transportacion->syncChofer($request->get('lchofer'));
-        $transportacion->choferes()->sync($request->get('lchofer'));
-        return back();
+        $data = request()->validate([
+        'cantidad_bultos'=>'numeric|min:1',
+        'peso_kg'=>'required|numeric|min:1',
+        'volumen_m3'=>'required|numeric|min:1',
+        'producto_id'=>'required',
+    ],
+    [ 
+        'cantidad_bultos.numeric'=>'Debe introducir un número',
+        'peso_kg.required'=>'Debe introducir el peso',
+        'volumen_m3.required'=>'Debe introducir el volumen',
+        'producto_id.required'=>'Debe seleccionar el producto',
+        'peso_kg.numeric'=>'Debe introducir un número',
+        'volumen_m3.numeric'=>'Debe introducir un número',
+        'peso_kg.min'=>'Debe introducir valores mayores que 0',
+        'volumen_m3.min'=>'Debe introducir valores mayores que 0',
+        'cantidad_bultos.min'=>'Debe introducir valores mayores que 0',
+    ]);
+        $data = $request->all();
+        $dat = Transf_Env_Prod::create([
+            'cantidad_bultos'=> $data['cantidad_bultos'],
+            'peso_kg'=> $data['peso_kg'],
+            'volumen_m3'=> $data['volumen_m3'],
+            'observacion'=> $data['observacion'],
+            'producto_id'=> $data['producto_id'],
+            'transf_enviada_id'=> $id,
+        ]);
+        if ($dat) {
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "Producto {$dat->producto->name} añadido a la transferencia número {$dat->transfenviada->num_fact} creada por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+            return redirect()->route('tenv');  
+
+        }
+        return back()->withInput()->with('errors','Error al llenar la transferencia');
     }
 
 }

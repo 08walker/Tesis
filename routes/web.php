@@ -200,15 +200,42 @@ Route::post('/añadir/chofer/{transportacion}','TransportacionController@storech
       ->name('transportaciones.choferes');
 Route::post('/añadir/arrastre/{transportacion}','TransportacionController@storearrastre')
       ->name('transportaciones.arrastres');
-Route::post('/añadir/envase/{id}','TransportacionController@storeenvase')
+Route::post('/añadir/envase/','TransportacionController@storeenvase')
       ->name('transportaciones.envases');
 
 Route::get('/{transportacion}/incidencia','HitoController@create')
       ->name('transportaciones.incidencia');
 Route::post('/{transportacion}/incidencia','HitoController@store');
+
+
 });
 
-// Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')->name('transportaciones.choferes');
+//Rutas de transferencia enviadas
+  //Route::resource('tenv','TransfEnviadaController');
+Route::group([
+    'prefix'=>'tenv',
+    'middleware'=>'auth'
+],
+function(){
+
+//Route::get('/','TransfEnviadaController@index')->name('transportaciones');
+
+Route::get('/{id}/crear','TransfEnviadaController@create')->name('tenv.create');
+Route::post('/{id}/crear','TransfEnviadaController@store');
+
+Route::get('/','TransfEnviadaController@index')->name('tenv');
+//Route::get('/{id}/llenar','TransfEnviadaController@show')->where('id','[0-9]+')->name('tenv.show');
+
+Route::post('/{id}','TransfEnviadaController@storeproducto')->name('tenv.storeproducto');
+Route::get('/{id}/llenar','TransfEnviadaController@llenar')->name('tenv.llenar');
+
+Route::get('/{tenv}/editar','TransfEnviadaController@edit')->name('tenv.edit');
+Route::put('/{tenv}','TransfEnviadaController@update')->name('tenv.update');
+Route::delete('/{tenv}','TransfEnviadaController@destroy')->name('tenv.destroy');
+});
+
+//Rutas de transferencia enviadas
+Route::resource('trec','TransfRecibidaController');
 
 //Rutas tipo unidad de medidas
 Route::group([
@@ -329,22 +356,3 @@ Route::middleware('role:Admin')
   Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
   Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-  //Route::resource('tenv','TransfEnviadaController');
-Route::group([
-    'prefix'=>'tenv',
-    'middleware'=>'auth'
-],
-function(){
-Route::get('/','TransfEnviadaController@index')->name('tenv');
-Route::get('/{id}/llenar','TransfEnviadaController@show')->where('id','[0-9]+')->name('tenv.show');
-Route::get('/crear','TransfEnviadaController@create')->name('tenv.create');
-Route::post('/crear','TransfEnviadaController@store');
-Route::get('/llenar','TransfEnviadaController@llenar')->name('tenv.llenar');
-Route::post('/llenar','TransfEnviadaController@guardar');
-Route::get('/{tenv}/editar','TransfEnviadaController@edit')->name('tenv.edit');
-Route::put('/{tenv}','TransfEnviadaController@update')->name('tenv.update');
-Route::delete('/{tenv}','TransfEnviadaController@destroy')->name('tenv.destroy');
-});
-
-
-  Route::resource('trec','TransfRecibidaController');

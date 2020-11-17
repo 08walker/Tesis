@@ -19,4 +19,9 @@ class Producto extends Model
     {
         return $this->belongsTo('App\UnidadMedida','unidad_medida_id');
     }
+
+    public function transfenvprod()
+    {
+        return $this->hasOne('App\Transf_Env_Prod');
+    }
 }

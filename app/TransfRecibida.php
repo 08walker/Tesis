@@ -24,4 +24,9 @@ class TransfRecibida extends Model
         return $this->belongsTo('App\Lugar');
     }
 
+    public function transportacion()
+    {
+        return $this->belongsTo('App\Transportacion');
+    }
+
 }

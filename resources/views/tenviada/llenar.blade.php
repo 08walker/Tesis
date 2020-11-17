@@ -19,32 +19,29 @@
           <div class="container">
             <div class="row">
                 <!-- aling -->
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                   <div class="card"></div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
                     
                     @include('partials.error-messages')
-                    
-                    <form id="quickForm" role="form" method="POST" action="{{ route('municipios.create') }}">
-                    {!! csrf_field() !!}
-                    <div class="card-body">
-                      
+                    <form id="quickForm" role="form" method="POST" action="{{ route('tenv.update',$id) }}">
+                {!! csrf_field() !!}
+
                       @include('foreach.productosfor',['model'=>$transfer])
-        
-                      @include('componentes.observacion',['model'=>$transfer])
 
+                      @include('componentes.cantbultos',['model'=>$transfer])
                       @include('componentes.pesoprod',['model'=>$transfer])
-
                       @include('componentes.volumenprod',['model'=>$transfer])
-
-                    <button type="submit" class="btn btn-success btn-flat">Añadir</button>
-                    <a class="btn btn-flat btn-primary" href="{{route('municipios')}}">Cancelar</a>
-                    </div>
-                </form>                
-                </div>
+                      @include('componentes.observacion',['model'=>$transfer])
+                      
+                      <button type="submit" class="btn btn-success btn-flat">LLenar</button>
+                      <a class="btn btn-flat btn-primary" {{-- href="{{route('transportaciones.show',$id)}}" --}}>Cancelar</a>
+                    </form>
+                    
+                  </div>
                 </div>
             </div>
             </div>

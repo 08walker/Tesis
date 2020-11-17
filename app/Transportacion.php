@@ -27,4 +27,15 @@ class Transportacion extends Model
     {
         return $this->hasMany('App\Arrasrtre_Transp','transportacion_id');
     }    
+
+    public function transfenviada()
+    {
+        return $this->hasMany('App\TransfEnviada');
+    }
+
+    public function transfrecibida()
+    {
+        return $this->hasMany('App\TransfRecibida');
+    }
+
 }

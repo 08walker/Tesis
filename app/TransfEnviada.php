@@ -24,4 +24,14 @@ class TransfEnviada extends Model
         return $this->belongsTo('App\Lugar');
     }
 
+    public function transportacion()
+    {
+        return $this->belongsTo('App\Transportacion');
+    }
+
+    public function transfenvprod()
+    {
+        return $this->hasOne('App\Transf_Env_Prod','transf_enviada_id');
+    }
+
 }

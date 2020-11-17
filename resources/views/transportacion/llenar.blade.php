@@ -46,7 +46,7 @@
                             <i class="fa fa-plus"></i> Reportar incidencia
                           </a>
                           {{-- @endif --}}
-                          <a href="{{route('tenv.create')}}" type="button" class="btn btn-success btn-flat" >
+                          <a href="{{route('tenv.create',$transportacion)}}" type="button" class="btn btn-success btn-flat" >
                             <i class="fa fa-plus"></i> Añadir transferencia enviada
                           </a>
                           <a href="#" type="button" class="btn btn-danger btn-flat" >
@@ -167,8 +167,8 @@
                             <td>{{$arrast->arrastres->identificador}}</td>
                             <td>{{$arrast->arrastres->description}}</td>
                             <td>
-                              <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#modal-default">
-                                      <i class="fa fa-plus"></i> Añadir Envase
+                              <button type="button" class="btn btn-flat btn-danger" >
+                                      <i class="fa fa-times"></i> Quitar
                              </button>
                             </td>
                           </tr>
@@ -179,6 +179,10 @@
 
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+                    <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#modal-default">
+                        <i class="fa fa-plus"></i> Añadir Envase
+                    </button>
+                    <br><br>
 
                      <div class="content">
                       <table id="example3" class="table table-bordered table-striped">
@@ -199,7 +203,7 @@
                                 <td>{{$dat->envase->identificador}}</td>
                                 <td>
                                   <button type="button" class="btn btn-flat btn-danger">
-                                          <i class="fa fa-minus"></i> Quitar
+                                          <i class="fa fa-times"></i> Quitar
                                  </button>
                                 </td>
                               </tr>
@@ -239,10 +243,17 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <select class="form-control select2" style="width: 100%;" name="envase_id">          
-                  <option value="">
-                    ---------Seleccione el envase---------
-                  </option>
+                <label for="exampleInputEmail1">Seleccione el arrastre:</label>
+                <select class="form-control select2" style="width: 100%;" name="arrast_transp_id">
+                  @foreach($tarras as $add)
+                        <option value="{{$add->id}}">{{$add->arrastres->identificador}}</option>
+                  @endforeach                  
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Seleccione el envase:</label>
+                <select class="form-control select2" style="width: 100%;" name="envase_id">
                   @foreach($envases->all() as $envase)
                         <option value="{{$envase->id}}">{{$envase->identificador}}</option>
                   @endforeach                  

@@ -13,7 +13,6 @@
     </div>
 
     @include('partials.success')
-    @include('partials.errors')    
 
     <div class="content">
       <div class="container">
@@ -28,7 +27,7 @@
                 
                 @include('partials.error-messages')
                 
-                <form id="quickForm" role="form" method="POST" action="{{ route('tenv.create') }}">
+                <form id="" role="form" method="POST" action="{{ route('tenv.storeproducto',$id) }}">
                 {!! csrf_field() !!}
                 <div class="card-body">
                   
@@ -40,11 +39,11 @@
 
     		        @include('foreach.destinofor',['model'=>$transfer])
 
-                <button type="submit" class="btn btn-success btn-flat">Crear</button>
-                <a class="btn btn-flat btn-primary" href="{{route('tenv')}}">Cancelar</a>
+                <button type="submit" class="btn btn-success btn-flat">LLenar</button>
+                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.show',$id)}}">Cancelar</a>
 
                 </div>
-            </form>                
+            </form>               
             </div>
             </div>
         </div>

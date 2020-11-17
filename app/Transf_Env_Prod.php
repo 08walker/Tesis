@@ -15,4 +15,14 @@ class Transf_Env_Prod extends Model
         'producto_id',
         'transf_enviada_id',
     ];
+
+    public function producto()
+    {
+        return $this->belongsTo('App\Producto');
+    }
+
+    public function transfenviada()
+    {
+        return $this->belongsTo('App\TransfEnviada','transf_enviada_id');
+    }
 }

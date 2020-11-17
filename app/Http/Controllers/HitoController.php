@@ -37,7 +37,7 @@ class HitoController extends Controller
         'description.required'=>'Debe escribir la descripción',
         'tipo_hito_id.required'=>'Debe seleccionar el tipo de incidencia'
     ]);
-        $data = request()->all();
+        //$data = request()->all();
         $hito = Hito::create([
             'fyh_ini'=> $data['fyh_ini'],
             'description'=> $data['description'],

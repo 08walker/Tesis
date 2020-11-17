@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Arrasrtre_Transp;
 use App\Arrasrtre_Transp_Enva;
 use App\Arrastre;
-use App\ArrastreTranspor;
 use App\Chofer;
 use App\Envase;
 use App\Equipo;
-use App\Hito;
-use App\TipoHito;
+use App\Http\Requests\StoreTransportacionRequest;
 use App\Transportacion;
 use App\Traza;
 use Illuminate\Http\Request;
@@ -32,17 +30,10 @@ class TransportacionController extends Controller
         return view('transportacion.create',compact('transportacion','equipos'));
     }
 
-    public function store(Request $request)
+    public function store(StoreTransportacionRequest $request)
     {
         $this->authorize('create',new Transportacion);
-    $data = request()->validate([
-        'numero'=>'required|min:1',
-        'equipo_id'=>'required'
-    ],
-    [   'numero.required'=>'El número es obligatorio',
-        'numero.min'=>'El número debe tener más de 1 caracter',
-        'equipo_id.required'=>'Debe seleccionar el equipo'
-    ]);
+    $data = request()->all();
     //dd($data);
         $data = request()->all();
         $transp = Transportacion::create([
@@ -65,8 +56,8 @@ class TransportacionController extends Controller
 
     public function show($id)
     {
-        $this->authorize('create',new Transportacion);
         $transportacion = Transportacion::find($id);
+        $this->authorize('create',$transportacion);
         $choferes = Chofer::all();
         $arrastres = Arrastre::all();
         $envases = Envase::all();
@@ -77,13 +68,15 @@ class TransportacionController extends Controller
 
     public function edit(Transportacion $transportacion)
     {
+        $this->authorize('update',$transportacion);
         $equipos = Equipo::all();
         return view('transportacion.edit',compact('transportacion','equipos'));
     }
 
-    public function update(Request $request, Transportacion $transportacion)
+    public function update(StoreTransportacionRequest $request, Transportacion $transportacion)
     {
-        $transportacion->update($request->all());        
+        $this->authorize('update',$transportacion);
+        $transportacion->update($request->all());    
         if ($transportacion) {
             $nombre = auth()->user()->name;
             $ip = request()->ip();
@@ -96,16 +89,7 @@ class TransportacionController extends Controller
         return back()->withInput()->with('error','Error al actualizar la transportación');
     }
 
-    public function destroy(Transportacion $transportacion)
-    {
-        //
-    }
-
-    public function llenar()
-    {
-        return view('transportacion.llenar');        
-    }
-
+    //Para llenar tabla chofer_equipo_transp
     public function storechofer(Request $request,Transportacion $transportacion)
     {
         $this->authorize('create',new Transportacion);
@@ -113,6 +97,7 @@ class TransportacionController extends Controller
         return back();
     }
 
+    //Para llenar tabla arrasrtre__transps
     public function storearrastre(Request $request,Transportacion $transportacion)
     {
         $this->authorize('create',new Transportacion);
@@ -143,15 +128,19 @@ class TransportacionController extends Controller
         return redirect()->route('transportaciones.show',$transportacion);
     }
 
-    public function storeenvase(Request $request,$id)
+    //Para llenar tabla arrasrtre__transp__envas -> pero me coge el ultimo atrrastre :(
+    public function storeenvase(Request $request)
     {
-        $arrastre = Arrasrtre_Transp::find($id);
-        //dd($arrastre);
+        $arrastre = Arrasrtre_Transp::find($request['arrast_transp_id']);
         $demo = Arrasrtre_Transp_Enva::create([
             'arrast_transp_id'=>$arrastre->id,
             'envase_id'=>$request['envase_id'],
         ]);
-        //dd($arrastre->arrastenva);
         return redirect()->route('transportaciones.show',$arrastre->transportacion_id);
     }   
+
+    public function destroy(Transportacion $transportacion)
+    {
+        //
+    }
 }

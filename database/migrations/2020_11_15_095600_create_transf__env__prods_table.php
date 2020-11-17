@@ -16,7 +16,7 @@ class CreateTransfEnvProdsTable extends Migration
         Schema::create('transf__env__prods', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->bigInteger('cantidad_bultos');
+            $table->bigInteger('cantidad_bultos')->nullable();
             $table->float('peso_kg', 8, 2);
             $table->float('volumen_m3', 8, 2);
             $table->longText('observacion')->nullable();
