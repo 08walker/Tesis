@@ -23,6 +23,24 @@ Route::get('/contacto', 'VistasController@contacto')->name('contacto');
 
 //Rutas provincias
 Route::group([
+    'prefix'=>'reportes',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','ReportesController@index')->name('reportes');
+Route::get('/reporte1','ReportesController@reporte1')->name('reportes.reporte1');
+Route::get('/reporte2','ReportesController@reporte2')->name('reportes.reporte2');
+Route::get('/reporte3','ReportesController@reporte3')->name('reportes.reporte3');
+Route::get('/reporte4','ReportesController@reporte4')->name('reportes.reporte4');
+Route::get('/reporte5','ReportesController@reporte5')->name('reportes.reporte5');
+Route::get('/reporte6','ReportesController@reporte6')->name('reportes.reporte6');
+//Route::get('/reporte7','ReportesController@reporte7')->name('reportes.reporte7');
+Route::get('/reporte8','ReportesController@reporte8')->name('reportes.reporte8');
+Route::get('/reporte9','ReportesController@reporte9')->name('reportes.reporte9');
+});
+
+//Rutas provincias
+Route::group([
     'prefix'=>'provincias',
     'middleware'=>'auth'
 ],
@@ -293,7 +311,7 @@ function(){
 Route::get('/','TipoHitoController@index')->name('tipohito');
 Route::get('/crear','TipoHitoController@create')->name('tipohito.create');
 Route::post('/crear','TipoHitoController@store')->name('tipohito.create');
-// Route::get('/{id}','TipoHitoController@show')->name('tipohito.show');
+Route::get('/{id}','TipoHitoController@show')->name('tipohito.show');
 Route::get('/{tipoHito}/editar','TipoHitoController@edit')->name('tipohito.edit');
 Route::put('/{tipoHito}','TipoHitoController@update')->name('tipohito.update');
 Route::delete('/{tipoHito}','TipoHitoController@destroy')->name('tipohito.destroy');

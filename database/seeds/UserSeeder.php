@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             //'display_name'=>'Escritor'
         ]);
         $inivitadoRole = Role::create([
-            'name'=>'Invitado',
+            'name'=>'Directivo',
             //'display_name'=>'Escritor'
         ]);
 
@@ -125,6 +125,7 @@ class UserSeeder extends Seeder
         $inivitadoRole->givePermissionTo('View chofer');
         $inivitadoRole->givePermissionTo('View envase');
         $inivitadoRole->givePermissionTo('View directivo');
+        $inivitadoRole->givePermissionTo('View reporte');
 
 
         $admin = new User;

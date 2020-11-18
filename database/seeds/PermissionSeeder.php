@@ -387,5 +387,12 @@ class PermissionSeeder extends Seeder
             'name'=>'View traza',
             'display_name'=>'Ver trazas'
         ]);
+
+        //Reportes
+        $viewReportePermission = Permission::create([
+            'name'=>'View reporte',
+            'display_name'=>'Ver reporte'
+        ]);
+
     }
 }

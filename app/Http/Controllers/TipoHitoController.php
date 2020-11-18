@@ -14,7 +14,11 @@ class TipoHitoController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view',new TipoHito);
+        
+        $tipohito = TipoHito::all();
+        
+        return view('tipohito.index',compact('tipohito'));
     }
 
     /**
@@ -24,60 +28,31 @@ class TipoHitoController extends Controller
      */
     public function create()
     {
-        //
+        $tipohito = new TipoHito;
+        $this->authorize('create',$tipohito);
+        return view('tipohito.create',compact('tipohito'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TipoHito  $tipoHito
-     * @return \Illuminate\Http\Response
-     */
     public function show(TipoHito $tipoHito)
     {
-        //
+        return view('tipohito.show',compact('tipoHito'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TipoHito  $tipoHito
-     * @return \Illuminate\Http\Response
-     */
     public function edit(TipoHito $tipoHito)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TipoHito  $tipoHito
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, TipoHito $tipoHito)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TipoHito  $tipoHito
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(TipoHito $tipoHito)
     {
         //

@@ -1,46 +1,45 @@
 @extends('admin.layout')
 
 @section('content')
+
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Introducir productos</h1>
+            <h1 class="m-0 text-dark"> Crear lugar</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
 
-    @include('partials.success')
-
     <div class="content">
           <div class="container">
             <div class="row">
                 <!-- aling -->
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                   <div class="card"></div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                 <div class="card card-primary card-outline">
                   <div class="card-body">
                     
                     @include('partials.error-messages')
-                    <form id="" role="form" method="POST" action="{{ route('tenv.update',$id) }}">
-                {!! csrf_field() !!}
-
-                      @include('foreach.productosfor',['model'=>$transfer])
-
-                      @include('componentes.cantbultos',['model'=>$transfer])
-                      @include('componentes.pesoprod',['model'=>$transfer])
-                      @include('componentes.volumenprod',['model'=>$transfer])
-                      @include('componentes.observacion',['model'=>$transfer])
-                      
-                      <button type="submit" class="btn btn-success btn-flat">LLenar</button>
-                      <a class="btn btn-flat btn-primary" {{-- href="{{route('transportaciones.show',$id)}}" --}}>Cancelar</a>
-                    </form>
                     
-                  </div>
+                    <form id="quickForm" role="form" method="POST" action="{{ route('lugares.create') }}">
+                    {!! csrf_field() !!}
+                    <div class="card-body">
+                      
+                        @include('componentes.name',['model'=>$lugar])
+                        @include('foreach.municipiofor',['model'=>$lugar])
+                        @include('foreach.tercerofor',['model'=>$lugar])
+                        @include('foreach.organizacionfor',['model'=>$lugar])
+                      
+                    <button type="submit" class="btn btn-success btn-flat">Crear</button>
+                    <a class="btn btn-flat btn-primary" href="{{route('lugares')}}">Cancelar</a>
+                    </div>
+                </form>                
+                </div>
                 </div>
             </div>
             </div>
@@ -78,35 +77,27 @@
     });
 
   });
-</script>
 
+</script>
 <script type="text/javascript">
 $(document).ready(function () {
    $('#quickForm').validate({
     rules: {
-      producto_id: {
+      name: {
+        required: true,
+        minlength: 5,
+      },
+      municipio_id: {
         required: true
-      },
-      peso_kg: {
-        required: true,
-        number: true
-      },
-      volumen_m3: {
-        required: true,
-        number: true
       },
     },
     messages: {
-      producto_id: {
-        required: "Debe seleccionar un producto"
+      name: {
+        required: "Debe introducir el nombre",
+        minlength: "El nombre debe tener 5 caracteres como mínimo"
       },
-      peso_kg: {
-        required: "Debe introducir el peso",
-        number: "Debe introducir un número"
-      },
-      volumen_m3: {
-        required: "Por favor seleccione la provincia",
-        number: "Debe introducir un número"
+      municipio_id: {
+        required: "Por favor seleccione el municipio",
       },
     },
     errorElement: 'span',
