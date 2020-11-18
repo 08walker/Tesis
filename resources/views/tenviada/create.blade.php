@@ -27,7 +27,7 @@
                 
                 @include('partials.error-messages')
                 
-                <form id="" role="form" method="POST" action="{{ route('tenv.storeproducto',$id) }}">
+                <form id="quickForm" role="form" method="POST" action="{{ route('tenv.create',$id) }}">
                 {!! csrf_field() !!}
                 <div class="card-body">
                   
