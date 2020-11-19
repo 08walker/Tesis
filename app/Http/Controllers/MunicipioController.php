@@ -15,10 +15,13 @@ class MunicipioController extends Controller
     {
         $this->authorize('view',new Municipio);
         
-        $todos = Municipio::all();
-        $municipios = $todos->filter(function ($value,$key){
-            return data_get($value,'activo') == 1;
-        })->sortBy('provincia_id');
+        // $todos = Municipio::all();
+        // $municipios = $todos->filter(function ($value,$key){
+        //     return data_get($value,'activo') == 1;
+        // })->sortBy('provincia_id');
+        
+        //Con el scope de activos
+        $municipios = Municipio::activos()->get();
         
         return view('municipio.index',compact('municipios'));
     }

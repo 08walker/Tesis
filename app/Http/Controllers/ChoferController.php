@@ -17,7 +17,7 @@ class ChoferController extends Controller
         $this->authorize('view',new Chofer);
         
         return view('chofer.index')
-        ->with('choferes', Chofer::all());
+        ->with('choferes', Chofer::activos()->get());
     }
     public function show($id)
     {
@@ -29,9 +29,9 @@ class ChoferController extends Controller
     {
         $chofer = new Chofer;
         $this->authorize('create',$chofer);
-        $organizaciones = Organizacion::all();
-        $terceros = Tercero::all();
-        $equipos = Equipo::all();
+        $organizaciones = Organizacion::activos()->get();
+        $terceros = Tercero::activos()->get();
+        $equipos = Equipo::activos()->get();
         return view('chofer.create',compact('terceros','equipos','organizaciones','chofer'));
     }
 

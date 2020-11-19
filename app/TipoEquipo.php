@@ -16,4 +16,9 @@ class TipoEquipo extends Model
     {
         return $this->hasMany('App\Equipo');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

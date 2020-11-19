@@ -18,7 +18,7 @@ class ArrastreController extends Controller
         $this->authorize('view',new Arrastre);
         
         return view('arrastre.index')
-        ->with('arrastres', Arrastre::all());
+        ->with('arrastres', Arrastre::activos()->get());
     }
     public function show($id)
     {
@@ -30,10 +30,10 @@ class ArrastreController extends Controller
     {
         $arrastre = new Arrastre;   
         $this->authorize('create',$arrastre);
-        $organizaciones = Organizacion::all();
-        $terceros = Tercero::all();
-        $equipos = Equipo::all();
-        $tipoarrastre = TipoArrastre::all();
+        $organizaciones = Organizacion::activos()->get();
+        $terceros = Tercero::activos()->get();
+        $equipos = Equipo::activos()->get();
+        $tipoarrastre = TipoArrastre::activos()->get();
         return view('arrastre.create',
             compact('terceros','equipos','organizaciones','tipoarrastre','arrastre'));
     }

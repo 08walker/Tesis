@@ -39,4 +39,9 @@ class Chofer extends Model
     {
         return $this->belongsToMany('App\Transportacion','chofer_equipo_transp','transportacion_id','chofer_id');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

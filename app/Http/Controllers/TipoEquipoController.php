@@ -14,7 +14,7 @@ class TipoEquipoController extends Controller
         $this->authorize('view',new TipoEquipo);
 
         return view('tipoequipo.index')
-            ->with('tipoequipo', TipoEquipo::all());
+            ->with('tipoequipo', TipoEquipo::activos()->get());
     }
 
     public function create()

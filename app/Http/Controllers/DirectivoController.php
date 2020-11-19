@@ -15,15 +15,15 @@ class DirectivoController extends Controller
         $this->authorize('view',new Directivo);
         
         return view('directivo.index')
-            ->with('directivos', Directivo::all());
+            ->with('directivos', Directivo::activos()->get());
     }
   
     public function create()
     {
         $directivo = new Directivo;
         $this->authorize('create',$directivo);
-        $users = User::all();
-        $organizaciones = Organizacion::all();
+        $users = User::activos()->get();
+        $organizaciones = Organizacion::activos()->get();
         return view('directivo.create',compact('users','organizaciones','directivo'));
     }
 

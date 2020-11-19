@@ -19,7 +19,7 @@ class TipoUnidadMedidaController extends Controller
         $this->authorize('view',new TipoUnidadMedida);
         
         return view('tipounidadmedida.index')
-            ->with('tipoum', TipoUnidadMedida::all());
+            ->with('tipoum', TipoUnidadMedida::activos()->get());
     }
 
     /**

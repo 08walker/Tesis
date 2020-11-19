@@ -45,4 +45,9 @@ class Arrastre extends Model
     {
         return $this->hasMany('App\Arrasrtre_Transp','arrastre_id');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

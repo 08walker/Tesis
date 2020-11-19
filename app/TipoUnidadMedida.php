@@ -16,4 +16,9 @@ class TipoUnidadMedida extends Model
     {
         return $this->hasMany('App\UnidadMedida');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

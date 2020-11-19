@@ -15,4 +15,9 @@ class TipoArrastre extends Model
     {
         return $this->hasMany('App\Arrastre');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

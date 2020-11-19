@@ -14,7 +14,7 @@ class UnidadMedidaController extends Controller
     {
         $this->authorize('view',new UnidadMedida);
 
-        $unidadmedida = UnidadMedida::all();        
+        $unidadmedida = UnidadMedida::activos()->get();        
         return view('unidadmedida.index',compact('unidadmedida'));
     }
 
@@ -22,7 +22,7 @@ class UnidadMedidaController extends Controller
     {
         $unidadmedida = new UnidadMedida;
         $this->authorize('create',$unidadmedida);
-        $tipoUnidades = TipoUnidadMedida::all();
+        $tipoUnidades = TipoUnidadMedida::activos()->get();
         return view('unidadmedida.create',compact('unidadmedida', 'tipoUnidades'));
     }
 

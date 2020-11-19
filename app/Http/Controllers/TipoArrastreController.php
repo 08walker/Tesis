@@ -14,7 +14,7 @@ class TipoArrastreController extends Controller
         $this->authorize('view',new TipoArrastre);
         
         return view('tipoarrastre.index')
-            ->with('tipoArrastre', TipoArrastre::all());
+            ->with('tipoArrastre', TipoArrastre::activos()->get());
     }
 
     public function create()

@@ -32,4 +32,9 @@ class Envase extends Model
         return $this->hasMany('App\Arrasrtre_Transp_Enva','envase_id');
     }
 
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
+
 }

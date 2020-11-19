@@ -58,9 +58,9 @@ class TransportacionController extends Controller
     {
         $transportacion = Transportacion::find($id);
         $this->authorize('create',$transportacion);
-        $choferes = Chofer::all();
-        $arrastres = Arrastre::all();
-        $envases = Envase::all();
+        $choferes = Chofer::activos()->get();
+        $arrastres = Arrastre::activos()->get();
+        $envases = Envase::activos()->get();
         $tarras = $transportacion->arrastretrasnp;
         //dd($tarras);
         return view('transportacion.llenar',compact('transportacion','choferes','arrastres','envases','tarras'));

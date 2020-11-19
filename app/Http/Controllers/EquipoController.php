@@ -17,7 +17,7 @@ class EquipoController extends Controller
         $this->authorize('view',new Equipo);
         
         return view('equipo.index')
-        ->with('equipos', Equipo::all());
+        ->with('equipos', Equipo::activos()->get());
     }
     public function show($id)
     {
@@ -29,9 +29,9 @@ class EquipoController extends Controller
     {   
         $equipo = new Equipo;
         $this->authorize('create',$equipo);
-        $organizaciones = Organizacion::all();
-        $terceros = Tercero::all();
-        $tipoequipo = TipoEquipo::all();
+        $organizaciones = Organizacion::activos()->get();
+        $terceros = Tercero::activos()->get();
+        $tipoequipo = TipoEquipo::activos()->get();
         return view('equipo.create',compact('terceros','organizaciones','tipoequipo','equipo'));
     }
 

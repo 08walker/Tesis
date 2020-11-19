@@ -16,4 +16,9 @@ class TipoHito extends Model
     {
         return $this->hasMany('App\Hito');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

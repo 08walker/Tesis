@@ -50,4 +50,9 @@ class Equipo extends Model
     {
         return $this->hasOne('App\Transportacion');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

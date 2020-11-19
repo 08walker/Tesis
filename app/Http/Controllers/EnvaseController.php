@@ -16,7 +16,7 @@ class EnvaseController extends Controller
         $this->authorize('view',new Envase);
         
         return view('envase.index')
-        ->with('envases', Envase::all());
+        ->with('envases', Envase::activos()->get());
     }
     public function show($id)
     {
@@ -28,8 +28,8 @@ class EnvaseController extends Controller
     {
         $envase = new Envase;
         $this->authorize('create',$envase);
-        $organizaciones = Organizacion::all();
-        $terceros = Tercero::all();
+        $organizaciones = Organizacion::activos()->get();
+        $terceros = Tercero::activos()->get();
         return view('envase.create',compact('terceros','organizaciones','envase'));
     }
 

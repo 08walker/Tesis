@@ -68,4 +68,9 @@ class Organizacion extends Model
 
         $this->attributes['url'] = str_slug($url);
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

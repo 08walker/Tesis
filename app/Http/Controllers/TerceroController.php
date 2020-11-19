@@ -15,7 +15,7 @@ class TerceroController extends Controller
         $this->authorize('view',new Tercero);
         
         return view('tercero.index')
-        ->with('terceros', Tercero::all());
+        ->with('terceros', Tercero::activos()->get());
     }
     public function show(Tercero $tercero)
     {
@@ -26,7 +26,7 @@ class TerceroController extends Controller
     {   
         $tercero = new Tercero;
         $this->authorize('create',$tercero);
-        $municipios = Municipio::all();
+        $municipios = Municipio::activos()->get();
         return view('tercero.create',compact('municipios','tercero'));
         //return view('tercero.create');
     }

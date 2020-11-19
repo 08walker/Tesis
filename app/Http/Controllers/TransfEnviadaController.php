@@ -25,7 +25,7 @@ class TransfEnviadaController extends Controller
     {
         $this->authorize('create',new Transportacion);
         $transfer = new TransfEnviada;
-        $lugares = Lugar::all();
+        $lugares = Lugar::activos()->get();
         return view('tenviada.create',compact('id','transfer','lugares'));
     }
 
@@ -78,7 +78,7 @@ class TransfEnviadaController extends Controller
     public function llenar($id)
     {
         $transfer = new Transf_Env_Prod;
-        $productos = Producto::all();
+        $productos = Producto::activos()->get();
         return view('tenviada.llenar',compact('transfer','productos','id'));
     }
 

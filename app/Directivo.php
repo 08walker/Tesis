@@ -22,4 +22,9 @@ class Directivo extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

@@ -17,7 +17,7 @@ class LugarController extends Controller
         $this->authorize('view',new Lugar);
         
         return view('lugar.index')
-        ->with('lugares', Lugar::all());
+        ->with('lugares', Lugar::activos()->get());
     }
     public function show($id)
     {
@@ -29,9 +29,9 @@ class LugarController extends Controller
     {   
         $lugar = new Lugar;
         $this->authorize('create',$lugar);
-        $municipios = Municipio::all();
-        $organizaciones = Organizacion::all();
-        $terceros = Tercero::all();
+        $municipios = Municipio::activos()->get();
+        $organizaciones = Organizacion::activos()->get();
+        $terceros = Tercero::activos()->get();
         return view('lugar.create',compact('municipios','terceros','organizaciones','lugar'));
     }
 

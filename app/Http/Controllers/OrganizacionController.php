@@ -15,7 +15,7 @@ class OrganizacionController extends Controller
         $this->authorize('view',new Organizacion);
 
         return view('organizacion.index')
-        ->with('organizaciones', Organizacion::all());
+        ->with('organizaciones', Organizacion::activos()->get());
     }
     public function show(Organizacion $organizacion)
     {
@@ -26,7 +26,7 @@ class OrganizacionController extends Controller
     {   
         $organizacion = new Organizacion;
         $this->authorize('create',$organizacion);
-        $municipios = Municipio::all();
+        $municipios = Municipio::activos()->get();
         return view('organizacion.create',compact('municipios','organizacion'));
     }
 

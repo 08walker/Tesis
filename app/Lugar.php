@@ -39,4 +39,9 @@ class Lugar extends Model
     {
         return $this->hasMany('App\TransfEnviada');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

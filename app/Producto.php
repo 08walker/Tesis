@@ -24,4 +24,9 @@ class Producto extends Model
     {
         return $this->hasOne('App\Transf_Env_Prod');
     }
+
+    public function scopeActivos($query)
+    {
+        $query->where('activo','=','1');
+    }
 }

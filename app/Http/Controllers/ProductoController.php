@@ -16,14 +16,14 @@ class ProductoController extends Controller
         $this->authorize('view',new Producto);
         
         return view('producto.index')
-            ->with('productos', Producto::all());
+            ->with('productos', Producto::activos()->get());
     }
 
     public function create()
     {
         $producto = new Producto;
         $this->authorize('create',$producto);
-        $unidades = UnidadMedida::all();
+        $unidades = UnidadMedida::activos()->get();
         return view('producto.create',compact('unidades','producto'));
     }
 
