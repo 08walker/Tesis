@@ -243,16 +243,26 @@ Route::post('/{id}/crear','TransfEnviadaController@store');
 
 Route::get('/{id}/inicio','TransfEnviadaController@index')->name('tenv');
 Route::get('/{transferencia}','TransfEnviadaController@show')->name('tenv.show');
-//Route::get('/{id}/llenar','TransfEnviadaController@show')->where('id','[0-9]+')->name('tenv.show');
 
-Route::post('/{id}','TransfEnviadaController@storeproducto')->name('tenv.storeproducto');
-Route::get('/{id}/llenar','TransfEnviadaController@llenar')->name('tenv.llenar');
+Route::get('/{id}/editar','TransfEnviadaController@edit')->name('tenv.edit');
+Route::put('/{transfEnviada}','TransfEnviadaController@update')->name('tenv.update');
 
-Route::get('/{tenv}/editar','TransfEnviadaController@edit')->name('tenv.edit');
-Route::put('/{tenv}','TransfEnviadaController@update')->name('tenv.update');
 Route::delete('/{tenv}','TransfEnviadaController@destroy')->name('tenv.destroy');
 });
 
+//
+Route::group([
+    'prefix'=>'tenv/prod',
+    'middleware'=>'auth'
+],
+function(){
+Route::post('/{id}','TransfEnvProdController@store')->name('tenv.storeproducto');
+Route::get('/{id}/llenar','TransfEnvProdController@create')->name('tenv.llenar');
+Route::get('/{id}/editar','TransfEnvProdController@edit')->name('tenv.prod.edit');
+Route::put('/{id}/','TransfEnvProdController@update')->name('tenv.prod.update');
+Route::delete('/{id}/','TransfEnvProdController@destroy')->name('tenv.prod.destroy');
+
+});
 
 //Rutas tipo unidad de medidas
 Route::group([

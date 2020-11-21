@@ -1,17 +1,13 @@
 @extends('admin.layout')
 
-@section('meta-title','Tesis| Trazas')
-@section('meta-description','Listado de trazas')
-
 @section('content')
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Trazas del sistema</h1>
+            <h1 class="m-0 text-dark">Recibir transferencia</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -25,13 +21,31 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="card">
+              	  <div class="card-header">
+                  <div class="row">
+                        <div class="col-3">
+                          <p>Fecha de salida: <strong>'fyh_salida'</strong></p>
+                        </div>
+                        <div class="col-3">
+                          <p>Número de factura: <strong>'num_fact'</strong></p>
+                        </div>
+                        <div class="col-3">
+                          <p>Origen: <strong>'origen_id'</strong></p>
+                        </div>
+                        <div class="col-3">
+                          <p>Destino: <strong>'destino_id'</strong></p>
+                        </div>
+                  </div>
+                  </div>
+                </div>
                   <div class="card-header">
-                    <h3 class="card-title">trazas:</h3> 
+                    <h3 class="card-title">Recibir:</h3> 
                     <br>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+
+                    {{-- <table id="example1" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th>ID</th>
@@ -51,7 +65,7 @@
                           </tr>
                         @endforeach
                       </tbody>
-                    </table>
+                    </table> --}}
                   </div>
                   <!-- /.card-body -->
               </div>
@@ -81,9 +95,7 @@
 <!-- page script -->
 <script>
   $(function () {
-      "order":['asc'],  
     $("#example1").DataTable({
-      //"_aData": [],
       "responsive": true,
       "autoWidth": false,
       "language": {
@@ -97,12 +109,10 @@
             "next": "Siguiente",
             "previous": "Anterior",
           },
-
-      
        },
     });
   });
 </script>
 </script>
 
-@endpush  
+@endpush

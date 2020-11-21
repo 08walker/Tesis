@@ -29,9 +29,14 @@
 	            <div class="card-header">
 	              <h3 class="card-title">Productos:</h3> 
 	              <br>
+	              @can('create',new \App\TransfEnviada)
 	              <a href="{{route('tenv.llenar',$transferencia)}}" type="button" class="btn btn-primary btn-flat" >
                     <i class="fa fa-plus"></i> Añadir Producto
-                </a>
+                  </a>
+                  <a href="/home" type="button" class="btn btn-primary btn-flat" >
+                    <i class="fa fa-plus"></i> Atras
+                  </a>
+                @endcan
 	            </div>
 	            <!-- /.card-header -->
 	            <div class="card-body">
@@ -57,7 +62,21 @@
 	                  <td>{{$todo->cantidad_bultos}}</td>
 	                  <td>{{$todo->volumen_m3}}</td>
 	                  <td>{{$todo->observacion}}</td>
-	                  <td>lolol</td>
+	                  <td>
+			            @can('update',new \App\TransfEnviada)
+			            <a href="{{route('tenv.prod.edit',$todo->id)}}" class="btn btn-xs btn-info">
+			              <i class="fa fa-pen"></i>
+			            </a>
+			            @endcan
+			              @can('delete',new \App\TransfEnviada)
+			              <form method="POST" action="{{route('tenv.prod.destroy', $todo)}}" style="display: inline;">
+			                {{csrf_field()}}{{method_field('DELETE')}}
+			                <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar el producto?')">
+			                <i class="fa fa-times"></i>
+			              </button>
+			              </form>
+			              @endcan
+	                  </td>
 	                </tr>
 	                @endforeach
 	                </tbody>

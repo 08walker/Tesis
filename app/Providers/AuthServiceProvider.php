@@ -38,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
 
         'App\Traza' => 'App\Policies\TrazaPolicy',
         'App\Transportacion' => 'App\Policies\TransportacionPolicy',
+        'App\TransfEnviada' => 'App\Policies\TransfEnviadaPolicy',
     ];
 
     /**

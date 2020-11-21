@@ -54,11 +54,11 @@
           
           @can('view',new \App\Transportacion)
           <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Transportaciones</a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Transferencias</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               
               <li>
-                <a href="#" class="dropdown-item">Ver en curso </a>
+                <a href="/home" class="dropdown-item">Transferencias en curso </a>
               </li>
 
               <li>
@@ -66,7 +66,7 @@
               </li>
               
               <li>
-                  <a href="{{ route('transportaciones') }}" class="dropdown-item">Ver Todas</a>
+                  <a href="{{ route('transportaciones') }}" class="dropdown-item">Transportaciones</a>
               </li>
 
               <li>

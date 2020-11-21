@@ -18,7 +18,7 @@ class CreateTransportacionesTable extends Migration
 
             $table->string('numero',10);
             $table->longText('observacion')->nullable();
-            $table->boolean('terminada')->unsigned()->default(1); 
+            $table->boolean('terminada')->unsigned()->default(0); 
 
             $table->unsignedBigInteger('equipo_id');
             $table->foreign('equipo_id')->references('id')->on('equipos');

@@ -24,15 +24,19 @@
             <a href="{{route('tenv.show',$transf)}}">
               <i class="fa fa-eye"></i>
             </a>
+            @can('update',new \App\TransfEnviada)
             <a href="{{route('tenv.edit',$transf)}}" class="btn btn-xs btn-info">
               <i class="fa fa-pen"></i>
             </a>
+            @endcan
+            @can('delete',new \App\TransfEnviada)
               <form method="POST" action="{{route('tenv.destroy', $transf)}}" style="display: inline;">
                 {{csrf_field()}}{{method_field('DELETE')}}
                 <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la transferencia?')">
                 <i class="fa fa-times"></i>
               </button>
               </form>
+            @endcan
           </td>
         </tr>
       @endforeach

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProdTransfEnvRequest;
-use App\Http\Requests\StoreTransfEnvRequest;
 use App\Lugar;
 use App\Producto;
 use App\TransfEnviada;
@@ -16,7 +14,7 @@ class TransfEnviadaController extends Controller
 {
     public function index($id)
     {
-        $this->authorize('view',new Transportacion);
+        $this->authorize('view',new TransfEnviada);
         //$todas = TransfEnviada::all();
         $transportacion = Transportacion::find($id);   
         return view('tenviada.index',compact('transportacion'));
@@ -24,15 +22,15 @@ class TransfEnviadaController extends Controller
 
     public function create($id)
     {
-        $this->authorize('create',new Transportacion);
+        $this->authorize('create',new TransfEnviada);
         $transfer = new TransfEnviada;
         $lugares = Lugar::activos()->get();
         return view('tenviada.create',compact('id','transfer','lugares'));
     }
 
-    public function store(StoreTransfEnvRequest $request,$id)
+    public function store(Request $request,$id)
     {
-        $this->authorize('create',new Transportacion);
+        $this->authorize('create',new TransfEnviada);
         $data = $request->all();
 
         //dd($data = request()->all());
@@ -58,24 +56,39 @@ class TransfEnviadaController extends Controller
 
     public function show(TransfEnviada $transferencia)
     {
-        $this->authorize('create',new Transportacion);
-        //dd($transferencia->transfenvprod);
+        $this->authorize('view',new TransfEnviada);
         return view('tenviada.show',compact('transferencia'));
     }
 
-    public function edit(TransfEnviada $transfEnviada)
+    public function edit($id)
     {
-        //
+        $this->authorize('update',new TransfEnviada);     
+        // dd($id);
+        $transfEnviada = TransfEnviada::find($id);
+        //dd($transfEnviada);
+        $lugares = Lugar::activos()->get();
+        return view('tenviada.edit',compact('transfEnviada','lugares'));
     }
 
-    public function update(Request $request, TransfEnviada $transfEnviada)
+    public function update(StoreTransfEnvRequest $request, TransfEnviada $transfEnviada)
     {
-        //
+        //no tiene validaciones por php
+        $this->authorize('update',new TransfEnviada);     
+        $transfEnviada->update($request->validated());
+        if ($transfEnviada) {
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "Actualizado transferencia número {$transfEnviada->num_fact} por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]); 
+            return redirect()->route('tenv.show',$transfEnviada)->with('success','Transferencia actualizada con éxito');
+        }
     }
 
     public function destroy(TransfEnviada $transfEnviada)
     {
-        $this->authorize('delete',new Transportacion);
+        $this->authorize('delete',new TransfEnviada);
         $nombre = auth()->user()->name;
         $ip = request()->ip();
         
@@ -101,42 +114,5 @@ class TransfEnviadaController extends Controller
         ]);
         return redirect()->route('contacto')
                     ->with('success', 'La transferencia ha sido eliminada con éxito');
-    }
-
-    public function llenar($id)
-    {
-        $transfer = new Transf_Env_Prod;
-        $productos = Producto::activos()->get();
-        return view('tenviada.llenar',compact('transfer','productos','id'));
-    }
-
-    public function storeproducto(StoreProdTransfEnvRequest $request,$id)
-    {
-        $data = request()->all();
-        //$data = $request->all();
-
-        $dat = Transf_Env_Prod::create([
-            'cantidad_bultos'=> $data['cantidad_bultos'],
-            'peso_kg'=> $data['peso_kg'],
-            'volumen_m3'=> $data['volumen_m3'],
-            'observacion'=> $data['observacion'],
-            'producto_id'=> $data['producto_id'],
-            'transf_enviada_id'=> $id,
-        ]);
-        if ($dat) {
-            $nombre = auth()->user()->name;
-            $ip = request()->ip();
-            Traza::create([
-            'description'=> "Producto {$dat->producto->name} añadido a la transferencia número {$dat->transfenviada->num_fact} creada por el usuario {$nombre}",
-            'ip'=>$ip,
-            ]);
-            $transferencia = TransfEnviada::find($id);
-            //dd($transferencia->transfenvprod);
-            return redirect()->route('tenv.show',$transferencia);
-            //$transferencia = TransfEnviada::find($id);
-            //return redirect()->route('tenv',$transferencia->transportacion->id);
-
-        }
-        return back()->withInput()->with('errors','Error al llenar la transferencia');
     }
 }

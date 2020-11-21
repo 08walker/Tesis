@@ -292,6 +292,24 @@ class PermissionSeeder extends Seeder
             'display_name'=>'Eliminar transportacion'
         ]);
 
+        //Tranferencias
+        $viewTransferenciaPermission = Permission::create([
+            'name'=>'View transferencia',
+            'display_name'=>'Ver transferencia'
+        ]);
+        $createTransferenciaPermission = Permission::create([
+            'name'=>'Create transferencia',
+            'display_name'=>'Crear transferencia'
+        ]);
+        $updateTransferenciaPermission = Permission::create([
+            'name'=>'Update transferencia',
+            'display_name'=>'Actualizar transferencia'
+        ]);
+        $deleteTransferenciaPermission = Permission::create([
+            'name'=>'Delete transferencia',
+            'display_name'=>'Eliminar transferencia'
+        ]);
+
         //Productos
         $viewProductoPermission = Permission::create([
             'name'=>'View producto',

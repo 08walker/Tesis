@@ -107,6 +107,10 @@ class UserSeeder extends Seeder
         $analistaRole->givePermissionTo('View directivo');
         $analistaRole->givePermissionTo('Create directivo');
         $analistaRole->givePermissionTo('Update directivo');
+
+        $analistaRole->givePermissionTo('View transferencia');
+        $analistaRole->givePermissionTo('Create transferencia');
+        $analistaRole->givePermissionTo('Update transferencia');
         
         //Permisos Rol Invitado
         $inivitadoRole->givePermissionTo('View provincia');
@@ -126,6 +130,7 @@ class UserSeeder extends Seeder
         $inivitadoRole->givePermissionTo('View envase');
         $inivitadoRole->givePermissionTo('View directivo');
         $inivitadoRole->givePermissionTo('View reporte');
+        $inivitadoRole->givePermissionTo('View transferencia');
 
 
         $admin = new User;

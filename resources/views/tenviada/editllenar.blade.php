@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Introducir productos</h1>
+            <h1 class="m-0 text-dark"> Actualizar productos</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -26,18 +26,19 @@
                   <div class="card-body">
                     
                     @include('partials.error-messages')
-                    <form id="quickForm" role="form" method="POST" action="{{ route('tenv.storeproducto',$id) }}">
-                {!! csrf_field() !!}
+                    
+                    <form id="" role="form" method="POST" action="{{ route('tenv.prod.update',$transfer) }}">
+                    {{ method_field('PUT') }}
+                    {!! csrf_field() !!}
 
                       @include('foreach.productosfor',['model'=>$transfer])
-
                       @include('componentes.cantbultos',['model'=>$transfer])
                       @include('componentes.pesoprod',['model'=>$transfer])
                       @include('componentes.volumenprod',['model'=>$transfer])
                       @include('componentes.observacion',['model'=>$transfer])
                       
                       <button type="submit" class="btn btn-success btn-flat">Agregar</button>
-                      <a class="btn btn-flat btn-primary" href="{{route('tenv.show',$id)}}">Cancelar</a>
+                      <a class="btn btn-flat btn-primary" href="{{route('tenv.show',$transfer->transfenviada)}}">Cancelar</a>
                     </form>
                     
                   </div>
