@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TransfEnviada;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $tranferencias = TransfEnviada::all();
+        return view('home')->with('tranferencias',TransfEnviada::encurso()->get());
     }
 }

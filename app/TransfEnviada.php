@@ -9,6 +9,7 @@ class TransfEnviada extends Model
     protected $table = 'transf_enviadas';
     protected $fillable = [
         'fyh_salida',
+        'fyh_llegada',
         'num_fact',
         'origen_id',
         'destino_id',
@@ -31,7 +32,17 @@ class TransfEnviada extends Model
 
     public function transfenvprod()
     {
-        return $this->hasOne('App\Transf_Env_Prod','transf_enviada_id');
+        return $this->hasMany('App\Transf_Env_Prod','transf_enviada_id');
+    }
+
+    public function scopeRecibidas($query)
+    {
+        $query->whereNotNull('fyh_llegada');
+    }
+
+    public function scopeEncurso($query)
+    {
+        $query->whereNull('fyh_llegada');
     }
 
 }

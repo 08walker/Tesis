@@ -36,8 +36,8 @@
                       @include('componentes.volumenprod',['model'=>$transfer])
                       @include('componentes.observacion',['model'=>$transfer])
                       
-                      <button type="submit" class="btn btn-success btn-flat">LLenar</button>
-                      <a class="btn btn-flat btn-primary" {{-- href="{{route('transportaciones.show',$id)}}" --}}>Cancelar</a>
+                      <button type="submit" class="btn btn-success btn-flat">Agregar</button>
+                      <a class="btn btn-flat btn-primary" href="{{route('tenv.show',$id)}}">Cancelar</a>
                     </form>
                     
                   </div>

@@ -10,7 +10,8 @@ class Transportacion extends Model
     protected $fillable = [
         'numero',
         'observacion',
-        'equipo_id'
+        'equipo_id',
+        'terminada'
     ];
 
 	public function equipo()
@@ -31,11 +32,6 @@ class Transportacion extends Model
     public function transfenviada()
     {
         return $this->hasMany('App\TransfEnviada');
-    }
-
-    public function transfrecibida()
-    {
-        return $this->hasMany('App\TransfRecibida');
     }
 
 }

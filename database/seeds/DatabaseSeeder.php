@@ -26,10 +26,7 @@ class DatabaseSeeder extends Seeder
             'productos',
             'transportaciones',
             'chofer_equipo_transp',
-            'p_transf_env',
-            'p_transf_rec',
             'transf_enviadas',
-            'transf_recibidas',
             'tipo_hito',
             //'hitos',
             'unidad_medida',
@@ -44,7 +41,6 @@ class DatabaseSeeder extends Seeder
 
             'arrasrtre__transps',
             'arrasrtre__transp__envas',
-            'transf__rec__prods',
             'transf__env__prods',
 
             'trazas',
@@ -73,8 +69,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(DirectivoSeeder::class);
         
-        $this->call(PTransfEnvSeeder::class);
-        $this->call(PTransfRecSeeder::class);
         $this->call(TipoHitoSeeder::class);
         //$this->call(HitoSeeder::class);
 
@@ -82,12 +76,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(ArrastreTransporSeeder::class);
         // $this->call(ArrastreEnvaEquipoSeeder::class);
         // $this->call(TransfEnviadaSeeder::class);
-        // $this->call(TransfRecibidaSeeder::class);
         // $this->call(ProdEnvaEnvSeeder::class);
-        // $this->call(ProdEnvaRecSeeder::class);
         
-        // $this->call(ProductoUnidadMedidaSeeder::class);
-
     }
 
     public function truncateTables(array $tables)

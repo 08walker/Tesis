@@ -23,43 +23,24 @@
 	<div class="content">
 	   <div class="container">
 	      <div class="row">
-	        <div class="col-lg-2">
+	        <div class="col-lg-1">
 	            <div class="card">
 	            </div>
 	      	</div>
-		      <div class="col-lg-8">
+		      <div class="col-lg-10">
 		        <div class="card">
 	            <div class="card-header">
 	              <h3 class="card-title">Transferencias Enviadas:</h3> 
 	              <br>
+	              <a href="{{route('tenv.create',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                    <i class="fa fa-plus"></i> Crear
+                </a>
 	            </div>
 	            <!-- /.card-header -->
 	            <div class="card-body">
-	            <table id="example1" class="table table-bordered table-striped">
-	                <thead>
-	                <tr>
-	                  <th>ID</th>
-	                  <th>Fecha de salida</th>
-	                  <th>Número</th>
-	                  <th>Origen</th>
-	                  <th>Destino</th>
-	                  <th>Acciones</th>
-	                </tr>
-	                </thead>
-
-	                <tbody>
-	                @foreach($todas as $todo)
-	                <tr>
-	                  <td>{{$todo->id}}</td>
-	                  <td>{{$todo->fyh_salida}}</td>
-	                  <td>{{$todo->num_fact}}</td>
-	                  <td>{{$todo->origen->name}}</td>
-	                  <td>{{$todo->destino->name}}</td>
-	                  <td>lolol</td>
-	                </tr>
-	                @endforeach
-	                </tbody>
-	              </table>
+	              
+	              @include('componentes.tablatransferencias',['model'=>$transportacion->transfenviada])
+	            
 	            </div>
 	            <!-- /.card-body -->
 	          </div>

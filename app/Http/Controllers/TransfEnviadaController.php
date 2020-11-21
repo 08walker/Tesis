@@ -14,11 +14,12 @@ use Illuminate\Http\Request;
 
 class TransfEnviadaController extends Controller
 {
-    public function index()
+    public function index($id)
     {
         $this->authorize('view',new Transportacion);
-        $todas = TransfEnviada::all();        
-        return view('tenviada.index',compact('todas'));
+        //$todas = TransfEnviada::all();
+        $transportacion = Transportacion::find($id);   
+        return view('tenviada.index',compact('transportacion'));
     }
 
     public function create($id)
@@ -55,9 +56,11 @@ class TransfEnviadaController extends Controller
         return back()->withInput()->with('error','Error al crear la transferencia');
     }
 
-    public function show(TransfEnviada $transfEnviada)
+    public function show(TransfEnviada $transferencia)
     {
-        //
+        $this->authorize('create',new Transportacion);
+        //dd($transferencia->transfenvprod);
+        return view('tenviada.show',compact('transferencia'));
     }
 
     public function edit(TransfEnviada $transfEnviada)
@@ -72,7 +75,32 @@ class TransfEnviadaController extends Controller
 
     public function destroy(TransfEnviada $transfEnviada)
     {
-        //
+        $this->authorize('delete',new Transportacion);
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+        
+        try {
+         $transfEnviada->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   //$transfEnviada->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El usuario {$nombre} intento borrar la transferencia enviada {$transfEnviada->num_fact}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('home')
+                        ->with('error', 'La transferencia no se ha podido eliminar');   
+               }
+               return redirect()->route('home')
+                    ->with('errors', 'El transfEnviada no ha sido ser eliminado');
+        }        
+        Traza::create([
+        'description'=> "La transferencia enviada {$transfEnviada->num_fact} ha sido eliminada por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('contacto')
+                    ->with('success', 'La transferencia ha sido eliminada con éxito');
     }
 
     public function llenar($id)
@@ -102,7 +130,11 @@ class TransfEnviadaController extends Controller
             'description'=> "Producto {$dat->producto->name} añadido a la transferencia número {$dat->transfenviada->num_fact} creada por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
-            return redirect()->route('tenv');  
+            $transferencia = TransfEnviada::find($id);
+            //dd($transferencia->transfenvprod);
+            return redirect()->route('tenv.show',$transferencia);
+            //$transferencia = TransfEnviada::find($id);
+            //return redirect()->route('tenv',$transferencia->transportacion->id);
 
         }
         return back()->withInput()->with('errors','Error al llenar la transferencia');

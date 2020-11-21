@@ -67,7 +67,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
+    // 'timezone' => 'GTM-5',
+    'timezone' => 'America/Havana',
 
     /*
     |--------------------------------------------------------------------------

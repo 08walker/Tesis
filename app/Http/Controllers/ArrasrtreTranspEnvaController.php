@@ -80,6 +80,10 @@ class ArrasrtreTranspEnvaController extends Controller
      */
     public function destroy(Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
     {
-        //
+        //dd($arrasrtre_Transp_Enva);
+        if ($arrasrtre_Transp_Enva->delete()) {
+            return back();
+        }
+        return redirect()->route('transportaciones');
     }
 }

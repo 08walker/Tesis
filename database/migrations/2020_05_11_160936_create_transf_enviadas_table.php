@@ -17,6 +17,7 @@ class CreateTransfEnviadasTable extends Migration
             $table->bigIncrements('id');
 
             $table->date('fyh_salida');
+			$table->date('fyh_llegada')->nullable();
             $table->string('num_fact',10);
             
             $table->unsignedBigInteger('origen_id');

@@ -15,6 +15,10 @@ class ReportesController extends Controller
 
     public function reporte1()
     {
+        //obtener las transferencias de este mes
+        //crear listado de productos y cantidades e ir añadiendo productos
+        //si el producto existe añadir al peso sino añdir el producto al listado
+        //devolver listado
         return view('reportes.reporte1');
     }
 
@@ -37,6 +41,8 @@ class ReportesController extends Controller
         //seleccionar los contenedores propios,los que tienen organizacion
         //Selecccionar la ultima transportacion realizada y verificar si llego 
         //Devolver listado y calcular la cantidad de dias sin utilizar, multiplicar por el costo
+        //no se puede hacer porque falta el costo. o poner fijo
+        //poner en el select e costo
         return view('reportes.reporte4');
     }
     
@@ -69,6 +75,8 @@ class ReportesController extends Controller
     public function reporte9()
     {
         //esto es tremenda candela porque son una pila de reportes en uno(11 para ser exactos)
+
+        //Buscar por periodo poner una fecha de inicio y fin en dos datepicker y filtrar por esos campos por el created_at
         return view('reportes.reporte9');
     }
 

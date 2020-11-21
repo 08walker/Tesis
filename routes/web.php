@@ -86,7 +86,6 @@ Route::delete('/{arratre}','ArrastreController@destroy')->name('arrastres.destro
 });
 
 
-
 //Rutas choferes
 Route::group([
     'prefix'=>'choferes',
@@ -101,6 +100,7 @@ Route::get('/{chofer}/editar','ChoferController@edit')->name('choferes.edit');
 Route::put('/{chofer}','ChoferController@update')->name('choferes.update');
 Route::delete('/{chofer}','ChoferController@destroy')->name('choferes.destroy');
 });
+
 
 //Rutas envases
 Route::group([
@@ -197,6 +197,7 @@ Route::put('/{producto}','ProductoController@update')->name('productos.update');
 Route::delete('/{producto}','ProductoController@destroy')->name('productos.destroy');
 });
 
+
 //Rutas Transportaciones
 Route::group([
     'prefix'=>'transportaciones',
@@ -220,14 +221,15 @@ Route::post('/añadir/arrastre/{transportacion}','TransportacionController@store
       ->name('transportaciones.arrastres');
 Route::post('/añadir/envase/','TransportacionController@storeenvase')
       ->name('transportaciones.envases');
+Route::delete('/{arrasrtre_Transp_Enva}','ArrasrtreTranspEnvaController@destroy')
+      ->name('transportaciones.destroyenvase');
 
 Route::get('/{transportacion}/incidencia','HitoController@create')
       ->name('transportaciones.incidencia');
 Route::post('/{transportacion}/incidencia','HitoController@store');
-
-
 });
 
+Route::resource('arrastreenvase','ArrasrtreTranspEnvaController');
 //Rutas de transferencia enviadas
   //Route::resource('tenv','TransfEnviadaController');
 Route::group([
@@ -236,12 +238,11 @@ Route::group([
 ],
 function(){
 
-//Route::get('/','TransfEnviadaController@index')->name('transportaciones');
-
 Route::get('/{id}/crear','TransfEnviadaController@create')->name('tenv.create');
 Route::post('/{id}/crear','TransfEnviadaController@store');
 
-Route::get('/','TransfEnviadaController@index')->name('tenv');
+Route::get('/{id}/inicio','TransfEnviadaController@index')->name('tenv');
+Route::get('/{transferencia}','TransfEnviadaController@show')->name('tenv.show');
 //Route::get('/{id}/llenar','TransfEnviadaController@show')->where('id','[0-9]+')->name('tenv.show');
 
 Route::post('/{id}','TransfEnviadaController@storeproducto')->name('tenv.storeproducto');
@@ -252,8 +253,6 @@ Route::put('/{tenv}','TransfEnviadaController@update')->name('tenv.update');
 Route::delete('/{tenv}','TransfEnviadaController@destroy')->name('tenv.destroy');
 });
 
-//Rutas de transferencia enviadas
-Route::resource('trec','TransfRecibidaController');
 
 //Rutas tipo unidad de medidas
 Route::group([

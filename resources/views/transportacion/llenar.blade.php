@@ -45,11 +45,8 @@
                             <i class="fa fa-plus"></i> Reportar incidencia
                           </a>
                           {{-- @endif --}}
-                          <a href="{{route('tenv.create',$transportacion)}}" type="button" class="btn btn-success btn-flat" >
-                            <i class="fa fa-plus"></i> Añadir transferencia enviada
-                          </a>
-                          <a href="#" type="button" class="btn btn-danger btn-flat" >
-                            <i class="fa fa-plus"></i> Añadir transferencia recibida
+                          <a href="{{route('tenv',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                             Transferencias
                           </a>
                       </div>
                   </div>
@@ -178,9 +175,12 @@
 
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+                    @if($tarras->count()>0)
                     <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#modal-default">
                         <i class="fa fa-plus"></i> Añadir Envase
                     </button>
+                    @endif
+
                     <br><br>
 
                      <div class="content">
@@ -201,9 +201,12 @@
                                 <td>{{$arra->arrastres->identificador}}</td>
                                 <td>{{$dat->envase->identificador}}</td>
                                 <td>
-                                  <button type="button" class="btn btn-flat btn-danger">
-                                          <i class="fa fa-times"></i> Quitar
-                                 </button>
+                                  <form method="POST" action="{{route('arrastreenvase.destroy', $dat)}}" style="display: inline;">
+                                    {{csrf_field()}}{{method_field('DELETE')}}
+                                    <button class="btn btn-flat btn-danger" onclick="return confirm('¿Estas seguro de que deseas quitar el arrastre?')">
+                                      <i class="fa fa-times"></i> Quitar
+                                    </button>
+                                  </form>
                                 </td>
                               </tr>
                             @endforeach

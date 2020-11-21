@@ -137,7 +137,7 @@ class TransportacionController extends Controller
             'envase_id'=>$request['envase_id'],
         ]);
         return redirect()->route('transportaciones.show',$arrastre->transportacion_id);
-    }   
+    }
 
     public function destroy(Transportacion $transportacion)
     {
