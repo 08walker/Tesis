@@ -20,11 +20,7 @@
 	<div class="content">
 	   <div class="container">
 	      <div class="row">
-	        <div class="col-lg-2">
-	            <div class="card">
-	            </div>
-	      	</div>
-		      <div class="col-lg-8">
+		      <div class="col-lg-12">
 		        <div class="card">
 	            <div class="card-header">
 	              <h3 class="card-title">Transferencias Recibidas:</h3> 
@@ -32,31 +28,36 @@
 	            </div>
 	            <!-- /.card-header -->
 	            <div class="card-body">
-	            <table id="example1" class="table table-bordered table-striped">
-	                <thead>
-	                <tr>
-	                  <th>ID</th>
-	                  <th>Fecha Recibo</th>
-	                  <th>Número</th>
-	                  <th>Origen</th>
-	                  <th>Destino</th>
-	                  <th>Acciones</th>
-	                </tr>
-	                </thead>
-
-	                <tbody>
-	                @foreach($todas as $todo)
-	                <tr>
-	                  <td>{{$todo->id}}</td>
-	                  <td>{{$todo->fyh_llegada}}</td>
-	                  <td>{{$todo->num_fact}}</td>
-	                  <td>{{$todo->origen->name}}</td>
-	                  <td>{{$todo->destino->name}}</td>
-	                  <td>lolol</td>
-	                </tr>
-	                @endforeach
-	                </tbody>
-	              </table>
+	            	<table id="example1" class="table table-bordered table-striped">
+					  <thead>
+					    <tr>
+					      <th>ID</th>
+					      <th>Fecha de inicio</th>
+					      <th>Fecha de llegada</th>
+					      <th>Número de factura</th>
+					      <th>Origen</th>
+					      <th>Destino</th>
+					      <th>Ver detalles</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					      @foreach($tranferencias as $transf)
+					        <tr>
+					          <td>{{$transf->id}}</td>
+					          <td>{{\Carbon\Carbon::parse($transf->fyh_salida)->format('d/M/y')}}</td>
+					          <td>{{\Carbon\Carbon::parse($transf->fyh_llegada)->format('d/M/y')}}</td>
+					          <td>{{$transf->num_fact}}</td>
+					          <td>{{$transf->origen->name}}</td>
+					          <td>{{$transf->destino->name}}</td>
+					          <td>
+					            <a href="{{route('tenv.show',$transf)}}">
+					              <i class="fa fa-eye"></i>arreglar esto
+					            </a>
+					          </td>
+					        </tr>
+					      @endforeach
+					  </tbody>
+					</table>
 	            </div>
 	            <!-- /.card-body -->
 	          </div>

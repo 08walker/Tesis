@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTransfEnvRequest;
 use App\Lugar;
 use App\Producto;
 use App\TransfEnviada;
 use App\Transf_Env_Prod;
 use App\Transportacion;
 use App\Traza;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransfEnviadaController extends Controller
@@ -20,6 +22,12 @@ class TransfEnviadaController extends Controller
         return view('tenviada.index',compact('transportacion'));
     }
 
+    public function index2()
+    {
+        $this->authorize('view',new TransfEnviada);
+        return view('trecibida.index')->with('tranferencias',TransfEnviada::recibidas()->get());
+    }
+
     public function create($id)
     {
         $this->authorize('create',new TransfEnviada);
@@ -28,14 +36,18 @@ class TransfEnviadaController extends Controller
         return view('tenviada.create',compact('id','transfer','lugares'));
     }
 
-    public function store(Request $request,$id)
+    public function store(StoreTransfEnvRequest $request,$id)
     {
-        $this->authorize('create',new TransfEnviada);
+        $this->authorize('create',new Transportacion);
         $data = $request->all();
 
+        if(Carbon::parse($request['fyh_salida'])->isAfter(Carbon::now())){
+            return redirect()->route('tenv.create',$id)->with('demo','La fecha introducida debe ser menor a la fecha actual');
+        }
         //dd($data = request()->all());
+
         $transf = TransfEnviada::create([
-            'fyh_salida'=> $data['fyh_salida'],
+            'fyh_salida'=> Carbon::parse($data['fyh_salida']),
             'num_fact'=> $data['num_fact'],
             'origen_id'=> $data['origen_id'],
             'destino_id'=> $data['destino_id'],
@@ -51,7 +63,7 @@ class TransfEnviadaController extends Controller
 
             return redirect()->route('tenv.llenar',$id)->with('success','Transferencia creada con éxito');
         }
-        return back()->withInput()->with('error','Error al crear la transferencia');
+        return back()->withInput()->with('demo','Error al crear la transferencia');
     }
 
     public function show(TransfEnviada $transferencia)
@@ -74,7 +86,23 @@ class TransfEnviadaController extends Controller
     {
         //no tiene validaciones por php
         $this->authorize('update',new TransfEnviada);     
-        $transfEnviada->update($request->validated());
+        $data = $request->all();
+
+        //si la fecha viene llena
+        if ($request['fyh_salida']) {
+            if(Carbon::parse($request['fyh_salida'])->isAfter(Carbon::now())){
+            return redirect()->route('tenv.edit',$transfEnviada)->with('demo','La fecha introducida debe ser menor a la fecha actual');
+             }
+            $transfEnviada->update($data);
+        }
+        //si la fecha viene vacia
+        else
+        {
+            $data['fyh_salida']= $transfEnviada->fyh_salida;
+            //dd($data);
+            $transfEnviada->update($data);
+        }
+        //$transfEnviada->update($request->all());
         if ($transfEnviada) {
             $nombre = auth()->user()->name;
             $ip = request()->ip();
@@ -82,7 +110,48 @@ class TransfEnviadaController extends Controller
             'description'=> "Actualizado transferencia número {$transfEnviada->num_fact} por el usuario {$nombre}",
             'ip'=>$ip,
             ]); 
-            return redirect()->route('tenv.show',$transfEnviada)->with('success','Transferencia actualizada con éxito');
+            return redirect()->route('home')->with('success','Transferencia actualizada con éxito');
+        }
+    }
+
+    public function editRecibo($id)
+    {
+        $this->authorize('update',new TransfEnviada);     
+        $transfEnviada = TransfEnviada::find($id);
+        return view('trecibida.recibir',compact('transfEnviada'));
+    }
+
+    public function updateRecibo(Request $request, TransfEnviada $transfEnviada)
+    {
+        //no tiene validaciones por php
+        $this->authorize('update',new TransfEnviada);     
+        $data = request()->validate([
+        'fyh_llegada'=>'required',
+        ],
+        [   
+            'fyh_llegada.required'=>'Debe seleccionar la fecha',
+        ]);
+        //dd($request['fyh_llegada']);
+        //dd(Carbon::parse($request['fyh_salida'])->format('d m y'));
+
+        if(Carbon::parse($request['fyh_llegada'])->isAfter(Carbon::now()))
+        {
+            return redirect()->route('tenv.recibir',$transfEnviada)->with('demo','La fecha introducida debe ser menor a la fecha actual');
+         }elseif (Carbon::parse($request['fyh_llegada']) < (Carbon::parse($transfEnviada->fyh_salida)) ) {
+             return redirect()->route('tenv.recibir',$transfEnviada)->with('demo','La fecha de llegada debe ser posterior a la fecha salida');
+         }else{
+            //dd($transfEnviada->fyh_salida);
+             $transfEnviada->update($data); 
+         }
+
+        if ($transfEnviada) {
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "Se recibió la transferencia número {$transfEnviada->num_fact} por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]); 
+            return redirect()->route('home')->with('success','Transferencia recibida con éxito');
         }
     }
 
@@ -103,10 +172,10 @@ class TransfEnviadaController extends Controller
                     'ip'=>$ip,
                     ]);
                     return redirect()->route('home')
-                        ->with('error', 'La transferencia no se ha podido eliminar');   
+                        ->with('demo', 'La transferencia no se ha podido eliminar');   
                }
                return redirect()->route('home')
-                    ->with('errors', 'El transfEnviada no ha sido ser eliminado');
+                    ->with('demo', 'El transfEnviada no ha sido ser eliminado');
         }        
         Traza::create([
         'description'=> "La transferencia enviada {$transfEnviada->num_fact} ha sido eliminada por el usuario {$nombre}",

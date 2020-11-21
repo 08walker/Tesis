@@ -14,7 +14,7 @@
     </div>
 
     @include('partials.success')
-    @include('partials.errors')    
+    @include('partials.demo')    
         <!-- Main content -->
         <div class="content">
           <div class="container">

@@ -57,7 +57,7 @@ class LugarController extends Controller
             ]); 
             return redirect()->route('lugares')->with('success','Lugar creado con éxito');
         }
-        return back()->withInput()->with('error','Error al insertar el nuevo lugar');
+        return back()->withInput()->with('demo','Error al insertar el nuevo lugar');
     }
 
     public function edit(Lugar $lugar)
@@ -86,7 +86,7 @@ class LugarController extends Controller
             ]); 
             return redirect()->route('lugares')->with('success','Lugar actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el lugar');
+        return back()->withInput()->with('demo','Error al actualizar el lugar');
     }
 
     public function destroy(Lugar $lugar)

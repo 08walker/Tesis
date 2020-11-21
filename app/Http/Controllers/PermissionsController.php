@@ -41,7 +41,7 @@ class PermissionsController extends Controller
             ]);
         return redirect()->route('admin.permissions.edit',$permission)->withFlash('El permiso ha sido actualizado');
         }
-        return back()->withInput()->with('error','Error al actualizar el permiso');
+        return back()->withInput()->with('demo','Error al actualizar el permiso');
 
     }
 }

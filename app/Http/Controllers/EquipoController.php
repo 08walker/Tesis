@@ -65,7 +65,7 @@ class EquipoController extends Controller
 
             return redirect()->route('equipos')->with('success','Equipo creado con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo equipo');
+        return back()->withInput()->with('demo','Error al crear el nuevo equipo');
     }
 
     public function edit(Equipo $equipo)
@@ -94,7 +94,7 @@ class EquipoController extends Controller
             ]);
             return redirect()->route('equipos')->with('success','Equipo actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el equipo');
+        return back()->withInput()->with('demo','Error al actualizar el equipo');
     }
 
     public function destroy(Equipo $equipo)

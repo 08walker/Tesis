@@ -14,7 +14,7 @@
     </div>
 
     @include('partials.success')
-    @include('partials.errors')
+    @include('partials.demo')
 
     <div class="content">
       <div class="container">
@@ -23,18 +23,43 @@
               <div class="card">
               	  <div class="card-header">
                   <div class="row">
+                        <div class="col-6">
+                          <label for="">Detalles de la transferencia:</label>
+                        </div>
+                        <div class="col-6"></div>
                         <div class="col-3">
-                          <p>Fecha de salida: <strong>'fyh_salida'</strong></p>
+                          <p>Fecha de salida: <strong>{{\Carbon\Carbon::parse($transfEnviada->fyh_salida)->format('d/M/y')}}</strong></p>
                         </div>
                         <div class="col-3">
-                          <p>Número de factura: <strong>'num_fact'</strong></p>
+                          <p>Número de factura: <strong>{{$transfEnviada->num_fact}}</strong></p>
                         </div>
                         <div class="col-3">
-                          <p>Origen: <strong>'origen_id'</strong></p>
+                          <p>Origen: <strong>{{$transfEnviada->origen->name}}</strong></p>
                         </div>
                         <div class="col-3">
-                          <p>Destino: <strong>'destino_id'</strong></p>
+                          <p>Destino: <strong>{{$transfEnviada->origen->name}}</strong></p>
                         </div>
+                        <div class="col-3">
+                        <form id="quickForm" role="form" method="POST" action="{{ route('tenv.update.recibo',$transfEnviada) }}">
+                        {{ method_field('PUT') }}{!! csrf_field() !!}
+                            <div class="form-group">
+                            <label for="exampleInputdate11">Fecha de llegada:</label>
+                            <input type="date" class="form-control" name="fyh_llegada" 
+                            value="old('fyh_llegada',$transfEnviada-> fyh_llegada ?$transfEnviada->fyh_llegada->format('d/m/y')):null">
+                              <div class="has-error">
+                                  @if($errors->has('fyh_llegada'))
+                                    <font color="#FF0000">
+                                          <span style="background-color: inherit;">
+                                            {{$errors->first('fyh_llegada')}}
+                                          </span>
+                                    </font>
+                                  @endif
+                              </div>
+                           </div>
+                           <button type="submit" class="btn btn-success btn-flat">Recibir</button>
+                           <a class="btn btn-flat btn-primary" href="{{route('home')}}">Cancelar</a>
+                        </form>
+                      </div>
                   </div>
                   </div>
                 </div>
@@ -45,27 +70,6 @@
                   <!-- /.card-header -->
                   <div class="card-body">
 
-                    {{-- <table id="example1" class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Fecha</th>
-                          <th>Descripción</th>
-                          <th>Accedió desde</th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        @foreach($trazas as $traza)
-                          <tr>
-                            <td>{{$traza->id}}</td>
-                            <td>{{$traza->created_at->format('d/M/Y H:i:s')}}</td>
-                            <td>{{$traza->description}}</td>
-                            <td>{{$traza->ip}}</td>
-                          </tr>
-                        @endforeach
-                      </tbody>
-                    </table> --}}
                   </div>
                   <!-- /.card-body -->
               </div>

@@ -44,7 +44,7 @@ class UnidadMedidaController extends Controller
             ]);
             return redirect()->route('unidadmedida')->with('success','Unidad de medida creada con éxito');
         }
-        return back()->withInput()->with('error','Error al crear la nueva Unidad de medida');
+        return back()->withInput()->with('demo','Error al crear la nueva Unidad de medida');
     }
 
     public function edit(UnidadMedida $unidadMedida)
@@ -70,7 +70,7 @@ class UnidadMedidaController extends Controller
             ]);
             return redirect()->route('unidadmedida')->with('success','Unidad de medidas actualizada con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar la unidad de medida');
+        return back()->withInput()->with('demo','Error al actualizar la unidad de medida');
     }
 
     public function destroy(UnidadMedida $unidadMedida)
@@ -94,7 +94,7 @@ class UnidadMedidaController extends Controller
                         ->with('success', 'La unidad de medida ha sido desactivada');   
                }
                return redirect()->route('unidadmedida')
-                    ->with('errors', 'La unidad de medida no ha sido ser eliminada');
+                    ->with('demo', 'La unidad de medida no ha sido ser eliminada');
         }
             Traza::create([
             'description'=> "La unidad de medida {$unidadMedida->name} ha sido eliminada por el usuario {$nombre}",

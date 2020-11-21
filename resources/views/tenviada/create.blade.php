@@ -13,6 +13,7 @@
     </div>
 
     @include('partials.success')
+    @include('partials.demo')
 
     <div class="content">
       <div class="container">

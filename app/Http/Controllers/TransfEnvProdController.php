@@ -51,7 +51,7 @@ class TransfEnvProdController extends Controller
             return redirect()->route('tenv.show',$transferencia);
 
         }
-        return back()->withInput()->with('errors','Error al llenar la transferencia');
+        return back()->withInput()->with('demo','Error al llenar la transferencia');
     }
 
     public function edit($id)
@@ -78,7 +78,7 @@ class TransfEnvProdController extends Controller
             // $transferencia = $transfer->transfenviada;
             return redirect()->route('tenv.show',$transfer->transfenviada)->with('success','Producto actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el transfer');
+        return back()->withInput()->with('demo','Error al actualizar el transfer');
         
     }
 

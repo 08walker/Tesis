@@ -24,7 +24,7 @@ class StoreTransfEnvRequest extends FormRequest
     public function rules()
     {
         return [
-            'fyh_salida'=>'required|date',
+            //'fyh_salida'=>'required|date',
             'num_fact'=>'required|numeric',
             'origen_id'=>'required',
             'destino_id'=>'required|different:origen_id',

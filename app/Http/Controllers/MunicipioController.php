@@ -58,7 +58,7 @@ class MunicipioController extends Controller
             ]); 
             return redirect()->route('municipios')->with('success','Municipio creado con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo municipio');
+        return back()->withInput()->with('demo','Error al crear el nuevo municipio');
     }
     
     public function edit(Municipio $municipio)
@@ -83,7 +83,7 @@ class MunicipioController extends Controller
             ]);
             return redirect()->route('municipios')->with('success','Municipio actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el municipio');
+        return back()->withInput()->with('demo','Error al actualizar el municipio');
     }
 
     public function destroy(Municipio $municipio)
@@ -106,7 +106,7 @@ class MunicipioController extends Controller
                         ->with('success', 'El municipio ha sido desactivado');   
                }
                return redirect()->route('municipios')
-                    ->with('errors', 'El municipio no ha sido ser eliminado');
+                    ->with('demo', 'El municipio no ha sido ser eliminado');
         }
         
         Traza::create([

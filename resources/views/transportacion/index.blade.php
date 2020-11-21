@@ -18,16 +18,16 @@
     </div>
 
     @include('partials.success')
-    @include('partials.errors')
+    @include('partials.demo')
 
 <div class="content">
           <div class="container">
             <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <div class="card">
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
               <h3 class="card-title">Transportaciones:</h3> 
@@ -46,6 +46,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Identificador</th>
+                  <th>Eequipo</th>
                   <th>Acciones</th>
                 </tr>
                 </thead>
@@ -55,6 +56,7 @@
                 <tr>
                   <td>{{$transpor->id}}</td>
                   <td>{{$transpor->numero}}</td>
+                  <td>{{$transpor->equipo->identificador}}</td>
                   <td>
                       <a href="{{route('transportaciones.show',$transpor)}}">
                           <i class="fa fa-eye"></i>

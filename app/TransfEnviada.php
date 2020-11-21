@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class TransfEnviada extends Model
@@ -44,5 +45,19 @@ class TransfEnviada extends Model
     {
         $query->whereNull('fyh_llegada');
     }
+
+    // public function setFyhSalidaAttribute($fyh_salida)
+    // {
+    //     $this->attributes['fyh_salida'] = $fyh_salida
+    //                                         ? Carbon::parse($fyh_salida)
+    //                                         :null;
+    // }
+
+    // public function setFyhLlegadaAttribute($fyh_llegada)
+    // {
+    //     $this->attributes['fyh_llegada'] = $fyh_llegada
+    //                                         ? Carbon::parse($fyh_llegada)
+    //                                         :null;
+    // }
 
 }

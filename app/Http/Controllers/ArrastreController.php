@@ -66,7 +66,7 @@ class ArrastreController extends Controller
             ]);
             return redirect()->route('arrastres')->with('success','Arrastre creado con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo arrastre');
+        return back()->withInput()->with('demo','Error al crear el nuevo arrastre');
     }
 
     public function edit(Arrastre $arrastre)
@@ -99,7 +99,7 @@ class ArrastreController extends Controller
         return redirect()->route('arrastres')->with('success','Arrastre actualizado con éxito');
         }
 
-        return back()->withInput()->with('error','Error al actualizar el arrastre');
+        return back()->withInput()->with('demo','Error al actualizar el arrastre');
     }
 
     public function destroy(Arrastre $arrastre)

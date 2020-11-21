@@ -51,7 +51,7 @@ class TransportacionController extends Controller
             return redirect()->route('transportaciones.show', ['transp'=>$transp->id])
                     ->with('success','Transportación creada con éxito');
         }
-        return back()->withInput()->with('errors','Error al crear la transportación');
+        return back()->withInput()->with('demo','Error al crear la transportación');
     }
 
     public function show($id)
@@ -86,7 +86,7 @@ class TransportacionController extends Controller
             ]);
             return redirect()->route('transportaciones.show',$transportacion)->with('success','Transportación actualizada con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar la transportación');
+        return back()->withInput()->with('demo','Error al actualizar la transportación');
     }
 
     //Para llenar tabla chofer_equipo_transp

@@ -38,7 +38,7 @@ class TipoArrastreController extends Controller
             ]);
             return redirect()->route('tipoarrastre')->with('success','Tipo de arrastre creada con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo tipo');
+        return back()->withInput()->with('demo','Error al crear el nuevo tipo');
     }
 
     public function edit(TipoArrastre $tipoArrastre)
@@ -62,7 +62,7 @@ class TipoArrastreController extends Controller
             ]);
             return redirect()->route('tipoarrastre')->with('success','Tipo arrastre actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el tipo de arrastre');
+        return back()->withInput()->with('demo','Error al actualizar el tipo de arrastre');
     }
 
     public function destroy(TipoArrastre $tipoArrastre)

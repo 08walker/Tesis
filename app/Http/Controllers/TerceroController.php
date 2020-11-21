@@ -52,7 +52,7 @@ class TerceroController extends Controller
             ]);
             return redirect()->route('terceros')->with('success','Tercero creado con éxito');
         }
-        return back()->withInput()->with('error','Error al crear la agencia');
+        return back()->withInput()->with('demo','Error al crear la agencia');
     }
 
     public function edit(Tercero $tercero)
@@ -79,7 +79,7 @@ class TerceroController extends Controller
             ]);
             return redirect()->route('terceros')->with('success','Tercero actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar la agencia');   
+        return back()->withInput()->with('demo','Error al actualizar la agencia');   
     }
 
     public function destroy(Tercero $tercero)

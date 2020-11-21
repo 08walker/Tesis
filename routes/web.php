@@ -230,8 +230,8 @@ Route::post('/{transportacion}/incidencia','HitoController@store');
 });
 
 Route::resource('arrastreenvase','ArrasrtreTranspEnvaController');
+
 //Rutas de transferencia enviadas
-  //Route::resource('tenv','TransfEnviadaController');
 Route::group([
     'prefix'=>'tenv',
     'middleware'=>'auth'
@@ -242,10 +242,14 @@ Route::get('/{id}/crear','TransfEnviadaController@create')->name('tenv.create');
 Route::post('/{id}/crear','TransfEnviadaController@store');
 
 Route::get('/{id}/inicio','TransfEnviadaController@index')->name('tenv');
+Route::get('/recibidas','TransfEnviadaController@index2')->name('tenv.recibidas');
 Route::get('/{transferencia}','TransfEnviadaController@show')->name('tenv.show');
 
 Route::get('/{id}/editar','TransfEnviadaController@edit')->name('tenv.edit');
 Route::put('/{transfEnviada}','TransfEnviadaController@update')->name('tenv.update');
+
+Route::get('/{id}/recibir','TransfEnviadaController@editRecibo')->name('tenv.recibir');
+Route::put('/{transfEnviada}/recibir','TransfEnviadaController@updateRecibo')->name('tenv.update.recibo');
 
 Route::delete('/{tenv}','TransfEnviadaController@destroy')->name('tenv.destroy');
 });

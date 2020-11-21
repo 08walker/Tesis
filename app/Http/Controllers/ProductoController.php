@@ -47,7 +47,7 @@ class ProductoController extends Controller
             ]);
             return redirect()->route('productos')->with('success','El producto ha sido creado con éxito');
         }
-        return back()->withInput()->with('errors','Error al crear el nuevo Producto');
+        return back()->withInput()->with('demo','Error al crear el nuevo Producto');
     }
 
     public function show($id)
@@ -80,7 +80,7 @@ class ProductoController extends Controller
             ]);
             return redirect()->route('productos')->with('success','Producto actualizado con éxito');
            }
-        return back()->withInput()->with('error','Error al actualizar el producto');
+        return back()->withInput()->with('demo','Error al actualizar el producto');
     }
 
     public function destroy(Producto $producto)
@@ -105,7 +105,7 @@ class ProductoController extends Controller
                         ->with('success', 'El producto ha sido desactivado');   
                }
                return redirect()->route('productos')
-                    ->with('errors', 'El producto no ha sido ser eliminado');
+                    ->with('demo', 'El producto no ha sido ser eliminado');
         }
         $nombre = auth()->user()->name;
             Traza::create([

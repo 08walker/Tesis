@@ -14,7 +14,8 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    @include('partials.success')
+    @include('partials.demo')
     <!-- Main content -->
         <div class="content">
           <div class="container">
@@ -24,9 +25,6 @@
               <div class="card-header">
                 <h5 class="card-title m-0">Transferencias en curso</h5>
               </div>
-              
-              @include('partials.success')
-              @include('partials.errors')
               
               <div class="card-body">
                 

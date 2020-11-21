@@ -62,7 +62,7 @@
               </li>
 
               <li>
-                <a href="#" class="dropdown-item">Ver Recibidas </a>
+                <a href="{{ route('tenv.recibidas') }}" class="dropdown-item">Transferencias recibidas </a>
               </li>
               
               <li>

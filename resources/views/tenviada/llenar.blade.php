@@ -12,7 +12,7 @@
       </div><!-- /.container-fluid -->
     </div>
 
-    @include('partials.success')
+    {{-- @include('partials.success') --}}
 
     <div class="content">
           <div class="container">
@@ -37,7 +37,7 @@
                       @include('componentes.observacion',['model'=>$transfer])
                       
                       <button type="submit" class="btn btn-success btn-flat">Agregar</button>
-                      <a class="btn btn-flat btn-primary" href="{{route('tenv.show',$id)}}">Cancelar</a>
+                      <a class="btn btn-flat btn-primary" href="{{route('home')}}">Cancelar</a>
                     </form>
                     
                   </div>

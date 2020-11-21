@@ -48,7 +48,7 @@ class TipoUnidadMedidaController extends Controller
             ]);
             return redirect()->route('tipounidad')->with('success','Tipo de unidad de medida creada con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo tipo');
+        return back()->withInput()->with('demo','Error al crear el nuevo tipo');
     }
 
     public function edit(TipoUnidadMedida $tipoUnidadMedida)
@@ -72,7 +72,7 @@ class TipoUnidadMedidaController extends Controller
             ]);
             return redirect()->route('tipounidad')->with('success','Tipo de unidad actualizada con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el tipo de unidad');
+        return back()->withInput()->with('demo','Error al actualizar el tipo de unidad');
     }
 
     public function destroy(TipoUnidadMedida $tipoUnidadMedida)

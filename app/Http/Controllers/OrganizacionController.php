@@ -51,7 +51,7 @@ class OrganizacionController extends Controller
             ]);
             return redirect()->route('organizaciones')->with('success','Organización creada con éxito');
         }
-        return back()->withInput()->with('error','Error al crear la nueva organización');
+        return back()->withInput()->with('demo','Error al crear la nueva organización');
     }
 
     public function edit(Organizacion $organizacion)
@@ -78,7 +78,7 @@ class OrganizacionController extends Controller
             ]);
             return redirect()->route('organizaciones')->with('success','Organización actualizada con éxito');
            }
-        return back()->withInput()->with('error','Error al actualizar la organización');
+        return back()->withInput()->with('demo','Error al actualizar la organización');
     }
 
     public function destroy(Organizacion $organizacion)

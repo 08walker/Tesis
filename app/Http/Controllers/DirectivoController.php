@@ -47,7 +47,7 @@ class DirectivoController extends Controller
             ]);
             return redirect()->route('directivo.index')->with('success','Directivo creado con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo directivo');
+        return back()->withInput()->with('demo','Error al crear el nuevo directivo');
     }
 
     public function show(Directivo $directivo)
@@ -79,7 +79,7 @@ class DirectivoController extends Controller
             ]);
             return redirect()->route('directivo.index')->with('success','Directivo actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el directivo');
+        return back()->withInput()->with('demo','Error al actualizar el directivo');
     }
 
     public function destroy(Directivo $directivo)

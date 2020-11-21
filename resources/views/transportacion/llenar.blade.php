@@ -40,14 +40,20 @@
                           <a href="{{route('transportaciones.edit',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                             <i class="fa fa-pen"></i> Editar detalles
                           </a>
-                          {{-- @if($transportacion->transfenv) --}}
+                          @if($transportacion->transfenv)
                           <a href="{{route('transportaciones.incidencia',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                             <i class="fa fa-plus"></i> Reportar incidencia
                           </a>
-                          {{-- @endif --}}
+                          @endif
+                          @if($transportacion->choferes->count()>0)
                           <a href="{{route('tenv',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                              Transferencias
                           </a>
+                          @else
+                            <strong>
+                              Debe introducir al menos un chofer para introducir transferencias
+                            </strong>
+                          @endif
                       </div>
                   </div>
                 </div>

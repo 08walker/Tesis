@@ -14,7 +14,7 @@
       @foreach($model as $transf)
         <tr>
           <td>{{$transf->id}}</td>
-          <td>{{$transf->fyh_salida}}</td>
+          <td>{{\Carbon\Carbon::parse($transf->fyh_salida)->format('d/M/y')}}</td>
           <td>{{$transf->num_fact}}</td>
           <td>{{$transf->origen->name}}</td>
           <td>{{$transf->destino->name}}</td>
@@ -27,6 +27,9 @@
             @can('update',new \App\TransfEnviada)
             <a href="{{route('tenv.edit',$transf)}}" class="btn btn-xs btn-info">
               <i class="fa fa-pen"></i>
+            </a>
+            <a href="{{route('tenv.recibir',$transf)}}" class="btn btn-xs btn-info">
+              Recibir
             </a>
             @endcan
             @can('delete',new \App\TransfEnviada)

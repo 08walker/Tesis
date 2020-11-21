@@ -38,7 +38,7 @@ class ProvinciaController extends Controller
             ]);
             return redirect()->route('provincias')->with('success','Provincia creada con éxito');
         }
-        return back()->withInput()->with('error','Error al crear la nueva provincia');
+        return back()->withInput()->with('demo','Error al crear la nueva provincia');
     }
 
         public function show(Provincia $provincia)
@@ -68,7 +68,7 @@ class ProvinciaController extends Controller
             ]);
             return redirect()->route('provincias')->with('success','Provincia actualizada con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar la provincia');
+        return back()->withInput()->with('demo','Error al actualizar la provincia');
     }
 
     public function destroy(Provincia $provincia)

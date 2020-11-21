@@ -109,7 +109,7 @@ class UsersController extends Controller
         ]); 
         return redirect()->route('user.edit', $user)->with('success','Usuario actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualisar el nuevo usuario');
+        return back()->withInput()->with('demo','Error al actualisar el nuevo usuario');
     }
 
     public function destroy(User $user)

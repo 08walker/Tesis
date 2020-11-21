@@ -6,13 +6,14 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear Tranferencia</h1>
+            <h1 class="m-0 text-dark"> Actualizar Tranferencia</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
 
     @include('partials.success')
+    @include('partials.demo')
 
     <div class="content">
       <div class="container">
@@ -33,19 +34,22 @@
                 <div class="card-body">
                   
     		        <div class="form-group">
-						<label for="exampleInputdate11">Fecha de salida:</label>
-						<label for="">{{$transfEnviada->fyh_salida}}</label>
-						<input type="date" class="form-control" name="fyh_salida" value="old('fyh_salida',$model->fyh_salida)">
-					  <div class="has-error">
-					      @if($errors->has('fyh_salida'))
-					        <font color="#FF0000">
-					              <span style="background-color: inherit;">
-					                {{$errors->first('fyh_salida')}}
-					              </span>
-					        </font>
-					      @endif
-					  </div>
-					</div>
+						      <label for="exampleInputdate11">Fecha de salida:</label>
+				          <strong>
+                    {{ \Carbon\Carbon::parse($transfEnviada->fyh_salida)->format('d/M/y')}}
+                  </strong>
+						      <input type="date" class="form-control" name="fyh_salida" 
+						      value="old('fyh_salida',$transfEnviada-> fyh_salida ?$transfEnviada->fyh_salida->format('d/m/y')):null">
+        					  <div class="has-error">
+        					      @if($errors->has('fyh_salida'))
+        					        <font color="#FF0000">
+        					              <span style="background-color: inherit;">
+        					                {{$errors->first('fyh_salida')}}
+        					              </span>
+        					        </font>
+        					      @endif
+        					  </div>
+					       </div>
 
     		        @include('componentes.numerfact',['model'=>$transfEnviada])
 
@@ -54,7 +58,7 @@
     		        @include('foreach.destinofor',['model'=>$transfEnviada])
 
                 <button type="submit" class="btn btn-success btn-flat">Actualizar</button>
-                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.show',$transfEnviada->transportacion)}}">Cancelar</a>
+                <a class="btn btn-flat btn-primary" href="{{route('home')}}">Cancelar</a>
 
                 </div>
             </form>               

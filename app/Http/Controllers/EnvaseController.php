@@ -58,7 +58,7 @@ class EnvaseController extends Controller
 
             return redirect()->route('envases')->with('success','Envase creado con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo envase');
+        return back()->withInput()->with('demo','Error al crear el nuevo envase');
     }
 
     public function edit(Envase $envase)
@@ -87,7 +87,7 @@ class EnvaseController extends Controller
             ]);
         return redirect()->route('envases')->with('success','Envase actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el envase');
+        return back()->withInput()->with('demo','Error al actualizar el envase');
     }
 
     public function destroy(Envase $envase)

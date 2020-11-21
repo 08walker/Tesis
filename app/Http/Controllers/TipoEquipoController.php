@@ -38,7 +38,7 @@ class TipoEquipoController extends Controller
             ]);
             return redirect()->route('tipoequipo')->with('success','Tipo de equipo creado con éxito');
         }
-        return back()->withInput()->with('error','Error al crear el nuevo tipo');
+        return back()->withInput()->with('demo','Error al crear el nuevo tipo');
     }
 
     public function edit(TipoEquipo $tipoEquipo)
@@ -62,7 +62,7 @@ class TipoEquipoController extends Controller
             ]);
             return redirect()->route('tipoequipo')->with('success','Tipo de equipo actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el tipo de equipo');
+        return back()->withInput()->with('demo','Error al actualizar el tipo de equipo');
     }
 
     public function destroy(TipoEquipo $tipoEquipo)

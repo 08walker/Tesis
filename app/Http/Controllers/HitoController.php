@@ -54,7 +54,7 @@ class HitoController extends Controller
             ]);
             return redirect()->route('transportaciones.show',$transportacion)->with('success','Incidencia creada con éxito');
         }
-        return back()->withInput()->with('error','Error al crear la incidencia');
+        return back()->withInput()->with('demo','Error al crear la incidencia');
     }
 
     public function show(Hito $hito)

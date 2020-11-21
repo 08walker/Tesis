@@ -62,7 +62,7 @@ class ChoferController extends Controller
             ]);
             return redirect()->route('choferes')->with('success','EL chofer ha sido creado con éxito');
         }
-        return back()->withInput()->with('error','Error al insertar el nuevo chofer');
+        return back()->withInput()->with('demo','Error al insertar el nuevo chofer');
     }
 
     public function edit(Chofer $chofer)
@@ -90,7 +90,7 @@ class ChoferController extends Controller
             ]);
             return redirect()->route('choferes')->with('success','Chofer actualizado con éxito');
         }
-        return back()->withInput()->with('error','Error al actualizar el chofer');
+        return back()->withInput()->with('demo','Error al actualizar el chofer');
     }
 
     public function destroy(Chofer $chofer)
