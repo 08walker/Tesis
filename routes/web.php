@@ -11,6 +11,11 @@
 |
 */
 
+//Para probar el envio de correos
+// Route::get('email',function(){
+//   return new App\Mail\EnviarIncidencia(App\Hito::first(),'pepe@pepe.com');
+// });
+
 Route::get('/', function () {
     return view('welcome');
 });

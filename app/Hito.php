@@ -19,4 +19,9 @@ class Hito extends Model
     {
         return $this->belongsTo('App\TipoHito');
     }
+
+    public function transportacion()
+    {
+        return $this->belongsTo('App\Transportacion');
+    }
 }

@@ -26,7 +26,7 @@ class TransportacionController extends Controller
     {   
         $this->authorize('create',new Transportacion);
         $transportacion = new Transportacion;
-        $equipos = Equipo::all();
+        $equipos = Equipo::activos()->get();
         return view('transportacion.create',compact('transportacion','equipos'));
     }
 

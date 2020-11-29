@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Directivo;
+use App\Events\HitoFueCreado;
 use App\Hito;
 use App\TipoHito;
 use App\Transportacion;
@@ -52,6 +54,12 @@ class HitoController extends Controller
             'description'=> "El usuario {$nombre} ha creado una incidencia en la transportación número {$transportacion->numero}",
             'ip'=>$ip,
             ]);
+            $directivos = Directivo::activos()->get();
+            foreach ($directivos as $directivo) {
+                $correos[] = $directivo->user->email;
+            }
+            //dd($correos);
+            HitoFueCreado::dispatch($hito,$correos);
             return redirect()->route('transportaciones.show',$transportacion)->with('success','Incidencia creada con éxito');
         }
         return back()->withInput()->with('demo','Error al crear la incidencia');

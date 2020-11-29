@@ -34,4 +34,9 @@ class Transportacion extends Model
         return $this->hasMany('App\TransfEnviada');
     }
 
+    public function hito()
+    {
+        return $this->hasMany('App\Hito');
+    }
+
 }

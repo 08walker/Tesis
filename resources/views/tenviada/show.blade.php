@@ -49,7 +49,9 @@
 	                  <th>Cantidad de bultos</th>
 	                  <th>Volumen</th>
 	                  <th>Observación</th>
+	                  @can('update',new \App\TransfEnviada)
 	                  <th>Acciones</th>
+	                  @endcan
 	                </tr>
 	                </thead>
 
@@ -62,12 +64,11 @@
 	                  <td>{{$todo->cantidad_bultos}}</td>
 	                  <td>{{$todo->volumen_m3}}</td>
 	                  <td>{{$todo->observacion}}</td>
+	                  @can('update',new \App\TransfEnviada)
 	                  <td>
-			            @can('update',new \App\TransfEnviada)
 			            <a href="{{route('tenv.prod.edit',$todo->id)}}" class="btn btn-xs btn-info">
 			              <i class="fa fa-pen"></i>
 			            </a>
-			            @endcan
 			              @can('delete',new \App\TransfEnviada)
 			              <form method="POST" action="{{route('tenv.prod.destroy', $todo)}}" style="display: inline;">
 			                {{csrf_field()}}{{method_field('DELETE')}}
@@ -77,6 +78,7 @@
 			              </form>
 			              @endcan
 	                  </td>
+			          @endcan
 	                </tr>
 	                @endforeach
 	                </tbody>
