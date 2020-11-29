@@ -13,7 +13,7 @@ class Equipo extends Model
         'volumen_max_carga',
         'peso_max_carga',
         'puede_cargar',
-        'es_propio',
+        'ocupado',
         'tara',
         'activo',
         'tipo_equipo_id',
@@ -54,5 +54,10 @@ class Equipo extends Model
     public function scopeActivos($query)
     {
         $query->where('activo','=','1');
+    }
+
+    public function scopeDisponibles($query)
+    {
+        $query->where('ocupado','=','1');
     }
 }

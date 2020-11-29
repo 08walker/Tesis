@@ -72,11 +72,11 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoHitoSeeder::class);
         // $this->call(HitoSeeder::class);
 
-        // $this->call(ChoferEquipoTranspSeeder::class);
-        // $this->call(ArrastreTransporSeeder::class);
-        // $this->call(ArrastreEnvaEquipoSeeder::class);
-        // $this->call(TransfEnviadaSeeder::class);
-        // $this->call(ProdEnvaEnvSeeder::class);
+        $this->call(ChoferEquipoTranspSeeder::class);
+        $this->call(ArrastreTransporSeeder::class);
+        $this->call(ArrasrtreTranspEnvaSeeder::class);
+        $this->call(TransfEnviadaSeeder::class);
+        $this->call(TransfEnvProdSeeder::class);
         
     }
 

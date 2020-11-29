@@ -19,8 +19,8 @@ class CreateEnvasesTable extends Migration
             $table->string('identificador',20);
             $table->double('volumen_max_carga', 8, 2);
             $table->double('tara', 8, 2);
-            $table->boolean('es_propio')->unsigned()->default(0);
             $table->boolean('activo')->unsigned()->default(1); 
+            $table->boolean('ocupado')->unsigned()->default(1);
 
             $table->unsignedBigInteger('tercero_id')->nullable();
             $table->foreign('tercero_id')->references('id')->on('terceros');

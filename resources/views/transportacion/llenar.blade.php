@@ -40,7 +40,7 @@
                           <a href="{{route('transportaciones.edit',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                             <i class="fa fa-pen"></i> Editar detalles
                           </a>
-                          @if($transportacion->transfenv)
+                          @if($transportacion->transfenviada->count() > 0 )
                           <a href="{{route('transportaciones.incidencia',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                             <i class="fa fa-plus"></i> Reportar incidencia
                           </a>

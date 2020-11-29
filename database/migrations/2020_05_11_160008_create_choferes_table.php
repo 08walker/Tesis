@@ -21,10 +21,10 @@ class CreateChoferesTable extends Migration
             $table->string('ci',11);
             $table->string('licencia');
             $table->string('telefono');
-            $table->boolean('es_propio')->unsigned()->default(0);
+            $table->boolean('ocupado')->unsigned()->default(1);
             $table->boolean('activo')->unsigned()->default(1);
 
-            $table->unsignedBigInteger('equipo_id');
+            $table->unsignedBigInteger('equipo_id')->nullable();
             $table->foreign('equipo_id')->references('id')->on('equipos');
             $table->unsignedBigInteger('tercero_id')->nullable();
             $table->foreign('tercero_id')->references('id')->on('terceros');

@@ -21,7 +21,7 @@ class CreateEquiposTable extends Migration
             $table->double('volumen_max_carga', 8, 2);
             $table->double('peso_max_carga', 8, 2);
             $table->boolean('puede_cargar')->unsigned()->default(1);
-            $table->boolean('es_propio')->unsigned()->default(0);
+            $table->boolean('ocupado')->unsigned()->default(1);
             $table->boolean('activo')->unsigned()->default(1);
             $table->double('tara', 8, 2);
 

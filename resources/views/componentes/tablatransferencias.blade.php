@@ -28,9 +28,11 @@
             <a href="{{route('tenv.edit',$transf)}}" class="btn btn-xs btn-info">
               <i class="fa fa-pen"></i>
             </a>
+            @if($transf->fyh_llegada == null)
             <a href="{{route('tenv.recibir',$transf)}}" class="btn btn-xs btn-info">
               Recibir
             </a>
+            @endif
             @endcan
             @can('delete',new \App\TransfEnviada)
               <form method="POST" action="{{route('tenv.destroy', $transf)}}" style="display: inline;">

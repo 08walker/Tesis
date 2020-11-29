@@ -11,7 +11,7 @@ class Envase extends Model
         'identificador',
         'volumen_max_carga',
         'tara',
-        'es_propio',
+        'ocupado',
         'activo',
         'tercero_id',
         'organizacion_id',
@@ -35,6 +35,11 @@ class Envase extends Model
     public function scopeActivos($query)
     {
         $query->where('activo','=','1');
+    }
+
+    public function scopeDisponibles($query)
+    {
+        $query->where('ocupado','=','1');
     }
 
 }

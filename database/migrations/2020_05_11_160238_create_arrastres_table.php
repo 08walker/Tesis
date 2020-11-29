@@ -20,9 +20,9 @@ class CreateArrastresTable extends Migration
             $table->longText('description')->nullable();
             $table->double('volumen_max_carga', 8, 2);
             $table->double('peso_max_carga', 8, 2);
-            $table->boolean('es_propio')->unsigned()->default(0);
             $table->double('tara', 8, 2);
             $table->boolean('activo')->unsigned()->default(1);
+            $table->boolean('ocupado')->unsigned()->default(1);
 
             $table->unsignedBigInteger('equipo_id');
             $table->foreign('equipo_id')->references('id')->on('equipos');

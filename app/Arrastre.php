@@ -12,9 +12,9 @@ class Arrastre extends Model
         'description',
         'volumen_max_carga',
         'peso_max_carga',
-        'es_propio',
         'tara',
         'activo',
+        'ocupado',
         'equipo_id',
         'tercero_id',
         'tipo_arrastre_id',   
@@ -49,5 +49,10 @@ class Arrastre extends Model
     public function scopeActivos($query)
     {
         $query->where('activo','=','1');
+    }
+
+    public function scopeDisponibles($query)
+    {
+        $query->where('ocupado','=','1');
     }
 }

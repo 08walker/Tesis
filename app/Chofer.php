@@ -13,7 +13,7 @@ class Chofer extends Model
         'ci',
         'licencia',
         'telefono',
-        'es_propio',
+        'ocupado',
         'equipo_id',
         'activo',
         'tercero_id',
@@ -43,5 +43,10 @@ class Chofer extends Model
     public function scopeActivos($query)
     {
         $query->where('activo','=','1');
+    }
+
+    public function scopeDisponibles($query)
+    {
+        $query->where('ocupado','=','1');
     }
 }

@@ -13,10 +13,10 @@ $factory->define(App\Chofer::class, function (Faker $faker) {
         'licencia'=>Str::random(7),
         'telefono'=>$faker->phoneNumber,
         //Para los boolean o cualquier otra cosa
-        'es_propio'=>$faker->randomElement(['0','1']),
+        //'ocupado'=>$faker->randomElement(['0','1']),
 
-        'tercero_id'=> Tercero::InRandomOrder()->value('id')?:factory(Tercero::class),
+        //'tercero_id'=> Tercero::InRandomOrder()->value('id')?:factory(Tercero::class),
         'equipo_id'=> Equipo::InRandomOrder()->value('id')?:factory(Equipo::class),
-		'organizacion_id'=>Organizacion::InRandomOrder()->value('id')?:factory(Organizacion::class),
+		//'organizacion_id'=>Organizacion::InRandomOrder()->value('id')?:factory(Organizacion::class),
     ];
 });

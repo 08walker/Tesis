@@ -32,6 +32,6 @@ class TerceroSeeder extends Seeder
         	'municipio_id'=>$municipio,
         ]);
 
-        factory(Tercero::class,3)->create();
+        factory(Tercero::class,8)->create();
     }
 }
