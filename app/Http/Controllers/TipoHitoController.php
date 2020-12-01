@@ -16,7 +16,8 @@ class TipoHitoController extends Controller
     {
         $this->authorize('view',new TipoHito);
         
-        $tipohito = TipoHito::activos()->get();
+        //$tipohito = TipoHito::activos()->get();
+        $tipohito = TipoHito::all();
         
         return view('tipohito.index',compact('tipohito'));
     }

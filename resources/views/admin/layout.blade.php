@@ -241,23 +241,81 @@
           </li>
           @endcanany
 
+          @can('view',new \App\Reporte1)
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Reportes</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes') }}" class="dropdown-item">Listado de reportes </a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte1') }}" class="dropdown-item">Reporte # 1</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte2') }}" class="dropdown-item">Reporte # 2</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte3') }}" class="dropdown-item">Reporte # 3</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte4') }}" class="dropdown-item">Reporte # 4</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte5') }}" class="dropdown-item">Reporte # 5</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte6') }}" class="dropdown-item">Reporte # 6</a>
+                </li>
+              @endcan
+
+              {{-- @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte7') }}" class="dropdown-item">Reporte # 7</a>
+                </li>
+              @endcan --}}
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte8') }}" class="dropdown-item">Reporte # 8</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte9') }}" class="dropdown-item">Reporte # 9</a>
+                </li>
+              @endcan
+
+            </ul>
+          </li>
+          @endcan
+
           <li class="nav-item">
             <a href="/contacto" class="nav-link">Contacto</a>
           </li>
           @endguest
         </ul>
 
-        <!-- SEARCH FORM -->
-        <!-- <form class="form-inline ml-0 ml-md-3">
-          <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </form> -->
       </div>
 
       <!-- Right navbar links -->

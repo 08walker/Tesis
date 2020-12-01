@@ -32,9 +32,13 @@
 	            <div class="card-header">
 	              <h3 class="card-title">Transferencias Enviadas:</h3> 
 	              <br>
+                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.formllenar',$transportacion)}}">
+                  <i class="fa fa-arrow-left"></i> Atras</a>
+                  @if(!$transportacion->terminada)
 	              <a href="{{route('tenv.create',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                     <i class="fa fa-plus"></i> Crear
                 </a>
+                @endif
 	            </div>
 	            <!-- /.card-header -->
 	            <div class="card-body">

@@ -50,8 +50,8 @@
 					          <td>{{$transf->origen->name}}</td>
 					          <td>{{$transf->destino->name}}</td>
 					          <td>
-					            <a href="{{route('tenv.show',$transf)}}">
-					              <i class="fa fa-eye"></i>arreglar esto
+					            <a href="{{route('tenv.detalles',$transf)}}">
+					              <i class="fa fa-eye"></i> Ver detalles
 					            </a>
 					          </td>
 					        </tr>

@@ -27,17 +27,16 @@
                     
                     @include('partials.error-messages')
                     <form id="quickForm" role="form" method="POST" action="{{ route('tenv.storeproducto',$id) }}">
-                {!! csrf_field() !!}
+                      {!! csrf_field() !!}
 
                       @include('foreach.productosfor',['model'=>$transfer])
-
                       @include('componentes.cantbultos',['model'=>$transfer])
                       @include('componentes.pesoprod',['model'=>$transfer])
                       @include('componentes.volumenprod',['model'=>$transfer])
                       @include('componentes.observacion',['model'=>$transfer])
                       
                       <button type="submit" class="btn btn-success btn-flat">Agregar</button>
-                      <a class="btn btn-flat btn-primary" href="{{route('home')}}">Cancelar</a>
+                      <a class="btn btn-flat btn-primary" href="{{route('tenv.show',$id)}}">Cancelar</a>
                     </form>
                     
                   </div>

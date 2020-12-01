@@ -58,7 +58,7 @@
                   <td>{{$transpor->numero}}</td>
                   <td>{{$transpor->equipo->identificador}}</td>
                   <td>
-                      <a href="{{route('transportaciones.show',$transpor)}}">
+                      <a href="{{route('transportaciones.formllenar',$transpor)}}">
                           <i class="fa fa-eye"></i>
                         </a>
 

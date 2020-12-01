@@ -29,13 +29,13 @@
 	            <div class="card-header">
 	              <h3 class="card-title">Productos:</h3> 
 	              <br>
+	              <a href="/home" type="button" class="btn btn-primary btn-flat" >
+                    <i class="fa fa-arrow-left"></i> Atras
+                  </a>
 	              @can('create',new \App\TransfEnviada)
 	              <a href="{{route('tenv.llenar',$transferencia)}}" type="button" class="btn btn-primary btn-flat" >
                     <i class="fa fa-plus"></i> Añadir Producto
-                  </a>
-                  <a href="/home" type="button" class="btn btn-primary btn-flat" >
-                    <i class="fa fa-plus"></i> Atras
-                  </a>
+                  </a>                  
                 @endcan
 	            </div>
 	            <!-- /.card-header -->

@@ -38,7 +38,7 @@
       		      @include('foreach.tipohitofor',['model'=>$incidencia])
 
                 <button type="submit" class="btn btn-success btn-flat">Crear</button>
-                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.show',$transportacion)}}">Cancelar</a>
+                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.formllenar',$transportacion)}}">Cancelar</a>
 
                 </div>
             </form>                

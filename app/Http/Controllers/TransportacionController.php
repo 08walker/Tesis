@@ -48,13 +48,14 @@ class TransportacionController extends Controller
             'description'=> "El usuario {$nombre} ha creado la transportación número {$transp->numero}",
             'ip'=>$ip,
             ]);
-            return redirect()->route('transportaciones.show', ['transp'=>$transp->id])
+            return redirect()->route('transportaciones.formllenar', ['transp'=>$transp->id])
                     ->with('success','Transportación creada con éxito');
         }
         return back()->withInput()->with('demo','Error al crear la transportación');
     }
 
-    public function show($id)
+    //public function show($id)
+    public function formllenar($id)
     {
         $transportacion = Transportacion::find($id);
         $this->authorize('create',$transportacion);
@@ -84,7 +85,7 @@ class TransportacionController extends Controller
                 'description'=> "El usuario {$nombre} ha actualizado la transportación número {$transportacion->numero}",
                 'ip'=>$ip,
             ]);
-            return redirect()->route('transportaciones.show',$transportacion)->with('success','Transportación actualizada con éxito');
+            return redirect()->route('transportaciones.formllenar',$transportacion)->with('success','Transportación actualizada con éxito');
         }
         return back()->withInput()->with('demo','Error al actualizar la transportación');
     }
@@ -125,7 +126,7 @@ class TransportacionController extends Controller
                 }
             }
         }        
-        return redirect()->route('transportaciones.show',$transportacion);
+        return redirect()->route('transportaciones.formllenar',$transportacion);
     }
 
     //Para llenar tabla arrasrtre__transp__envas -> pero me coge el ultimo atrrastre :(
@@ -136,7 +137,7 @@ class TransportacionController extends Controller
             'arrast_transp_id'=>$arrastre->id,
             'envase_id'=>$request['envase_id'],
         ]);
-        return redirect()->route('transportaciones.show',$arrastre->transportacion_id);
+        return redirect()->route('transportaciones.formllenar',$arrastre->transportacion_id);
     }
 
     public function destroy(Transportacion $transportacion)

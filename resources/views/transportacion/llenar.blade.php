@@ -33,10 +33,13 @@
                           <p>Observación: <strong>{{$transportacion->observacion}}</strong></p>
                         </div>
                         <div class="col-4">
-                          <p>Equipos: <strong>{{$transportacion->equipo->identificador}}</strong></p>
+                          <p>Equipo: <strong>{{$transportacion->equipo->identificador}}</strong></p>
                         </div>
                   </div>
                       <div class="content">
+                          <a href="{{route('transportaciones')}}" type="button" class="btn btn-primary btn-flat" >
+                            <i class="fa fa-arrow-left"></i> Atras
+                          </a>
                           <a href="{{route('transportaciones.edit',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                             <i class="fa fa-pen"></i> Editar detalles
                           </a>

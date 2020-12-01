@@ -33,7 +33,8 @@ Route::group([
 ],
 function(){
 Route::get('/','ReportesController@index')->name('reportes');
-Route::get('/reporte1','ReportesController@reporte1')->name('reportes.reporte1');
+Route::get('/reporte1/','ReportesController@reporte1')->name('reportes.reporte1');
+Route::post('/reporte1','ReportesController@reporte1filtrado')->name('reportes.reporte1filtrado');
 Route::get('/reporte2','ReportesController@reporte2')->name('reportes.reporte2');
 Route::get('/reporte3','ReportesController@reporte3')->name('reportes.reporte3');
 Route::get('/reporte4','ReportesController@reporte4')->name('reportes.reporte4');
@@ -210,7 +211,7 @@ Route::group([
 ],
 function(){
 Route::get('/','TransportacionController@index')->name('transportaciones');
-Route::get('/{id}/llenar','TransportacionController@show')->where('id','[0-9]+')->name('transportaciones.show');
+Route::get('/{id}/llenar','TransportacionController@formllenar')->where('id','[0-9]+')->name('transportaciones.formllenar');
 Route::get('/crear','TransportacionController@create')->name('transportaciones.create');
 Route::post('/crear','TransportacionController@store');
 Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.llenar');
@@ -249,6 +250,8 @@ Route::post('/{id}/crear','TransfEnviadaController@store');
 Route::get('/{id}/inicio','TransfEnviadaController@index')->name('tenv');
 Route::get('/recibidas','TransfEnviadaController@index2')->name('tenv.recibidas');
 Route::get('/{transferencia}','TransfEnviadaController@show')->name('tenv.show');
+
+Route::get('/{transferencia}/detalles','TransfEnviadaController@detalles')->name('tenv.detalles');
 
 Route::get('/{id}/editar','TransfEnviadaController@edit')->name('tenv.edit');
 Route::put('/{transfEnviada}','TransfEnviadaController@update')->name('tenv.update');
@@ -329,7 +332,7 @@ function(){
 Route::get('/','TipoHitoController@index')->name('tipohito');
 Route::get('/crear','TipoHitoController@create')->name('tipohito.create');
 Route::post('/crear','TipoHitoController@store')->name('tipohito.create');
-Route::get('/{id}','TipoHitoController@show')->name('tipohito.show');
+// Route::get('/{id}','TipoHitoController@show')->name('tipohito.show');
 Route::get('/{tipoHito}/editar','TipoHitoController@edit')->name('tipohito.edit');
 Route::put('/{tipoHito}','TipoHitoController@update')->name('tipohito.update');
 Route::delete('/{tipoHito}','TipoHitoController@destroy')->name('tipohito.destroy');

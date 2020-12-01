@@ -65,19 +65,21 @@
             this.drops = 'up';
 
         this.buttonClasses = 'btn btn-sm';
-        this.applyButtonClasses = 'btn-primary';
-        this.cancelButtonClasses = 'btn-default';
+        this.applyButtonClasses = 'btn-success';
+        this.cancelButtonClasses = 'btn-primary';
 
         this.locale = {
             direction: 'ltr',
             format: moment.localeData().longDateFormat('L'),
             separator: ' - ',
-            applyLabel: 'Apply',
-            cancelLabel: 'Cancel',
+            applyLabel: 'Apicar',	
+            cancelLabel: 'Cancelar',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
-            daysOfWeek: moment.weekdaysMin(),
-            monthNames: moment.monthsShort(),
+            //daysOfWeek: moment.weekdaysMin(),
+            daysOfWeek: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+            //monthNames: moment.monthsShort(),
+            monthNames: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
             firstDay: moment.localeData().firstDayOfWeek()
         };
 

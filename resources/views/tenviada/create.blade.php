@@ -41,7 +41,7 @@
     		        @include('foreach.destinofor',['model'=>$transfer])
 
                 <button type="submit" class="btn btn-success btn-flat">LLenar</button>
-                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.show',$id)}}">Cancelar</a>
+                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.formllenar',$id)}}">Cancelar</a>
 
                 </div>
             </form>               

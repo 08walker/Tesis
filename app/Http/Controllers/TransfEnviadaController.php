@@ -61,7 +61,7 @@ class TransfEnviadaController extends Controller
             'ip'=>$ip,
             ]);
 
-            return redirect()->route('tenv.llenar',$id)->with('success','Transferencia creada con éxito');
+            return redirect()->route('tenv.llenar',$transf)->with('success','Transferencia creada con éxito');
         }
         return back()->withInput()->with('demo','Error al crear la transferencia');
     }
@@ -153,6 +153,12 @@ class TransfEnviadaController extends Controller
             ]); 
             return redirect()->route('home')->with('success','Transferencia recibida con éxito');
         }
+    }
+
+    public function detalles(TransfEnviada $transferencia)
+    {
+        $this->authorize('view',new TransfEnviada);
+        return view('trecibida.show',compact('transferencia'));
     }
 
     public function destroy(TransfEnviada $transfEnviada)
