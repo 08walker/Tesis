@@ -144,4 +144,10 @@ class TransportacionController extends Controller
     {
         //
     }
+
+    public function detalles(Transportacion $transportacion)
+    {
+    	$this->authorize('view',new Transportacion);
+        return view('transportacion.detalles',compact('transportacion'));
+    }
 }

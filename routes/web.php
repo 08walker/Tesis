@@ -220,6 +220,9 @@ Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.
 Route::post('/llenar','TransportacionController@guardar');
 Route::get('/{transportacion}/editar','TransportacionController@edit')->name('transportaciones.edit');
 Route::put('/{transportacion}','TransportacionController@update')->name('transportaciones.update');
+
+Route::get('/{transportacion}/detalles','TransportacionController@detalles')->name('transportaciones.detalles');
+
 Route::delete('/{transportacion}','TransportacionController@destroy')
       ->name('transportaciones.destroy');
 

@@ -69,7 +69,7 @@
                           </a>
                           @endcan
                         @elseif(auth()->user()->can('view',new \App\Transportacion))
-                        <a href="{{route('transportaciones.formllenar',$transpor)}}">
+                        <a href="{{route('transportaciones.detalles',$transpor)}}">
                             <i class="fa fa-eye"></i> Ver detalles
                           </a>
                         @endif

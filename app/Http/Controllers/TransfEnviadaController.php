@@ -158,7 +158,9 @@ class TransfEnviadaController extends Controller
     public function detalles(TransfEnviada $transferencia)
     {
         $this->authorize('view',new TransfEnviada);
-        return view('trecibida.show',compact('transferencia'));
+        $transportacion = $transferencia->transportacion;
+        //dd($transportacion);
+        return view('trecibida.show',compact('transferencia','transportacion'));
     }
 
     public function destroy(TransfEnviada $transfEnviada)
