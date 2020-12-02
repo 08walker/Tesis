@@ -17,7 +17,7 @@
 		            </thead>
 
 		            <tbody>
-		            @foreach($transferencia->transfenvprod as $todo)
+		            @foreach($model->transfenvprod as $todo)
 		            <tr>
 		              <td>{{$todo->producto->name}}</td>
 		              <td>{{$todo->peso_kg}}</td>

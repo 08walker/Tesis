@@ -75,9 +75,7 @@ class TransfEnviadaController extends Controller
     public function edit($id)
     {
         $this->authorize('update',new TransfEnviada);     
-        // dd($id);
         $transfEnviada = TransfEnviada::find($id);
-        //dd($transfEnviada);
         $lugares = Lugar::activos()->get();
         return view('tenviada.edit',compact('transfEnviada','lugares'));
     }
@@ -158,9 +156,7 @@ class TransfEnviadaController extends Controller
     public function detalles(TransfEnviada $transferencia)
     {
         $this->authorize('view',new TransfEnviada);
-        $transportacion = $transferencia->transportacion;
-        //dd($transportacion);
-        return view('trecibida.show',compact('transferencia','transportacion'));
+        return view('trecibida.show',compact('transferencia'));
     }
 
     public function destroy(TransfEnviada $transfEnviada)

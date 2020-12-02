@@ -25,12 +25,11 @@
 	      		<a class="btn btn-flat btn-primary" href="{{route('tenv.recibidas')}}">
 	      			<i class="fa fa-arrow-left"></i> Atras
 	      		</a>
-	      		<br>
-	      		<br>
+	      		<br><br>
 
-	      		@include('componentes.transpcallout',['model'=>$transferencia])	      		
-	      		@include('componentes.transfercallout',['model'=>$transferencia])
-	      		@include('componentes.prodcallout',['model'=>$transferencia])
+	      		@include('componentes.callouttransp',['model'=>$transferencia->transportacion])	      		
+	      		@include('componentes.callouttransfer',['model'=>$transferencia])
+	      		@include('componentes.calloutprod',['model'=>$transferencia])
 
 	      	 </div>
 	       </div>		      

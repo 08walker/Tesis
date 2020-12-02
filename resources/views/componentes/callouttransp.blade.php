@@ -6,13 +6,13 @@
         			<h3>Tranportación:</h3>
         		</div>
                 <div class="col-sm-3">
-                  <p>Identificador: <strong>{{$transportacion->numero}}</strong></p>
+                  <p>Identificador: <strong>{{$model->numero}}</strong></p>
                 </div>
                 <div class="col-sm-5">
-                  <p>Observación: <strong>{{$transportacion->observacion}}</strong></p>
+                  <p>Observación: <strong>{{$model->observacion}}</strong></p>
                 </div>
                 <div class="col-sm-4">
-                  <p>Equipo: <strong>{{$transportacion->equipo->identificador}}</strong></p>
+                  <p>Equipo: <strong>{{$model->equipo->identificador}}</strong></p>
                 </div>
         	</div>
         
@@ -29,7 +29,7 @@
                 		</tr>
                 	</thead>
                 	<tbody>
-                  		@foreach($transportacion->choferes as $chofer)
+                  		@foreach($model->choferes as $chofer)
                 		<tr>
                 			<td>{{$chofer->name}}</td>
                 			<td>{{$chofer->apellido}}</td>
@@ -51,7 +51,7 @@
                 		</tr>
                 	</thead>
                 	<tbody>
-                  		@foreach($transportacion->arrastretrasnp as $arrastre)
+                  		@foreach($model->arrastretrasnp as $arrastre)
                 		<tr>
                 			<td>{{$arrastre->arrastres->identificador}}</td>
                 			<td>{{$arrastre->arrastres->description}}</td>
@@ -71,7 +71,7 @@
                 		</tr>
                 	</thead>
                 	<tbody>
-                  		@foreach($transportacion->arrastretrasnp as $arras)
+                  		@foreach($model->arrastretrasnp as $arras)
                       		@foreach($arras->arrastenva as $dat)
                         		<tr>
                         			<td>{{$dat->envase->identificador}}</td>

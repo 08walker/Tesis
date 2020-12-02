@@ -43,7 +43,7 @@
 	            <!-- /.card-header -->
 	            <div class="card-body">
 	              
-	              @include('componentes.tablatransferencias',['model'=>$transportacion->transfenviada])
+	              @include('tablas.transferencias',['model'=>$transportacion->transfenviada])
 	            
 	            </div>
 	            <!-- /.card-body -->

@@ -70,7 +70,7 @@
               </li>
 
               <li>
-                <a href="#" class="dropdown-item">Incidencias </a>
+                <a href="{{ route('incidencias') }}" class="dropdown-item">Incidencias </a>
               </li>
               
             </ul>

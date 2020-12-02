@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Crear Incidencia</h1>
+            <h1 class="m-0 text-dark"> Actualizar Incidencia</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -28,18 +28,38 @@
                 
                 @include('partials.error-messages')
                 
-                <form id="quickForm" role="form" method="POST" action="{{ route('incidencias.create',$transportacion) }}">
-                {!! csrf_field() !!}
+                <form id="quickForm" role="form" method="POST" action="{{ route('incidencias.update',$hito) }}">
+                {{ method_field('PUT') }} {!! csrf_field() !!}
                 <div class="card-body">
 
-  			        @include('componentes.fechaincidencia',['model'=>$incidencia])
+  			        <div class="form-group">
+                  <strong>
+                    Transportación: {{$hito->transportacion->numero}}
+                  </strong>
+                  <br>
+                  <strong>
+                    Fecha actual de la incidencia: {{ \Carbon\Carbon::parse($hito->fyh_ini)->format('d/M/y')}}
+                  </strong>
+                  <br>
+                  <label for="exampleInputdate11">Seleccione la fecha:</label>
+                  <input type="date" class="form-control" name="fyh_ini" value="old('fyh_ini',$model->fyh_ini ? $model->fyh_ini->format('d/m/y')):">
+                  <div class="has-error">
+                      @if($errors->has('fyh_ini'))
+                        <font color="#FF0000">
+                              <span style="background-color: inherit;">
+                                {{$errors->first('fyh_ini')}}
+                              </span>
+                        </font>
+                      @endif
+                  </div>
+                </div>
                     	
-                @include('componentes.description',['model'=>$incidencia])
+                @include('componentes.description',['model'=>$hito])
 
-      		      @include('foreach.tipohitofor',['model'=>$incidencia])
+      		      @include('foreach.tipohitofor',['model'=>$hito])
 
-                <button type="submit" class="btn btn-success btn-flat">Crear</button>
-                <a class="btn btn-flat btn-primary" href="{{route('transportaciones.formllenar',$transportacion)}}">Cancelar</a>
+                <button type="submit" class="btn btn-success btn-flat">Actualizar</button>
+                <a class="btn btn-flat btn-primary" href="{{route('incidencias')}}">Cancelar</a>
 
                 </div>
             </form>                
@@ -87,9 +107,6 @@
 $(document).ready(function () {
    $('#quickForm').validate({
     rules: {
-      fyh_ini: {
-        required: true
-      },
       description: {
         required: true
       },
@@ -98,9 +115,6 @@ $(document).ready(function () {
       },      
     },
     messages: {
-      fyh_ini: {
-        required: "Debe seleccionar la fecha"
-      },
       description: {
         required: "Debe introducir la descripción"
       },

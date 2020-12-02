@@ -41,12 +41,18 @@
                             <i class="fa fa-arrow-left"></i> Atras
                           </a>
                           <a href="{{route('transportaciones.edit',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
-                            <i class="fa fa-pen"></i> Editar detalles
+                            <i class="fa fa-pen"></i> Editar
                           </a>
                           @if($transportacion->transfenviada->count() > 0 )
-                          <a href="{{route('transportaciones.incidencia',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
-                            <i class="fa fa-plus"></i> Reportar incidencia
-                          </a>
+                            @if($transportacion->hito->count() > 0 )
+                              <a href="{{route('incidencias.lista',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                                 Incidencias
+                              </a>
+                            @else
+                              <a href="{{route('incidencias.create',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                                <i class="fa fa-plus"></i> Reportar incidencia
+                              </a>
+                            @endif
                           @endif
                           @if($transportacion->choferes->count()>0)
                           <a href="{{route('tenv',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >

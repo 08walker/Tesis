@@ -234,13 +234,25 @@ Route::post('/añadir/envase/','TransportacionController@storeenvase')
       ->name('transportaciones.envases');
 Route::delete('/{arrasrtre_Transp_Enva}','ArrasrtreTranspEnvaController@destroy')
       ->name('transportaciones.destroyenvase');
-
-Route::get('/{transportacion}/incidencia','HitoController@create')
-      ->name('transportaciones.incidencia');
-Route::post('/{transportacion}/incidencia','HitoController@store');
 });
 
-Route::resource('arrastreenvase','ArrasrtreTranspEnvaController');
+
+Route::group([
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/{id}/transportacion','HitoController@lista')->name('incidencias.lista');
+Route::get('/incidencias','HitoController@index')->name('incidencias');
+Route::get('/transportaciones/{id}/incidencia','HitoController@create')
+      ->name('incidencias.create');
+Route::post('/transportaciones/{transportacion}/incidencia','HitoController@store');
+Route::get('/{hito}/editar','HitoController@edit')->name('incidencias.edit');
+Route::put('/{hito}','HitoController@update')->name('incidencias.update');
+Route::delete('/{hito}','HitoController@destroy')->name('incidencias.destroy');
+
+});
+
+Route::resource('arrastreenvase','ArrasrtreTranspEnvaController',['only'=>['destroy']]);
 
 //Rutas de transferencia enviadas
 Route::group([
@@ -252,7 +264,7 @@ function(){
 Route::get('/{id}/crear','TransfEnviadaController@create')->name('tenv.create');
 Route::post('/{id}/crear','TransfEnviadaController@store');
 
-Route::get('/{id}/inicio','TransfEnviadaController@index')->name('tenv');
+Route::get('/{id}/transportacion','TransfEnviadaController@index')->name('tenv');
 Route::get('/recibidas','TransfEnviadaController@index2')->name('tenv.recibidas');
 Route::get('/{transferencia}','TransfEnviadaController@show')->name('tenv.show');
 
