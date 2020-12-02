@@ -46,6 +46,11 @@ class TransfEnviada extends Model
         $query->whereNull('fyh_llegada');
     }
 
+    // public function scopeEnrango($query,$fecha1,$fecha2)
+    // {
+    //     $query->where('fyh_salida','>=',Carbon::parse($fecha1))->where('fyh_salida','<=',Carbon::parse($fecha2));
+    // }
+
     // public function setFyhSalidaAttribute($fyh_salida)
     // {
     //     $this->attributes['fyh_salida'] = $fyh_salida

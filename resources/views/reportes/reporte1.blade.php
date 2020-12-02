@@ -47,9 +47,9 @@
                   Filtrar
                 </button>
               </form>
-              @foreach($totales as $total)
+              {{-- @foreach($totales as $total)
                 <p>{{$total}}</p>
-              @endforeach
+              @endforeach --}}
                 </h3>
               </div>
               <!-- /.card-body-->
@@ -89,10 +89,8 @@
   <!-- daterange picker -->
   <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  
+  <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">  
 @endpush
-  
   
 @push('scripts')
 <!-- jQuery -->
@@ -125,13 +123,18 @@
 <script>
   $(function () {
 
+    var values = @json($totales);
+    var labels = @json($nombres);
+    // values.push($totales);
+    // labels.push($nombres);
     /*
      * BAR CHART
      * ---------
      */
     //var bar_data = $totales,
     var bar_data = {
-      data : [[1,10], [2,8], [3,4], [4,13], [5,17], [6,9]],
+      // data : [[1,10], [2,8], [3,4], [4,13], [5,17], [6,9]],
+      data : values,
       bars: { show: true }
     }
     $.plot('#bar-chart', [bar_data], {
@@ -147,7 +150,8 @@
       },
       colors: ['#3c8dbc'],
       xaxis : {
-        ticks: [[1,'Criollos'], [2,'14na grande'], [3,'Popular'], [4,'Virginia'], [5,'Capote #3'], [6,'Capote #1']]
+      // ticks: [[1,'Criollos'], [2,'14na grande'], [3,'Popular'], [4,'Virginia'], [5,'Capote #3'], [6,'Capote #1']]
+      ticks: labels
       }
     })
     /* END BAR CHART */

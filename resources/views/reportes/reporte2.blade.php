@@ -6,9 +6,39 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Generar un reporte mensual de transportaciones por chofer que facilite la facturación del pago del servicio, introduciendo los valores establecidos por Geocuba en las tablas de distancia para cada recorrido.</h1>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-8">
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h3 class="card-title">
+              
+                <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte2filtrado') }}">
+                    {!! csrf_field() !!}
+                  <!-- Date range -->
+                <div class="form-group">
+                  <label>Seleccione el rango de fecha:</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                    </div>
+                    <input type="text" name="rango" class="form-control float-right" id="reservation">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+                <button type="submit" class="btn btn-success btn-flat">
+                  {{-- <i></i> --}}
+                  Filtrar
+                </button>
+              </form>
+                </h3>
+              </div>
+              <!-- /.card-body-->
+            </div>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -19,61 +49,67 @@
       <div class="container-fluid">
         <!-- /.row -->
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-1">
           </div>
           <!-- /.col -->
-          <div class="col-md-8">
+          <div class="col-md-10">
             <!-- Bar chart -->
             <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title">
-                  Transportaciones por chofer del mes en curso:
+                  Transportaciones por chofer:
                 </h3>
               </div>
               <div class="card-body">
 
-                <table id="example1" class="table table-bordered table-striped">
+                @foreach($choferes as $chofer)
+                @if(isset($chofer->transportaciones))
+                {{$chofer->transportaciones}}
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                    <h3>{{$chofer->id}}</h3>                      
+                    </div>
+                    {{-- @foreach($chofer->transportaciones as $transportacion)
+                    <div class="col-6">
+                      Número: <p>{{$transportacion->numero}}</p>
+                    </div>
+                    @endforeach --}}
+                  </div>
+                </div>                
+                @endif
+                @endforeach
+
+                {{-- <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nombre y Apellidos:</th>
                     <th>Transportación</th>
-                    <th>Ver recorrido</th>
+                    <th>Transferencia</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Fecha de salida</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Fernando Estrada</td>
-                    <td>45GEliGH</td>
-                    <td>
-                          <a href="#" class="btn btn-xs btn-info">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jorge Mares</td>
-                    <td>bEzE5gQ</td>
-                    <td>
-                          <a href="#" class="btn btn-xs btn-info">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Alberto Prado</td>
-                    <td>yewImJW</td>
-                    <td>
-                          <a href="#" class="btn btn-xs btn-info">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                    </td>
-                  </tr>
+
+                    @foreach($choferes as $chofer)
+                    @if($chofer->transportaciones)
+                    @foreach($chofer->transportaciones as $cho) 
+                    <tr>
+                      <td>{{$chofer->id}}</td>
+                      <td>{{$cho->id}}</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>1</td>
+                    </tr>
+                    @endforeach
+                    @endif
+                    @endforeach
+
                   </tbody>
-                </table>
+                </table> --}}
               </div>
               <!-- /.card-body-->
             </div>
@@ -92,9 +128,23 @@
     <!-- DataTables -->
   <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 @endpush
 
 @push('scripts')
+<!-- InputMask -->
+<script src="/adminlte/plugins/moment/moment.min.js"></script>
+<script src="/adminlte/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- date-range-picker -->
+<script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 
 <!-- DataTables -->
 <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -121,9 +171,48 @@
             "previous": "Anterior",
           },
        },
+       
     });
   });
 </script>
-</script>
+<script>
+  //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
 
-@endpush 
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+</script>
+</script>
+@endpush

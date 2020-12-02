@@ -38,5 +38,4 @@ class Transportacion extends Model
     {
         return $this->hasMany('App\Hito');
     }
-
 }

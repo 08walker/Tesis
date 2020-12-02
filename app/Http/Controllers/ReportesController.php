@@ -13,7 +13,7 @@ class ReportesController extends Controller
 
     public function index()
     {
-        //$this->authorize('view',new Transportacion);
+        $this->authorize('view',new Reporte1);
         return view('reportes.index');
     }
 
@@ -21,22 +21,25 @@ class ReportesController extends Controller
     {
         $this->authorize('view',new Reporte1);
         $productos = Reporte1::all();
+        $i = 0;
         $totales = [];
+        $nombres = [];
         $productoss_id = [];
         foreach($productos as $data){
             if(!in_array($data['producto_id'],$productoss_id)){
                 $prod = Producto::find($data['producto_id']);
-                $totales[$prod->name] = $data['SUM(peso_kg)'];
+                $totales[$i] = $data['SUM(peso_kg)'];
+                $nombres[]=$prod->name; 
                 $productoss_id[] = $data['producto_id'];
+                $i++;
             }
             else{
                 $prod = Producto::find($data['producto_id']);
-                $totales[$prod->name] += $data['SUM(peso_kg)'];
+                $totales[$i-1] += $data['SUM(peso_kg)'];
             }
         }
-        //dd($totales);
-        
-        return view('reportes.reporte1',compact('totales'));
+        // dd($totales);
+        return view('reportes.reporte1',compact('nombres','totales'));
     }
 
     public function reporte1filtrado(Request $request)
@@ -56,7 +59,6 @@ class ReportesController extends Controller
         //     $a[$x['producto_id']] += $x['SUM(peso_kg)'];
         //     return $a;
         // });
-        // dd($totales);
 
         $totales = [];
         $productoss_id = [];
@@ -69,7 +71,6 @@ class ReportesController extends Controller
                 $totales[$data['producto_id']] += $data['SUM(peso_kg)'];
             }
         }
-        //dd($totales);
         return view('reportes.reporte1',compact('totales'));
 
     }
@@ -79,8 +80,32 @@ class ReportesController extends Controller
         $this->authorize('view',new Reporte1);
 
         $choferes = Chofer::activos()->get();
+        $demo = Chofer::find(1);
+        if($demo->transortaciones){
+            dd($choferes);
+        }
+        // $i = 0;
+        // foreach ($choferes as $chofer) {
+        //     if ($chofer->transportaciones->count() < 1) {
+        //         $demo[$i] = $chofer->id;
+        //         $i++;
+        //     }
+        // }
+        //dd($demo->transortaciones->count());
+
         //lista de choferes con transortaciones enviadas y recibidas en el mes
         return view('reportes.reporte2',compact('choferes'));
+    }
+
+    public function reporte2filtrado(Request $request)
+    {
+        $this->authorize('view',new Reporte1);
+        $rango = $request->rango;
+        dd($rango);
+        //dividir la fecha
+        $dividir = explode("- ",$rango);
+        $fechaini = $dividir[0];
+        $fechafin = $dividir[1];
     }
     
     public function reporte3()

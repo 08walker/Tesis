@@ -58,17 +58,23 @@
                   <td>{{$transpor->numero}}</td>
                   <td>{{$transpor->equipo->identificador}}</td>
                   <td>
-                      <a href="{{route('transportaciones.formllenar',$transpor)}}">
-                          <i class="fa fa-eye"></i>
-                        </a>
+                        @if(auth()->user()->can('update',new \App\Transportacion))
+                          <a href="{{route('transportaciones.formllenar',$transpor)}}">
+                            <i class="fa fa-eye"></i>
+                          </a>
 
-                        @can('update',new \App\Transportacion)
-                        <a href="{{route('transportaciones.edit',$transpor)}}" class="btn btn-xs btn-info">
-                          <i class="fa fa-pen"></i>
-                        </a>
-                        @endcan
+                          @can('update',new \App\Transportacion)
+                          <a href="{{route('transportaciones.edit',$transpor)}}" class="btn btn-xs btn-info">
+                            <i class="fa fa-pen"></i>
+                          </a>
+                          @endcan
+                        @elseif(auth()->user()->can('view',new \App\Transportacion))
+                        <a href="{{route('transportaciones.formllenar',$transpor)}}">
+                            <i class="fa fa-eye"></i> Ver detalles
+                          </a>
+                        @endif
 
-                        @can('view',new \App\Transportacion)
+                        @can('delete',new \App\Transportacion)
                         <form method="POST" action="{{route('transportaciones.destroy', $transpor)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
                           <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la transportacion?')">

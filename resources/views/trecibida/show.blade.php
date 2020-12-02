@@ -22,6 +22,12 @@
 	      <div class="row">
 	      	<div class="card-body">
 
+	      		<a class="btn btn-flat btn-primary" href="{{route('tenv.recibidas')}}">
+	      			<i class="fa fa-arrow-left"></i> Atras
+	      		</a>
+	      		<br>
+	      		<br>
+
 	      		<div class="callout callout-danger">
 	      			<div class="col-12">
 	      				<div class="container">
