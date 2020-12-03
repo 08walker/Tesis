@@ -6,6 +6,7 @@ use App\Chofer;
 use App\Producto;
 use App\Reporte1;
 use App\Reporte2;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReportesController extends Controller
@@ -80,19 +81,6 @@ class ReportesController extends Controller
         $this->authorize('view',new Reporte1);
 
         $choferes = Chofer::activos()->get();
-        $demo = Chofer::find(1);
-        if($demo->transortaciones){
-            dd($choferes);
-        }
-        // $i = 0;
-        // foreach ($choferes as $chofer) {
-        //     if ($chofer->transportaciones->count() < 1) {
-        //         $demo[$i] = $chofer->id;
-        //         $i++;
-        //     }
-        // }
-        //dd($demo->transortaciones->count());
-
         //lista de choferes con transortaciones enviadas y recibidas en el mes
         return view('reportes.reporte2',compact('choferes'));
     }
@@ -100,12 +88,40 @@ class ReportesController extends Controller
     public function reporte2filtrado(Request $request)
     {
         $this->authorize('view',new Reporte1);
+        $data = request()->validate([
+        'chofer_id'=>'required',
+        ],
+        [   
+        'chofer_id.required'=>'Debe seleccionar un chofer',
+        ]);
         $rango = $request->rango;
-        dd($rango);
-        //dividir la fecha
-        $dividir = explode("- ",$rango);
-        $fechaini = $dividir[0];
-        $fechafin = $dividir[1];
+        //dd($request['chofer_id']);
+        $choferes = Chofer::activos()->get();
+        $chofer = Chofer::find($request['chofer_id']);
+        //dd($chofer->name);
+        $transportaciones = $chofer->transportaciones;
+        dd($transportaciones->pluck('id'));
+
+        // if ($rango) {
+        //     //dividir la fecha
+        //     $dividir = explode("- ",$rango);
+        //     $fechaini = $dividir[0];
+        //     $fechafin = $dividir[1];
+        //     $tranferencias;
+        //     foreach ($transportaciones as $viajes) {
+        //         foreach ($viajes->transfenviada as $viaje) {
+        //             if (Carbon::parse($viaje->fyh_llegada) > (Carbon::parse($fechaini))){
+        //                 // if (Carbon::parse($viaje->fyh_llegada) > (Carbon::parse($fechafin))){
+        //                     $tranferencias = $viaje;
+                        
+        //             }
+        //         }
+        //     }
+        // }                
+        //dd($tranferencias);
+
+        return view('reportes.reporte2',compact('chofer','choferes','transportaciones'));
+
     }
     
     public function reporte3()

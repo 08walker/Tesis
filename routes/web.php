@@ -84,12 +84,14 @@ Route::group([
 ],
 function(){
 Route::get('/','ArrastreController@index')->name('arrastres');
+Route::get('/desactivados','ArrastreController@desactivados')->name('arrastres.desactivados');
 // Route::get('/{id}','ArrastreController@show')->where('id','[0-9]+')->name('arrastres.show');
 Route::get('/crear','ArrastreController@create')->name('arrastres.create');
 Route::post('/crear','ArrastreController@store')->name('arrastres.create');
 Route::get('/{arrastre}/editar','ArrastreController@edit')->name('arrastres.edit');
 Route::put('/{arrastre}','ArrastreController@update')->name('arrastres.update');
-Route::delete('/{arratre}','ArrastreController@destroy')->name('arrastres.destroy');
+Route::put('/{arrastre}/activar','ArrastreController@activar')->name('arrastres.activar');
+Route::delete('/{arrastre}','ArrastreController@destroy')->name('arrastres.destroy');
 });
 
 

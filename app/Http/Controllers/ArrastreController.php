@@ -9,6 +9,7 @@ use App\Organizacion;
 use App\Tercero;
 use App\TipoArrastre;
 use App\Traza;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ArrastreController extends Controller
@@ -104,22 +105,61 @@ class ArrastreController extends Controller
 
     public function destroy(Arrastre $arrastre)
     {
-        
-        //arreglar este metodo
-
-        //$this->authorize('update',$arrastre);
-        $delet = $arrastre;
-        $arrastre->delete();
-        //$municipio->delete();
-        
+        //$this->authorize('delete',$arrastre);
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        
+        try {
+         $arrastre->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $arrastre->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El arrastre {$arrastre->identificador} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('arrastres')
+                        ->with('success', 'El arrastre ha sido desactivado');   
+               }
+               return redirect()->route('arrastres')
+                    ->with('demo', 'El arrastre no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El arrastre {$arrastre->identificador} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('arrastres')
+                    ->with('success', 'El arrastre ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new Arrastre);
+        
+        return view('arrastre.desactivados')
+        ->with('arrastres', Arrastre::noactivos()->get());
+    }
+
+    public function activar(Request $request, Arrastre $arrastre)
+    {
+        $this->authorize('update',$arrastre);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $arrastre->update($data);
+            //dd($request['activo']);
+            //dd($arrastre->activo);
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "Arrastre {$delet->identificador} eliminado por el usuario {$nombre}",
+            'description'=> "El arrastre {$arrastre->identificador} ha sido activado por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
-
-        return redirect()->route('arrastres')
-                    ->with('success', 'El arrastre ha sido eliminado');
+            return back()->with('success', 'El arrastre ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El arrastre no se ha activado');
     }
+
+
 }

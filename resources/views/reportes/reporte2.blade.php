@@ -3,87 +3,72 @@
 @section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-2">
-          </div>
-          <div class="col-md-8">
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">
-              
-                <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte2filtrado') }}">
-                    {!! csrf_field() !!}
-                  <!-- Date range -->
-                <div class="form-group">
-                  <label>Seleccione el rango de fecha:</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
-                      </span>
+
+  <div class="content-header">
+
+    <div class="container">
+          <div class="card card-primary card-outline">
+            <div class="card-body">
+              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte2filtrado') }}">
+                  {!! csrf_field() !!}
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        @include('foreach.choferfor',['model'=>$choferes])
+                      </div>
+                      <div class="col-md-6">
+                        @include('componentes.rangofecha')
+                      </div>
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-success btn-flat">Filtrar</button>
+                      </div>
                     </div>
-                    <input type="text" name="rango" class="form-control float-right" id="reservation">
                   </div>
-                  <!-- /.input group -->
-                </div>
-                <!-- /.form group -->
-                <button type="submit" class="btn btn-success btn-flat">
-                  {{-- <i></i> --}}
-                  Filtrar
-                </button>
               </form>
-                </h3>
-              </div>
-              <!-- /.card-body-->
             </div>
           </div>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
     </div>
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <!-- /.row -->
-        <div class="row">
-          <div class="col-md-1">
-          </div>
-          <!-- /.col -->
-          <div class="col-md-10">
-            <!-- Bar chart -->
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">
-                  Transportaciones por chofer:
-                </h3>
-              </div>
-              <div class="card-body">
-
-                @foreach($choferes as $chofer)
-                @if(isset($chofer->transportaciones))
-                {{$chofer->transportaciones}}
-                <div class="container">
+</div>
+    @isset($transportaciones)
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
                   <div class="row">
                     <div class="col-12">
-                    <h3>{{$chofer->id}}</h3>                      
+                      <h3 class="card-title">
+                        Datos del chofer:
+                      </h3>
+                    </div>                  
+                    <div class="col-4">
+                      <p>Nombre: <strong>{{$chofer->name}} {{$chofer->apellido}}</strong></p>
                     </div>
-                    {{-- @foreach($chofer->transportaciones as $transportacion)
-                    <div class="col-6">
-                      Número: <p>{{$transportacion->numero}}</p>
-                    </div>
-                    @endforeach --}}
-                  </div>
-                </div>                
-                @endif
-                @endforeach
 
-                {{-- <table id="example1" class="table table-bordered table-striped">
+                    <div class="col-4">
+                      <p>Carnet de identidad: <strong>{{$chofer->ci}}</strong></p>
+                    </div>
+
+                    <div class="col-4">
+                      <p>Teléfono: <strong>{{$chofer->telefono}}</strong></p>
+                    </div>
+                    
+                    <div class="col-4">
+                      @if($chofer->tercero)
+                        <p>Tercero: <strong>{{$chofer->tercero->name}}</strong></p>
+                      @elseif($chofer->organizacion)
+                        <p>Organización: <strong>{{$chofer->organizacion->name}}</strong></p>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Nombre y Apellidos:</th>
                     <th>Transportación</th>
                     <th>Transferencia</th>
                     <th>Origen</th>
@@ -91,41 +76,38 @@
                     <th>Fecha de salida</th>
                   </tr>
                   </thead>
+
                   <tbody>
-
-                    @foreach($choferes as $chofer)
-                    @if($chofer->transportaciones)
-                    @foreach($chofer->transportaciones as $cho) 
-                    <tr>
-                      <td>{{$chofer->id}}</td>
-                      <td>{{$cho->id}}</td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>1</td>
-                    </tr>
-                    @endforeach
-                    @endif
-                    @endforeach
-
+                  @foreach($transportaciones as $viajes)
+                  @foreach($viajes->transfenviada as $viaje)
+                  <tr>
+                    <td>{{$viajes->numero}}</td>
+                    <td>{{$viaje->num_fact}}</td>
+                    <td>{{$viaje->origen->name}}</td>
+                    <td>{{$viaje->destino->name}}</td>
+                    <td>{{\Carbon\Carbon::parse($viaje->fyh_salida)->format('d/M/y')}}</td>
+                  </tr>
+                  @endforeach
+                  @endforeach
                   </tbody>
-                </table> --}}
+                </table>
+                </div>
               </div>
-              <!-- /.card-body-->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-  </div>
+      </div>
+    @endisset
+</div>
 @endsection
 
 @push('styles')
-    <!-- DataTables -->
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+  <!-- DataTables -->
   <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
@@ -136,9 +118,13 @@
 @endpush
 
 @push('scripts')
+<!-- Select2 -->
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+  
 <!-- InputMask -->
 <script src="/adminlte/plugins/moment/moment.min.js"></script>
 <script src="/adminlte/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+
 <!-- date-range-picker -->
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
@@ -152,8 +138,28 @@
 <script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
+<!-- jquery-validation -->
+<script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
+
 <script src="/adminlte/dist/js/demo.js"></script>
 <!-- page script -->
+<script>
+    $(function () {
+
+    //Initialize Select2 Elements
+    $('.select2').select2({
+      //tags:true
+    });
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });
+
+  });
+</script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -214,5 +220,31 @@
    * ----------------------
    */
 </script>
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#quickForm').validate({
+    rules: {
+      chofer_id: {
+        required: true,
+      },
+    },
+    messages: {
+      chofer_id: {
+        required: "Debe seleccionar un chofer",
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
 </script>
 @endpush
