@@ -98,46 +98,10 @@ class TransportacionController extends Controller
         return back();
     }
 
-    //Para llenar tabla arrasrtre__transps
-    public function storearrastre(Request $request,Transportacion $transportacion)
+    public function detalles(Transportacion $transportacion)
     {
-        $this->authorize('create',new Transportacion);
-        
-        $data = $request['larrastre'];
-        //si viene vacio sale
-        if ($data) {
-            if ($transportacion->arrastretrasnp->count() > 0) {
-                foreach ($data as $dat) {
-                if ($transportacion->arrastretrasnp->contains('arrastre_id',$dat)) {}
-                else{
-                      Arrasrtre_Transp::create([
-                       'transportacion_id'=>$transportacion->id,
-                       'arrastre_id'=>$dat,
-                      ]);
-                    }
-                }
-            }
-            else{
-                foreach ($data as $dat) {
-                      Arrasrtre_Transp::create([
-                       'transportacion_id'=>$transportacion->id,
-                       'arrastre_id'=>$dat,
-                      ]);
-                }
-            }
-        }        
-        return redirect()->route('transportaciones.formllenar',$transportacion);
-    }
-
-    //Para llenar tabla arrasrtre__transp__envas -> pero me coge el ultimo atrrastre :(
-    public function storeenvase(Request $request)
-    {
-        $arrastre = Arrasrtre_Transp::find($request['arrast_transp_id']);
-        $demo = Arrasrtre_Transp_Enva::create([
-            'arrast_transp_id'=>$arrastre->id,
-            'envase_id'=>$request['envase_id'],
-        ]);
-        return redirect()->route('transportaciones.formllenar',$arrastre->transportacion_id);
+    	$this->authorize('view',new Transportacion);
+        return view('transportacion.detalles',compact('transportacion'));
     }
 
     public function destroy(Transportacion $transportacion)
@@ -145,9 +109,4 @@ class TransportacionController extends Controller
         //
     }
 
-    public function detalles(Transportacion $transportacion)
-    {
-    	$this->authorize('view',new Transportacion);
-        return view('transportacion.detalles',compact('transportacion'));
-    }
 }

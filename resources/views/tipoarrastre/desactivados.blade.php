@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
-@section('meta-title','Tesis| Tipos de UM')
-@section('meta-description','Tipos unidades de medidas')
+@section('meta-title','Tesis| Tipos de arrastre')
+@section('meta-description','Tipos arrastres desactivados')
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Tipos unidades de medidas</h1>
+            <h1 class="m-0 text-dark">Tipos de arrastres desactivados</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -32,17 +32,10 @@
             <div class="card-header">
               <h3 class="card-title">Tipos:</h3> 
               <br>
-
-              @can('create',new \App\TipoUnidadMedida)
-              <a href="{{route('tipounidad.create')}}" type="button" class="btn btn-primary btn-flat" >
-                  <i class="fa fa-plus"></i> Crear
-              </a>
-              @endcan
-
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              @include('tablas.tipounidadmedida',['model'=>$tipoum])
+              @include('tablas.tipoarrastre',['model'=>$tipoArrastre])
             </div>
             <!-- /.card-body -->
           </div>

@@ -183,7 +183,9 @@ Route::get('/crear','TerceroController@create')->name('terceros.create');
 // Route::get('/{tercero}','TerceroController@show')->name('terceros.show');
 Route::get('/{tercero}/editar','TerceroController@edit')->name('terceros.edit');
 Route::put('/{tercero}','TerceroController@update')->name('terceros.update');
+Route::put('/{tercero}/activar','TerceroController@activar')->name('terceros.activar');
 Route::delete('/{tercero}','TerceroController@destroy')->name('terceros.destroy');
+Route::get('/desactivados','TerceroController@desactivados')->name('terceros.desactivados');
 });
 
 
@@ -246,14 +248,10 @@ Route::delete('/{transportacion}','TransportacionController@destroy')
 
 Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')
       ->name('transportaciones.choferes');
-Route::post('/añadir/arrastre/{transportacion}','TransportacionController@storearrastre')
-      ->name('transportaciones.arrastres');
-Route::post('/añadir/envase/','TransportacionController@storeenvase')
-      ->name('transportaciones.envases');
+
 Route::delete('/{arrasrtre_Transp_Enva}','ArrasrtreTranspEnvaController@destroy')
       ->name('transportaciones.destroyenvase');
 });
-
 
 Route::group([
     'middleware'=>'auth'
@@ -267,11 +265,20 @@ Route::post('/transportaciones/{transportacion}/incidencia','HitoController@stor
 Route::get('/{hito}/editar','HitoController@edit')->name('incidencias.edit');
 Route::put('/{hito}','HitoController@update')->name('incidencias.update');
 Route::delete('/{hito}','HitoController@destroy')->name('incidencias.destroy');
-
 });
 
-Route::resource('arrastreenvase','ArrasrtreTranspEnvaController',['only'=>['destroy']]);
-
+Route::group([
+    'prefix'=>'transportaciones',
+    'middleware'=>'auth'
+],
+function(){
+Route::post('/añadir/arrastre/{transportacion}','ArrasrtreTranspController@store')
+      ->name('transportaciones.arrastres');
+Route::delete('/{id}/arrastretransp','ArrasrtreTranspController@destroy')->name('arrastretransp.destroy');
+Route::post('/añadir/envase/','ArrasrtreTranspEnvaController@store')
+    ->name('transportaciones.envases');
+Route::delete('/{id}/arrastreenv','ArrasrtreTranspEnvaController@destroy')->name('arrastreenvase.destroy');
+});
 //Rutas de transferencia enviadas
 Route::group([
     'prefix'=>'tenv',
@@ -323,7 +330,9 @@ Route::post('/crear','TipoUnidadMedidaController@store')->name('tipounidad.creat
 // Route::get('/{id}','TipoUnidadMedidaController@show')->name('tipounidad.show');
 Route::get('/{tipoUnidadMedida}/editar','TipoUnidadMedidaController@edit')->name('tipounidad.edit');
 Route::put('/{tipoUnidadMedida}','TipoUnidadMedidaController@update')->name('tipounidad.update');
+Route::put('/{tipoUnidadMedida}/activar','TipoUnidadMedidaController@activar')->name('tipounidad.activar');
 Route::delete('/{tipoUnidadMedida}','TipoUnidadMedidaController@destroy')->name('tipounidad.destroy');
+Route::get('/desactivados','TipoUnidadMedidaController@desactivados')->name('tipounidad.desactivados');
 });
 
 //Rutas tipo arrastre
@@ -338,7 +347,9 @@ Route::post('/crear','TipoArrastreController@store')->name('tipoarrastre.create'
 // Route::get('/{id}','TipoArrastreController@show')->name('tipoarrastre.show');
 Route::get('/{tipoArrastre}/editar','TipoArrastreController@edit')->name('tipoarrastre.edit');
 Route::put('/{tipoArrastre}','TipoArrastreController@update')->name('tipoarrastre.update');
+Route::put('/{tipoArrastre}/activar','TipoArrastreController@activar')->name('tipoarrastre.activar');
 Route::delete('/{tipoArrastre}','TipoArrastreController@destroy')->name('tipoarrastre.destroy');
+Route::get('/desactivados','TipoArrastreController@desactivados')->name('tipoarrastre.desactivados');
 });
 
 
@@ -354,7 +365,9 @@ Route::post('/crear','UnidadMedidaController@store')->name('unidadmedida.create'
 // Route::get('/{id}','UnidadMedidaController@show')->name('unidadmedida.show');
 Route::get('/{unidadMedida}/editar','UnidadMedidaController@edit')->name('unidadmedida.edit');
 Route::put('/{unidadMedida}','UnidadMedidaController@update')->name('unidadmedida.update');
+Route::put('/{unidadMedida}/activar','UnidadMedidaController@activar')->name('unidadmedida.activar');
 Route::delete('/{unidadMedida}','UnidadMedidaController@destroy')->name('unidadmedida.destroy');
+Route::get('/desactivados','UnidadMedidaController@desactivados')->name('unidadmedida.desactivados');
 });
 
 //Route::resource('tipohito','TipoHitoController');
@@ -385,7 +398,9 @@ Route::post('/crear','TipoEquipoController@store')->name('tipoequipo.create');
 // Route::get('/{id}','TipoEquipoController@show')->name('tipoequipo.show');
 Route::get('/{tipoEquipo}/editar','TipoEquipoController@edit')->name('tipoequipo.edit');
 Route::put('/{tipoEquipo}','TipoEquipoController@update')->name('tipoequipo.update');
+Route::put('/{tipoEquipo}/activar','TipoEquipoController@activar')->name('tipoequipo.activar');
 Route::delete('/{tipoEquipo}','TipoEquipoController@destroy')->name('tipoequipo.destroy');
+Route::get('/desactivados','TipoEquipoController@desactivados')->name('tipoequipo.desactivados');
 });
 
 Route::group([
@@ -393,6 +408,7 @@ Route::group([
 ],
 function(){
 Route::resource('directivo','DirectivoController',['except'=>'show']);
+//Route::resource('user','UsersController');
 Route::get('/trazas', 'TrazasController@index')->name('trazas');
 });
 
@@ -406,11 +422,24 @@ Route::delete('/{directivo}','DirectivoController@destroy')->name('directivo.des
 Route::get('/desactivados','DirectivoController@desactivados')->name('directivo.desactivados');
 });
 
+Route::group([
+    'prefix'=>'user',
+    'middleware'=>'auth'
+],
+function(){
+Route::get('/','UsersController@index')->name('user.index');
+Route::get('/crear','UsersController@create')->name('user.create');
+Route::post('/crear','UsersController@store')->name('user.store');
+Route::get('/{user}/show','UsersController@show')->name('user.show');
+Route::get('/{user}/editar','UsersController@edit')->name('user.edit');
+Route::put('/{user}','UsersController@update')->name('user.update');
 
+Route::put('/{user}/activar','UsersController@activar')->name('user.activar');
+Route::delete('/{user}','UsersController@destroy')->name('user.destroy');
+Route::get('/desactivados','UsersController@desactivados')->name('user.desactivados');
+});
 
 Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
-
-Route::resource('user','UsersController');
 
 // Route::middleware('role:Admin')
 //       ->put('users/{user}/roles','UsersRolesController@update')

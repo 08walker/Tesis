@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTArrastreRequest;
 use App\TipoArrastre;
 use App\Traza;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class TipoArrastreController extends Controller
@@ -68,16 +69,57 @@ class TipoArrastreController extends Controller
     public function destroy(TipoArrastre $tipoArrastre)
     {
         $this->authorize('delete',$tipoArrastre);
-        $tipoArrastre->delete();
-
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        
+        try {
+         $tipoArrastre->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $tipoArrastre->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El tipo de arrastre {$tipoArrastre->name} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('tipoarrastre')
+                        ->with('success', 'El tipo de arrastre ha sido desactivado');   
+               }
+               return redirect()->route('tipoarrastre')
+                    ->with('demo', 'El tipo de arrastre no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El tipo de arrastre {$tipoArrastre->name} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('tipoarrastre')
+                    ->with('success', 'El tipo de arrastre ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new TipoArrastre);
+        $tipoArrastre = TipoArrastre::noactivos()->get();
+        return view('tipoArrastre.desactivados',['tipoArrastre'=>$tipoArrastre]);
+    }
+
+    public function activar(Request $request, TipoArrastre $tipoArrastre)
+    {
+        $this->authorize('update',$tipoArrastre);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $tipoArrastre->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "El tipo de arrastre {$tipoArrastre->name} ha sido eliminado por el usuario {$nombre}",
+            'description'=> "El tipo de arrastre {$tipoArrastre->name} ha sido activado por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
 
-        return redirect()->route('tipoarrastre')
-                    ->with('success', 'El tipo arrastre ha sido eliminado');
+            return back()->with('success', 'El tipo de arrastre ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El tipo de arrastre no se ha activado');
     }
 }

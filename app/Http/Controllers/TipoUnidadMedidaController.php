@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTUnidadMRequest;
 use App\TipoUnidadMedida;
 use App\Traza;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class TipoUnidadMedidaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->authorize('view',new TipoUnidadMedida);
@@ -21,12 +17,6 @@ class TipoUnidadMedidaController extends Controller
         return view('tipounidadmedida.index')
             ->with('tipoum', TipoUnidadMedida::activos()->get());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $tipoum = new TipoUnidadMedida;
@@ -78,16 +68,57 @@ class TipoUnidadMedidaController extends Controller
     public function destroy(TipoUnidadMedida $tipoUnidadMedida)
     {
         $this->authorize('delete',$tipoUnidadMedida);
-        $tipoUnidadMedida->delete();
-
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        
+        try {
+         $tipoUnidadMedida->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $tipoUnidadMedida->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('tipounidad')
+                        ->with('success', 'El tipoUnidadMedida ha sido desactivado');   
+               }
+               return redirect()->route('tipounidad')
+                    ->with('demo', 'El tipo de unidad de medida no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('tipounidad')
+                    ->with('success', 'El tipo de unidad de medida ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new TipoUnidadMedida);        
+        return view('tipoUnidadMedida.desactivados')
+        ->with('tipoum', TipoUnidadMedida::noactivos()->get());
+    }
+
+    public function activar(Request $request, TipoUnidadMedida $tipoUnidadMedida)
+    {
+        $this->authorize('update',$tipoUnidadMedida);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $tipoUnidadMedida->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} ha sido eliminada por el usuario {$nombre}",
+            'description'=> "El tipo de unidad de medida {$tipoUnidadMedida->name} ha sido activado por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
 
-        return redirect()->route('tipounidad')
-                    ->with('success', 'El tipo de unidad ha sido eliminado');
+            return back()->with('success', 'El tipo de unidad de medida ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El tipo de unidad de medida no se ha activado');
     }
 }

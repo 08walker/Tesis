@@ -3,83 +3,64 @@
 namespace App\Http\Controllers;
 
 use App\Arrasrtre_Transp;
+use App\Transportacion;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ArrasrtreTranspController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //Para llenar tabla arrasrtre__transps
+    public function store(Request $request,Transportacion $transportacion)
     {
-        //
+        $this->authorize('create',new Transportacion);
+        
+        $data = $request['larrastre'];
+        //si viene vacio sale
+        if ($data) {
+            if ($transportacion->arrastretrasnp->count() > 0) {
+                foreach ($data as $dat) {
+                if ($transportacion->arrastretrasnp->contains('arrastre_id',$dat)) {
+                    return redirect()->route('transportaciones.formllenar',$transportacion)->with('success', 'El arrastre ya está añadido');
+                }
+                else{
+                      Arrasrtre_Transp::create([
+                       'transportacion_id'=>$transportacion->id,
+                       'arrastre_id'=>$dat,
+                      ]);
+                    }
+                }
+            }
+            else{
+                foreach ($data as $dat) {
+                      Arrasrtre_Transp::create([
+                       'transportacion_id'=>$transportacion->id,
+                       'arrastre_id'=>$dat,
+                      ]);
+                }
+            }
+        }        
+        return redirect()->route('transportaciones.formllenar',$transportacion)->with('success', 'El arrastre ha sido añadido');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Arrasrtre_Transp $arrasrtre_Transp)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Arrasrtre_Transp $arrasrtre_Transp)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Arrasrtre_Transp $arrasrtre_Transp)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Arrasrtre_Transp  $arrasrtre_Transp
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Arrasrtre_Transp $arrasrtre_Transp)
-    {
-        //
+        $this->authorize('create',new Transportacion);
+        $arrastre = Arrasrtre_Transp::find($id);
+        //$arrastre->delete();
+        try {
+         $arrastre->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $arrastre->update(['activo'=>'0']);
+                    // Traza::create([
+                    // 'description'=> "El arrastre {$arrastre->identificador} desactivado por el usuario {$nombre}",
+                    // 'ip'=>$ip,
+                    // ]);
+                    return back()->with('success', 'El arrastre tiene envases asociados');  
+               }
+               return back()->with('success', 'El arrastre tiene envases asociados');  
+        }
+        return back()->with('success', 'El arrastre ha sido eliminado');
     }
 }

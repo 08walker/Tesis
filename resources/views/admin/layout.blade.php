@@ -100,6 +100,34 @@
                 </li>
               @endcan
 
+              <!-- Level two dropdown-->
+              @canany('view',[new \App\Organizacion,new \App\Tercero,new \App\Lugar])
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Desactivados</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+
+                  @can('view',new \App\Organizacion)
+                <li>
+                  <a href="{{ route('organizaciones.desactivados') }}" class="dropdown-item">Organizaciones </a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Tercero)
+                <li>
+                  <a href="{{ route('terceros.desactivados') }}" class="dropdown-item">Terceros</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Lugar)
+                <li>
+                  <a href="{{ route('lugares.desactivados') }}" class="dropdown-item">Lugares</a>
+                </li>
+              @endcan
+                </ul>
+              </li>
+              @endcanany
+              <!-- End Level two -->
+
             </ul>
           </li>
           @endcanany
@@ -145,6 +173,51 @@
                 </li>
               @endcan
 
+              <!-- Level two dropdown-->
+              @canany('view',[new \App\Chofer,new \App\Equipo,new \App\Envase,new \App\Arrastre,new \App\TipoEquipo,new \App\TipoArrastre])
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Desactivados</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  @can('view',new \App\Chofer)
+                <li>
+                  <a href="{{ route('choferes.desactivados') }}" class="dropdown-item">Choferes </a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Equipo)
+                <li>
+                  <a href="{{ route('equipos.desactivados') }}" class="dropdown-item">Equipos</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Envase)
+                <li>
+                  <a href="{{ route('envases.desactivados') }}" class="dropdown-item">Envases</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Arrastre)
+                <li>
+                  <a href="{{ route('arrastres.desactivados') }}" class="dropdown-item">Arrastres</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\TipoEquipo) 
+                <li>
+                  <a href="{{ route('tipoequipo.desactivados') }}" class="dropdown-item">Tipo Equipo</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\TipoArrastre)
+                <li>
+                  <a href="{{ route('tipoarrastre.desactivados') }}" class="dropdown-item">Tipo Arrastre</a>
+                </li>
+              @endcan
+                </ul>
+              </li>
+              @endcanany
+              <!-- End Level two -->
+
             </ul>
           </li>
           @endcanany
@@ -175,7 +248,8 @@
               @canany('view',[new \App\Provincia,new \App\Municipio])
               <li class="dropdown-submenu dropdown-hover">
                 <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">División P.A.</a>
-                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                      
                   @can('view',new \App\Provincia)
                     <li>
                       <a href="{{ route('provincias') }}" class="dropdown-item">Provincias </a>
@@ -185,6 +259,38 @@
                   @can('view',new \App\Municipio)
                     <li>
                       <a href="{{ route('municipios') }}" class="dropdown-item">Municipios </a>
+                    </li>
+                  @endcan
+                </ul>
+              </li>
+              @endcanany
+              <!-- End Level two -->
+
+              <!-- Level two dropdown-->
+              @canany('view',[new \App\Provincia,new \App\Municipio,new \App\TipoUnidadMedida,new \App\UnidadMedida])
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Desactivados</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  @can('view',new \App\TipoUnidadMedida)
+                    <li>
+                      <a href="{{ route('tipounidad.desactivados') }}" class="dropdown-item">Tipo Unidad de medida </a>
+                    </li>
+                  @endcan
+
+                  @can('view',new \App\UnidadMedida)
+                    <li>
+                      <a href="{{ route('unidadmedida.desactivados') }}" class="dropdown-item">Unidad de medida</a>
+                    </li>
+                  @endcan
+                  @can('view',new \App\Provincia)
+                    <li>
+                      <a href="{{ route('provincias.desactivados') }}" class="dropdown-item">Provincias </a>
+                    </li>
+                  @endcan
+
+                  @can('view',new \App\Municipio)
+                    <li>
+                      <a href="{{ route('municipios.desactivados') }}" class="dropdown-item">Municipios </a>
                     </li>
                   @endcan
                 </ul>
@@ -236,6 +342,29 @@
                   <a href="{{ route('trazas') }}" class="dropdown-item">Trazas</a>
                 </li>
               @endcan
+
+               <!-- Level two dropdown-->
+              @canany('view',[new \App\User,new \App\Directivo])
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Desactivados</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+
+              @can('view',new \App\User)
+                <li>
+                  <a href="{{ route('user.desactivados') }}" class="dropdown-item">Usuarios</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Directivo)
+                <li>
+                  <a href="{{ route('directivo.desactivados') }}" class="dropdown-item">Directivo</a>
+                </li>
+              @endcan
+
+                </ul>
+              </li>
+              @endcanany
+              <!-- End Level two -->
 
             </ul>
           </li>

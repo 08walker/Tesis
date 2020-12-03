@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
-@section('meta-title','Tesis| Tipos de UM')
-@section('meta-description','Tipos unidades de medidas')
+@section('meta-title','Tesis| Unidades de medida')
+@section('meta-description','Listado de Unidades de medida desactivadas')
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Tipos unidades de medidas</h1>
+            <h1 class="m-0 text-dark"> Listado de Unidades de medida desactivadas</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -30,27 +30,17 @@
         <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Tipos:</h3> 
+              <h3 class="card-title">Unidades de medida:</h3> 
               <br>
-
-              @can('create',new \App\TipoUnidadMedida)
-              <a href="{{route('tipounidad.create')}}" type="button" class="btn btn-primary btn-flat" >
-                  <i class="fa fa-plus"></i> Crear
-              </a>
-              @endcan
-
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              @include('tablas.tipounidadmedida',['model'=>$tipoum])
+              @include('tablas.unidadmedida',['model'=>$unidadmedida])
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-  </div>
-</div>
-</div>
-</div>
+  </div></div></div></div>
 </div>
 @endsection
 @include('tablas.estilos')

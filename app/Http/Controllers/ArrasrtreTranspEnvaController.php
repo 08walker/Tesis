@@ -2,88 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Arrasrtre_Transp;
 use App\Arrasrtre_Transp_Enva;
+use App\Transportacion;
 use Illuminate\Http\Request;
 
 class ArrasrtreTranspEnvaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $this->authorize('create',new Transportacion);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Arrasrtre_Transp_Enva  $arrasrtre_Transp_Enva
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Arrasrtre_Transp_Enva $arrasrtre_Transp_Enva)
-    {
-        //dd($arrasrtre_Transp_Enva);
-        if ($arrasrtre_Transp_Enva->delete()) {
-            return back();
+        $arrastre = Arrasrtre_Transp::find($request['arrast_transp_id']);
+        if ($arrastre->arrastenva->count() > 0) {            
+                if ($arrastre->arrastenva->contains('envase_id',$request['envase_id'])) {
+                    return redirect()->route('transportaciones.formllenar',$arrastre->transportacion_id)->with('success', 'El envase ya está añadido');
+                }
+                else{
+                    Arrasrtre_Transp_Enva::create([
+                        'arrast_transp_id'=>$arrastre->id,
+                        'envase_id'=>$request['envase_id'],
+                    ]);
+                }
         }
-        return redirect()->route('transportaciones');
+        return redirect()->route('transportaciones.formllenar',$arrastre->transportacion_id)->with('success', 'El envase ha sido añadido');
+    }
+
+    public function destroy($id)
+    {   
+        $this->authorize('create',new Transportacion);
+        $data = Arrasrtre_Transp_Enva::find($id);
+        $data->delete();
+        return back()->with('success', 'El envase ha sido eliminado');;
     }
 }

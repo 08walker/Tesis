@@ -178,9 +178,12 @@
                             <td>{{$arrast->arrastres->identificador}}</td>
                             <td>{{$arrast->arrastres->description}}</td>
                             <td>
-                              <button type="button" class="btn btn-flat btn-danger" >
+                              <form method="POST" action="{{route('arrastretransp.destroy', $arrast)}}" style="display: inline;">
+                                    {{csrf_field()}}{{method_field('DELETE')}}
+                                    <button class="btn btn-flat btn-danger" onclick="return confirm('¿Estas seguro de que deseas quitar el arrastre?')">
                                       <i class="fa fa-times"></i> Quitar
-                             </button>
+                                    </button>
+                                  </form>
                             </td>
                           </tr>
                           @endforeach

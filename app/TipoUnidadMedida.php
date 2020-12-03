@@ -21,4 +21,9 @@ class TipoUnidadMedida extends Model
     {
         $query->where('activo','=','1');
     }
+
+    public function scopeNoactivos($query)
+    {
+        $query->where('activo','=','0');
+    }
 }

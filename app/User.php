@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','activo'
     ];
 
     /**
@@ -61,5 +61,10 @@ class User extends Authenticatable
     public function scopeActivos($query)
     {
         $query->where('activo','=','1');
+    }
+
+    public function scopeNoactivos($query)
+    {
+        $query->where('activo','=','0');
     }
 }

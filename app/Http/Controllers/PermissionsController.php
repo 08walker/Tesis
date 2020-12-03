@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traza;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -39,7 +40,7 @@ class PermissionsController extends Controller
             'description'=> "Permiso {$permission->display_name} actualizado por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
-        return redirect()->route('admin.permissions.edit',$permission)->withFlash('El permiso ha sido actualizado');
+        return redirect()->route('admin.permissions.edit',$permission)->with('success','El permiso ha sido actualizado');
         }
         return back()->withInput()->with('demo','Error al actualizar el permiso');
 

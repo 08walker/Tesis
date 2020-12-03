@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Traza;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -15,7 +16,7 @@ class UsersController extends Controller
     {
         $this->authorize('view',new User);
         
-        $users = User::allowed()->get();
+        $users = User::activos()->get();
         return view('users.index',compact('users'));
     }
 
@@ -114,16 +115,58 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        $this->authorize('update',$user);
-
-        $user->delete();
+        //$this->authorize('delete',$user);
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        
+        try {
+         $user->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $user->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El usuario {$user->name} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('user.index')
+                        ->with('success', 'El usuario ha sido desactivado');   
+               }
+               return redirect()->route('user.index')
+                    ->with('demo', 'El usuario no ha sido ser eliminado');
+        }
+        
         Traza::create([
-            'description'=> "Usuario {$user->name} eliminado por el usuario {$nombre}",
-            'ip'=>$ip,
-        ]); 
+        'description'=> "El usuario {$user->name} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('user.index')
+                    ->with('success', 'El usuario ha sido eliminado con éxito');
+    }
 
-        return redirect()->route('user.index')->withFlash('EL usuario ha sido eliminado');
+    public function desactivados()
+    {
+        $this->authorize('view',new User);        
+        return view('users.desactivados')
+        ->with('users', User::noactivos()->get());
+    }
+
+    public function activar(Request $request, User $user)
+    {
+        $this->authorize('update',$user);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $user->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "El user {$user->name} ha sido activado por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+
+            return back()->with('success', 'El usuario ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El usuario no se ha activado');
     }
 }

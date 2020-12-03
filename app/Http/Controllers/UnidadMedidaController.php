@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUnidadMRequest;
 use App\TipoUnidadMedida;
 use App\Traza;
 use App\UnidadMedida;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class UnidadMedidaController extends Controller
@@ -102,5 +103,31 @@ class UnidadMedidaController extends Controller
             ]);
         return redirect()->route('unidadmedida')
                     ->with('success', 'La unidad de medida ha sido eliminada con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new UnidadMedida);        
+        return view('unidadmedida.desactivados')
+        ->with('unidadmedida', UnidadMedida::noactivos()->get());
+    }
+
+    public function activar(Request $request, UnidadMedida $unidadMedida)
+    {
+        $this->authorize('update',$unidadMedida);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $unidadMedida->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "La unidad de medida {$unidadMedida->name} ha sido activada por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+
+            return back()->with('success', 'La unidad de medida ha sido activada con éxito');
+        }
+        return back()->with('demo', 'La unidad de medida no se ha activado');
     }
 }

@@ -126,12 +126,12 @@ class ChoferController extends Controller
 
     public function desactivados()
     {
-        $this->authorize('view',new chofer);        
+        $this->authorize('view',new Chofer);        
         return view('chofer.desactivados')
         ->with('choferes', Chofer::noactivos()->get());
     }
 
-    public function activar(Request $request, chofer $chofer)
+    public function activar(Request $request, Chofer $chofer)
     {
         $this->authorize('update',$chofer);
         if ($request['activo']) {
