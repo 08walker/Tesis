@@ -30,6 +30,11 @@ class Producto extends Model
         $query->where('activo','=','1');
     }
 
+    public function scopeNoactivos($query)
+    {
+        $query->where('activo','=','0');
+    }
+
     public function reporte1()
     {
         return $this->hasMany('App\Reporte1');

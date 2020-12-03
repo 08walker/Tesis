@@ -8,6 +8,7 @@ use App\Http\Requests\StoreChoferRequest;
 use App\Organizacion;
 use App\Tercero;
 use App\Traza;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ChoferController extends Controller
@@ -78,7 +79,6 @@ class ChoferController extends Controller
     {   
         $this->authorize('update',$chofer);
         $data = request()->all(); 
-        //dd($data);
     
         $chofer->update($data);
         if ($chofer) {
@@ -96,16 +96,57 @@ class ChoferController extends Controller
     public function destroy(Chofer $chofer)
     {
         $this->authorize('delete',$chofer);
-        $chofer->delete();
-
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        
+        try {
+         $chofer->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $chofer->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El chofer {$chofer->name} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('choferes')
+                        ->with('success', 'El chofer ha sido desactivado');   
+               }
+               return redirect()->route('choferes')
+                    ->with('demo', 'El chofer no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El chofer {$chofer->name} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('choferes')
+                    ->with('success', 'El chofer ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new chofer);        
+        return view('chofer.desactivados')
+        ->with('choferes', Chofer::noactivos()->get());
+    }
+
+    public function activar(Request $request, chofer $chofer)
+    {
+        $this->authorize('update',$chofer);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $chofer->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "Chofer {$chofer->name} eliminado por el usuario {$nombre}",
-            'ip'=>$ip,            
+            'description'=> "El chofer {$chofer->name} ha sido activado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
-        return redirect()->route('choferes')
-                    ->with('success', 'El chofer ha sido eliminado');
+            return back()->with('success', 'El chofer ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El chofer no se ha activado');
     }
 }

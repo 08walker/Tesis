@@ -33,13 +33,13 @@
           @can('update',new \App\Arrastre)
               <td>
                 @if(!$arrastre->activo)
-                <form id="quickForm" role="form" method="POST" action="{{ route('arrastres.activar',$arrastre) }}">
-                    {{ method_field('PUT') }} {!! csrf_field() !!}
-                    <input type="hidden" value="1" name="activo">
-                  <button class="btn btn-sm btn-primary" type="submit">
-                    Activar
-                  </button>
-              </form>
+                  <form id="quickForm" role="form" method="POST" action="{{ route('arrastres.activar',$arrastre) }}">
+                      {{ method_field('PUT') }} {!! csrf_field() !!}
+                      <input type="hidden" value="1" name="activo">
+                    <button class="btn btn-sm btn-primary" type="submit">
+                      Activar
+                    </button>
+                  </form>
                 @else
                 <a href="{{route('arrastres.edit',$arrastre)}}" class="btn btn-xs btn-info">
                   <i class="fa fa-pen"></i>

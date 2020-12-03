@@ -6,6 +6,7 @@ use App\Directivo;
 use App\Organizacion;
 use App\Traza;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class DirectivoController extends Controller
@@ -85,16 +86,56 @@ class DirectivoController extends Controller
     public function destroy(Directivo $directivo)
     {
         $this->authorize('delete',$directivo);
-        $directivo->delete();
-
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        try {
+         $directivo->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $directivo->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El directivo {$directivo->user->name} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('directivo.index')
+                        ->with('success', 'El directivo ha sido desactivado');   
+               }
+               return redirect()->route('directivo.index')
+                    ->with('demo', 'El directivo no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El directivo {$directivo->user->name} ha sido eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('directivo.index')
+                    ->with('success', 'El directivo ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new Directivo);
+        $directivos = Directivo::noactivos()->get();
+        return view('directivo.desactivados',compact('directivos'));
+    }
+
+    public function activar(Request $request, Directivo $directivo)
+    {
+        $this->authorize('update',$directivo);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $directivo->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "Directivo {$directivo->name} eliminado por el usuario {$nombre}",
+            'description'=> "El directivo {$directivo->user->name} ha sido activado por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
 
-        return redirect()->route('directivo.index')
-                    ->with('success', 'El directivo ha sido eliminado');
+            return back()->with('success', 'El directivo ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El directivo no se ha activado');
     }
 }

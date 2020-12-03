@@ -8,6 +8,7 @@ use App\Organizacion;
 use App\Tercero;
 use App\TipoEquipo;
 use App\Traza;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -100,16 +101,57 @@ class EquipoController extends Controller
     public function destroy(Equipo $equipo)
     {
         $this->authorize('delete',$equipo);
-        $equipo->delete();
-
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        
+        try {
+         $equipo->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $equipo->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El equipo {$equipo->identificador} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('equipos')
+                        ->with('success', 'El equipo ha sido desactivado');   
+               }
+               return redirect()->route('equipos')
+                    ->with('demo', 'El equipo no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El equipo {$equipo->identificador} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('equipos')
+                    ->with('success', 'El equipo ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new Equipo);        
+        return view('equipo.desactivados')
+        ->with('equipos', Equipo::noactivos()->get());
+    }
+
+    public function activar(Request $request, equipo $equipo)
+    {
+        $this->authorize('update',$equipo);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $equipo->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "Equipo {$equipo->identificador} eliminado por el usuario {$nombre}",
-            'ip'=>$ip,            
+            'description'=> "El equipo {$equipo->identificador} ha sido activado por el usuario {$nombre}",
+            'ip'=>$ip,
             ]);
 
-        return redirect()->route('equipos')
-                    ->with('success', 'El equipo ha sido eliminado');
+            return back()->with('success', 'El equipo ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El equipo no se ha activado');
     }
 }

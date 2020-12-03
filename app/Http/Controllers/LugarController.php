@@ -8,6 +8,7 @@ use App\Municipio;
 use App\Organizacion;
 use App\Tercero;
 use App\Traza;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class LugarController extends Controller
@@ -92,16 +93,57 @@ class LugarController extends Controller
     public function destroy(Lugar $lugar)
     {
         $this->authorize('delete',$lugar);
-        $lugar->delete();
-        
         $nombre = auth()->user()->name;
         $ip = request()->ip();
-            Traza::create([
-            'description'=> "Lugar {$lugar->name} eliminado por el usuario {$nombre}",
-            'ip'=>$ip,
-            ]); 
-
+        
+        try {
+         $lugar->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $lugar->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El lugar {$lugar->name} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('lugares')
+                        ->with('success', 'El lugar ha sido desactivado');   
+               }
+               return redirect()->route('lugares')
+                    ->with('demo', 'El lugar no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El lugar {$lugar->name} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
         return redirect()->route('lugares')
-                    ->with('success', 'El lugar ha sido eliminado');
+                    ->with('success', 'El lugar ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new lugar);
+        return view('lugar.desactivados')
+        ->with('lugares', lugar::noactivos()->get());
+    }
+
+    public function activar(Request $request, lugar $lugar)
+    {
+        $this->authorize('update',$lugar);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $lugar->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "El lugar {$lugar->name} ha sido activado por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+
+            return back()->with('success', 'El lugar ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El lugar no se ha activado');
     }
 }

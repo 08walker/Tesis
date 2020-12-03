@@ -26,7 +26,7 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contacto', 'VistasController@contacto')->name('contacto');
 
-//Rutas provincias
+//Rutas reportes
 Route::group([
     'prefix'=>'reportes',
     'middleware'=>'auth'
@@ -58,7 +58,9 @@ Route::post('/crear','ProvinciaController@store');
 //Route::get('/{provincia}','ProvinciaController@show')->name('provincias.show');
 Route::get('/{provincia}/editar','ProvinciaController@edit')->name('provincias.edit');
 Route::put('/{provincia}','ProvinciaController@update')->name('provincias.update');
+Route::put('/{provincia}/activar','ProvinciaController@activar')->name('provincias.activar');
 Route::delete('/{provincia}','ProvinciaController@destroy')->name('provincias.destroy');
+Route::get('/desactivados','ProvinciaController@desactivados')->name('provincias.desactivados');
 });
 
 //Rutas municipios
@@ -74,6 +76,8 @@ Route::post('/crear','MunicipioController@store')->name('municipios.create');
 Route::get('/{municipio}/editar','MunicipioController@edit')->name('municipios.edit');
 Route::put('/{municipio}','MunicipioController@update')->name('municipios.update');
 Route::delete('/{municipio}','MunicipioController@destroy')->name('municipios.destroy');
+Route::put('/{municipio}/activar','MunicipioController@activar')->name('municipios.activar');
+Route::get('/desactivados','MunicipioController@desactivados')->name('municipios.desactivados');
 });
 
 
@@ -84,7 +88,6 @@ Route::group([
 ],
 function(){
 Route::get('/','ArrastreController@index')->name('arrastres');
-Route::get('/desactivados','ArrastreController@desactivados')->name('arrastres.desactivados');
 // Route::get('/{id}','ArrastreController@show')->where('id','[0-9]+')->name('arrastres.show');
 Route::get('/crear','ArrastreController@create')->name('arrastres.create');
 Route::post('/crear','ArrastreController@store')->name('arrastres.create');
@@ -92,6 +95,7 @@ Route::get('/{arrastre}/editar','ArrastreController@edit')->name('arrastres.edit
 Route::put('/{arrastre}','ArrastreController@update')->name('arrastres.update');
 Route::put('/{arrastre}/activar','ArrastreController@activar')->name('arrastres.activar');
 Route::delete('/{arrastre}','ArrastreController@destroy')->name('arrastres.destroy');
+Route::get('/desactivados','ArrastreController@desactivados')->name('arrastres.desactivados');
 });
 
 
@@ -107,7 +111,9 @@ Route::post('/crear','ChoferController@store');
 Route::get('/crear','ChoferController@create')->name('choferes.create');
 Route::get('/{chofer}/editar','ChoferController@edit')->name('choferes.edit');
 Route::put('/{chofer}','ChoferController@update')->name('choferes.update');
+Route::put('/{chofer}/activar','ChoferController@activar')->name('choferes.activar');
 Route::delete('/{chofer}','ChoferController@destroy')->name('choferes.destroy');
+Route::get('/desactivados','ChoferController@desactivados')->name('choferes.desactivados');
 });
 
 
@@ -123,7 +129,9 @@ Route::post('/crear','EnvaseController@store');
 Route::get('/crear','EnvaseController@create')->name('envases.create');
 Route::get('/{envase}/editar','EnvaseController@edit')->name('envases.edit');
 Route::put('/{envase}','EnvaseController@update')->name('envases.update');
+Route::put('/{envase}/activar','EnvaseController@activar')->name('envases.activar');
 Route::delete('/{envase}','EnvaseController@destroy')->name('envases.destroy');
+Route::get('/desactivados','EnvaseController@desactivados')->name('envases.desactivados');
 });
 
 
@@ -139,7 +147,9 @@ Route::post('/crear','EquipoController@store');
 Route::get('/crear','EquipoController@create')->name('equipos.create');
 Route::get('/{equipo}/editar','EquipoController@edit')->name('equipos.edit');
 Route::put('/{equipo}','EquipoController@update')->name('equipos.update');
+Route::put('/{equipo}/activar','EquipoController@activar')->name('equipos.activar');
 Route::delete('/{equipo}','EquipoController@destroy')->name('equipos.destroy');
+Route::get('/desactivados','EquipoController@desactivados')->name('equipos.desactivados');
 });
 
 
@@ -155,7 +165,9 @@ Route::post('/crear','LugarController@store');
 Route::get('/crear','LugarController@create')->name('lugares.create');
 Route::get('/{lugar}/editar','LugarController@edit')->name('lugares.edit');
 Route::put('/{lugar}','LugarController@update')->name('lugares.update');
+Route::put('/{lugar}/activar','LugarController@activar')->name('lugares.activar');
 Route::delete('/{lugar}','LugarController@destroy')->name('lugares.destroy');
+Route::get('/desactivados','LugarController@desactivados')->name('lugares.desactivados');
 });
 
 
@@ -188,6 +200,8 @@ Route::get('/crear','OrganizacionController@create')->name('organizaciones.creat
 Route::get('/{organizacion}/editar','OrganizacionController@edit')->name('organizaciones.edit');
 Route::put('/{organizacion}','OrganizacionController@update')->name('organizaciones.update');
 Route::delete('/{organizacion}','OrganizacionController@destroy')->name('organizaciones.destroy');
+Route::put('/{organizacion}/activar','OrganizacionController@activar')->name('organizaciones.activar');
+Route::get('/desactivados','OrganizacionController@desactivados')->name('organizaciones.desactivados');
 });
 
 
@@ -203,7 +217,9 @@ Route::post('/crear','ProductoController@store');
 Route::get('/crear','ProductoController@create')->name('productos.create');
 Route::get('/{producto}/editar','ProductoController@edit')->name('productos.edit');
 Route::put('/{producto}','ProductoController@update')->name('productos.update');
+Route::put('/{producto}/activar','ProductoController@activar')->name('productos.activar');
 Route::delete('/{producto}','ProductoController@destroy')->name('productos.destroy');
+Route::get('/desactivados','ProductoController@desactivados')->name('productos.desactivados');
 });
 
 
@@ -379,6 +395,18 @@ function(){
 Route::resource('directivo','DirectivoController',['except'=>'show']);
 Route::get('/trazas', 'TrazasController@index')->name('trazas');
 });
+
+Route::group([
+    'prefix'=>'directivo',
+    'middleware'=>'auth'
+],
+function(){
+Route::put('/{directivo}/activar','DirectivoController@activar')->name('directivo.activar');
+Route::delete('/{directivo}','DirectivoController@destroy')->name('directivo.destroy');
+Route::get('/desactivados','DirectivoController@desactivados')->name('directivo.desactivados');
+});
+
+
 
 Route::resource('roles','RolesController',['except'=>'show','as'=>'admin']);
 

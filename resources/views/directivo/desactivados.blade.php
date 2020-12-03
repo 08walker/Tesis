@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('meta-title','Tesis| Directivos')
-@section('meta-description','Listado de directivos')
+@section('meta-description','Listado de directivos desactivados')
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Listado de directivos</h1>
+            <h1 class="m-0 text-dark"> Listado de directivos desactivados</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -32,11 +32,6 @@
               <div class="card-header">
                 <h3 class="card-title">Directivo:</h3> 
                 <br>
-                @can('create',new \App\Directivo)
-                <a href="{{route('directivo.create')}}" type="button" class="btn btn-primary btn-flat" >
-                <i class="fa fa-plus"></i> Crear
-                </a>
-                @endcan
               </div>
               <div class="card-body">
                 @include('tablas.directivos',['model'=>$directivos])

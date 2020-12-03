@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEnvaseRequest;
 use App\Organizacion;
 use App\Tercero;
 use App\Traza;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class EnvaseController extends Controller
@@ -93,17 +94,57 @@ class EnvaseController extends Controller
     public function destroy(Envase $envase)
     {
         $this->authorize('delete',$envase);
-
-        $envase->delete();
-
         $nombre = auth()->user()->name;
         $ip = request()->ip();
+        
+        try {
+         $envase->delete();   
+        }   catch (QueryException $e) {
+               $arrayName = $e->errorInfo;
+               if ($arrayName[1] == 1451) {
+                   $envase->update(['activo'=>'0']);
+                    Traza::create([
+                    'description'=> "El envase {$envase->identificador} ha sido desactivado por el usuario {$nombre}",
+                    'ip'=>$ip,
+                    ]);
+                    return redirect()->route('envases')
+                        ->with('success', 'El envase ha sido desactivado');   
+               }
+               return redirect()->route('envases')
+                    ->with('demo', 'El envase no ha sido ser eliminado');
+        }
+        
+        Traza::create([
+        'description'=> "El envase {$envase->identificador} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
+        return redirect()->route('envases')
+                    ->with('success', 'El envase ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new Envase);        
+        return view('envase.desactivados')
+        ->with('envases', Envase::noactivos()->get());
+    }
+
+    public function activar(Request $request, envase $envase)
+    {
+        $this->authorize('update',$envase);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $envase->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
             Traza::create([
-            'description'=> "Envase {$envase->identificador} eliminado por el usuario {$nombre}",
+            'description'=> "El envase {$envase->identificador} ha sido activado por el usuario {$nombre}",
             'ip'=>$ip,
             ]);
 
-        return redirect()->route('envases')
-                    ->with('success', 'El envase ha sido eliminado');
+            return back()->with('success', 'El envase ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El envase no se ha activado');
     }
 }

@@ -1,12 +1,11 @@
 @extends('admin.layout')
 
 @section('meta-title','Tesis| Arrastres')
-@section('meta-description','Listado de arrastres')
+@section('meta-description','Listado de arrastres desactivados')
 
 @section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
@@ -28,11 +27,6 @@
                 <div class="card-header">
                   <h3 class="card-title">Arrastres:</h3> 
                   <br>
-                  @can('create',new \App\Arrastre)
-                    <a href="{{route('arrastres.create')}}" type="button" class="btn btn-primary btn-flat" >
-                      <i class="fa fa-plus"></i> Crear
-                    </a>
-                  @endcan
                 </div>
                 <div class="card-body">
                     @include('tablas.arrastres',['model'=>$arrastres])

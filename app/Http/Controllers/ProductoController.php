@@ -86,7 +86,6 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         $this->authorize('delete',$producto);
-
         $nombre = auth()->user()->name;
         $ip = request()->ip();
         
@@ -96,7 +95,6 @@ class ProductoController extends Controller
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $producto->update(['activo'=>'0']);
-
                     Traza::create([
                     'description'=> "El producto {$producto->name} ha sido desactivado por el usuario {$nombre}",
                     'ip'=>$ip,
@@ -107,12 +105,37 @@ class ProductoController extends Controller
                return redirect()->route('productos')
                     ->with('demo', 'El producto no ha sido ser eliminado');
         }
-        $nombre = auth()->user()->name;
-            Traza::create([
-            'description'=> "El producto {$producto->name} ha sido eliminado por el usuario {$nombre}",
-            'ip'=>$ip,
-            ]);
+        
+        Traza::create([
+        'description'=> "El producto {$producto->name} eliminado por el usuario {$nombre}",
+        'ip'=>$ip,
+        ]);
         return redirect()->route('productos')
                     ->with('success', 'El producto ha sido eliminado con éxito');
+    }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new producto);        
+        return view('producto.desactivados')
+        ->with('productos', producto::noactivos()->get());
+    }
+
+    public function activar(Request $request, producto $producto)
+    {
+        $this->authorize('update',$producto);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $producto->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "El producto {$producto->name} ha sido activado por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+            return back()->with('success', 'El producto ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El producto no se ha activado');
     }
 }

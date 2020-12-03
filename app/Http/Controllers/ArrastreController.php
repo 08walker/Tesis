@@ -105,7 +105,7 @@ class ArrastreController extends Controller
 
     public function destroy(Arrastre $arrastre)
     {
-        //$this->authorize('delete',$arrastre);
+        $this->authorize('delete',$arrastre);
         $nombre = auth()->user()->name;
         $ip = request()->ip();
         
@@ -160,6 +160,4 @@ class ArrastreController extends Controller
         }
         return back()->with('demo', 'El arrastre no se ha activado');
     }
-
-
 }

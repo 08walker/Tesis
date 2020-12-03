@@ -116,4 +116,30 @@ class MunicipioController extends Controller
         return redirect()->route('municipios')
                     ->with('success', 'El municipio ha sido eliminado con éxito');
     }
+
+    public function desactivados()
+    {
+        $this->authorize('view',new Municipio);        
+        return view('municipio.desactivados')
+        ->with('municipios', Municipio::noactivos()->get());
+    }
+
+    public function activar(Request $request, Municipio $municipio)
+    {
+        $this->authorize('update',$municipio);
+        if ($request['activo']) {
+            $data['activo'] = 1;
+            $municipio->update($data);
+
+            $nombre = auth()->user()->name;
+            $ip = request()->ip();
+            Traza::create([
+            'description'=> "El municipio {$municipio->name} ha sido activado por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+
+            return back()->with('success', 'El municipio ha sido activado con éxito');
+        }
+        return back()->with('demo', 'El municipio no se ha activado');
+    }
 }
