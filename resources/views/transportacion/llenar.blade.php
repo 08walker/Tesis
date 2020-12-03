@@ -54,7 +54,7 @@
                               </a>
                             @endif
                           @endif
-                          @if($transportacion->choferes->count()>0)
+                          @if($transportacion->chofertransp->count()>0)
                           <a href="{{route('tenv',$transportacion)}}" type="button" class="btn btn-primary btn-flat" >
                              Transferencias
                           </a>
@@ -96,7 +96,7 @@
                         <select class="select2" multiple="multiple" name="lchofer[]" data-placeholder="Seleccione los choferes" style="width: 100%;">
                           @foreach($choferes->all() as $chofer)
                             <option 
-                              {{ collect(old('lchofer', $transportacion->choferes->pluck('id')))->contains($chofer->id) ? 'selected':'' }}
+                              {{-- {{ collect(old('lchofer', $transportacion->chofertransp->pluck('id')))->contains($chofer->id) ? 'selected':'' }} --}}
                               value="{{$chofer->id}}">
                               {{$chofer->name}}
                             </option>
@@ -120,14 +120,23 @@
                             <th>Nombre y Apellidos</th>
                             <th>Telefono</th>
                             <th>Carnet de identidad</th>
+                            <th>Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($transportacion->choferes as $chofer)
+                          @foreach($tchofer as $chofer)
                           <tr>
-                            <td>{{$chofer->name}} {{$chofer->apellido}}</td>
-                            <td>{{$chofer->telefono}}</td>
-                            <td>{{$chofer->ci}}</td>
+                            <td>{{$chofer->choferes->name}} {{$chofer->apellido}}</td>
+                            <td>{{$chofer->choferes->telefono}}</td>
+                            <td>{{$chofer->choferes->ci}}</td>
+                            <td>
+                               <form method="POST" action="{{route('chofertransp.destroy', $chofer)}}" style="display: inline;">
+                                    {{csrf_field()}}{{method_field('DELETE')}}
+                                    <button class="btn btn-flat btn-danger" onclick="return confirm('¿Estas seguro de que deseas quitar el arrastre?')">
+                                      <i class="fa fa-times"></i> Quitar
+                                    </button>
+                                  </form>
+                            </td>
                             </tr>
                           @endforeach
                         </tbody>

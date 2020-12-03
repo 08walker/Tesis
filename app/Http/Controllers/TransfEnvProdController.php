@@ -28,7 +28,6 @@ class TransfEnvProdController extends Controller
     {
         $this->authorize('create',new TransfEnviada);
         $data = request()->all();
-        //$data = $request->all();
 
         $dat = Transf_Env_Prod::create([
             'cantidad_bultos'=> $data['cantidad_bultos'],
@@ -46,8 +45,6 @@ class TransfEnvProdController extends Controller
             'ip'=>$ip,
             ]);
             $transferencia = $dat->transfenviada;
-            // $transferencia = TransfEnviada::find($id);
-            //dd($transferencia->transfenvprod);
             return redirect()->route('tenv.show',$transferencia);
 
         }
@@ -74,11 +71,9 @@ class TransfEnvProdController extends Controller
             'description'=> "Actualizado producto en la transferencia {$transfer->transfenviada->num_fact} por el usuario {$nombre}",
             'ip'=>$ip,
             ]); 
-            // dd($transfer->transfenviada);
-            // $transferencia = $transfer->transfenviada;
             return redirect()->route('tenv.show',$transfer->transfenviada)->with('success','Producto actualizado con éxito');
         }
-        return back()->withInput()->with('demo','Error al actualizar el transfer');
+        return back()->with('demo','Error al actualizar el producto');
         
     }
 
@@ -96,6 +91,6 @@ class TransfEnvProdController extends Controller
             'ip'=>$ip,
             ]);
         
-        return back();
+        return back()->with('success','El producto ha sido eliniminado de la transferencia');
     }
 }

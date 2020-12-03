@@ -129,8 +129,6 @@ class TransfEnviadaController extends Controller
         [   
             'fyh_llegada.required'=>'Debe seleccionar la fecha',
         ]);
-        //dd($request['fyh_llegada']);
-        //dd(Carbon::parse($request['fyh_salida'])->format('d m y'));
 
         if(Carbon::parse($request['fyh_llegada'])->isAfter(Carbon::now()))
         {
@@ -138,7 +136,6 @@ class TransfEnviadaController extends Controller
          }elseif (Carbon::parse($request['fyh_llegada']) < (Carbon::parse($transfEnviada->fyh_salida)) ) {
              return redirect()->route('tenv.recibir',$transfEnviada)->with('demo','La fecha de llegada debe ser posterior a la fecha salida');
          }else{
-            //dd($transfEnviada->fyh_salida);
              $transfEnviada->update($data); 
          }
 
@@ -148,8 +145,24 @@ class TransfEnviadaController extends Controller
             Traza::create([
             'description'=> "Se recibió la transferencia número {$transfEnviada->num_fact} por el usuario {$nombre}",
             'ip'=>$ip,
-            ]); 
-            return redirect()->route('home')->with('success','Transferencia recibida con éxito');
+            ]);
+
+            //actualizar el estado de la transportacion
+            $tranp = $transfEnviada->transportacion;
+            $var = false;
+            //dd($tranp->transfenviada->count());
+            foreach ($tranp->transfenviada as $value) {
+                if (is_null($value->fyh_llegada)) {
+                    $var = true;
+                }
+            }
+            if ($var) {
+                return redirect()->route('home')->with('success','Transferencia recibida con éxito');
+            }else{
+                $tranp->terminada='1';
+                $tranp->save();
+                return redirect()->route('home')->with('success','Transferencia recibida con éxito');
+            }
         }
     }
 
@@ -159,33 +172,24 @@ class TransfEnviadaController extends Controller
         return view('trecibida.show',compact('transferencia'));
     }
 
-    public function destroy(TransfEnviada $transfEnviada)
+    public function destroy($id)
     {
         $this->authorize('delete',new TransfEnviada);
+        $data = TransfEnviada::find($id);
         $nombre = auth()->user()->name;
         $ip = request()->ip();
         
-        try {
-         $transfEnviada->delete();   
-        }   catch (QueryException $e) {
-               $arrayName = $e->errorInfo;
-               if ($arrayName[1] == 1451) {
-                   //$transfEnviada->update(['activo'=>'0']);
-                    Traza::create([
-                    'description'=> "El usuario {$nombre} intento borrar la transferencia enviada {$transfEnviada->num_fact}",
-                    'ip'=>$ip,
-                    ]);
-                    return redirect()->route('home')
-                        ->with('demo', 'La transferencia no se ha podido eliminar');   
-               }
-               return redirect()->route('home')
-                    ->with('demo', 'El transfEnviada no ha sido ser eliminado');
-        }        
+        if ($data->transfenvprod->count()>0) {
+            foreach ($data->transfenvprod as $producto) {
+                Transf_Env_Prod::destroy($producto->id);
+            }
+        }
+        $data->delete();
+
         Traza::create([
-        'description'=> "La transferencia enviada {$transfEnviada->num_fact} ha sido eliminada por el usuario {$nombre}",
+        'description'=> "La transferencia enviada número {$data->num_fact} ha sido eliminada por el usuario {$nombre}",
         'ip'=>$ip,
         ]);
-        return redirect()->route('contacto')
-                    ->with('success', 'La transferencia ha sido eliminada con éxito');
+        return back()->with('success', 'La transferencia ha sido eliminada con éxito');
     }
 }

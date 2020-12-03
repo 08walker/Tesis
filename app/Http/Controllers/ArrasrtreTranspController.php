@@ -46,17 +46,12 @@ class ArrasrtreTranspController extends Controller
     {
         $this->authorize('create',new Transportacion);
         $arrastre = Arrasrtre_Transp::find($id);
-        //$arrastre->delete();
         try {
          $arrastre->delete();   
         }   catch (QueryException $e) {
                $arrayName = $e->errorInfo;
                if ($arrayName[1] == 1451) {
                    $arrastre->update(['activo'=>'0']);
-                    // Traza::create([
-                    // 'description'=> "El arrastre {$arrastre->identificador} desactivado por el usuario {$nombre}",
-                    // 'ip'=>$ip,
-                    // ]);
                     return back()->with('success', 'El arrastre tiene envases asociados');  
                }
                return back()->with('success', 'El arrastre tiene envases asociados');  

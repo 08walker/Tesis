@@ -11,4 +11,13 @@ class ChoferEquipoTransp extends Model
         'transportacion_id',
         'chofer_id',
     ];
+
+    public function choferes()
+    {
+        return $this->belongsTo('App\Chofer','chofer_id');
+    }
+   public function transportaciones()
+    {
+        return $this->belongsTo('App\Transportacion','transportacion_id');
+    }
 }

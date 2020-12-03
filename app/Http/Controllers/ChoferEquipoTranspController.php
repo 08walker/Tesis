@@ -3,83 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\ChoferEquipoTransp;
+use App\Transportacion;
 use Illuminate\Http\Request;
 
 class ChoferEquipoTranspController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+  public function store(Request $request,Transportacion $transportacion)
     {
-        //
+         $this->authorize('create',new Transportacion);
+        
+        $data = $request['lchofer'];
+        //si viene vacio sale
+        if ($data) {
+            if ($transportacion->chofertransp->count() > 0) {
+                foreach ($data as $dat) {
+                if ($transportacion->chofertransp->contains('chofer_id',$dat)) {
+                    return redirect()->route('transportaciones.formllenar',$transportacion)
+                        ->with('success', 'El chofer ya está añadido');
+                }
+                else{
+                      ChoferEquipoTransp::create([
+                       'transportacion_id'=>$transportacion->id,
+                       'chofer_id'=>$dat,
+                      ]);
+                    }
+                }
+            }
+            else{
+                foreach ($data as $dat) {
+                      ChoferEquipoTransp::create([
+                       'transportacion_id'=>$transportacion->id,
+                       'chofer_id'=>$dat,
+                      ]);
+                }
+            }
+        }        
+        return redirect()->route('transportaciones.formllenar',$transportacion)
+            ->with('success', 'El chofer ha sido añadido');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ChoferEquipoTransp  $choferEquipoTransp
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ChoferEquipoTransp $choferEquipoTransp)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ChoferEquipoTransp  $choferEquipoTransp
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ChoferEquipoTransp $choferEquipoTransp)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ChoferEquipoTransp  $choferEquipoTransp
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ChoferEquipoTransp $choferEquipoTransp)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ChoferEquipoTransp  $choferEquipoTransp
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ChoferEquipoTransp $choferEquipoTransp)
-    {
-        //
+        $this->authorize('create',new Transportacion);
+        $data = ChoferEquipoTransp::find($id);
+        $data->delete();
+        return back()->with('success', 'El chofer ha sido eliminado');
     }
 }

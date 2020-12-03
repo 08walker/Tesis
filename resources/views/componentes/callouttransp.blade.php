@@ -29,12 +29,12 @@
                 		</tr>
                 	</thead>
                 	<tbody>
-                  		@foreach($model->choferes as $chofer)
+                  		@foreach($model->chofertransp as $chofer)
                 		<tr>
-                			<td>{{$chofer->name}}</td>
-                			<td>{{$chofer->apellido}}</td>
-                			<td>{{$chofer->ci}}</td>
-                			<td>{{$chofer->telefono}}</td>
+                			<td>{{$chofer->choferes->name}}</td>
+                			<td>{{$chofer->choferes->apellido}}</td>
+                			<td>{{$chofer->choferes->ci}}</td>
+                			<td>{{$chofer->choferes->telefono}}</td>
                 		</tr>
                 		@endforeach
                 	</tbody>

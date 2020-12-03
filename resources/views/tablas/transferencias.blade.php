@@ -35,12 +35,14 @@
             @endif
             @endcan
             @can('delete',new \App\TransfEnviada)
+            @if($transf->fyh_llegada == null)
               <form method="POST" action="{{route('tenv.destroy', $transf)}}" style="display: inline;">
                 {{csrf_field()}}{{method_field('DELETE')}}
-                <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la transferencia?')">
+                <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar la transferencia,tenga en cuenta que los productos que incluya seran eliminados?')">
                 <i class="fa fa-times"></i>
               </button>
               </form>
+              @endif
             @endcan
           </td>
         </tr>

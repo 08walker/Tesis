@@ -19,11 +19,6 @@ class Transportacion extends Model
         return $this->belongsTo('App\Equipo');
     }
 
-     public function choferes()
-    {
-        return $this->belongsToMany('App\Chofer','chofer_equipo_transp','transportacion_id','chofer_id')->withTimestamps();
-    }
-
     public function arrastretrasnp()
     {
         return $this->hasMany('App\Arrasrtre_Transp','transportacion_id');
@@ -37,5 +32,10 @@ class Transportacion extends Model
     public function hito()
     {
         return $this->hasMany('App\Hito');
+    }
+
+    public function chofertransp()
+    {
+        return $this->hasMany('App\ChoferEquipoTransp','transportacion_id');
     }
 }

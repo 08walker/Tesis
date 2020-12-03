@@ -245,12 +245,6 @@ Route::get('/{transportacion}/detalles','TransportacionController@detalles')->na
 
 Route::delete('/{transportacion}','TransportacionController@destroy')
       ->name('transportaciones.destroy');
-
-Route::post('/añadir/chofer/{transportacion}','TransportacionController@storechofer')
-      ->name('transportaciones.choferes');
-
-Route::delete('/{arrasrtre_Transp_Enva}','ArrasrtreTranspEnvaController@destroy')
-      ->name('transportaciones.destroyenvase');
 });
 
 Route::group([
@@ -274,11 +268,20 @@ Route::group([
 function(){
 Route::post('/añadir/arrastre/{transportacion}','ArrasrtreTranspController@store')
       ->name('transportaciones.arrastres');
-Route::delete('/{id}/arrastretransp','ArrasrtreTranspController@destroy')->name('arrastretransp.destroy');
+Route::delete('/{id}/arrastretransp','ArrasrtreTranspController@destroy')
+    ->name('arrastretransp.destroy');
 Route::post('/añadir/envase/','ArrasrtreTranspEnvaController@store')
     ->name('transportaciones.envases');
-Route::delete('/{id}/arrastreenv','ArrasrtreTranspEnvaController@destroy')->name('arrastreenvase.destroy');
+Route::delete('/{id}/arrastreenv','ArrasrtreTranspEnvaController@destroy')
+    ->name('arrastreenvase.destroy');
+Route::post('/añadir/chofer/{transportacion}','ChoferEquipoTranspController@store')
+      ->name('transportaciones.choferes');
+Route::delete('/{id}/chofertransp','ChoferEquipoTranspController@destroy')
+    ->name('chofertransp.destroy');
 });
+
+
+
 //Rutas de transferencia enviadas
 Route::group([
     'prefix'=>'tenv',
@@ -301,7 +304,7 @@ Route::put('/{transfEnviada}','TransfEnviadaController@update')->name('tenv.upda
 Route::get('/{id}/recibir','TransfEnviadaController@editRecibo')->name('tenv.recibir');
 Route::put('/{transfEnviada}/recibir','TransfEnviadaController@updateRecibo')->name('tenv.update.recibo');
 
-Route::delete('/{tenv}','TransfEnviadaController@destroy')->name('tenv.destroy');
+Route::delete('/{id}/eliminar','TransfEnviadaController@destroy')->name('tenv.destroy');
 });
 
 //

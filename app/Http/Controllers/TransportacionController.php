@@ -6,6 +6,7 @@ use App\Arrasrtre_Transp;
 use App\Arrasrtre_Transp_Enva;
 use App\Arrastre;
 use App\Chofer;
+use App\ChoferEquipoTransp;
 use App\Envase;
 use App\Equipo;
 use App\Http\Requests\StoreTransportacionRequest;
@@ -63,8 +64,10 @@ class TransportacionController extends Controller
         $arrastres = Arrastre::activos()->get();
         $envases = Envase::activos()->get();
         $tarras = $transportacion->arrastretrasnp;
-        //dd($tarras);
-        return view('transportacion.llenar',compact('transportacion','choferes','arrastres','envases','tarras'));
+        $tchofer = $transportacion->chofertransp;
+        // $demo = $tchofer->first();
+        // dd($demo->choferes->name);
+        return view('transportacion.llenar',compact('transportacion','choferes','arrastres','envases','tarras','tchofer'));
     }
 
     public function edit(Transportacion $transportacion)
@@ -90,14 +93,6 @@ class TransportacionController extends Controller
         return back()->withInput()->with('demo','Error al actualizar la transportación');
     }
 
-    //Para llenar tabla chofer_equipo_transp
-    public function storechofer(Request $request,Transportacion $transportacion)
-    {
-        $this->authorize('create',new Transportacion);
-        $transportacion->choferes()->sync($request->get('lchofer'));
-        return back();
-    }
-
     public function detalles(Transportacion $transportacion)
     {
     	$this->authorize('view',new Transportacion);
@@ -106,7 +101,29 @@ class TransportacionController extends Controller
 
     public function destroy(Transportacion $transportacion)
     {
-        //
+        $this->authorize('delete',$transportacion);
+        if ($transportacion->transfenviada->count() > 0) {
+            return back()->with('demo', 'La transportación tiene transferencias asociadas');
+        }elseif ($transportacion->hito->count() > 0) 
+        {
+            return back()->with('demo', 'La transportación tiene incidencias asociadas');
+        }
+        if ($transportacion->arrastretrasnp->count() > 0) 
+        {
+            foreach ($transportacion->arrastretrasnp as $arrastre) {
+                foreach ($arrastre->arrastenva as $envase) {
+                    Arrasrtre_Transp_Enva::destroy($envase->id);
+                }
+                Arrasrtre_Transp::destroy($arrastre->id);
+            }
+        }
+        if ($transportacion->chofertransp->count() > 0){
+            foreach ($transportacion->chofertransp as $chofer) {
+                ChoferEquipoTransp::destroy($chofer->id);
+            }
+        }
+        $transportacion->delete();
+        return back()->with('success', 'La transportación ha sido eliminada');
     }
 
 }
