@@ -32,7 +32,25 @@
                 </h3>
               </div>
               <div class="card-body">
-                <div id="bar-chart" style="height: 300px;"></div>              
+                {{-- <div id="bar-chart" style="height: 300px;"></div>               --}}
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Identificador</th>
+                    <th>Costo de días sin utilizar</th>
+                    <th>Costo de días utilizados</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($envases as $dato)
+                  <tr>
+                    <td>{{$dato->identificador}}</td>
+                    <td>{{(\Carbon\Carbon::now()->diffInDays($dato->ultima_vez))*500}}</td>
+                    <td>{{(\Carbon\Carbon::parse($dato->primera_vez)->diffInDays($dato->ultima_vez))*500}}</td>
+                  </tr>
+                  @endforeach
+                  </tbody>
+              </table>
               </div>
 
               <!-- /.card-body-->
@@ -107,5 +125,5 @@
   //     + Math.round(series.percent) + '%</div>'
   // }
 </script>
-
 @endpush
+@include('tablas.estilos')

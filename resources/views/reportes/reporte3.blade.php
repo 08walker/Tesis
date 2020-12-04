@@ -32,7 +32,24 @@
                 </h3>
               </div>
               <div class="card-body">
-                <h1>contenido</h1>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Identificador</th>
+                    <th>Días sin utilizar</th>
+                    <th>Días utilizados</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($envases as $dato)
+                  <tr>
+                    <td>{{$dato->identificador}}</td>
+                    <td>{{\Carbon\Carbon::now()->diffInDays($dato->ultima_vez)}}</td>
+                    <td>{{\Carbon\Carbon::parse($dato->primera_vez)->diffInDays($dato->ultima_vez)}}</td>
+                  </tr>
+                  @endforeach
+                  </tbody>
+              </table>
               </div>
               <!-- /.card-body-->
             </div>
@@ -46,11 +63,4 @@
     <!-- /.content -->
   </div>
 @endsection
-
-@push('styles')
-
-@endpush
-
-@push('scripts')
-
-@endpush
+@include('tablas.estilos')

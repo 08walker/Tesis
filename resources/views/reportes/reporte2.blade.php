@@ -29,7 +29,7 @@
           </div>
     </div>
 </div>
-    @isset($transportaciones)
+    @isset($chofertransp)
       <div class="content">
         <div class="container-fluid">
           <div class="row">
@@ -45,22 +45,22 @@
                       </h3>
                     </div>                  
                     <div class="col-4">
-                      <p>Nombre: <strong>{{$chofer->name}} {{$chofer->apellido}}</strong></p>
+                      <p>Nombre: <strong>{{$chofertransp->first()->choferes->name}} {{$chofertransp->first()->choferes->apellido}}</strong></p>
                     </div>
 
                     <div class="col-4">
-                      <p>Carnet de identidad: <strong>{{$chofer->ci}}</strong></p>
+                      <p>Carnet de identidad: <strong>{{$chofertransp->first()->choferes->ci}}</strong></p>
                     </div>
 
                     <div class="col-4">
-                      <p>Teléfono: <strong>{{$chofer->telefono}}</strong></p>
+                      <p>Teléfono: <strong>{{$chofertransp->first()->choferes->telefono}}</strong></p>
                     </div>
                     
                     <div class="col-4">
-                      @if($chofer->tercero)
-                        <p>Tercero: <strong>{{$chofer->tercero->name}}</strong></p>
-                      @elseif($chofer->organizacion)
-                        <p>Organización: <strong>{{$chofer->organizacion->name}}</strong></p>
+                      @if($chofertransp->first()->choferes->tercero)
+                        <p>Tercero: <strong>{{$chofertransp->first()->choferes->tercero->name}}</strong></p>
+                      @elseif($chofertransp->first()->choferes->organizacion)
+                        <p>Organización: <strong>{{$chofertransp->first()->choferes->organizacion->name}}</strong></p>
                       @endif
                     </div>
                   </div>
@@ -76,12 +76,11 @@
                     <th>Fecha de salida</th>
                   </tr>
                   </thead>
-
                   <tbody>
-                  @foreach($transportaciones as $viajes)
-                  @foreach($viajes->transfenviada as $viaje)
+                  @foreach($chofertransp as $transp)
+                  @foreach($transp->transportaciones->transfenviada as $viaje)
                   <tr>
-                    <td>{{$viajes->numero}}</td>
+                    <td>{{$transp->transportaciones->numero}}</td>
                     <td>{{$viaje->num_fact}}</td>
                     <td>{{$viaje->origen->name}}</td>
                     <td>{{$viaje->destino->name}}</td>

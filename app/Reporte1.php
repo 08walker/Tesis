@@ -10,7 +10,7 @@ class Reporte1 extends Model
     protected $table = 'reporte3';
     protected $fillable = [
         'producto_id',
-        'SUM(peso_kg)',
+        'suMpeso',
         'fyh_salida'
     ];
 

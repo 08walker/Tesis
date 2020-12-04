@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Chofer;
 use App\Producto;
 use App\Reporte1;
+use App\Reporte1a;
 use App\Reporte2;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,26 +22,26 @@ class ReportesController extends Controller
     public function reporte1()
     {
         $this->authorize('view',new Reporte1);
-        $productos = Reporte1::all();
-        $i = 0;
-        $totales = [];
-        $nombres = [];
-        $productoss_id = [];
-        foreach($productos as $data){
-            if(!in_array($data['producto_id'],$productoss_id)){
-                $prod = Producto::find($data['producto_id']);
-                $totales[$i] = $data['SUM(peso_kg)'];
-                $nombres[]=$prod->name; 
-                $productoss_id[] = $data['producto_id'];
-                $i++;
-            }
-            else{
-                $prod = Producto::find($data['producto_id']);
-                $totales[$i-1] += $data['SUM(peso_kg)'];
-            }
-        }
-        // dd($totales);
-        return view('reportes.reporte1',compact('nombres','totales'));
+        $productos = Reporte1a::all();
+        // $i = 0;
+        // $totales = [];
+        // $nombres = [];
+        // $productos_id = [];
+        // foreach($productos as $data){
+        //     if(!in_array($data['producto_id'],$productos_id)){
+        //         $prod = Producto::find($data['producto_id']);
+        //         $totales[$i] = $data['suMpeso'];
+        //         $nombres[]=$prod->name; 
+        //         $productos_id[] = $data['producto_id'];
+        //         $i++;
+        //     }
+        //     else{
+        //         $prod = Producto::find($data['producto_id']);
+        //         $totales[$i-1] += $data['suMpeso'];
+        //     }
+        // }
+        //dd($productos);
+        return view('reportes.reporte1',compact('productos'));
     }
 
     public function reporte1filtrado(Request $request)
@@ -54,25 +55,26 @@ class ReportesController extends Controller
         $fechafin = $dividir[1];
 
         $productos = Reporte1::enrango($fechaini,$fechafin)->get();
-        //dd($productos->toArray());
 
-        // $totales =array_reduce($productos, function($a,$x){
-        //     $a[$x['producto_id']] += $x['SUM(peso_kg)'];
-        //     return $a;
-        // });
-
+        $i = 0;
         $totales = [];
-        $productoss_id = [];
+        $nombres = [];
+        $productos_id = [];
         foreach($productos as $data){
-            if(!in_array($data['producto_id'],$productoss_id)){
-                $totales[$data['producto_id']] = $data['SUM(peso_kg)'];
-                $productoss_id[] = $data['producto_id'];
+            if(!in_array($data['producto_id'],$productos_id)){
+                $prod = Producto::find($data['producto_id']);
+                $totales[$i] = $data['suMpeso'];
+                $nombres[]=$prod->name; 
+                $productos_id[] = $data['producto_id'];
+                $i++;
             }
             else{
-                $totales[$data['producto_id']] += $data['SUM(peso_kg)'];
+                $prod = Producto::find($data['producto_id']);
+                $totales[$i-1] += $data['suMpeso'];
             }
         }
-        return view('reportes.reporte1',compact('totales'));
+        //dd($totales);
+        return view('reportes.reporte1',compact('nombres','totales'));
 
     }
 
@@ -94,13 +96,15 @@ class ReportesController extends Controller
         [   
         'chofer_id.required'=>'Debe seleccionar un chofer',
         ]);
+        //dd($request->all());
         $rango = $request->rango;
         //dd($request['chofer_id']);
         $choferes = Chofer::activos()->get();
         $chofer = Chofer::find($request['chofer_id']);
-        //dd($chofer->name);
-        $transportaciones = $chofer->transportaciones;
-        dd($transportaciones->pluck('id'));
+        $chofertransp = $chofer->chofertransp;
+        // foreach ($chofertransp as $demo) {
+        //         dd($demo->transportaciones->transfenviada);
+        // }
 
         // if ($rango) {
         //     //dividir la fecha
@@ -120,40 +124,43 @@ class ReportesController extends Controller
         // }                
         //dd($tranferencias);
 
-        return view('reportes.reporte2',compact('chofer','choferes','transportaciones'));
+        return view('reportes.reporte2',compact('chofertransp','choferes'));
 
     }
     
     public function reporte3()
     {
         $this->authorize('view',new Reporte1);
+        $envases = Reporte2::all();
 
         //seleccionar los contenedores propios,los que tienen organizacion
         //Selecccionar la ultima transportacion realizada y verificar si llego 
         //Devolver listado y calcular la cantidad de dias sin utilizar
-        return view('reportes.reporte3');
+        return view('reportes.reporte3',compact('envases'));
     }
     
     public function reporte4()
     {
         $this->authorize('view',new Reporte1);
+        $envases = Reporte2::all();
 
         //seleccionar los contenedores propios,los que tienen organizacion
         //Selecccionar la ultima transportacion realizada y verificar si llego 
         //Devolver listado y calcular la cantidad de dias sin utilizar, multiplicar por el costo
         //no se puede hacer porque falta el costo. o poner fijo
         //poner en el select e costo
-        return view('reportes.reporte4');
+        return view('reportes.reporte4',compact('envases'));
     }
     
     public function reporte5()
     {
         $this->authorize('view',new Reporte1);
+        $envases = Reporte2::all();
 
         //seleccionar los contenedores propios,los que tienen organizacion
         //Selecccionar la ultima transportacion realizada y verificar si llego 
         //devolver el listado
-        return view('reportes.reporte5');
+        return view('reportes.reporte5',compact('envases'));
     }
     
     public function reporte6()
@@ -175,9 +182,10 @@ class ReportesController extends Controller
     public function reporte8()
     {
         $this->authorize('view',new Reporte1);
+        $envases = Reporte2::all();
 
         //Lo resuelvo en el reporte 5, filtrar los que llevan mas de 7 dias
-        return view('reportes.reporte8');
+        return view('reportes.reporte8',compact('envases'));
     }
     
     public function reporte9()

@@ -33,6 +33,11 @@ class Transportacion extends Model
     {
         return $this->hasMany('App\Hito');
     }
+    
+    public function reporte2()
+    {
+        return $this->hasMany('App\Reporte2');
+    }
 
     public function chofertransp()
     {

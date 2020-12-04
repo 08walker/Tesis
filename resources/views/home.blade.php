@@ -24,12 +24,17 @@
             <div class="card card-primary card-outline">
               <div class="card-header">
                 <h5 class="card-title m-0">Transferencias en curso</h5>
+                <br>
+                {{-- <button type="button" onload="ToastDemo()" class="btn btn-danger toastsDefaultDanger">
+                  Launch Danger Toast
+                </button>
+
+                <button type="button" class="btn btn-danger toastsDangerAutohide">
+                     Launch Default Toasts with autohide
+                </button> --}}
               </div>
-              
               <div class="card-body">
-                
                 @include('tablas.transferencias',['model'=>$tranferencias])
-                
               </div>
             </div>
           </div>
@@ -40,14 +45,22 @@
     </div>
     <!-- /.content -->
   </div>
-
+@endsection
 @push('styles')
+{{-- <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="/adminlte/plugins/toastr/toastr.min.css"> --}}
+
     <!-- DataTables -->
   <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 @endpush
 
 @push('scripts')
+{{-- 
+<script src="/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="/adminlte/plugins/toastr/toastr.min.js"></script> --}}
 
 <!-- DataTables -->
 <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -78,6 +91,24 @@
     });
   });
 </script>
-</script>
+{{-- <script>
+$('.toastsDefaultDanger').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-danger', 
+        title: 'Alerta de demora',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+
+    $('.toastsDangerAutohide').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-danger', 
+        title: 'Alerta de demora',
+        autohide: true,
+        delay: 3500,
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+  </script> --}}
 @endpush
-@endsection

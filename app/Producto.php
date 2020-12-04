@@ -40,4 +40,9 @@ class Producto extends Model
         return $this->hasMany('App\Reporte1');
     }
 
+    public function reporte1a()
+    {
+        return $this->hasMany('App\Reporte1a');
+    }
+
 }

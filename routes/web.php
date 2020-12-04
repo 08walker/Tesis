@@ -16,6 +16,8 @@
 //   return new App\Mail\EnviarIncidencia(App\Hito::first(),'pepe@pepe.com');
 // });
 
+Route::get('chart', 'ChartController@index');
+
 Route::get('/', function () {
     return view('welcome');
 });
