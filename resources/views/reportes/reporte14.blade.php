@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Reporte #11 Filtrar transportaciones por organizaciones.</h1>
+            <h1 class="m-0 text-dark"> Reporte #14 Última ubicación del contenedor.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -24,31 +24,12 @@
           <div class="col-md-8">
           <div class="card card-primary card-outline">
               <div class="card-body">
-              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte11filtrado') }}">
+              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte14filtrado') }}">
                   {!! csrf_field() !!}
                   <div class="container">
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="form-group">
-						    <label for="exampleInputEmail1">Seleccione la organización:</label>
-						      		<select class="form-control select2" style="width: 100%;" name="organizacion_id">
-						          <option value="">
-						            --------Seleccione la organización--------
-						          </option>
-						          @foreach($organizaciones->all() as $org)
-						                <option value="{{$org->id}}">{{$org->name}}</option>
-						          @endforeach
-						      </select>
-						      <div class="has-error">
-						        @if($errors->has('organizacion_id'))
-						        <font color="#FF0000">
-						                <span style="background-color: inherit;">
-						                    {{$errors->first('organizacion_id')}}
-						                </span>
-						        </font>
-						        @endif
-						    </div>
-						</div>
+                        @include('foreach.envasefor',['model'=>$envases])
                       </div>
                       {{-- <div class="col-md-6">
                         @include('componentes.rangofecha')
@@ -68,7 +49,7 @@
           </div>
           </div>
     </div>
-    @isset($lugares)
+    @isset($arrastenva)
           <div class="row">
             <div class="col-md-2">
             </div>
@@ -78,24 +59,51 @@
                   <div class="row">
                     <div class="col-12">
                       <h3 class="card-title">
-                        Datos de la organización:
+                        Datos del envase:
                       </h3>
                     </div>                  
                     <div class="col-4">
-                      <p>Nombre: <strong>{{$organizacion->name}}</strong></p>
+                      <p>Identificador: <strong>{{$arrastenva->first()->envase->identificador}}</strong></p>
                     </div>
+                    
                     <div class="col-4">
-                        <p>Municipio: <strong>{{$organizacion->municipio->name}}</strong></p>
+                      @if($arrastenva->first()->envase->tercero)
+                        <p>Tercero: <strong>{{$arrastenva->first()->envase->tercero->name}}</strong></p>
+                      @elseif($arrastenva->first()->envase->organizacion)
+                        <p>Organización: <strong>{{$arrastenva->first()->envase->organizacion->name}}</strong></p>
+                      @endif
                     </div>
                   </div>
                 </div>
                 <div class="card-body">
-                  @foreach($lugares as $lugar)
-                  <h3>{{$lugar->name}}</h3>
-                  @foreach($lugar->tenviadaorigen as $demo2)
-                  @include('componentes.callouttransfer',['model'=>$demo2])
-                  @endforeach                  
-                  @endforeach                  
+                  <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>No. Transportación</th>
+                        <th>No. Transferencia</th>
+                        <th>Destino</th>
+                        <th>Fecha de salida</th>
+                        <th>Fecha de llegada</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($arrastenva as $demo)
+                      @foreach($demo->arrasrtre_transps->transportaciones->transfenviada as $demo2)
+                      <tr>
+                        <td>{{$demo->arrasrtre_transps->transportaciones->numero}}</td>
+                        <td>{{$demo2->num_fact}}</td>
+                        <td>{{$demo2->destino->name}}</td>
+                        <td>{{\Carbon\Carbon::parse($demo2->fyh_salida)->format('d/M/y')}}</td>
+                        @if($demo2->fyh_llegada)
+                        <td>{{\Carbon\Carbon::parse($demo2->fyh_llegada)->format('d/M/y')}}</td>
+                        @else
+                        <td></td>
+                        @endif
+                      </tr>
+                      @endforeach
+                      @endforeach
+                      </tbody>
+                  </table>                  
                 </div>
               </div>
             </div>
@@ -227,13 +235,13 @@
 $(document).ready(function () {
   $('#quickForm').validate({
     rules: {
-      organizacion_id: {
+      envase_id: {
         required: true,
       },
     },
     messages: {
-      organizacion_id: {
-        required: "Debe seleccionar una organización",
+      envase_id: {
+        required: "Debe seleccionar un envase",
       },
     },
     errorElement: 'span',

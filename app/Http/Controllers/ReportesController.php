@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Chofer;
 use App\Envase;
 use App\Equipo;
+use App\Lugar;
 use App\Organizacion;
 use App\Producto;
 use App\Reporte1;
@@ -40,7 +41,7 @@ class ReportesController extends Controller
         $fechafin = $dividir[1];
 
         $productos = Reporte1::enrango($fechaini,$fechafin)->get();
-        //este pincha pero me devuevle un array que no es de tipo reporte1
+        //este pincha pero me devuelve un array que no es de tipo reporte1
         // $demo = $productos->groupBy('producto_id')->map(function($row){
         //     return $row->sum('suMpeso');
         // });
@@ -118,16 +119,55 @@ class ReportesController extends Controller
     public function reporte5()
     {
         $this->authorize('view',new Reporte1);
-        $envases = Reporte2::all();
+        //$envases = Reporte2::all();
+        $envases = Envase::propios()->get();
         return view('reportes.reporte5',compact('envases'));
+    }
+
+    public function reporte5filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['envase_id']);
+        $data = request()->validate([
+        'envase_id'=>'required',
+        ],
+        [   
+        'envase_id.required'=>'Debe seleccionar un envase',
+        ]);
+        $envase = Envase::find($request['envase_id']);
+        if ($envase->arrastenva->count()) {
+            $arrastenva = $envase->arrastenva;
+            $envases = Envase::propios()->get();
+            return view('reportes.reporte5',compact('envases','arrastenva'));            
+        }
+        return back()->withInput()->with('demo','El envase seleccionado no ha realizado ninguna transportación');    
     }
     
     public function reporte6()
-    {
+    {   
         $this->authorize('view',new Reporte1);
+        $equipos = Equipo::propios()->get();
+        return view('reportes.reporte6',compact('equipos'));        
+    }
 
-        //D:/Programas/para%20saber/Paginas%20Web/Bootstrap/Plantillas/2020-04-15/AdminLTE-3.0.4/pages/charts/chartjs.html -->utilizar este grafico (Bar Chart)
-        return view('reportes.reporte6');
+    public function reporte6filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['equipo_id']);
+        $data = request()->validate([
+        'equipo_id'=>'required',
+        ],
+        [   
+        'equipo_id.required'=>'Debe seleccionar un equipo',
+        ]);
+        $equipo = Equipo::find($request['equipo_id']);
+        
+        if ($equipo->transportacion->count()) {
+            $transportaciones = $equipo->transportacion;
+            $equipos = Envase::propios()->get();
+            return view('reportes.reporte6',compact('equipos','equipo','transportaciones'));
+        }
+        return back()->withInput()->with('demo','El equipo seleccionado no ha realizado ninguna transportación');    
     }
     
     public function reporte7()
@@ -178,6 +218,12 @@ class ReportesController extends Controller
     {   
         $this->authorize('view',new Reporte1);
         //dd($request['envase_id']);
+        $data = request()->validate([
+        'envase_id'=>'required',
+        ],
+        [   
+        'envase_id.required'=>'Debe seleccionar un envase',
+        ]);
         $envase = Envase::find($request['envase_id']);
         if ($envase->arrastenva->count()) {
             $arrastenva = $envase->arrastenva;
@@ -198,6 +244,12 @@ class ReportesController extends Controller
     {   
         $this->authorize('view',new Reporte1);
         //dd($request['equipo_id']);
+        $data = request()->validate([
+        'equipo_id'=>'required',
+        ],
+        [   
+        'equipo_id.required'=>'Debe seleccionar un equipo',
+        ]);
         $equipo = Equipo::find($request['equipo_id']);
         
         if ($equipo->transportacion->count()) {
@@ -219,6 +271,12 @@ class ReportesController extends Controller
     {   
         $this->authorize('view',new Reporte1);
         //dd($request['organizacion_id']);
+        $data = request()->validate([
+        'organizacion_id'=>'required',
+        ],
+        [   
+        'organizacion_id.required'=>'Debe seleccionar una organización',
+        ]);
         $organizacion = Organizacion::find($request['organizacion_id']);
         if ($organizacion->lugar->count()) {
             $lugares = $organizacion->lugar;
@@ -238,6 +296,12 @@ class ReportesController extends Controller
     public function reporte12filtrado(Request $request)
     {   
         $this->authorize('view',new Reporte1);
+        $data = request()->validate([
+        'producto_id'=>'required',
+        ],
+        [   
+        'producto_id.required'=>'Debe seleccionar un producto',
+        ]);
         $producto = Producto::find($request['producto_id']);
         if ($producto->transfenvprod->count()) {
             $transfenvprod = $producto->transfenvprod;
@@ -245,5 +309,84 @@ class ReportesController extends Controller
             return view('reportes.reporte12',compact('transfenvprod','producto','productos'));
         }
         return back()->withInput()->with('demo','El producto seleccionado no tiene transportaciones asociadas');    
+    }
+
+    public function reporte13()
+    {   
+        $this->authorize('view',new Reporte1);
+        $lugares = Lugar::activos()->get();
+        return view('reportes.reporte13',compact('lugares'));        
+    }
+
+    public function reporte13filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['lugar_id']);
+        $data = request()->validate([
+        'lugar_id'=>'required',
+        ],
+        [   
+        'lugar_id.required'=>'Debe seleccionar un lugar',
+        ]);
+        $lugar = Lugar::find($request['lugar_id']);
+        if ($lugar->tenviadaorigen->count()) {
+            $tenviadaorigen = $lugar->tenviadaorigen;
+            $lugares = Lugar::activos()->get();
+            return view('reportes.reporte13',compact('tenviadaorigen','lugar','lugares'));
+        }
+        return back()->withInput()->with('demo','El lugar seleccionado no tiene transportaciones asociadas');
+    }
+
+    public function reporte14()
+    {   
+        $this->authorize('view',new Reporte1);
+        $envases = Envase::activos()->get();
+        return view('reportes.reporte14',compact('envases'));        
+    }
+
+    public function reporte14filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['envase_id']);
+        $data = request()->validate([
+        'envase_id'=>'required',
+        ],
+        [   
+        'envase_id.required'=>'Debe seleccionar un envase',
+        ]);
+        $envase = Envase::find($request['envase_id']);
+        if ($envase->arrastenva->count()) {
+            $arrastenva = $envase->arrastenva;
+            $envases = Envase::activos()->get();
+            return view('reportes.reporte14',compact('envases','arrastenva'));            
+        }
+        return back()->withInput()->with('demo','El envase seleccionado no ha realizado ninguna transportación');    
+    }
+
+    public function reporte15()
+    {   
+        $this->authorize('view',new Reporte1);
+        $equipos = Equipo::activos()->get();
+        return view('reportes.reporte15',compact('equipos'));        
+    }
+
+    public function reporte15filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['equipo_id']);
+        $data = request()->validate([
+        'equipo_id'=>'required',
+        ],
+        [   
+        'equipo_id.required'=>'Debe seleccionar un equipo',
+        ]);
+        $equipo = Equipo::find($request['equipo_id']);
+        
+        if ($equipo->transportacion->count()) {
+            $transportaciones = $equipo->transportacion;
+            $equipos = Envase::activos()->get();
+            return view('reportes.reporte15',compact('equipos','equipo','transportaciones'));
+        }
+        return back()->withInput()->with('demo','El equipo seleccionado no ha realizado ninguna transportación');    
     }
 }

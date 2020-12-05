@@ -23,11 +23,11 @@
 	<div class="content">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-2">
+				<div class="col-lg-1">
 					<div class="card">
 					</div>
 				</div>
-				<div class="col-lg-8">
+				<div class="col-lg-10">
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">Incidencias:</h3> 

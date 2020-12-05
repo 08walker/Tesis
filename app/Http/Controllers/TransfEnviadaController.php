@@ -165,6 +165,12 @@ class TransfEnviadaController extends Controller
             }else{
                 $tranp->terminada='1';
                 $tranp->save();
+                $nombre = auth()->user()->name;
+                $ip = request()->ip();
+                Traza::create([
+                'description'=> "La transportación número {$tranp->numero} ha cambiado el estado a terminada, por el usuario {$nombre}",
+                'ip'=>$ip,
+                ]);
                 return redirect()->route('home')->with('success','Transferencia recibida con éxito');
             }
         }

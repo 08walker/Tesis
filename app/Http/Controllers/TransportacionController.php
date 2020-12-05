@@ -137,6 +137,12 @@ class TransportacionController extends Controller
             }
         }
         $transportacion->delete();
+        $nombre = auth()->user()->name;
+        $ip = request()->ip();
+        Traza::create([
+        'description'=> "El usuario {$nombre} ha eliminado la transportación número {$transportacion->numero}",
+        'ip'=>$ip,
+        ]);
         return back()->with('success', 'La transportación ha sido eliminada');
     }
 

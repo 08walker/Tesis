@@ -65,4 +65,9 @@ class Equipo extends Model
     {
         $query->where('ocupado','=','1');
     }
+
+    public function scopePropios($query)
+    {
+        $query->whereNotNull('organizacion_id');
+    }
 }

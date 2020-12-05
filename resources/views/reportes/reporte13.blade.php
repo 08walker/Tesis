@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Reporte #11 Filtrar transportaciones por organizaciones.</h1>
+            <h1 class="m-0 text-dark"> Reporte #13 Filtrar transportaciones por lugar.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -24,31 +24,31 @@
           <div class="col-md-8">
           <div class="card card-primary card-outline">
               <div class="card-body">
-              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte11filtrado') }}">
+              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte13filtrado') }}">
                   {!! csrf_field() !!}
                   <div class="container">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-						    <label for="exampleInputEmail1">Seleccione la organización:</label>
-						      		<select class="form-control select2" style="width: 100%;" name="organizacion_id">
-						          <option value="">
-						            --------Seleccione la organización--------
-						          </option>
-						          @foreach($organizaciones->all() as $org)
-						                <option value="{{$org->id}}">{{$org->name}}</option>
-						          @endforeach
-						      </select>
-						      <div class="has-error">
-						        @if($errors->has('organizacion_id'))
-						        <font color="#FF0000">
-						                <span style="background-color: inherit;">
-						                    {{$errors->first('organizacion_id')}}
-						                </span>
-						        </font>
-						        @endif
-						    </div>
-						</div>
+                <label for="exampleInputEmail1">Seleccione el lugar:</label>
+                      <select class="form-control select2" style="width: 100%;" name="lugar_id">
+                      <option value="">
+                        --------Seleccione el lugar--------
+                      </option>
+                      @foreach($lugares->all() as $prod)
+                            <option value="{{$prod->id}}">{{$prod->name}}</option>
+                      @endforeach
+                  </select>
+                  <div class="has-error">
+                    @if($errors->has('lugar_id'))
+                    <font color="#FF0000">
+                            <span style="background-color: inherit;">
+                                {{$errors->first('lugar_id')}}
+                            </span>
+                    </font>
+                    @endif
+                </div>
+            </div>
                       </div>
                       {{-- <div class="col-md-6">
                         @include('componentes.rangofecha')
@@ -68,7 +68,7 @@
           </div>
           </div>
     </div>
-    @isset($lugares)
+    @isset($tenviadaorigen)
           <div class="row">
             <div class="col-md-2">
             </div>
@@ -78,24 +78,45 @@
                   <div class="row">
                     <div class="col-12">
                       <h3 class="card-title">
-                        Datos de la organización:
+                        Datos del lugar:
                       </h3>
                     </div>                  
                     <div class="col-4">
-                      <p>Nombre: <strong>{{$organizacion->name}}</strong></p>
+                      <p>Nombre: <strong>{{$lugar->name}}</strong></p>
                     </div>
                     <div class="col-4">
-                        <p>Municipio: <strong>{{$organizacion->municipio->name}}</strong></p>
+                      <p>Municipio: <strong>{{$lugar->municipio->name}}</strong></p>
+                    </div>
+                    <div class="col-4">
+                      @if($lugar->tercero)
+                        <p>Tercero: <strong>{{$lugar->tercero->name}}</strong></p>
+                      @elseif($lugar->organizacion)
+                        <p>Organización: <strong>{{$lugar->organizacion->name}}</strong></p>
+                      @endif
                     </div>
                   </div>
                 </div>
                 <div class="card-body">
-                  @foreach($lugares as $lugar)
-                  <h3>{{$lugar->name}}</h3>
-                  @foreach($lugar->tenviadaorigen as $demo2)
-                  @include('componentes.callouttransfer',['model'=>$demo2])
-                  @endforeach                  
-                  @endforeach                  
+                  <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>No. Transportación</th>
+                        <th>No. Transferencia</th>
+                        <th>Destino</th>
+                        <th>Fecha de salida</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($tenviadaorigen as $demo)
+                      <tr>
+                        <td>{{$demo->transportacion->numero}}</td>
+                        <td>{{$demo->num_fact}}</td>
+                        <td>{{$demo->destino->name}}</td>
+                        <td>{{\Carbon\Carbon::parse($demo->fyh_salida)->format('d/M/y')}}</td>
+                      </tr>
+                      @endforeach
+                      </tbody>
+                  </table>                  
                 </div>
               </div>
             </div>
@@ -227,13 +248,13 @@
 $(document).ready(function () {
   $('#quickForm').validate({
     rules: {
-      organizacion_id: {
+      lugar_id: {
         required: true,
       },
     },
     messages: {
-      organizacion_id: {
-        required: "Debe seleccionar una organización",
+      lugar_id: {
+        required: "Debe seleccionar un lugar",
       },
     },
     errorElement: 'span',

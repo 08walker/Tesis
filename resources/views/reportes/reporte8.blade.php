@@ -229,7 +229,7 @@ $(document).ready(function () {
     },
     messages: {
       envase_id: {
-        required: "Debe seleccionar un chofer",
+        required: "Debe seleccionar un envase",
       },
     },
     errorElement: 'span',

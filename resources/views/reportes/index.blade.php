@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-lg-8">
-          <div class="card">
+          <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title">Reportes:</h3> 
                 <br>
@@ -43,10 +43,9 @@
               <b>Reporte #10</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte10') }}">Equipo.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
               <b>Reporte #11</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte11') }}">Organización.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
               <b>Reporte #12</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte12') }}">Producto.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>Reporte #13</b>&nbsp;&nbsp;<a href="">Lugar (almacenes, principalmente donde se recibe la rama de tabaco).</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>Reporte #14</b>&nbsp;&nbsp;<a href="">Contenedores propios que llevan determinados días sin utilizarse.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>Reporte #15</b>&nbsp;&nbsp;<a href="">Última ubicación contenedor.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>Reporte #16</b>&nbsp;&nbsp;<a href="">Última ubicación equipo.</a><br></p>
+              <b>Reporte #13</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte13') }}">Lugar (almacenes, principalmente donde se recibe la rama de tabaco).</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #14</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte14') }}">Última ubicación contenedor.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #15</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte15') }}">Última ubicación equipo.</a><br></p>
               </div>
               <!-- /.card-body -->
           </div>
@@ -56,45 +55,4 @@
     </div>
   </div>
 </div>
-
 @endsection
-
-@push('styles')
-    <!-- DataTables -->
-  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-@endpush
-
-@push('scripts')
-
-<!-- DataTables -->
-<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-
-<script src="/adminlte/dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-      "language": {
-        "search": "Buscar",
-        "lengthMenu": "Ver _MENU_ entradas",
-        "info": "Mostrando página _PAGE_ de _PAGES_",
-        "emptyTable": "No hay datos para mostrar",
-        "paginate": {
-            "last": "Última página",
-            "first": "Primera página",
-            "next": "Siguiente",
-            "previous": "Anterior",
-          },
-       },
-    });
-  });
-</script>
-</script>
-
-@endpush  

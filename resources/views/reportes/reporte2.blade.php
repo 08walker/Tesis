@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Productos y cantidades transferidos en el periodo seleccionado.</h1>
+            <h1 class="m-0 text-dark">Reporte #2 Transportaciones por chofer que facilite la facturación del pago del servicio.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

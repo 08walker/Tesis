@@ -12,8 +12,8 @@ class EnviarCorreo
 {
     public function handle(HitoFueCreado $event)
     {
-        //dd($event->hito->toArray(),$event->correos);
-        //no funciona porque no encuentra una direccion de salida
+        // dd($event->hito->toArray(),$event->correos);
+        // no funciona porque no encuentra una direccion de salida
         // foreach ($event->correos as $correo) {
         //     Mail::to($correo)->queue(
         //         new EnviarIncidencia($event->hito,$correo)

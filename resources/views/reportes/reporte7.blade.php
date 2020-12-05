@@ -44,7 +44,7 @@
                   </thead>
                   <tbody>
                   @foreach($envases as $dato)
-                  @if(\Carbon\Carbon::now()->diffInDays($dato->ultima_vez) < 7)
+                  @if(\Carbon\Carbon::now()->diffInDays($dato->ultima_vez) > 7)
                   <tr>
                     <td>{{$dato->identificador}}</td>
                     <td>{{\Carbon\Carbon::now()->diffInDays($dato->ultima_vez)}}</td>

@@ -252,7 +252,7 @@ $(document).ready(function () {
     },
     messages: {
       producto_id: {
-        required: "Debe seleccionar un chofer",
+        required: "Debe seleccionar un producto",
       },
     },
     errorElement: 'span',
