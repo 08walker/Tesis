@@ -7,8 +7,10 @@
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
+          <div class="col-md-1">
+          </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Gráfico del comportamiento estadístico de la utilización de contenedores propios en días.</h1>
+            <h1 class="m-0 text-dark">Comportamiento de la utilización de contenedores de la empresa.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

@@ -16,7 +16,11 @@
                 <td>{{\Carbon\Carbon::parse($hito->fyh_ini)->format('d/M/y')}}</td>
                 <td>{{$hito->description}}</td>
                 <td>{{$hito->tipoHito->name}}</td>
-                <td>{{$hito->transportacion->numero}}</td>
+                <td>
+                    <a href="{{ route('transportaciones.detalles',$hito->transportacion) }}" class="btn btn-flat btn-primary">
+                    {{$hito->transportacion->numero}} ->Ver detalles
+                    </a>
+                </td>
                 @can('update',new \App\hito)
                   <td>
                     <a href="{{route('incidencias.edit',$hito)}}" class="btn btn-xs btn-info">

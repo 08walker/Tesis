@@ -118,7 +118,7 @@
                         <thead>
                           <tr>
                             <th>Nombre y Apellidos</th>
-                            <th>Telefono</th>
+                            <th>Teléfono</th>
                             <th>Carnet de identidad</th>
                             <th>Acciones</th>
                           </tr>
@@ -214,7 +214,7 @@
                       <table id="example3" class="table table-bordered table-striped">
                         <thead>
                           <tr>
-                            <th>ID</th>
+                            {{-- <th>ID</th> --}}
                             <th>Ident. Arrastre</th>
                             <th>Ident. Envase</th>
                             <th>Acciones</th>
@@ -224,7 +224,7 @@
                           @foreach($tarras as $arra)
                             @foreach($arra->arrastenva as $dat)
                               <tr>
-                                <td>{{$dat->id}}</td>
+                                {{-- <td>{{$dat->id}}</td> --}}
                                 <td>{{$arra->arrastres->identificador}}</td>
                                 <td>{{$dat->envase->identificador}}</td>
                                 <td>

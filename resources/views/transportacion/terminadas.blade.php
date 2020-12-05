@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('meta-title','Tesis| Transportaciones')
-@section('meta-description','Listado de transportaciones')
+@section('meta-description','Listado de transportaciones terminadas')
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> Listado de transportaciones</h1>
+            <h1 class="m-0 text-dark"> Listado de transportaciones terminadas</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -32,12 +32,6 @@
             <div class="card-header">
               <h3 class="card-title">Transportaciones:</h3> 
               <br>
-              {{-- esto de de momemnto porque no he hecho las policies --}}
-              @can('update',new \App\Transportacion)
-              <a href="{{route('transportaciones.create')}}" type="button" class="btn btn-primary btn-flat" >
-                  <i class="fa fa-plus"></i> Crear
-              </a>
-              @endcan
             </div>
             <!-- /.card-header -->
             <div class="card-body">

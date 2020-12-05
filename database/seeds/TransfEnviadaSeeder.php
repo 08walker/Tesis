@@ -28,6 +28,7 @@ class TransfEnviadaSeeder extends Seeder
         ]);
         factory(TransfEnviada::class,1)->create([
             'fyh_salida'=> Carbon::now()->subDays(8),
+            'fyh_llegada'=>Carbon::now()->subDays(3),
             'origen_id'=>'6',
             'destino_id'=>'8',
             'transportacion_id'=>'2',
@@ -86,7 +87,7 @@ class TransfEnviadaSeeder extends Seeder
         factory(TransfEnviada::class,1)->create([
             'fyh_salida'=> Carbon::now()->subDays(2),
             'origen_id'=>'7',
-            'destino_id'=>'2',
+        'destino_id'=>'2',
             'transportacion_id'=>'7',
         ]);
         factory(TransfEnviada::class,1)->create([

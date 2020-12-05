@@ -20,6 +20,20 @@ class TransportacionController extends Controller
     {
         $this->authorize('view',new Transportacion);
         return view('transportacion.index')
+            ->with('transportaciones', Transportacion::noterminada()->get());
+    }
+
+    public function index2()
+    {
+        $this->authorize('view',new Transportacion);
+        return view('transportacion.terminadas')
+            ->with('transportaciones', Transportacion::terminada()->get());
+    }
+
+    public function index3()
+    {
+        $this->authorize('view',new Transportacion);
+        return view('transportacion.index')
             ->with('transportaciones', Transportacion::all());
     }
 

@@ -43,4 +43,14 @@ class Transportacion extends Model
     {
         return $this->hasMany('App\ChoferEquipoTransp','transportacion_id');
     }
+
+    public function scopeTerminada($query)
+    {
+        $query->where('terminada','=','1');
+    }
+
+    public function scopeNoterminada($query)
+    {
+        $query->where('terminada','=','0');
+    }
 }

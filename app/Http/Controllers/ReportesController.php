@@ -23,24 +23,6 @@ class ReportesController extends Controller
     {
         $this->authorize('view',new Reporte1);
         $productos = Reporte1a::all();
-        // $i = 0;
-        // $totales = [];
-        // $nombres = [];
-        // $productos_id = [];
-        // foreach($productos as $data){
-        //     if(!in_array($data['producto_id'],$productos_id)){
-        //         $prod = Producto::find($data['producto_id']);
-        //         $totales[$i] = $data['suMpeso'];
-        //         $nombres[]=$prod->name; 
-        //         $productos_id[] = $data['producto_id'];
-        //         $i++;
-        //     }
-        //     else{
-        //         $prod = Producto::find($data['producto_id']);
-        //         $totales[$i-1] += $data['suMpeso'];
-        //     }
-        // }
-        //dd($productos);
         return view('reportes.reporte1',compact('productos'));
     }
 
@@ -55,8 +37,15 @@ class ReportesController extends Controller
         $fechafin = $dividir[1];
 
         $productos = Reporte1::enrango($fechaini,$fechafin)->get();
+        //este pincha pero me devuevle un array que no es de tipo reporte1
+        // $demo = $productos->groupBy('producto_id')->map(function($row){
+        //     return $row->sum('suMpeso');
+        // });
+        // dd($demo);
 
         $i = 0;
+        $demo = 0;
+
         $totales = [];
         $nombres = [];
         $productos_id = [];
@@ -67,14 +56,15 @@ class ReportesController extends Controller
                 $nombres[]=$prod->name; 
                 $productos_id[] = $data['producto_id'];
                 $i++;
+                $demo++;
             }
             else{
                 $prod = Producto::find($data['producto_id']);
                 $totales[$i-1] += $data['suMpeso'];
             }
         }
-        //dd($totales);
-        return view('reportes.reporte1',compact('nombres','totales'));
+        //dd($demo);
+        return view('reportes.reporte1',compact('nombres','totales','demo'));
 
     }
 
@@ -197,29 +187,4 @@ class ReportesController extends Controller
         //Buscar por periodo poner una fecha de inicio y fin en dos datepicker y filtrar por esos campos por el created_at
         return view('reportes.reporte9');
     }
-
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // public function show($id)
-    // {
-    //     //
-    // }
-
-    // public function edit($id)
-    // {
-    //     //
-    // }
-
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-    // public function destroy($id)
-    // {
-    //     //
-    // }
 }

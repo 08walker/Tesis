@@ -56,19 +56,42 @@
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Transferencias</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              
-              <li>
-                <a href="/home" class="dropdown-item">Transferencias en curso </a>
-              </li>
+              <!-- Level two dropdown-->
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Tranferencias</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  <li>
+                <a href="/home" class="dropdown-item">En curso </a>
+                </li>
 
               <li>
-                <a href="{{ route('tenv.recibidas') }}" class="dropdown-item">Transferencias recibidas </a>
+                <a href="{{ route('tenv.recibidas') }}" class="dropdown-item">Recibidas </a>
               </li>
-              
               <li>
-                  <a href="{{ route('transportaciones') }}" class="dropdown-item">Transportaciones</a>
+                <a href="{{ route('tenv.todas') }}" class="dropdown-item">Todas </a>
               </li>
+                </ul>
+              </li>
+              <!-- End Level two -->
 
+              <!-- Level two dropdown-->
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Transportaciones</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  <li>
+                <a href="{{ route('transportaciones') }}" class="dropdown-item">En curso</a>
+                </li>
+
+              <li>
+                <a href="{{ route('transportaciones.terminadas') }}" class="dropdown-item">Terminadas </a>
+              </li>
+              <li>
+                <a href="{{ route('transportaciones.todas') }}" class="dropdown-item">Todas </a>
+              </li>
+                </ul>
+              </li>
+              <!-- End Level two -->
+              
               <li>
                 <a href="{{ route('incidencias') }}" class="dropdown-item">Incidencias </a>
               </li>
@@ -267,7 +290,7 @@
               <!-- End Level two -->
 
               <!-- Level two dropdown-->
-              @canany('view',[new \App\Provincia,new \App\Municipio,new \App\TipoUnidadMedida,new \App\UnidadMedida])
+              @canany('view',[new \App\Provincia,new \App\Municipio,new \App\TipoUnidadMedida,new \App\UnidadMedida,new \App\Producto])
               <li class="dropdown-submenu dropdown-hover">
                 <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Desactivados</a>
                 <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
@@ -291,6 +314,12 @@
                   @can('view',new \App\Municipio)
                     <li>
                       <a href="{{ route('municipios.desactivados') }}" class="dropdown-item">Municipios </a>
+                    </li>
+                  @endcan
+
+                  @can('view',new \App\Producto)
+                    <li>
+                      <a href="{{ route('productos.desactivados') }}" class="dropdown-item">Productos </a>
                     </li>
                   @endcan
                 </ul>
@@ -417,23 +446,78 @@
                 </li>
               @endcan
 
-              {{-- @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte7') }}" class="dropdown-item">Reporte # 7</a>
-                </li>
-              @endcan --}}
-
               @can('view',new \App\Reporte1)
                 <li>
-                  <a href="{{ route('reportes.reporte8') }}" class="dropdown-item">Reporte # 8</a>
+                  <a href="{{ route('reportes.reporte8') }}" class="dropdown-item">Reporte # 7</a>
                 </li>
               @endcan
 
               @can('view',new \App\Reporte1)
                 <li>
-                  <a href="{{ route('reportes.reporte9') }}" class="dropdown-item">Reporte # 9</a>
+                  <a href="{{ route('reportes.reporte9') }}" class="dropdown-item">Reporte # 8</a>
                 </li>
               @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 9</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 10</a>
+                </li>
+              @endcan
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 11</a>
+                </li>
+              @endcan
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 12</a>
+                </li>
+              @endcan
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 13</a>
+                </li>
+              @endcan
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 14</a>
+                </li>
+              @endcan
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 15</a>
+                </li>
+              @endcan
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 16</a>
+                </li>
+              @endcan
+              
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 17</a>
+                </li>
+              @endcan
+
+              @can('view',new \App\Reporte1)
+                <li>
+                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 18</a>
+                </li>
+              @endcan
+
 
             </ul>
           </li>

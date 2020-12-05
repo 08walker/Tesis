@@ -7,8 +7,10 @@
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
+          <div class="col-md-1">
+          </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Gráfico del análisis de costo de contenedores propios sin utilizar por mes. </h1>
+            <h1 class="m-0 text-dark"> Comportamiento del costo de contenedores de la empresa. </h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -25,12 +27,12 @@
           <div class="col-md-8">
             <!-- Bar chart -->
             <div class="card card-primary card-outline">
-              <div class="card-header">
+              {{-- <div class="card-header">
                 <h3 class="card-title">
                   <i class="far fa-chart-bar"></i>
                   Gráfico de barras (Costo por días/Identificador de los contenedores)
                 </h3>
-              </div>
+              </div> --}}
               <div class="card-body">
                 {{-- <div id="bar-chart" style="height: 300px;"></div>               --}}
                 <table id="example1" class="table table-bordered table-striped">

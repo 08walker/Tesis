@@ -31,7 +31,7 @@
 	            	<table id="example1" class="table table-bordered table-striped">
 					  <thead>
 					    <tr>
-					      <th>ID</th>
+					      {{-- <th>ID</th> --}}
 					      <th>Fecha de inicio</th>
 					      <th>Fecha de llegada</th>
 					      <th>Número de factura</th>
@@ -43,9 +43,13 @@
 					  <tbody>
 					      @foreach($tranferencias as $transf)
 					        <tr>
-					          <td>{{$transf->id}}</td>
+					          {{-- <td>{{$transf->id}}</td> --}}
 					          <td>{{\Carbon\Carbon::parse($transf->fyh_salida)->format('d/M/y')}}</td>
+					          @if($transf->fyh_llegada)
 					          <td>{{\Carbon\Carbon::parse($transf->fyh_llegada)->format('d/M/y')}}</td>
+					          @else
+					          <td></td>
+					          @endif
 					          <td>{{$transf->num_fact}}</td>
 					          <td>{{$transf->origen->name}}</td>
 					          <td>{{$transf->destino->name}}</td>
@@ -68,42 +72,4 @@
 	</div>
 </div>
 @endsection
-
-@push('styles')
-    <!-- DataTables -->
-  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-@endpush
-
-@push('scripts')
-
-<!-- DataTables -->
-<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-
-<script src="/adminlte/dist/js/demo.js"></script>
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-      "language": {
-        "search": "Buscar",
-        "lengthMenu": "Ver _MENU_ entradas",
-        "info": "Mostrando página _PAGE_ de _PAGES_",
-        "emptyTable": "No hay datos para mostrar",
-        "paginate": {
-            "last": "Última página",
-            "first": "Primera página",
-            "next": "Siguiente",
-            "previous": "Anterior",
-          },
-       },
-    });
-  });
-</script>
-</script>
-@endpush
+@include('tablas.estilos')

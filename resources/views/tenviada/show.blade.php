@@ -30,8 +30,15 @@
 	              <h3 class="card-title">Productos:</h3> 
 	              <br>
 	              <a href="/home" type="button" class="btn btn-primary btn-flat" >
-                    <i class="fa fa-arrow-left"></i> Atras
+                    <i class="fa fa-arrow-left"></i> En curso
                   </a>
+                  
+                  @can('create',new \App\TransfEnviada)
+	              <a href="{{route('tenv',$transferencia->transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                    Ir a listado de transfencias
+                  </a>
+                  @endcan
+
 	              @can('create',new \App\TransfEnviada)
 	              <a href="{{route('tenv.llenar',$transferencia)}}" type="button" class="btn btn-primary btn-flat" >
                     <i class="fa fa-plus"></i> Añadir Producto
@@ -43,7 +50,7 @@
 	            <table id="example1" class="table table-bordered table-striped">
 	                <thead>
 	                <tr>
-	                  <th>ID</th>
+	                  {{-- <th>ID</th> --}}
 	                  <th>Producto</th>
 	                  <th>Peso</th>
 	                  <th>Cantidad de bultos</th>
@@ -58,7 +65,7 @@
 	                <tbody>
 	                @foreach($transferencia->transfenvprod as $todo)
 	                <tr>
-	                  <td>{{$todo->id}}</td>
+	                  {{-- <td>{{$todo->id}}</td> --}}
 	                  <td>{{$todo->producto->name}}</td>
 	                  <td>{{$todo->peso_kg}}</td>
 	                  <td>{{$todo->cantidad_bultos}}</td>

@@ -37,7 +37,7 @@
                           <p>Origen: <strong>{{$transfEnviada->origen->name}}</strong></p>
                         </div>
                         <div class="col-3">
-                          <p>Destino: <strong>{{$transfEnviada->origen->name}}</strong></p>
+                          <p>Destino: <strong>{{$transfEnviada->destino->name}}</strong></p>
                         </div>
                         <div class="col-3">
                         <form id="quickForm" role="form" method="POST" action="{{ route('tenv.update.recibo',$transfEnviada) }}">
@@ -64,12 +64,12 @@
                   </div>
                 </div>
                   <div class="card-header">
-                    <h3 class="card-title">Recibir:</h3> 
+                    <h3 class="card-title">Productos:</h3> 
                     <br>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-
+                    @include('componentes.calloutprod',['model'=>$transfEnviada])
                   </div>
                   <!-- /.card-body -->
               </div>

@@ -7,8 +7,10 @@
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
+          <div class="col-md-1">
+          </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Productos que más se transportaron en el mes de Noviembre</h1>
+            <h1 class="m-0 text-dark">Productos y cantidades transferidos en el periodo seleccionado.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -94,8 +96,7 @@
             @endisset
             <!-- /.card -->
 
-            <!-- Bar chart -->
-            {{-- @isset($nombres)
+            @isset($nombres)
             <div class="card card-primary card-outline">
               <div class="card-header">
                   <div class="row">
@@ -112,13 +113,13 @@
                             <th>Cantidad</th>
                           </tr>
                           </thead>
-
                           <tbody>
-                          @foreach($nombres as $data)
+                          @for($i=0;$i < $demo;$i++)
                           <tr>
-                            <td>{{$data}}</td>
+                            <td>{{$nombres[$i]}}</td>
+                            <td>{{$totales[$i]}}</td>
                           </tr>
-                          @endforeach
+                          @endfor
                           </tbody>
                       </table>
                     </div>
@@ -126,48 +127,13 @@
               </div>
               <!-- /.card-body-->
             </div>
-            @endisset --}}
+            @endisset
             <!-- /.card -->
           </div>
           <div class="col-md-2">
           </div>
           <div class="col-md-2">
           </div>
-          <!-- /.col -->
-          {{-- <div class="col-md-8">
-            <!-- Bar chart -->
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="far fa-chart-bar"></i>
-                  Gráfico de barras (Kilogramos/Productos)
-                </h3>
-              </div>
-              <div class="card-body">
-                <div id="bar-chart" style="height: 300px;"></div>
-              </div>
-              <!-- /.card-body-->
-            </div> --}}
-
-            <!-- BAR CHART -->
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Bar Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
           </div>
           <!-- /.col -->
         </div>
@@ -175,102 +141,90 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
 @endsection
 
 @push('styles')
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
   <!-- daterange picker -->
   <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">  
+  <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 @endpush
-  
+
 @push('scripts')
-<!-- jQuery -->
-{{-- <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI -->
-<script src="/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- FLOT CHARTS -->
-<script src="/adminlte/plugins/flot/jquery.flot.js"></script> --}}
-<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-<script src="/adminlte/plugins/flot-old/jquery.flot.resize.min.js"></script>
-<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-<script src="/adminlte/plugins/flot-old/jquery.flot.pie.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- ChartJS -->
-<script src="/adminlte/plugins/chart.js/Chart.min.js"></script>
-
+<!-- Select2 -->
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+  
 <!-- InputMask -->
 <script src="/adminlte/plugins/moment/moment.min.js"></script>
 <script src="/adminlte/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+
 <!-- date-range-picker -->
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Bootstrap Switch -->
 <script src="/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<!-- AdminLTE App -->
+
+<!-- DataTables -->
+<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<!-- jquery-validation -->
+<script src="/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 
 <script src="/adminlte/dist/js/demo.js"></script>
-<!-- AdminLTE App -->
-<script src="/adminlte/dist/js/adminlte.min.js"></script>
-<!-- Page script -->
+<!-- page script -->
 <script>
-  <script>
+    $(function () {
+
+    //Initialize Select2 Elements
+    $('.select2').select2({
+      //tags:true
+    });
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });
+
+  });
+</script>
+
+<script>
   $(function () {
-
-    var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label               : 'Digital Goods',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : 'Electronics',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-      ]
-    }
-
-    //-------------
-    //- BAR CHART -
-    //-------------
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = jQuery.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
-
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false
-    }
-
-    var barChart = new Chart(barChartCanvas, {
-      type: 'bar', 
-      data: barChartData,
-      options: barChartOptions
-    })
-
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      "language": {
+        "search": "Buscar",
+        "lengthMenu": "Ver _MENU_ entradas",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "emptyTable": "No hay datos para mostrar",
+        "paginate": {
+            "last": "Última página",
+            "first": "Primera página",
+            "next": "Siguiente",
+            "previous": "Anterior",
+          },
+       },
+       
+    });
+  });
+</script>
+<script>
   //Date range picker
     $('#reservation').daterangepicker()
     //Date range picker with time picker
@@ -304,6 +258,9 @@
     $('#timepicker').datetimepicker({
       format: 'LT'
     })
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
 </script>
 @endpush
-@include('tablas.estilos')

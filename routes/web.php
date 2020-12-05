@@ -43,9 +43,18 @@ Route::get('/reporte3','ReportesController@reporte3')->name('reportes.reporte3')
 Route::get('/reporte4','ReportesController@reporte4')->name('reportes.reporte4');
 Route::get('/reporte5','ReportesController@reporte5')->name('reportes.reporte5');
 Route::get('/reporte6','ReportesController@reporte6')->name('reportes.reporte6');
-//Route::get('/reporte7','ReportesController@reporte7')->name('reportes.reporte7');
 Route::get('/reporte8','ReportesController@reporte8')->name('reportes.reporte8');
 Route::get('/reporte9','ReportesController@reporte9')->name('reportes.reporte9');
+Route::get('/reporte10','ReportesController@reporte10')->name('reportes.reporte10');
+Route::get('/reporte11','ReportesController@reporte11')->name('reportes.reporte11');
+Route::get('/reporte12','ReportesController@reporte12')->name('reportes.reporte12');
+Route::get('/reporte13','ReportesController@reporte13')->name('reportes.reporte13');
+Route::get('/reporte14','ReportesController@reporte14')->name('reportes.reporte14');
+Route::get('/reporte15','ReportesController@reporte15')->name('reportes.reporte15');
+Route::get('/reporte16','ReportesController@reporte16')->name('reportes.reporte16');
+Route::get('/reporte17','ReportesController@reporte17')->name('reportes.reporte17');
+Route::get('/reporte18','ReportesController@reporte18')->name('reportes.reporte18');
+Route::get('/reporte19','ReportesController@reporte19')->name('reportes.reporte19');
 });
 
 //Rutas provincias
@@ -234,6 +243,8 @@ Route::group([
 ],
 function(){
 Route::get('/','TransportacionController@index')->name('transportaciones');
+Route::get('/terminadas','TransportacionController@index2')->name('transportaciones.terminadas');
+Route::get('/todas','TransportacionController@index3')->name('transportaciones.todas');
 Route::get('/{id}/llenar','TransportacionController@formllenar')
         ->where('id','[0-9]+')->name('transportaciones.formllenar');
 Route::get('/crear','TransportacionController@create')->name('transportaciones.create');
@@ -242,9 +253,7 @@ Route::get('/llenar','TransportacionController@llenar')->name('transportaciones.
 Route::post('/llenar','TransportacionController@guardar');
 Route::get('/{transportacion}/editar','TransportacionController@edit')->name('transportaciones.edit');
 Route::put('/{transportacion}','TransportacionController@update')->name('transportaciones.update');
-
 Route::get('/{transportacion}/detalles','TransportacionController@detalles')->name('transportaciones.detalles');
-
 Route::delete('/{transportacion}','TransportacionController@destroy')
       ->name('transportaciones.destroy');
 });
@@ -290,22 +299,17 @@ Route::group([
     'middleware'=>'auth'
 ],
 function(){
-
 Route::get('/{id}/crear','TransfEnviadaController@create')->name('tenv.create');
 Route::post('/{id}/crear','TransfEnviadaController@store');
-
 Route::get('/{id}/transportacion','TransfEnviadaController@index')->name('tenv');
 Route::get('/recibidas','TransfEnviadaController@index2')->name('tenv.recibidas');
+Route::get('/todas','TransfEnviadaController@index3')->name('tenv.todas');
 Route::get('/{transferencia}','TransfEnviadaController@show')->name('tenv.show');
-
 Route::get('/{transferencia}/detalles','TransfEnviadaController@detalles')->name('tenv.detalles');
-
 Route::get('/{id}/editar','TransfEnviadaController@edit')->name('tenv.edit');
 Route::put('/{transfEnviada}','TransfEnviadaController@update')->name('tenv.update');
-
 Route::get('/{id}/recibir','TransfEnviadaController@editRecibo')->name('tenv.recibir');
 Route::put('/{transfEnviada}/recibir','TransfEnviadaController@updateRecibo')->name('tenv.update.recibo');
-
 Route::delete('/{id}/eliminar','TransfEnviadaController@destroy')->name('tenv.destroy');
 });
 

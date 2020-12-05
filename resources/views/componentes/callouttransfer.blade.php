@@ -19,7 +19,7 @@
             <p>Origen: <strong>{{$transferencia->origen->name}}</strong></p>
           </div>
           <div class="col-4">
-            <p>Destino: <strong>{{$transferencia->origen->name}}</strong></p>
+            <p>Destino: <strong>{{$transferencia->destino->name}}</strong></p>
           </div>
      </div>
   </div>

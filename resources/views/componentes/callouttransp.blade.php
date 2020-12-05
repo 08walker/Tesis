@@ -1,4 +1,4 @@
-<div class="callout callout-danger">
+<div class="callout callout-success">
 	<div class="col-12">
 		<div class="container">
 			<div class="row">
@@ -15,8 +15,10 @@
                   <p>Equipo: <strong>{{$model->equipo->identificador}}</strong></p>
                 </div>
         	</div>
-        
+            
+
             <div class="row">
+                @if($model->chofertransp->count() > 0)
                 <div class="col-sm-6">
                 	<strong>Choferes:</strong>
                 	<table id="example2" class="table table-bordered table-striped">
@@ -40,7 +42,9 @@
                 	</tbody>
                 	</table>
             	</div>
+                @endif
 
+                @if($model->arrastretrasnp->count() > 0)
                 <div class="col-sm-6">
                 	<strong>Arrastres:</strong>
                 	<table id="example2" class="table table-bordered table-striped">
@@ -60,8 +64,10 @@
                 	</tbody>
                 	</table>
                 </div>
+                @endif
         	</div>
 
+            @if($model->arrastretrasnp->count() > 0)
             <div class="col-sm-6">
             	<strong>Envases:</strong>
             	<table id="example2" class="table table-bordered table-striped">
@@ -81,6 +87,7 @@
                 	</tbody>
             	</table>
             </div>
+            @endif
         </div>
     </div>
 </div>

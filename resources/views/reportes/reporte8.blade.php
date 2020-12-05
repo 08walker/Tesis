@@ -7,8 +7,10 @@
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
+          <div class="col-md-1">
+          </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark">Generar reporte con los contenedores que llevan más de 7 días sin utilizarse.</h1>
+            <h1 class="m-0 text-dark">Contenedores que llevan más de 7 días sin utilizarse.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -43,14 +45,14 @@
                   </thead>
                   <tbody>
                   @foreach($envases as $dato)
-                  @if((\Carbon\Carbon::now()->diffInDays($dato->ultima_vez)) < 7)
+                  @if(\Carbon\Carbon::now()->diffInDays($dato->ultima_vez) < 7)
                   <tr>
                     <td>{{$dato->identificador}}</td>
                     <td>{{\Carbon\Carbon::now()->diffInDays($dato->ultima_vez)}}</td>
                     <td>{{$dato->lugares_name}}</td>
-                    <td>{{$dato->transportacion->numero}}
-                          <a href="{{ route('transportaciones.detalles',$dato->transportacion) }}" class="btn btn-xs btn-primary">
-                            Ver detalles
+                    <td>
+                          <a href="{{ route('transportaciones.detalles',$dato->transportacion) }}" class="btn btn-flat btn-primary">
+                        {{$dato->transportacion->numero}} ->Ver detalles
                           </a>
                     </td>
                   </tr>

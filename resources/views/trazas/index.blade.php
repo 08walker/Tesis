@@ -34,7 +34,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>ID</th>
+                          {{-- <th>ID</th> --}}
                           <th>Fecha</th>
                           <th>Descripción</th>
                           <th>Accedió desde</th>
@@ -43,7 +43,7 @@
                       <tbody>
                         @foreach($trazas as $traza)
                           <tr>
-                            <td>{{$traza->id}}</td>
+                            {{-- <td>{{$traza->id}}</td> --}}
                             <td>{{$traza->created_at->format('d/M/Y H:i:s')}}</td>
                             <td>{{$traza->description}}</td>
                             <td>{{$traza->ip}}</td>

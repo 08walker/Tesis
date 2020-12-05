@@ -48,7 +48,7 @@ class TransfEnvProdSeeder extends Seeder
         factory(Transf_Env_Prod::class,7)->create([
 	        'transf_enviada_id'=>'12',
         ]);
-        factory(Transf_Env_Prod::class,1)->create([
+        factory(Transf_Env_Prod::class,3)->create([
 	        'transf_enviada_id'=>'13',
         ]);
         factory(Transf_Env_Prod::class,2)->create([
@@ -59,6 +59,9 @@ class TransfEnvProdSeeder extends Seeder
         ]);
         factory(Transf_Env_Prod::class,4)->create([
 	        'transf_enviada_id'=>'16',
+        ]);
+        factory(Transf_Env_Prod::class,5)->create([
+            'transf_enviada_id'=>'17',
         ]);
     }
 }

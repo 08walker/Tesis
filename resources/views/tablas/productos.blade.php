@@ -33,7 +33,7 @@
                           Activar
                         </button>
                       </form>
-                    @else
+        @else
             <a href="{{route('productos.edit',$producto)}}" class="btn btn-xs btn-info">
               <i class="fa fa-pen"></i>
             </a>
@@ -46,7 +46,7 @@
               </button>
             </form>
             @endcan
-            @endif            
+        @endif            
       </td>
       @endcan
     </tr>

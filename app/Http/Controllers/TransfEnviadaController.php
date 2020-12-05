@@ -27,6 +27,11 @@ class TransfEnviadaController extends Controller
         $this->authorize('view',new TransfEnviada);
         return view('trecibida.index')->with('tranferencias',TransfEnviada::recibidas()->get());
     }
+    public function index3()
+    {
+        $this->authorize('view',new TransfEnviada);
+        return view('trecibida.index')->with('tranferencias',TransfEnviada::all());
+    }
 
     public function create($id)
     {
@@ -44,7 +49,6 @@ class TransfEnviadaController extends Controller
         if(Carbon::parse($request['fyh_salida'])->isAfter(Carbon::now())){
             return redirect()->route('tenv.create',$id)->with('demo','La fecha introducida debe ser menor a la fecha actual');
         }
-        //dd($data = request()->all());
 
         $transf = TransfEnviada::create([
             'fyh_salida'=> Carbon::parse($data['fyh_salida']),

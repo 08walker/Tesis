@@ -18,7 +18,7 @@
 	      <div class="row">
 	      	<div class="card-body">
 
-	      		<a class="btn btn-flat btn-primary" href="{{route('transportaciones')}}">
+	      		<a class="btn btn-flat btn-primary" href="{{route('transportaciones.terminadas')}}">
 	      			<i class="fa fa-arrow-left"></i> Atras
 	      		</a>
 	      		<br><br>

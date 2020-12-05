@@ -3,10 +3,22 @@
 @section('content')
 
 <div class="content-wrapper">
-
-  <div class="content-header">
-
-    <div class="container">
+  <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-md-1">
+          </div>
+          <div class="col-sm-10">
+            <h1 class="m-0 text-dark">Productos y cantidades transferidos en el periodo seleccionado.</h1>
+          </div>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-8">
           <div class="card card-primary card-outline">
             <div class="card-body">
               <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte2filtrado') }}">
@@ -27,15 +39,14 @@
               </form>
             </div>
           </div>
+          </div>
     </div>
-</div>
     @isset($chofertransp)
-      <div class="content">
-        <div class="container-fluid">
+      
           <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-8">
               <div class="card card-primary card-outline">
                 <div class="card-header">
                   <div class="row">
@@ -94,8 +105,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
     @endisset
 </div>
 @endsection

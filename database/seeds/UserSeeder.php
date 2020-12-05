@@ -33,84 +33,117 @@ class UserSeeder extends Seeder
         ]);
 
         //Permisos Rol Admin
-        // $adminRole->givePermissionTo('View users');
-        // $adminRole->givePermissionTo('Create users');
-        // $adminRole->givePermissionTo('Update users');
-        // $adminRole->givePermissionTo('Delete users');
+        $adminRole->givePermissionTo('View users');
+        $adminRole->givePermissionTo('Create users');
+        $adminRole->givePermissionTo('Update users');
+        $adminRole->givePermissionTo('Delete users');
 
-        // $adminRole->givePermissionTo('View roles');
-        // $adminRole->givePermissionTo('Create roles');
-        // $adminRole->givePermissionTo('Update roles');
-        // $adminRole->givePermissionTo('Delete roles');
+        $adminRole->givePermissionTo('View directivo');
+        $adminRole->givePermissionTo('Create directivo');
+        $adminRole->givePermissionTo('Update directivo');
+        $adminRole->givePermissionTo('Delete directivo');
 
-        // $adminRole->givePermissionTo('View permissions');
-        // $adminRole->givePermissionTo('Update permissions');
+        $adminRole->givePermissionTo('View roles');
+        $adminRole->givePermissionTo('Create roles');
+        $adminRole->givePermissionTo('Update roles');
+        $adminRole->givePermissionTo('Delete roles');
+        
+        $adminRole->givePermissionTo('View traza');
+
+        $adminRole->givePermissionTo('View permissions');
+        $adminRole->givePermissionTo('Update permissions');
 
         //Permisos Rol Transporte
         $transporteRole->givePermissionTo('View tArrastre');
         $transporteRole->givePermissionTo('Create tArrastre');
         $transporteRole->givePermissionTo('Update tArrastre');
+        $transporteRole->givePermissionTo('Delete tArrastre');
 
         $transporteRole->givePermissionTo('View tEquipo');
         $transporteRole->givePermissionTo('Create tEquipo');
         $transporteRole->givePermissionTo('Update tEquipo');
+        $transporteRole->givePermissionTo('Delete tEquipo');
 
         $transporteRole->givePermissionTo('View arrastre');
         $transporteRole->givePermissionTo('Create arrastre');
         $transporteRole->givePermissionTo('Update arrastre');
+        $transporteRole->givePermissionTo('Delete arrastre');
 
         $transporteRole->givePermissionTo('View chofer');
         $transporteRole->givePermissionTo('Create chofer');
         $transporteRole->givePermissionTo('Update chofer');
+        $transporteRole->givePermissionTo('Delete chofer');
 
         $transporteRole->givePermissionTo('View envase');
         $transporteRole->givePermissionTo('Create envase');
         $transporteRole->givePermissionTo('Update envase');
+        $transporteRole->givePermissionTo('Delete envase');
 
         $transporteRole->givePermissionTo('View equipo');
         $transporteRole->givePermissionTo('Create equipo');        
         $transporteRole->givePermissionTo('Update equipo');
+        $transporteRole->givePermissionTo('Delete equipo');
+
+        $inivitadoRole->givePermissionTo('View transferencia');
+        $inivitadoRole->givePermissionTo('View transportation');
+        $inivitadoRole->givePermissionTo('View hito');
 
         //Permisos Rol Analista
         $analistaRole->givePermissionTo('View lugar');
         $analistaRole->givePermissionTo('Create lugar');
         $analistaRole->givePermissionTo('Update lugar');
+        $analistaRole->givePermissionTo('Delete lugar');
 
         $analistaRole->givePermissionTo('View municipio');
 
         $analistaRole->givePermissionTo('View provincia');
 
+        $analistaRole->givePermissionTo('View tHito');
+
         $analistaRole->givePermissionTo('View organization');
         $analistaRole->givePermissionTo('Create organization');
         $analistaRole->givePermissionTo('Update organization');
+        $analistaRole->givePermissionTo('Delete organization');
 
         $analistaRole->givePermissionTo('View tercero');
         $analistaRole->givePermissionTo('Create tercero');
         $analistaRole->givePermissionTo('Update tercero');
+        $analistaRole->givePermissionTo('Delete tercero');
 
         $analistaRole->givePermissionTo('View TunidadMedida');
         $analistaRole->givePermissionTo('Create TunidadMedida');
         $analistaRole->givePermissionTo('Update TunidadMedida');
+        $analistaRole->givePermissionTo('Delete TunidadMedida');
 
         $analistaRole->givePermissionTo('View unidadMedida');
         $analistaRole->givePermissionTo('Create unidadMedida');
         $analistaRole->givePermissionTo('Update unidadMedida');
+        $analistaRole->givePermissionTo('Delete unidadMedida');
 
         $analistaRole->givePermissionTo('View transportation');
         $analistaRole->givePermissionTo('Create transportation');
         $analistaRole->givePermissionTo('Update transportation');
+        $analistaRole->givePermissionTo('Delete transportation');
 
         $analistaRole->givePermissionTo('View producto');
         $analistaRole->givePermissionTo('Create producto');
         $analistaRole->givePermissionTo('Update producto');
+        $analistaRole->givePermissionTo('Delete producto');
 
-        $analistaRole->givePermissionTo('View directivo');
-        $analistaRole->givePermissionTo('Create directivo');
-        $analistaRole->givePermissionTo('Update directivo');
+        // $analistaRole->givePermissionTo('View directivo');
+        // $analistaRole->givePermissionTo('Create directivo');
+        // $analistaRole->givePermissionTo('Update directivo');
+        // $analistaRole->givePermissionTo('Delete directivo');
 
         $analistaRole->givePermissionTo('View transferencia');
         $analistaRole->givePermissionTo('Create transferencia');
         $analistaRole->givePermissionTo('Update transferencia');
+        $analistaRole->givePermissionTo('Delete transferencia');
+
+        $analistaRole->givePermissionTo('View hito');
+        $analistaRole->givePermissionTo('Create hito');
+        $analistaRole->givePermissionTo('Update hito');
+        $analistaRole->givePermissionTo('Delete hito');
         
         //Permisos Rol Invitado
         $inivitadoRole->givePermissionTo('View provincia');
@@ -131,7 +164,9 @@ class UserSeeder extends Seeder
         $inivitadoRole->givePermissionTo('View directivo');
         $inivitadoRole->givePermissionTo('View reporte');
         $inivitadoRole->givePermissionTo('View transferencia');
-
+        $inivitadoRole->givePermissionTo('View tHito');
+        $inivitadoRole->givePermissionTo('View transportation');
+        $inivitadoRole->givePermissionTo('View hito');
 
         $admin = new User;
         $admin->name ='Walker';
