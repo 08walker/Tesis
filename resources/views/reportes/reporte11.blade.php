@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Productos y cantidades transferidos en el periodo seleccionado.</h1>
+            <h1 class="m-0 text-dark"> Reporte #11 Filtrar transportaciones por organizaciones.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -24,12 +24,31 @@
           <div class="col-md-8">
           <div class="card card-primary card-outline">
               <div class="card-body">
-              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte2filtrado') }}">
+              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte11filtrado') }}">
                   {!! csrf_field() !!}
                   <div class="container">
                     <div class="row">
                       <div class="col-md-6">
-                        @include('foreach.choferfor',['model'=>$choferes])
+                        <div class="form-group">
+						    <label for="exampleInputEmail1">Seleccione la organización:</label>
+						      		<select class="form-control select2" style="width: 100%;" name="organizacion_id">
+						          <option value="">
+						            --------Seleccione la organización--------
+						          </option>
+						          @foreach($organizaciones->all() as $org)
+						                <option value="{{$org->id}}">{{$org->name}}</option>
+						          @endforeach
+						      </select>
+						      <div class="has-error">
+						        @if($errors->has('organizacion_id'))
+						        <font color="#FF0000">
+						                <span style="background-color: inherit;">
+						                    {{$errors->first('organizacion_id')}}
+						                </span>
+						        </font>
+						        @endif
+						    </div>
+						</div>
                       </div>
                       {{-- <div class="col-md-6">
                         @include('componentes.rangofecha')
@@ -49,7 +68,7 @@
           </div>
           </div>
     </div>
-    @isset($chofertransp)
+    @isset($lugares)
           <div class="row">
             <div class="col-md-2">
             </div>
@@ -59,55 +78,24 @@
                   <div class="row">
                     <div class="col-12">
                       <h3 class="card-title">
-                        Datos del chofer:
+                        Datos de la organización:
                       </h3>
                     </div>                  
                     <div class="col-4">
-                      <p>Nombre: <strong>{{$chofertransp->first()->choferes->name}} {{$chofertransp->first()->choferes->apellido}}</strong></p>
+                      <p>Nombre: <strong>{{$organizacion->name}}</strong></p>
                     </div>
-
                     <div class="col-4">
-                      <p>Carnet de identidad: <strong>{{$chofertransp->first()->choferes->ci}}</strong></p>
-                    </div>
-
-                    <div class="col-4">
-                      <p>Teléfono: <strong>{{$chofertransp->first()->choferes->telefono}}</strong></p>
-                    </div>
-                    
-                    <div class="col-4">
-                      @if($chofertransp->first()->choferes->tercero)
-                        <p>Tercero: <strong>{{$chofertransp->first()->choferes->tercero->name}}</strong></p>
-                      @elseif($chofertransp->first()->choferes->organizacion)
-                        <p>Organización: <strong>{{$chofertransp->first()->choferes->organizacion->name}}</strong></p>
-                      @endif
+                        <p>Municipio: <strong>{{$organizacion->municipio->name}}</strong></p>
                     </div>
                   </div>
                 </div>
                 <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Transportación</th>
-                    <th>Transferencia</th>
-                    <th>Origen</th>
-                    <th>Destino</th>
-                    <th>Fecha de salida</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  @foreach($chofertransp as $transp)
-                  @foreach($transp->transportaciones->transfenviada as $viaje)
-                  <tr>
-                    <td>{{$transp->transportaciones->numero}}</td>
-                    <td>{{$viaje->num_fact}}</td>
-                    <td>{{$viaje->origen->name}}</td>
-                    <td>{{$viaje->destino->name}}</td>
-                    <td>{{\Carbon\Carbon::parse($viaje->fyh_salida)->format('d/M/y')}}</td>
-                  </tr>
-                  @endforeach
-                  @endforeach
-                  </tbody>
-                </table>
+                  @foreach($lugares as $lugar)
+                  <h3>{{$lugar->name}}</h3>
+                  @foreach($lugar->tenviadaorigen as $demo2)
+                  @include('componentes.callouttransfer',['model'=>$demo2])
+                  @endforeach                  
+                  @endforeach                  
                 </div>
               </div>
             </div>
@@ -239,12 +227,12 @@
 $(document).ready(function () {
   $('#quickForm').validate({
     rules: {
-      chofer_id: {
+      envase_id: {
         required: true,
       },
     },
     messages: {
-      chofer_id: {
+      envase_id: {
         required: "Debe seleccionar un chofer",
       },
     },

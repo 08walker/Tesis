@@ -10,12 +10,12 @@ class TipoHitoPolicy
 {
     use HandlesAuthorization;
 
-    public function before($user)
-    {
-        if ($user->hasRole('Admin')) {
-            return true;
-        }
-    }
+    // public function before($user)
+    // {
+    //     if ($user->hasRole('Admin')) {
+    //         return true;
+    //     }
+    // }
     
     /**
      * Determine whether the user can view any tipo hitos.

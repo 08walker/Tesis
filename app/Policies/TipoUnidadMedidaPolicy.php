@@ -10,17 +10,12 @@ class TipoUnidadMedidaPolicy
 {
     use HandlesAuthorization;
 
-    public function before($user)
-    {
-        if ($user->hasRole('Admin')) {
-            return true;
-        }
-    }
-    
-    public function viewAny(User $user)
-    {
-        //
-    }
+    // public function before($user)
+    // {
+    //     if ($user->hasRole('Admin')) {
+    //         return true;
+    //     }
+    // }
 
     public function view(User $user, TipoUnidadMedida $tipoUnidadMedida)
     {
@@ -40,15 +35,5 @@ class TipoUnidadMedidaPolicy
     public function delete(User $user, TipoUnidadMedida $tipoUnidadMedida)
     {
         return $user->hasPermissionTo('Delete TunidadMedida');
-    }
-
-    public function restore(User $user, TipoUnidadMedida $tipoUnidadMedida)
-    {
-        //
-    }
-
-    public function forceDelete(User $user, TipoUnidadMedida $tipoUnidadMedida)
-    {
-        //
     }
 }

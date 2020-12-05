@@ -48,7 +48,7 @@ class Equipo extends Model
 
     public function transportacion()
     {
-        return $this->hasOne('App\Transportacion');
+        return $this->hasMany('App\Transportacion');
     }
 
     public function scopeActivos($query)

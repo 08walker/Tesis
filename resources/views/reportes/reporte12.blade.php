@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark"> Productos y cantidades transferidos en el periodo seleccionado.</h1>
+            <h1 class="m-0 text-dark"> Reporte #12 Filtrar transportaciones por productos.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -24,12 +24,31 @@
           <div class="col-md-8">
           <div class="card card-primary card-outline">
               <div class="card-body">
-              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte2filtrado') }}">
+              <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte12filtrado') }}">
                   {!! csrf_field() !!}
                   <div class="container">
                     <div class="row">
                       <div class="col-md-6">
-                        @include('foreach.choferfor',['model'=>$choferes])
+                        <div class="form-group">
+                <label for="exampleInputEmail1">Seleccione el producto:</label>
+                      <select class="form-control select2" style="width: 100%;" name="producto_id">
+                      <option value="">
+                        --------Seleccione el producto--------
+                      </option>
+                      @foreach($productos->all() as $prod)
+                            <option value="{{$prod->id}}">{{$prod->name}}</option>
+                      @endforeach
+                  </select>
+                  <div class="has-error">
+                    @if($errors->has('equipo_id'))
+                    <font color="#FF0000">
+                            <span style="background-color: inherit;">
+                                {{$errors->first('equipo_id')}}
+                            </span>
+                    </font>
+                    @endif
+                </div>
+            </div>
                       </div>
                       {{-- <div class="col-md-6">
                         @include('componentes.rangofecha')
@@ -49,7 +68,7 @@
           </div>
           </div>
     </div>
-    @isset($chofertransp)
+    @isset($transfenvprod)
           <div class="row">
             <div class="col-md-2">
             </div>
@@ -59,55 +78,43 @@
                   <div class="row">
                     <div class="col-12">
                       <h3 class="card-title">
-                        Datos del chofer:
+                        Datos del producto:
                       </h3>
                     </div>                  
                     <div class="col-4">
-                      <p>Nombre: <strong>{{$chofertransp->first()->choferes->name}} {{$chofertransp->first()->choferes->apellido}}</strong></p>
+                      <p>Nombre: <strong>{{$producto->name}}</strong></p>
                     </div>
-
                     <div class="col-4">
-                      <p>Carnet de identidad: <strong>{{$chofertransp->first()->choferes->ci}}</strong></p>
+                      <p>Identificador: <strong>{{$producto->identificador}}</strong></p>
                     </div>
-
                     <div class="col-4">
-                      <p>Teléfono: <strong>{{$chofertransp->first()->choferes->telefono}}</strong></p>
-                    </div>
-                    
-                    <div class="col-4">
-                      @if($chofertransp->first()->choferes->tercero)
-                        <p>Tercero: <strong>{{$chofertransp->first()->choferes->tercero->name}}</strong></p>
-                      @elseif($chofertransp->first()->choferes->organizacion)
-                        <p>Organización: <strong>{{$chofertransp->first()->choferes->organizacion->name}}</strong></p>
-                      @endif
+                      <p>Unidad de medida: <strong>{{$producto->unidadMedida->name}}</strong></p>
                     </div>
                   </div>
                 </div>
                 <div class="card-body">
                   <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Transportación</th>
-                    <th>Transferencia</th>
-                    <th>Origen</th>
-                    <th>Destino</th>
-                    <th>Fecha de salida</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  @foreach($chofertransp as $transp)
-                  @foreach($transp->transportaciones->transfenviada as $viaje)
-                  <tr>
-                    <td>{{$transp->transportaciones->numero}}</td>
-                    <td>{{$viaje->num_fact}}</td>
-                    <td>{{$viaje->origen->name}}</td>
-                    <td>{{$viaje->destino->name}}</td>
-                    <td>{{\Carbon\Carbon::parse($viaje->fyh_salida)->format('d/M/y')}}</td>
-                  </tr>
-                  @endforeach
-                  @endforeach
-                  </tbody>
-                </table>
+                      <thead>
+                      <tr>
+                        <th>No. Transportación</th>
+                        <th>No. Transferencia</th>
+                        <th>Cantidad(kg)</th>
+                        <th>Origen</th>
+                        <th>Fecha de salida</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($transfenvprod as $demo)
+                      <tr>
+                        <td>{{$demo->transfenviada->transportacion->numero}}</td>
+                        <td>{{$demo->transfenviada->num_fact}}</td>
+                        <td>{{$demo->peso_kg}}</td>
+                        <td>{{$demo->transfenviada->origen->name}}</td>
+                        <td>{{\Carbon\Carbon::parse($demo->transfenviada->fyh_salida)->format('d/M/y')}}</td>
+                      </tr>
+                      @endforeach
+                      </tbody>
+                  </table>                  
                 </div>
               </div>
             </div>
@@ -239,12 +246,12 @@
 $(document).ready(function () {
   $('#quickForm').validate({
     rules: {
-      chofer_id: {
+      producto_id: {
         required: true,
       },
     },
     messages: {
-      chofer_id: {
+      producto_id: {
         required: "Debe seleccionar un chofer",
       },
     },

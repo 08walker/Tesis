@@ -16,11 +16,6 @@ class UserPolicy
         }
     }
     
-    public function viewAny(User $user)
-    {
-        //
-    }
-
     public function view(User $authUser, User $user)
     {
         return $authUser->id === $user->id || $user->hasPermissionTo('View users');
@@ -39,15 +34,5 @@ class UserPolicy
     public function delete(User $authUser, User $user)
     {
         return $authUser->id === $user->id || $user->hasPermissionTo('Delete users');        
-    }
-
-    public function restore(User $user, User $model)
-    {
-        //
-    }
-
-    public function forceDelete(User $user, User $model)
-    {
-        //
     }
 }

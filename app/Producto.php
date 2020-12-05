@@ -22,7 +22,7 @@ class Producto extends Model
 
     public function transfenvprod()
     {
-        return $this->hasOne('App\Transf_Env_Prod');
+        return $this->hasMany('App\Transf_Env_Prod');
     }
 
     public function scopeActivos($query)

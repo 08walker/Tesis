@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Chofer;
+use App\Envase;
+use App\Equipo;
+use App\Organizacion;
 use App\Producto;
 use App\Reporte1;
 use App\Reporte1a;
@@ -86,46 +89,22 @@ class ReportesController extends Controller
         [   
         'chofer_id.required'=>'Debe seleccionar un chofer',
         ]);
-        //dd($request->all());
         $rango = $request->rango;
         //dd($request['chofer_id']);
         $choferes = Chofer::activos()->get();
         $chofer = Chofer::find($request['chofer_id']);
         $chofertransp = $chofer->chofertransp;
-        // foreach ($chofertransp as $demo) {
-        //         dd($demo->transportaciones->transfenviada);
-        // }
-
-        // if ($rango) {
-        //     //dividir la fecha
-        //     $dividir = explode("- ",$rango);
-        //     $fechaini = $dividir[0];
-        //     $fechafin = $dividir[1];
-        //     $tranferencias;
-        //     foreach ($transportaciones as $viajes) {
-        //         foreach ($viajes->transfenviada as $viaje) {
-        //             if (Carbon::parse($viaje->fyh_llegada) > (Carbon::parse($fechaini))){
-        //                 // if (Carbon::parse($viaje->fyh_llegada) > (Carbon::parse($fechafin))){
-        //                     $tranferencias = $viaje;
-                        
-        //             }
-        //         }
-        //     }
-        // }                
-        //dd($tranferencias);
-
-        return view('reportes.reporte2',compact('chofertransp','choferes'));
-
+        if($chofer->chofertransp->count()){
+            //dd($chofer->chofertransp->count());
+            return view('reportes.reporte2',compact('chofertransp','choferes'));
+        }
+        return back()->withInput()->with('demo','El chofer seleccionado no ha realizado ninguna transportación');
     }
     
     public function reporte3()
     {
         $this->authorize('view',new Reporte1);
         $envases = Reporte2::all();
-
-        //seleccionar los contenedores propios,los que tienen organizacion
-        //Selecccionar la ultima transportacion realizada y verificar si llego 
-        //Devolver listado y calcular la cantidad de dias sin utilizar
         return view('reportes.reporte3',compact('envases'));
     }
     
@@ -133,12 +112,6 @@ class ReportesController extends Controller
     {
         $this->authorize('view',new Reporte1);
         $envases = Reporte2::all();
-
-        //seleccionar los contenedores propios,los que tienen organizacion
-        //Selecccionar la ultima transportacion realizada y verificar si llego 
-        //Devolver listado y calcular la cantidad de dias sin utilizar, multiplicar por el costo
-        //no se puede hacer porque falta el costo. o poner fijo
-        //poner en el select e costo
         return view('reportes.reporte4',compact('envases'));
     }
     
@@ -146,10 +119,6 @@ class ReportesController extends Controller
     {
         $this->authorize('view',new Reporte1);
         $envases = Reporte2::all();
-
-        //seleccionar los contenedores propios,los que tienen organizacion
-        //Selecccionar la ultima transportacion realizada y verificar si llego 
-        //devolver el listado
         return view('reportes.reporte5',compact('envases'));
     }
     
@@ -164,27 +133,117 @@ class ReportesController extends Controller
     public function reporte7()
     {
         $this->authorize('view',new Reporte1);
-
-        //Este no lo pienso hacer, revisar todo para eliminarlo donde quiera que salga
-        return view('reportes.reporte7');
+        $envases = Reporte2::all();
+        return view('reportes.reporte7',compact('envases'));
     }
     
     public function reporte8()
     {
         $this->authorize('view',new Reporte1);
-        $envases = Reporte2::all();
 
-        //Lo resuelvo en el reporte 5, filtrar los que llevan mas de 7 dias
-        return view('reportes.reporte8',compact('envases'));
+        $choferes = Chofer::activos()->get();
+        //lista de choferes con transortaciones enviadas y recibidas en el mes
+        return view('reportes.reporte8',compact('choferes'));
+    }
+
+    public function reporte8filtrado(Request $request)
+    {
+        $this->authorize('view',new Reporte1);
+        $data = request()->validate([
+        'chofer_id'=>'required',
+        ],
+        [   
+        'chofer_id.required'=>'Debe seleccionar un chofer',
+        ]);
+        $rango = $request->rango;
+        //dd($request['chofer_id']);
+        $choferes = Chofer::activos()->get();
+        $chofer = Chofer::find($request['chofer_id']);
+        $chofertransp = $chofer->chofertransp;
+        if($chofer->chofertransp->count()){
+            //dd($chofer->chofertransp->count());
+            return view('reportes.reporte8',compact('chofertransp','choferes'));
+        }
+        return back()->withInput()->with('demo','El chofer seleccionado no ha realizado ninguna transportación');
     }
     
     public function reporte9()
-    {
+    {   
         $this->authorize('view',new Reporte1);
-        
-        //esto es tremenda candela porque son una pila de reportes en uno(11 para ser exactos)
+        $envases = Envase::activos()->get();
+        return view('reportes.reporte9',compact('envases'));        
+    }
 
-        //Buscar por periodo poner una fecha de inicio y fin en dos datepicker y filtrar por esos campos por el created_at
-        return view('reportes.reporte9');
+    public function reporte9filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['envase_id']);
+        $envase = Envase::find($request['envase_id']);
+        if ($envase->arrastenva->count()) {
+            $arrastenva = $envase->arrastenva;
+            $envases = Envase::activos()->get();
+            return view('reportes.reporte9',compact('envases','arrastenva'));            
+        }
+        return back()->withInput()->with('demo','El envase seleccionado no ha realizado ninguna transportación');    
+    }
+
+    public function reporte10()
+    {   
+        $this->authorize('view',new Reporte1);
+        $equipos = Equipo::activos()->get();
+        return view('reportes.reporte10',compact('equipos'));        
+    }
+
+    public function reporte10filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['equipo_id']);
+        $equipo = Equipo::find($request['equipo_id']);
+        
+        if ($equipo->transportacion->count()) {
+            $transportaciones = $equipo->transportacion;
+            $equipos = Envase::activos()->get();
+            return view('reportes.reporte10',compact('equipos','equipo','transportaciones'));
+        }
+        return back()->withInput()->with('demo','El equipo seleccionado no ha realizado ninguna transportación');    
+    }
+
+    public function reporte11()
+    {   
+        $this->authorize('view',new Reporte1);
+        $organizaciones = Organizacion::activos()->get();
+        return view('reportes.reporte11',compact('organizaciones'));        
+    }
+
+    public function reporte11filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        //dd($request['organizacion_id']);
+        $organizacion = Organizacion::find($request['organizacion_id']);
+        if ($organizacion->lugar->count()) {
+            $lugares = $organizacion->lugar;
+            $organizaciones = Organizacion::activos()->get();
+            return view('reportes.reporte11',compact('organizaciones','organizacion','lugares'));
+        }
+        return back()->withInput()->with('demo','La organización seleccionada no tiene transportaciones asociadas');    
+    }
+
+    public function reporte12()
+    {   
+        $this->authorize('view',new Reporte1);
+        $productos = Producto::activos()->get();
+        return view('reportes.reporte12',compact('productos'));        
+    }
+
+    public function reporte12filtrado(Request $request)
+    {   
+        $this->authorize('view',new Reporte1);
+        $producto = Producto::find($request['producto_id']);
+        if ($producto->transfenvprod->count()) {
+            $transfenvprod = $producto->transfenvprod;
+            $productos = Producto::activos()->get();
+            return view('reportes.reporte12',compact('transfenvprod','producto','productos'));
+        }
+        return back()->withInput()->with('demo','El producto seleccionado no tiene transportaciones asociadas');    
     }
 }

@@ -7,8 +7,10 @@
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
+          <div class="col-md-1">
+          </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark">Análisis estadístico del cumplimiento del plan de transportaciones por organización.</h1>
+            <h1 class="m-0 text-dark">Reporte #7 Contenedores que llevan más de 7 días sin utilizarse.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -26,13 +28,37 @@
             <!-- Bar chart -->
             <div class="card card-primary card-outline">
               <div class="card-header">
-                <h3 class="card-title">
-                  <i class="far fa-chart-bar"></i>
-                  Gráfico de barras (Toneladas/Productos)
-                </h3>
+                <a href="{{route('reportes')}}" type="button" class="btn btn-primary btn-flat" >
+                          <i class="fa fa-arrow-left"></i> Atras
+                        </a>                 
               </div>
               <div class="card-body">
-                <h1>contenido</h1>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Identificador</th>
+                    <th>Días sin utilizar</th>
+                    <th>Lugar de destino</th>
+                    <th>Ver transportación</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($envases as $dato)
+                  @if(\Carbon\Carbon::now()->diffInDays($dato->ultima_vez) < 7)
+                  <tr>
+                    <td>{{$dato->identificador}}</td>
+                    <td>{{\Carbon\Carbon::now()->diffInDays($dato->ultima_vez)}}</td>
+                    <td>{{$dato->lugares_name}}</td>
+                    <td>
+                          <a href="{{ route('transportaciones.detalles',$dato->transportacion) }}" class="btn btn-flat btn-primary">
+                        {{$dato->transportacion->numero}} ->Ver detalles
+                          </a>
+                    </td>
+                  </tr>
+                  @endif
+                  @endforeach
+                  </tbody>
+                </table>
               </div>
               <!-- /.card-body-->
             </div>

@@ -400,127 +400,9 @@
           @endcanany
 
           @can('view',new \App\Reporte1)
-          <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Reportes</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes') }}" class="dropdown-item">Listado de reportes </a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte1') }}" class="dropdown-item">Reporte # 1</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte2') }}" class="dropdown-item">Reporte # 2</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte3') }}" class="dropdown-item">Reporte # 3</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte4') }}" class="dropdown-item">Reporte # 4</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte5') }}" class="dropdown-item">Reporte # 5</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte6') }}" class="dropdown-item">Reporte # 6</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte8') }}" class="dropdown-item">Reporte # 7</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte9') }}" class="dropdown-item">Reporte # 8</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 9</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 10</a>
-                </li>
-              @endcan
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 11</a>
-                </li>
-              @endcan
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 12</a>
-                </li>
-              @endcan
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 13</a>
-                </li>
-              @endcan
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 14</a>
-                </li>
-              @endcan
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 15</a>
-                </li>
-              @endcan
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 16</a>
-                </li>
-              @endcan
-              
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 17</a>
-                </li>
-              @endcan
-
-              @can('view',new \App\Reporte1)
-                <li>
-                  <a href="{{ route('reportes.reporte10') }}" class="dropdown-item">Reporte # 18</a>
-                </li>
-              @endcan
-
-
-            </ul>
-          </li>
+            <li class="nav-item">
+              <a href="{{ route('reportes') }}" class="nav-link">Reportes</a>
+            </li>
           @endcan
 
           <li class="nav-item">
@@ -538,13 +420,13 @@
         <!-- legacy-user-menu.html -->
         <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="/adminlte/dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image">
+          <img src="/adminlte/dist/img/user2.png" class="user-image img-circle elevation-2" alt="User Image">
           <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-primary">
-            <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="/adminlte/dist/img/user2.png" class="img-circle elevation-2" alt="User Image">
 
             <p>
               {{auth()->user()->name}} 

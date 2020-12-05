@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark">Comportamiento de la utilización de equipos de la empresa.</h1>
+            <h1 class="m-0 text-dark">Reporte #6 Comportamiento de la utilización de equipos de la empresa.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -28,10 +28,9 @@
             <!-- Bar chart -->
             <div class="card card-primary card-outline">
               <div class="card-header">
-                <h3 class="card-title">
-                  <i class="far fa-chart-bar"></i>
-                  Gráfico de barras (Toneladas/Productos)
-                </h3>
+                <a href="{{route('reportes')}}" type="button" class="btn btn-primary btn-flat" >
+                          <i class="fa fa-arrow-left"></i> Atras
+                        </a>                 
               </div>
               <div class="card-body">
                 <h1>contenido</h1>

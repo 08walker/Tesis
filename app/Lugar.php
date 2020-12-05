@@ -35,9 +35,14 @@ class Lugar extends Model
         return $this->hasMany('App\TransfRecibida');
     }
 
-    public function tenviada()
+    public function tenviadaorigen()
     {
-        return $this->hasMany('App\TransfEnviada');
+        return $this->hasMany('App\TransfEnviada','origen_id');
+    }
+
+    public function tenviadadestino()
+    {
+        return $this->hasMany('App\TransfEnviada','destino_id');
     }
 
     public function scopeActivos($query)

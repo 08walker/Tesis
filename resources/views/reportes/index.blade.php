@@ -28,21 +28,25 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <p><b>RF.1&nbsp;</b>&nbsp;&nbsp; Productos y cantidades transferidos en el periodo seleccionado.<br><b>RF.2&nbsp;</b>&nbsp;&nbsp; Transportaciones por chofer que facilite la facturación del pago del servicio.<br><b>RF.3&nbsp;</b>&nbsp;&nbsp; Comportamiento de la utilización de contenedores de la empresa.<br><b>RF.4&nbsp;</b>&nbsp;&nbsp; Comportamiento del costo de contenedores de la empresa. <br><b>RF.5&nbsp;&nbsp;</b>&nbsp; Ubicación de contenedores propios.<br><b>RF.6</b>&nbsp;&nbsp;&nbsp; Comportamiento de la utilización de equipos de la empresa.<br>
-              {{-- <b>RF.7&nbsp;&nbsp;</b>&nbsp; Análisis estadístico del cumplimiento del plan de transportaciones por organización.<br> --}}
-              <b>RF.7</b>&nbsp;&nbsp;&nbsp; Generar reporte con los contenedores que llevan más de 7 días sin utilizarse. <br>
-              <b>RF.8</b>&nbsp;&nbsp;&nbsp; Generar reporte de transportaciones por:<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.9</b>&nbsp;&nbsp;Chofer.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <p><b>Reporte #1&nbsp;</b>&nbsp;&nbsp; <a href="{{ route('reportes.reporte1') }}">Productos y cantidades transferidos en el periodo seleccionado.</a><br>
+              <b>Reporte #2&nbsp;</b>&nbsp;&nbsp; <a href="{{ route('reportes.reporte2') }}">Transportaciones por chofer que facilite la facturación del pago del servicio.</a><br>
+              <b>Reporte #3&nbsp;</b>&nbsp;&nbsp; <a href="{{ route('reportes.reporte3') }}">Comportamiento de la utilización de contenedores de la empresa.</a><br>
+              <b>Reporte #4&nbsp;</b>&nbsp;&nbsp; <a href="{{ route('reportes.reporte4') }}">Comportamiento del costo de contenedores de la empresa.</a><br>
+              <b>Reporte #5&nbsp;&nbsp;</b>&nbsp; <a href="{{ route('reportes.reporte5') }}">Ubicación de contenedores propios.</a><br>
+              <b>Reporte #6</b>&nbsp;&nbsp;&nbsp; <a href="{{ route('reportes.reporte6') }}">Comportamiento de la utilización de equipos de la empresa.</a><br>
+              {{-- <b>Reporte #7&nbsp;&nbsp;</b>&nbsp; Análisis estadístico del cumplimiento del plan de transportaciones por organización.<br> --}}
+              <b>Reporte #7</b>&nbsp;&nbsp;&nbsp; <a href="{{ route('reportes.reporte7') }}">Generar reporte con los contenedores que llevan más de 7 días sin utilizarse.</a><br>
+              <b>Seleccione la opción para optener las transportaciones:</b><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #8</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte8') }}">Chofer.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
               {{-- Periodo (día, semana, mes, año).<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  --}}
-              <b>RF.10</b>&nbsp;&nbsp;Contenedor.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.11</b>&nbsp;&nbsp;Equipo.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.12</b>&nbsp;&nbsp;Organización.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.13</b>&nbsp;&nbsp;Contenedor.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.14</b>&nbsp;&nbsp;Producto.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.15</b>&nbsp;&nbsp;Lugar (almacenes, principalmente donde se recibe la rama de tabaco).<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.16</b>&nbsp;&nbsp;Contenedores propios que llevan determinados días sin utilizarse.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.17</b>&nbsp;&nbsp;Última ubicación contenedor.<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
-              <b>RF.18</b>&nbsp;&nbsp;Última ubicación equipo.<br></p>
+              <b>Reporte #9</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte9') }}">Contenedor.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #10</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte10') }}">Equipo.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #11</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte11') }}">Organización.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #12</b>&nbsp;&nbsp;<a href="{{ route('reportes.reporte12') }}">Producto.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #13</b>&nbsp;&nbsp;<a href="">Lugar (almacenes, principalmente donde se recibe la rama de tabaco).</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #14</b>&nbsp;&nbsp;<a href="">Contenedores propios que llevan determinados días sin utilizarse.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #15</b>&nbsp;&nbsp;<a href="">Última ubicación contenedor.</a><br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+              <b>Reporte #16</b>&nbsp;&nbsp;<a href="">Última ubicación equipo.</a><br></p>
               </div>
               <!-- /.card-body -->
           </div>

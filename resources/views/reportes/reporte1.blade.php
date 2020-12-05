@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark">Productos y cantidades transferidos en el periodo seleccionado.</h1>
+            <h1 class="m-0 text-dark">Reporte #1 Productos y cantidades transferidos en el periodo seleccionado.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -25,9 +25,7 @@
           </div>
           <div class="col-md-8">
             <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">
-              
+              <div class="card-body">
                 <form id="quickForm" role="form" method="POST" action="{{ route('reportes.reporte1filtrado') }}">
                     {!! csrf_field() !!}
                   <!-- Date range -->
@@ -44,12 +42,13 @@
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
+                <a href="{{route('reportes')}}" type="button" class="btn btn-primary btn-flat" >
+                  <i class="fa fa-arrow-left"></i> Atras
+                </a>
                 <button type="submit" class="btn btn-success btn-flat">
-                  {{-- <i></i> --}}
                   Filtrar
                 </button>
               </form>
-                </h3>
               </div>
               <!-- /.card-body-->
             </div>

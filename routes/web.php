@@ -43,18 +43,23 @@ Route::get('/reporte3','ReportesController@reporte3')->name('reportes.reporte3')
 Route::get('/reporte4','ReportesController@reporte4')->name('reportes.reporte4');
 Route::get('/reporte5','ReportesController@reporte5')->name('reportes.reporte5');
 Route::get('/reporte6','ReportesController@reporte6')->name('reportes.reporte6');
+Route::get('/reporte7','ReportesController@reporte7')->name('reportes.reporte7');
 Route::get('/reporte8','ReportesController@reporte8')->name('reportes.reporte8');
+Route::post('/reporte8','ReportesController@reporte8filtrado')->name('reportes.reporte8filtrado');
 Route::get('/reporte9','ReportesController@reporte9')->name('reportes.reporte9');
+Route::post('/reporte9','ReportesController@reporte9filtrado')->name('reportes.reporte9filtrado');
 Route::get('/reporte10','ReportesController@reporte10')->name('reportes.reporte10');
+Route::post('/reporte10','ReportesController@reporte10filtrado')->name('reportes.reporte10filtrado');
 Route::get('/reporte11','ReportesController@reporte11')->name('reportes.reporte11');
+Route::post('/reporte11','ReportesController@reporte11filtrado')->name('reportes.reporte11filtrado');
 Route::get('/reporte12','ReportesController@reporte12')->name('reportes.reporte12');
+Route::post('/reporte12','ReportesController@reporte12filtrado')->name('reportes.reporte12filtrado');
 Route::get('/reporte13','ReportesController@reporte13')->name('reportes.reporte13');
 Route::get('/reporte14','ReportesController@reporte14')->name('reportes.reporte14');
 Route::get('/reporte15','ReportesController@reporte15')->name('reportes.reporte15');
 Route::get('/reporte16','ReportesController@reporte16')->name('reportes.reporte16');
 Route::get('/reporte17','ReportesController@reporte17')->name('reportes.reporte17');
 Route::get('/reporte18','ReportesController@reporte18')->name('reportes.reporte18');
-Route::get('/reporte19','ReportesController@reporte19')->name('reportes.reporte19');
 });
 
 //Rutas provincias

@@ -10,7 +10,7 @@
           <div class="col-md-1">
           </div>
           <div class="col-sm-10">
-            <h1 class="m-0 text-dark">Última ubicación de contenedores propios.</h1>
+            <h1 class="m-0 text-dark">Reporte #5 Última ubicación de contenedores propios.</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -28,9 +28,9 @@
             <!-- Bar chart -->
             <div class="card card-primary card-outline">
               <div class="card-header">
-                <h3 class="card-title">
-                  Contenedores de la empresa última transportación 
-                </h3>
+                <a href="{{route('reportes')}}" type="button" class="btn btn-primary btn-flat" >
+                          <i class="fa fa-arrow-left"></i> Atras
+                        </a>                 
               </div>
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
