@@ -24,7 +24,6 @@ class StoreTransfEnvRequest extends FormRequest
     public function rules()
     {
         return [
-            //'fyh_salida'=>'required|date',
             'num_fact'=>'required|numeric',
             'origen_id'=>'required',
             'destino_id'=>'required|different:origen_id',
@@ -34,8 +33,6 @@ class StoreTransfEnvRequest extends FormRequest
     public function messages()
     {
         return [
-            'fyh_salida.required'=>'La fecha es obligatoria',
-            'fyh_salida.required'=>'Debe intruducir una fecha válida',
             'num_fact.required'=>'El número de la factura es obligatorio',
             'num_fact.required'=>'El número de la factura no debe contener letras',
             'origen_id.required'=>'El lugar de origen es obligatorio',

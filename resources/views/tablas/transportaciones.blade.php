@@ -2,7 +2,7 @@
                 <thead>
                 <tr>
                   {{-- <th>ID</th> --}}
-                  <th>Identificador</th>
+                  <th>Número</th>
                   <th>Eequipo</th>
                   <th>Acciones</th>
                 </tr>

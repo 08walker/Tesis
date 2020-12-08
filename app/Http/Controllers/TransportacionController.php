@@ -116,7 +116,12 @@ class TransportacionController extends Controller
     public function destroy(Transportacion $transportacion)
     {
         $this->authorize('delete',$transportacion);
-        if ($transportacion->transfenviada->count() > 0) {
+        if ($transportacion->terminada == 1) {
+            return back()->with('demo', 'La transportación no puede ser eliminada porque se informado como terminada');
+        }
+        else
+        {
+            if ($transportacion->transfenviada->count() > 0) {
             return back()->with('demo', 'La transportación tiene transferencias asociadas');
         }elseif ($transportacion->hito->count() > 0) 
         {
@@ -144,6 +149,7 @@ class TransportacionController extends Controller
         'ip'=>$ip,
         ]);
         return back()->with('success', 'La transportación ha sido eliminada');
+        }        
     }
 
 }

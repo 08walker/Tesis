@@ -39,7 +39,13 @@
                         <div class="col-3">
                           <p>Destino: <strong>{{$transfEnviada->destino->name}}</strong></p>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12">
+                        <a href="{{route('incidencias.create',$transfEnviada->transportacion)}}" type="button" class="btn btn-primary btn-flat" >
+                                <i class="fa fa-plus"></i> Reportar incidencia
+                              </a>
+                        </div>
+                        
+                        <div class="col-5">
                         <form id="quickForm" role="form" method="POST" action="{{ route('tenv.update.recibo',$transfEnviada) }}">
                         {{ method_field('PUT') }}{!! csrf_field() !!}
                             <div class="form-group">

@@ -4,6 +4,7 @@
       {{-- <th>ID</th> --}}
       <th>Fecha de inicio</th>
       <th>Número de factura</th>
+      <th>Transportación</th>
       <th>Origen</th>
       <th>Destino</th>
       <th>Días en curso</th>
@@ -16,6 +17,7 @@
           {{-- <td>{{$transf->id}}</td> --}}
           <td>{{\Carbon\Carbon::parse($transf->fyh_salida)->format('d/M/y')}}</td>
           <td>{{$transf->num_fact}}</td>
+          <td>{{$transf->transportacion->numero}}</td>
           <td>{{$transf->origen->name}}</td>
           <td>{{$transf->destino->name}}</td>
           <td>{{\Carbon\Carbon::now()->diffInDays($transf->fyh_salida)}}</td>

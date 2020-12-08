@@ -138,7 +138,7 @@ class TransfEnviadaController extends Controller
         {
             return redirect()->route('tenv.recibir',$transfEnviada)->with('demo','La fecha introducida debe ser menor a la fecha actual');
          }elseif (Carbon::parse($request['fyh_llegada']) < (Carbon::parse($transfEnviada->fyh_salida)) ) {
-             return redirect()->route('tenv.recibir',$transfEnviada)->with('demo','La fecha de llegada debe ser posterior a la fecha salida');
+             return redirect()->route('tenv.recibir',$transfEnviada)->with('demo','La fecha de llegada debe ser menor a la fecha salida');
          }else{
              $transfEnviada->update($data); 
          }
@@ -152,10 +152,9 @@ class TransfEnviadaController extends Controller
             ]);
 
             //actualizar el estado de la transportacion
-            $tranp = $transfEnviada->transportacion;
+            $transportacion = $transfEnviada->transportacion;
             $var = false;
-            //dd($tranp->transfenviada->count());
-            foreach ($tranp->transfenviada as $value) {
+            foreach ($transportacion->transfenviada as $value) {
                 if (is_null($value->fyh_llegada)) {
                     $var = true;
                 }
@@ -163,8 +162,8 @@ class TransfEnviadaController extends Controller
             if ($var) {
                 return redirect()->route('home')->with('success','Transferencia recibida con éxito');
             }else{
-                $tranp->terminada='1';
-                $tranp->save();
+                $transportacion->terminada='1';
+                $transportacion->save();
                 $nombre = auth()->user()->name;
                 $ip = request()->ip();
                 Traza::create([
@@ -188,18 +187,19 @@ class TransfEnviadaController extends Controller
         $data = TransfEnviada::find($id);
         $nombre = auth()->user()->name;
         $ip = request()->ip();
-        
-        if ($data->transfenvprod->count()>0) {
-            foreach ($data->transfenvprod as $producto) {
-                Transf_Env_Prod::destroy($producto->id);
+        if (is_null($data->fyh_llegada)) {
+            if ($data->transfenvprod->count()>0) {
+                foreach ($data->transfenvprod as $producto) {
+                    Transf_Env_Prod::destroy($producto->id);
             }
         }
-        $data->delete();
-
-        Traza::create([
-        'description'=> "La transferencia enviada número {$data->num_fact} ha sido eliminada por el usuario {$nombre}",
-        'ip'=>$ip,
-        ]);
-        return back()->with('success', 'La transferencia ha sido eliminada con éxito');
+            $data->delete();
+            Traza::create([
+            'description'=> "La transferencia enviada número {$data->num_fact} ha sido eliminada por el usuario {$nombre}",
+            'ip'=>$ip,
+            ]);
+            return back()->with('success', 'La transferencia ha sido eliminada con éxito');
+        }
+        return back()->with('demo', 'La transferencia no puede ser eliminada porque ya esta recibida');
     }
 }
