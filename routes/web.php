@@ -84,12 +84,12 @@ Route::get('/desactivados','ProvinciaController@desactivados')->name('provincias
 //Rutas municipios
 Route::group([
     'prefix'=>'municipios',
-    'middleware'=>'auth'
+    //'middleware'=>'auth'
 ],
 function(){
 Route::get('/','MunicipioController@index')->name('municipios');
 Route::get('/crear','MunicipioController@create')->name('municipios.create');
-Route::post('/crear','MunicipioController@store')->name('municipios.create');
+Route::post('/crear','MunicipioController@store')->name('municipios.store');
 //Route::get('/{municipio}','MunicipioController@show')->name('municipios.show');
 Route::get('/{municipio}/editar','MunicipioController@edit')->name('municipios.edit');
 Route::put('/{municipio}','MunicipioController@update')->name('municipios.update');

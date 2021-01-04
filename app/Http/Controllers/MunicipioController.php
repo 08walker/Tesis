@@ -13,7 +13,7 @@ class MunicipioController extends Controller
 {
     public function index()
     {
-        $this->authorize('view',new Municipio);
+        //$this->authorize('view',new Municipio);
         
         // $todos = Municipio::all();
         // $municipios = $todos->filter(function ($value,$key){
@@ -34,7 +34,7 @@ class MunicipioController extends Controller
     public function create()
     {   
         $municipio = new Municipio;
-        $this->authorize('create',$municipio);
+        //$this->authorize('create',$municipio);
         $provincias = Provincia::all();
         return view('municipio.create',compact('provincias', 'municipio'));
         //return view('municipio.create');
@@ -42,7 +42,7 @@ class MunicipioController extends Controller
 
     public function store(StoreMunicipioRequest $request)
     {   
-        $this->authorize('create',new Municipio);
+        //$this->authorize('create',new Municipio);
         $data = request()->all();
         $municipio = Municipio::create([
             'name'=> $data['name'],

@@ -2,29 +2,32 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class MunicipioModuleTest extends TestCase
 {
     /**
      * A basic feature test example.
-     *
      * @return void
-     */
-    public function testRurtaMun()
+    */
+
+    use RefreshDatabase;
+
+    public function test_municipio_index()
     {
-        $response = $this->get('/municipios');
-        $response->assertStatus(200)
-        ->assertSee('Municipios');
+        $response = $this->get('/municipios')
+        ->assertStatus(200);
+        //->assertRedirect('/login');
     }
-    
-    public function test_login()
-    {
-        $this->get('/login')
-        ->assertStatus(200)
-        ->assertSee('Correo')
-        ->assertSee('Contraseña');
-    }
+
+    // public function test_municipio_create()
+    // {
+    //     $this->post(route('municipios.store'), [
+    //         'name' => 'Malanga',
+    //         'provincia_id' => '1',
+    //     ])->assertRedirect(route('municipios'));
+    // }
 }

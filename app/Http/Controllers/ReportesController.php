@@ -90,13 +90,12 @@ class ReportesController extends Controller
         [   
         'chofer_id.required'=>'Debe seleccionar un chofer',
         ]);
-        $rango = $request->rango;
+        //$rango = $request->rango;
         //dd($request['chofer_id']);
         $choferes = Chofer::activos()->get();
         $chofer = Chofer::find($request['chofer_id']);
-        $chofertransp = $chofer->chofertransp;
         if($chofer->chofertransp->count()){
-            //dd($chofer->chofertransp->count());
+            $chofertransp = $chofer->chofertransp;
             return view('reportes.reporte2',compact('chofertransp','choferes'));
         }
         return back()->withInput()->with('demo','El chofer seleccionado no ha realizado ninguna transportación');
