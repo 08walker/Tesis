@@ -10,12 +10,12 @@ class TransfEnviadaPolicy
 {
     use HandlesAuthorization;
     
-    // public function before($user)
-    // {
-    //     if ($user->hasRole('Admin')) {
-    //         return true;
-    //     }
-    // }
+    public function before($user)
+    {
+        if ($user->hasRole('Admin')) {
+            return true;
+        }
+    }
 
     public function view(User $user, TransfEnviada $transfEnviada)
     {

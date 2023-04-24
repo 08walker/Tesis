@@ -10,12 +10,12 @@ class ArrastrePolicy
 {
     use HandlesAuthorization;
 
-    // public function before($user)
-    // {
-    //     if ($user->hasRole('Admin')) {
-    //         return true;
-    //     }
-    // }
+    public function before($user)
+    {
+        if ($user->hasRole('Admin')) {
+            return true;
+        }
+    }
     
     public function viewAny(User $user)
     {

@@ -46,7 +46,7 @@
                       @can('delete',new \App\Chofer)
                         <form method="POST" action="{{route('choferes.destroy', $chofer)}}" style="display: inline;">
                           {{csrf_field()}}{{method_field('DELETE')}}
-                          <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar el chofer?')">
+                          <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas eliminar el chofer?')">
                             <i class="fa fa-times"></i>
                           </button>
                         </form>

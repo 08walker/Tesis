@@ -21,8 +21,7 @@ class MunicipioController extends Controller
         // })->sortBy('provincia_id');
         
         //Con el scope de activos
-        $municipios = Municipio::activos()->get();
-        
+        $municipios = Municipio::activos()->get();        
         return view('municipio.index',compact('municipios'));
     }
 

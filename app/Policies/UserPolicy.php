@@ -28,7 +28,7 @@ class UserPolicy
 
     public function update(User $authUser, User $user)
     {
-        return $authUser->id === $user->id || $user->hasPermissionTo('Update users');
+        return $authUser->id === $user->id ;
     }
 
     public function delete(User $authUser, User $user)

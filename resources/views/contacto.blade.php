@@ -32,7 +32,7 @@
                   <dt><i class="fa fa-globe"></i>Web:</dt>
                   <dd><a href="http://www.comerciallavega.com.cu" class="card-link">www.comerciallavega.com.cu</a></dd>
                   <dt><i class="fa fa-building"></i>Dirección:</dt>
-                  <dd>#123 Calle 23, entre 14 y 16, Vedado, municipio Plaza de la Revolución, La habana, Cuba</dd>
+                  <dd>#1255 Calle 23, entre 14 y 16, Vedado, municipio Plaza de la Revolución, La habana, Cuba</dd>
                 </dl>                
               </div>
             </div>

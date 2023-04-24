@@ -11,7 +11,6 @@ use App\Producto;
 use App\Reporte1;
 use App\Reporte1a;
 use App\Reporte2;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReportesController extends Controller

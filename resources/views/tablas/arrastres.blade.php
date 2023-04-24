@@ -41,13 +41,13 @@
                     </button>
                   </form>
                 @else
-                <a href="{{route('arrastres.edit',$arrastre)}}" class="btn btn-xs btn-info">
+                <a href="{{route('arrastres.edit',$arrastre)}}" class="btn btn-xs btn-info" title="Editar">
                   <i class="fa fa-pen"></i>
                 </a>
                 @can('delete',new \App\Arrastre)
                 <form method="POST" action="{{route('arrastres.destroy', $arrastre)}}" style="display: inline;">
                   {{csrf_field()}}{{method_field('DELETE')}}
-                  <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas elimiar el arrastre?')">
+                  <button class="btn btn-xs btn-danger" onclick="return confirm('¿Estas seguro de que deseas eliminar el arrastre?')">
                     <i class="fa fa-times"></i>
                   </button>
                 </form>
